@@ -1,0 +1,128 @@
+.projects-container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+ 
+.projects-frame4 {
+  gap: 18px;
+  width: 1068px;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+ 
+.projects-button1 {
+  gap: 8px;
+  width: 344px;
+  height: 58px;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 100px;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(11, 244, 200, 1);
+}
+ 
+.projects-statelayer1 {
+  gap: 8px;
+  display: flex;
+  padding: 10px 24px;
+  flex-grow: 1;
+  align-self: stretch;
+  align-items: center;
+  justify-content: center;
+}
+ 
+.projects-text1 {
+  color: rgba(8, 119, 98, 1);
+  height: auto;
+  font-size: 20px;
+  font-style: Bold;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: 20px;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.projects-button2 {
+  gap: 8px;
+  width: 344px;
+  height: 58px;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 100px;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(250, 216, 93, 1);
+}
+ 
+.projects-statelayer2 {
+  gap: 8px;
+  display: flex;
+  padding: 10px 24px;
+  flex-grow: 1;
+  align-self: stretch;
+  align-items: center;
+  justify-content: center;
+}
+ 
+.projects-text2 {
+  color: rgba(121, 101, 27, 1);
+  height: auto;
+  font-size: 20px;
+  font-style: Bold;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: 20px;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.projects-button3 {
+  gap: 8px;
+  width: 344px;
+  height: 58px;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 100px;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(242, 160, 255, 1);
+}
+ 
+.projects-statelayer3 {
+  gap: 8px;
+  display: flex;
+  padding: 10px 24px;
+  flex-grow: 1;
+  align-self: stretch;
+  align-items: center;
+  justify-content: center;
+}
+ 
+.projects-text3 {
+  color: rgba(139, 29, 156, 1);
+  height: auto;
+  font-size: 20px;
+  font-style: Bold;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: 20px;
+  font-stretch: normal;
+  text-decoration: none;
+}
