@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% load static %}
+
+
+
+{% block CSSLinks %}
+<!-- Animate.css -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/animate.css@4.1.1/animate.css"
+/>
+
+<!-- Google Fonts -->
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+  data-tag="font"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+  data-tag="font"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+  data-tag="font"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+  data-tag="font"
+/>
+
+<!-- TeleportHQ Custom Scripts -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css"
+/>
+
+<!-- Local Styles -->
+<link rel="stylesheet" href="{% static 'Home/Home_globals.css' %}" />
+{% comment %} <link rel="stylesheet" href="{% static 'Home/Home_style.css' %}" /> {% endcomment %}
+<link rel="stylesheet" href="{% static 'Project/Project_style.css' %}" />
+{% endblock CSSLinks %}
+
+
+
+{% block title %}
+<title>Projects</title>
+{% endblock title %}
+
+{% block HomeClass %}"text-wrapper"{% endblock %}
+{% block ProjectClass %}"store"{% endblock ProjectClass %}
+{% block aboutClass %}"text-wrapper"{% endblock aboutClass %}
+{% block HireClass %}"text-wrapper"{% endblock HireClass %}
+{% block contactClass %}"text-wrapper"{% endblock contactClass %}
+{% block storyClass %}"customer"{% endblock storyClass %}
+
+
+{% block content %}
+<div>
+    <div class="Projects-container">
+            <div class="Projects-frame4">
+            <button class="Projects-button1">
+                <div class="Projects-statelayer1">
+                <span class="Projects-text1">Designing</span>
+                </div>
+            </button>
+            <button class="Projects-button2">
+                <div class="Projects-statelayer2">
+                <span class="Projects-text2">Development</span>
+                </div>
+            </button>
+            <button class="Projects-button3">
+                <div class="Projects-statelayer3">
+                <span class="Projects-text3">Video Editing</span>
+                </div>
+            </button>
+            </div>
+    </div>
+</div>
+{% endblock content %}
