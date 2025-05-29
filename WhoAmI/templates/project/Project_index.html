@@ -61,23 +61,149 @@
 {% block content %}
 <div>
     <div class="Projects-container">
-            <div class="Projects-frame4">
-            <button class="Projects-button1">
-                <div class="Projects-statelayer1">
-                <span class="Projects-text1">Designing</span>
-                </div>
-            </button>
-            <button class="Projects-button2">
-                <div class="Projects-statelayer2">
-                <span class="Projects-text2">Development</span>
-                </div>
-            </button>
-            <button class="Projects-button3">
-                <div class="Projects-statelayer3">
-                <span class="Projects-text3">Video Editing</span>
-                </div>
-            </button>
-            </div>
+      <div class="Projects-frame4">
+        <button class="Projects-button1" data-filter="designing">
+          <div class="Projects-statelayer1">
+            <span class="Projects-text1">Designing</span>
+          </div>
+        </button>
+        <button class="Projects-button2" data-filter="development">
+          <div class="Projects-statelayer2">
+            <span class="Projects-text2">Development</span>
+          </div>
+        </button>
+        <button class="Projects-button3" data-filter="video-editing">
+          <div class="Projects-statelayer3">
+            <span class="Projects-text3">Video Editing</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    {% comment %} project 1 {% endcomment %}
+    <div>
+      <div class="PROJECT1-container" data-skill="development">
+        <div class="PROJECT1-maincard" style = "border: 5px solid rgba(250, 216, 93, 1);">
+          <img src="{% static 'Project/images/image.png' %}" alt="Main image" class="PROJECT1-image3" />
+
+          <div class="PROJECT1-text100">
+            <p>
+              My portfolio website is a comprehensive <span class="highlight">showcase</span> of my <span class="highlight">skills</span>, <span class="highlight">projects</span>, and <span class="highlight">professional journey</span> in <span class="highlight">software development</span> and <span class="highlight">data analytics</span>. It presents work including personal projects like the <span class="highlight">Personal Finance Tracker</span>, hackathon contributions, and internship experiences with detailed highlights of the <span class="highlight">technologies used</span>.<br><br>
+
+              Designed with <span class="highlight">user-friendly navigation</span>, the site allows easy exploration of my <span class="highlight">technical expertise</span> across <span class="highlight">frontend</span>, <span class="highlight">backend development</span>, <span class="highlight">database management</span>, and <span class="highlight">cloud computing</span>. It also includes my updated <span class="highlight">resume</span>, <span class="highlight">contact information</span>, and <span class="highlight">social profiles</span> for connection.<br><br>
+
+              More than a portfolio, it reflects my passion for <span class="highlight">continuous learning</span>, <span class="highlight">problem-solving</span>, and <span class="highlight">innovation</span> in the <span class="highlight">tech industry</span>. It stands as a <span class="highlight">digital portfolio</span> showing my commitment to <span class="highlight">growth</span> and openness to new <span class="highlight">challenges</span>.
+            </p>
+            <a href="http://127.0.0.1:8000/" target="_blank" class="project-view-button">View</a>
+          </div>
+
+          <span class="PROJECT1-title" style = "color: rgba(250, 216, 93, 1);">01 My Portfolio Website</span>
+
+          <img src="{% static 'Project/images/image copy 2.png' %}" alt="image2" class="PROJECT1-image2" />
+          <img src="{% static 'Project/images/image copy.png' %}" alt="image1" class="PROJECT1-image1" />
+        </div>
+      </div>
+
+      {% comment %} project 2 {% endcomment %}
+
+      <div class="PROJECT1-container" data-skill="video-editing">
+        <div class="PROJECT1-maincard" style = "border: 5px solid rgba(242, 160, 255, 1)">
+          <img src="{% static 'Project/images/image copy.png' %}" alt="Main image" class="PROJECT1-image3" />
+
+          <div class="PROJECT1-text100">
+            <p>
+              <span class="highlight" style = "color : rgba(242, 160, 255, 1);">Expense and Income Tracking</span> - Easily add, categorize, and monitor your daily expenses and income to keep a clear record of your finances.<br><br>
+
+              <span class="highlight" style = "color : rgba(242, 160, 255, 1);">Budget Management</span> - Set monthly or weekly budgets for different categories to control your spending and avoid overspending.<br><br>
+
+              <span class="highlight" style = "color : rgba(242, 160, 255, 1);">Saving Goals</span> - Create and track personalized saving goals to motivate and help you plan for future expenses or investments.<br><br>
+
+              <span class="highlight" style = "color : rgba(242, 160, 255, 1);">Spending Trends Visualization</span> - View interactive charts and graphs that show your spending patterns over time, helping you make informed financial decisions.<br><br>
+
+              <span class="highlight" style = "color : rgba(242, 160, 255, 1);">Secure Data Management</span> - All your financial data is stored securely with user authentication and encryption to ensure privacy and protection.
+            </p> 
+            <a href="https://yourportfolio.link" target="_blank" class="project-view-button">View</a>
+          </div>
+
+          <span class="PROJECT1-title" style = "color: rgba(242, 160, 255, 1);">02 Video Editing</span>
+
+          <img src="{% static 'Project/images/image copy.png' %}" alt="image2" class="PROJECT1-image2" />
+          <img src="{% static 'Project/images/image copy.png' %}" alt="image1" class="PROJECT1-image1" />
+        </div>
+      </div>
+
+      
+
+      {% comment %} project 3 {% endcomment %}
+      <div class="PROJECT1-container" data-skill="designing">
+        <div class="PROJECT1-maincard" style = "border: 5px solid rgba(11, 244, 200, 1)">
+          <img src="{% static 'Project/images/image copy.png' %}" alt="Main image" class="PROJECT1-image3" />
+
+          <div class="PROJECT1-text100">
+            <p>
+              <span class="highlight" style = "color : rgba(11, 244, 200, 1);">Expense and Income Tracking</span> - Easily add, categorize, and monitor your daily expenses and income to keep a clear record of your finances.<br><br>
+
+              <span class="highlight" style = "color : rgba(11, 244, 200, 1);">Budget Management</span> - Set monthly or weekly budgets for different categories to control your spending and avoid overspending.<br><br>
+
+              <span class="highlight" style = "color : rgba(11, 244, 200, 1);">Saving Goals</span> - Create and track personalized saving goals to motivate and help you plan for future expenses or investments.<br><br>
+
+              <span class="highlight" style = "color : rgba(11, 244, 200, 1);">Spending Trends Visualization</span> - View interactive charts and graphs that show your spending patterns over time, helping you make informed financial decisions.<br><br>
+
+              <span class="highlight" style = "color : rgba(11, 244, 200, 1);">Secure Data Management</span> - All your financial data is stored securely with user authentication and encryption to ensure privacy and protection.
+            </p> 
+            <a href="https://yourportfolio.link" target="_blank" class="project-view-button">View</a>
+          </div>
+
+          <span class="PROJECT1-title" style = "color: rgba(11, 244, 200, 1);">03 Designing</span>
+
+          <img src="{% static 'Project/images/image copy.png' %}" alt="image2" class="PROJECT1-image2" />
+          <img src="{% static 'Project/images/image copy.png' %}" alt="image1" class="PROJECT1-image1" />
+        </div>
+      </div>
+
+      {% comment %} project 4 {% endcomment %}
+      <div class="PROJECT1-container" data-skill="development">
+        <div class="PROJECT1-maincard" style = "border: 5px solid rgba(250, 216, 93, 1);">
+          <img src="{% static 'Project/images/image copy 4.png' %}" alt="Main image" class="PROJECT1-image3" style = "top: 230px;" />
+
+          <div class="PROJECT1-text100">
+            <p>
+              <span class="highlight">Expense and Income Tracking</span> - Easily add, categorize, and monitor your daily expenses and income to keep a clear record of your finances.<br><br>
+
+              <span class="highlight">Budget Management</span> - Set monthly or weekly budgets for different categories to control your spending and avoid overspending.<br><br>
+
+              <span class="highlight">Saving Goals</span> - Create and track personalized saving goals to motivate and help you plan for future expenses or investments.<br><br>
+
+              <span class="highlight">Spending Trends Visualization</span> - View interactive charts and graphs that show your spending patterns over time, helping you make informed financial decisions.<br><br>
+
+              <span class="highlight">Secure Data Management</span> - All your financial data is stored securely with user authentication and encryption to ensure privacy and protection.
+            </p>
+            <a href="https://finance-tracker-tymo.onrender.com/" target="_blank" class="project-view-button">View</a>
+          </div>
+
+          <span class="PROJECT1-title" style = "color: rgba(250, 216, 93, 1);">04 Personal Finance Tracker</span>
+          <img src="{% static 'Project/images/image copy 3.png' %}" alt="image1" class="PROJECT1-image1" style = "top: 80px;" />
+        </div>
+      </div>
     </div>
 </div>
+
+<script>
+  const buttons = document.querySelectorAll('.Projects-frame4 button');
+  const projects = document.querySelectorAll('.PROJECT1-container');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const filter = button.getAttribute('data-filter');
+
+      projects.forEach(project => {
+        if (project.getAttribute('data-skill') === filter || filter === 'all') {
+          project.style.display = 'block';
+        } else {
+          project.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
 {% endblock content %}

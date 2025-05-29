@@ -1,4 +1,5 @@
 {% load static %}
+{% load django_browser_reload %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +13,7 @@
   {% block title %}
   {% endblock title %}
 </head>
+{% django_browser_reload_script %}
 <body>
   <div class="landing-page-main" data-model-id="67:2">
     <div class="div">
