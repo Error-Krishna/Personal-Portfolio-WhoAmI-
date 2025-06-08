@@ -26,7 +26,7 @@
   position: relative;
   background-color: #161717;
   width: 1240px;
-  height: 170px;
+  height: 2430px;
   border-radius: 30px;
 }
 
@@ -64,6 +64,49 @@
   font-size: 12.8px;
   letter-spacing: 0;
   line-height: 14.2px;
+}
+.text-wrapper-hire {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    background: rgb(223, 48, 250);
+    text-align: center;
+    white-space: nowrap;
+    font-family: "Inter", Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(214, 0, 0, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.text-wrapper-hire::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+    z-index: -1;
+}
+
+.text-wrapper-hire:hover::before {
+    transform: scaleX(1);
+}
+
+.text-wrapper-hire:hover {
+    box-shadow: 0 6px 20px rgba(242, 160, 255, 1);
+    transform: translateY(-2px);
 }
 
 .landing-page-main .store {

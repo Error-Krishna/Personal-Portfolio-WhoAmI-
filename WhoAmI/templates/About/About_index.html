@@ -1,14 +1,19 @@
 {% extends "layout.html" %}
 {% load static %}
 
-
-
 {% block CSSLinks %}
 <link rel="stylesheet" href="{% static 'Home/Home_globals.css' %}" />
 <link rel="stylesheet" href="{% static 'Home/Home_style.css' %}" />
+<link rel="stylesheet" href="{% static 'About/About_style.css' %}" />
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/animate.css@4.1.1/animate.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter&display=swap"
+/>
 {% endblock CSSLinks %}
-
-
 
 {% block title %}
 <title>About Krishna</title>
@@ -17,11 +22,474 @@
 {% block HomeClass %}"text-wrapper"{% endblock %}
 {% block ProjectClass %}"text-wrapper"{% endblock ProjectClass %}
 {% block aboutClass %}"store"{% endblock aboutClass %}
-{% block HireClass %}"text-wrapper"{% endblock HireClass %}
-{% block contactClass %}"text-wrapper"{% endblock contactClass %}
-{% block storyClass %}"customer"{% endblock storyClass %}
+{% block HireClass %}"text-wrapper-hire"{% endblock HireClass %}
 
 
 {% block content %}
+<div>
+  <div class="kg-container">
+    <div class="kg-container1">
+      <div class="kg-profile-image" role="img" aria-label="Picture of Krishna Goyal">
+        <img src="{% static 'About/image/img1.png' %}" alt = "Krishna Goyal" class="kg-profile-image">
+      </div>
+      <div class="kg-container2">
+        <header class="kg-header">
+          <h1>Krishna Goyal</h1>
+          <p class="kg-tagline">Aspiring Data Analytics Engineer | Tech Enthusiast | Lifelong Learner</p>
+        </header>
+        <div class="kg-main-section">
+          <section id="about" class="kg-section" aria-label="About Krishna Goyal">
+            <div class="kg-about-container">
+              <div class="kg-intro-text">
+                <p>Hello! I am <span class="kg-highlight">Krishna Goyal</span>, a passionate Data Analytics engineering student at VIT-AP University. With a keen eye for data, I love transforming raw information into meaningful insights that can drive smart decisions. I am constantly exploring new technologies and honing my skills in programming, analytics, and visualization.</p>
+                <p>My journey in tech started with a curiosity about how data shapes our world. Since then, I've been developing my expertise in Python, MongoDB, Java, and both frontend and backend development to create impactful solutions.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    
+    <section id="skills" class="kg-section" aria-label="Skills">
+      <h2 class="kg-section-title">Skills</h2>
+      <div class="kg-skill-item">
+        <div class="kg-skill-name">
+          <span>Python</span>
+          <span>90%</span>
+        </div>
+        <div class="kg-progress-container">
+          <div class="kg-progress-fill" style="width: 90%;"></div>
+        </div>
+      </div>
+      <div class="kg-skill-item">
+        <div class="kg-skill-name">
+          <span>MongoDB</span>
+          <span>80%</span>
+        </div>
+        <div class="kg-progress-container">
+          <div class="kg-progress-fill" style="width: 80%;"></div>
+        </div>
+      </div>
+      <div class="kg-skill-item">
+        <div class="kg-skill-name">
+          <span>Java</span>
+          <span>75%</span>
+        </div>
+        <div class="kg-progress-container">
+          <div class="kg-progress-fill" style="width: 75%;"></div>
+        </div>
+      </div>
+      <div class="kg-skill-item">
+        <div class="kg-skill-name">
+          <span>Frontend Development</span>
+          <span>85%</span>
+        </div>
+        <div class="kg-progress-container">
+          <div class="kg-progress-fill" style="width: 85%;"></div>
+        </div>
+      </div>
+      <div class="kg-skill-item">
+        <div class="kg-skill-name">
+          <span>Backend Development</span>
+          <span>70%</span>
+        </div>
+        <div class="kg-progress-container">
+          <div class="kg-progress-fill" style="width: 70%;"></div>
+        </div>
+      </div>
+    </section>
+    <section id="techstack" class="kg-section" aria-label="Technology Stack">
+      <h2 class="kg-section-title">Tech Stack</h2>
+      <div class="kg-tech-icons" role="list">
+        <div class="kg-tech-icon" data-tech="python">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python logo" />
+          <span class="kg-tech-name">Python</span>
+        </div>
+        <div class="kg-tech-icon" data-tech="mongodb">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB logo" />
+          <span class="kg-tech-name">MongoDB</span>
+        </div>
+        <div class="kg-tech-icon" data-tech="java">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java logo" />
+          <span class="kg-tech-name">Java</span>
+        </div>
+        <div class="kg-tech-icon" data-tech="javascript">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript logo" />
+          <span class="kg-tech-name">JavaScript</span>
+        </div>
+        <div class="kg-tech-icon" data-tech="html5">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5 logo" />
+          <span class="kg-tech-name">HTML5</span>
+        </div>
+        <div class="kg-tech-icon" data-tech="css3">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3 logo" />
+          <span class="kg-tech-name">CSS3</span>
+        </div>
+        <div class="kg-tech-icon" data-tech="flask">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" alt="Flask logo" />
+          <span class="kg-tech-name">Flask</span>
+        </div>
+      </div>
+    </section>
+    <section id="hobbies" class="kg-section" aria-label="Hobbies and Interests">
+      <h2 class="kg-section-title">Hobbies & Interests</h2>
+      <div class="kg-hobbies-container">
+        <div class="kg-hobby-item"><i class="fas fa-dumbbell"></i> Gym & Fitness</div>
+        <div class="kg-hobby-item"><i class="fas fa-video"></i> Video Editing</div>
+        <div class="kg-hobby-item"><i class="fas fa-book"></i> Reading Tech Articles</div>
+        <div class="kg-hobby-item"><i class="fas fa-microchip"></i> Exploring New Technologies</div>
+        <div class="kg-hobby-item"><i class="fas fa-headphones"></i> Music & Podcast Listening</div>
+      </div>
+    </section>
+    <a href="/Krishna_Goyal_Resume.pdf" target="_blank" rel="noopener" class="kg-resume-btn" aria-label="Download Resume">
+      <i class="fas fa-download"></i> Download Resume
+    </a>
 
+    <section id="timeline" class="kg-section" aria-label="Personal Timeline">
+      <h2 class="kg-section-title">Timeline</h2>
+      <ul class="kg-timeline-list">
+        <li class="kg-timeline-item" tabindex="0">
+          <time datetime="2023-08">August 2023</time>
+          <h3>Started Data Analytics Program</h3>
+          <p>Began my BTech specialization in Data Analytics at VIT-AP University.</p>
+        </li>
+        <li class="kg-timeline-item" tabindex="0">
+          <time datetime="2024-03">March 2024</time>
+          <h3>Completed Internship Project</h3>
+          <p>Developed a chatbot using AWS Bot and Amazon Lex for hostel booking assistance.</p>
+        </li>
+        <li class="kg-timeline-item" tabindex="0">
+          <time datetime="2024-05">May 2024</time>
+          <h3>Participated in EY Techathon 5.0</h3>
+          <p>Cleared the first round of the EY Techathon competition.</p>
+        </li>
+        <li class="kg-timeline-item" tabindex="0">
+          <time datetime="2024-11">November 2024</time>
+          <h3>Led UP State-Wise Rally</h3>
+          <p>Managed a team of 70 people and coordinated budgeting and communication for the event.</p>
+        </li>
+        <li class="kg-timeline-item" tabindex="0">
+          <time datetime="2025-03">March 2025</time>
+          <h3>Built Personal Finance Tracker</h3>
+          <p>Developed a web-based application using MongoDB, Flask, and JavaScript.</p>
+        </li>
+      </ul>
+    </section>
+    <section id="contact" class="kg-section" aria-label="Contact Information">
+      <div class="kg-contact-container">
+        <p class="kg-contact-text">Feel free to reach out to me via email or connect on social media!</p>
+        <div class="kg-social-icons" role="list">
+          <a href="https://linkedin.com/in/krishna-goyal-5560a1284" target="_blank" rel="noopener" class="kg-social-link" role="listitem" aria-label="LinkedIn Profile">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://github.com/krishnagoyal" target="_blank" rel="noopener" class="kg-social-link" role="listitem" aria-label="GitHub Profile">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="mailto:krishna.23bce8419@vitapstudent.ac.in" class="kg-social-link" role="listitem" aria-label="Send Email">
+            <i class="fas fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="kg-footer">
+      &copy; 2023 Krishna Goyal | Data Analytics Portfolio
+    </footer>
+  </div>
+  <!-- Tech Modal -->
+  <div class="kg-tech-modal" id="techModal">
+    <div class="kg-modal-content">
+      <div class="kg-modal-header">
+        <div class="kg-modal-icon" id="modalIcon">
+          <img id="modalImg" src="" alt="Tech Icon">
+        </div>
+        <h2 class="kg-modal-title" id="modalTitle">Technology Name</h2>
+        <button class="kg-modal-close" id="modalClose">&times;</button>
+      </div>
+      <div class="kg-modal-body">
+        <p class="kg-modal-description" id="modalDescription"></p>
+        
+        <div class="kg-modal-features">
+          <h3>Key Features</h3>
+          <ul id="modalFeatures"></ul>
+        </div>
+        
+        <div class="kg-modal-features">
+          <h3>Common Uses</h3>
+          <ul id="modalUses"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Background particles animation
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Random position and size
+        const size = Math.random() * 5 + 2;
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        const opacity = Math.random() * 0.3 + 0.1;
+        
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${posX}%`;
+        particle.style.top = `${posY}%`;
+        particle.style.opacity = opacity;
+        particle.style.animation = `float ${Math.random() * 20 + 10}s linear infinite`;
+        
+        document.styleSheets[0].insertRule(
+          `@keyframes float-${i} {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px); }
+          }`, 
+          document.styleSheets[0].cssRules.length
+        );
+        
+        particle.style.animation = `float-${i} ${Math.random() * 20 + 10}s linear infinite`;
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+    
+    // Technology data
+    const techData = {
+      python: {
+        title: "Python",
+        description: "Python is a high-level, interpreted programming language known for its simplicity and readability. It supports multiple programming paradigms and has a comprehensive standard library.",
+        features: [
+          "Simple and easy-to-learn syntax",
+          "Extensive libraries and frameworks",
+          "Cross-platform compatibility",
+          "Strong community support",
+          "Great for data analysis and machine learning"
+        ],
+        uses: [
+          "Web development (Django, Flask)",
+          "Data science and analytics (Pandas, NumPy)",
+          "Machine learning (TensorFlow, PyTorch)",
+          "Scripting and automation",
+          "Scientific computing"
+        ]
+      },
+      mongodb: {
+        title: "MongoDB",
+        description: "MongoDB is a source-available cross-platform document-oriented NoSQL database program. It uses JSON-like documents with optional schemas.",
+        features: [
+          "Document-oriented storage",
+          "Full index support",
+          "Replication and high availability",
+          "Auto-sharding for horizontal scaling",
+          "Rich query language"
+        ],
+        uses: [
+          "Big Data applications",
+          "Content management systems",
+          "Mobile and social infrastructure",
+          "User data management",
+          "Real-time analytics"
+        ]
+      },
+      java: {
+        title: "Java",
+        description: "Java is a high-level, class-based, object-oriented programming language designed to have as few implementation dependencies as possible.",
+        features: [
+          "Platform independence (Write Once, Run Anywhere)",
+          "Object-oriented programming",
+          "Robust and secure",
+          "Multithreading support",
+          "Rich standard library"
+        ],
+        uses: [
+          "Enterprise applications",
+          "Android app development",
+          "Web applications",
+          "Big Data technologies (Hadoop)",
+          "Scientific computing"
+        ]
+      },
+      javascript: {
+        title: "JavaScript",
+        description: "JavaScript is a lightweight, interpreted programming language with first-class functions. It is a core technology of the World Wide Web alongside HTML and CSS.",
+        features: [
+          "Client-side scripting for interactive web pages",
+          "Asynchronous programming with Promises",
+          "Event-driven programming",
+          "Supports object-oriented and functional programming",
+          "Extensive ecosystem with npm"
+        ],
+        uses: [
+          "Front-end web development",
+          "Server-side development (Node.js)",
+          "Mobile app development (React Native)",
+          "Desktop applications (Electron)",
+          "Game development"
+        ]
+      },
+      html5: {
+        title: "HTML5",
+        description: "HTML5 is the latest evolution of the standard that defines HTML. It includes new elements, attributes, and behaviors for richer web applications.",
+        features: [
+          "Semantic elements for better structure",
+          "Multimedia support (audio, video)",
+          "Canvas for drawing and animations",
+          "Local storage capabilities",
+          "Geolocation API"
+        ],
+        uses: [
+          "Web page structure",
+          "Responsive web design",
+          "Web application development",
+          "Mobile app development",
+          "Game development"
+        ]
+      },
+      css3: {
+        title: "CSS3",
+        description: "CSS3 is the latest evolution of the Cascading Style Sheets language. It brings a lot of long-awaited features like rounded corners, shadows, gradients, transitions, and animations.",
+        features: [
+          "Advanced selectors",
+          "Box model enhancements",
+          "Transitions and animations",
+          "Flexbox and Grid layouts",
+          "Media queries for responsive design"
+        ],
+        uses: [
+          "Styling web pages",
+          "Creating responsive layouts",
+          "Animations and transitions",
+          "Creating complex layouts with Flexbox/Grid",
+          "Theming and customization"
+        ]
+      },
+      flask: {
+        title: "Flask",
+        description: "Flask is a lightweight WSGI web application framework in Python. It is designed to make getting started quick and easy, with the ability to scale up to complex applications.",
+        features: [
+          "Simple and lightweight",
+          "Built-in development server and debugger",
+          "Integrated support for unit testing",
+          "RESTful request dispatching",
+          "Extensive documentation"
+        ],
+        uses: [
+          "Building web APIs",
+          "Developing small to medium web applications",
+          "Prototyping applications",
+          "Creating microservices",
+          "Educational projects"
+        ]
+      }
+    };
+
+    // Tech Modal functionality
+    const techIcons = document.querySelectorAll('.kg-tech-icon');
+    const techModal = document.getElementById('techModal');
+    const modalImg = document.getElementById('modalImg');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDescription = document.getElementById('modalDescription');
+    const modalFeatures = document.getElementById('modalFeatures');
+    const modalUses = document.getElementById('modalUses');
+    const modalClose = document.getElementById('modalClose');
+    const modalIcon = document.getElementById('modalIcon');
+
+    techIcons.forEach(icon => {
+      icon.addEventListener('click', () => {
+        const tech = icon.getAttribute('data-tech');
+        const data = techData[tech];
+        
+        // Update modal content
+        modalImg.src = icon.querySelector('img').src;
+        modalTitle.textContent = data.title;
+        modalDescription.textContent = data.description;
+        
+        // Populate features
+        modalFeatures.innerHTML = '';
+        data.features.forEach(feature => {
+          const li = document.createElement('li');
+          li.textContent = feature;
+          modalFeatures.appendChild(li);
+        });
+        
+        // Populate uses
+        modalUses.innerHTML = '';
+        data.uses.forEach(use => {
+          const li = document.createElement('li');
+          li.textContent = use;
+          modalUses.appendChild(li);
+        });
+        
+        // Show modal
+        techModal.style.display = 'flex';
+        setTimeout(() => {
+          techModal.style.opacity = '1';
+          document.querySelector('.kg-modal-content').style.transform = 'scale(1)';
+        }, 10);
+        
+        // Change modal icon background to match the tech color
+        modalIcon.style.background = icon.querySelector('img').getAttribute('src').includes('python') ? '#306998' :
+                                    icon.querySelector('img').getAttribute('src').includes('mongodb') ? '#4DB33D' :
+                                    icon.querySelector('img').getAttribute('src').includes('java') ? '#007396' :
+                                    icon.querySelector('img').getAttribute('src').includes('javascript') ? '#F7DF1E' :
+                                    icon.querySelector('img').getAttribute('src').includes('html5') ? '#E34F26' :
+                                    icon.querySelector('img').getAttribute('src').includes('css3') ? '#1572B6' :
+                                    icon.querySelector('img').getAttribute('src').includes('flask') ? '#000000' : '#1e293b';
+      });
+    });
+
+    // Close modal functionality
+    modalClose.addEventListener('click', () => {
+      techModal.style.opacity = '0';
+      document.querySelector('.kg-modal-content').style.transform = 'scale(0.9)';
+      setTimeout(() => {
+        techModal.style.display = 'none';
+      }, 300);
+    });
+
+    // Close modal when clicking outside content
+    techModal.addEventListener('click', (e) => {
+      if (e.target === techModal) {
+        techModal.style.opacity = '0';
+        document.querySelector('.kg-modal-content').style.transform = 'scale(0.9)';
+        setTimeout(() => {
+          techModal.style.display = 'none';
+        }, 300);
+      }
+    });
+
+    // Animate progress bars when they come into view
+    document.addEventListener('DOMContentLoaded', function() {
+      createParticles();
+      
+      const skillItems = document.querySelectorAll('.kg-skill-item');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const progressFill = entry.target.querySelector('.kg-progress-fill');
+            const width = progressFill.style.width;
+            progressFill.style.width = '0';
+            setTimeout(() => {
+              progressFill.style.width = width;
+            }, 300);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.5
+      });
+      
+      skillItems.forEach(item => {
+        observer.observe(item);
+      });
+    });
+  </script>
+</div>
 {% endblock content %}
