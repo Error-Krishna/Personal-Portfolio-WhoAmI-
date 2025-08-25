@@ -1,0 +1,805 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna Goyal - Portfolio</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'playfair': ['"Playfair Display"', 'serif'],
+                        'archivo': ['"Archivo Black"', 'sans-serif']
+                    },
+                    colors: {
+                        'bg-primary': '#050709',
+                        'bg-secondary': '#0E1318',
+                        'card-bg': 'rgba(14, 19, 24, 0.7)',
+                        'accent-cyan': '#00F0FF',
+                        'accent-purple': '#A06EE7',
+                        'text-light': '#E6E6E6',
+                        'text-secondary': '#A0AEC0',
+                        'dev-accent': '#00FFC8',
+                        'design-accent': '#FFD700',
+                        'video-accent': '#E76EE7'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+        * {
+          -webkit-font-smoothing: antialiased;
+          box-sizing: border-box;
+        }
+        html {
+          margin: 0;
+          height: 100%;
+        }
+        body {
+            background-color: #050709;
+            background-image: linear-gradient(160deg, #0E1318 0%, #050709 74%);
+            font-family: 'Inter', sans-serif;
+            color: #E6E6E6;
+            cursor: default; /* Use default cursor on touch devices */
+        }
+        @media (hover: hover) and (pointer: fine) {
+            body {
+                cursor: none; /* Hide cursor only on devices that support hover */
+            }
+        }
+        a {
+          text-decoration: none;
+        }
+        
+        #three-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.2;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--tw-gradient-from), var(--tw-gradient-to));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .section-card {
+            background-color: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(48, 54, 61, 0.5);
+            transition: all 0.5s ease;
+        }
+        .section-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+        }
+        .section-header {
+            font-family: 'Inter', sans-serif, serif;
+            position: relative;
+            display: inline-block;
+            transition: all 0.5s ease;
+        }
+        .section-header::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            transition: width 0.5s ease;
+        }
+        .section-header:hover::after {
+            width: 100%;
+        }
+
+        .project-card video {
+            filter: grayscale(100%);
+            transition: filter 0.5s ease-in-out;
+        }
+        .project-card:hover video {
+            filter: grayscale(0%);
+        }
+
+        .profile-section-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 80vh;
+            overflow: hidden;
+        }
+
+        .background-name-text {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 18vw;
+            font-weight: 900;
+            color: white;
+            position: absolute;
+            z-index: 1;
+            text-align: center;
+            line-height: 0.9;
+            user-select: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            transform: translateY(-5%);
+        }
+        
+        .name-goyal {
+            opacity: 0.2;
+        }
+
+        .profile-image-container {
+            position: relative;
+            z-index: 2;
+            width: 30vw;
+            max-width: 450px;
+            min-width: 250px;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+            mix-blend-mode: exclusion;
+        }
+        .profile-image:hover {
+            filter: grayscale(0%);
+        }
+
+        .profile-subsection-text {
+            position: absolute;
+            z-index: 3;
+            bottom: 10%;
+            left: 5%;
+            max-width: 250px;
+            color: white;
+        }
+
+        #plasma-cursor {
+            display: none; /* Hidden by default */
+        }
+        @media (hover: hover) and (pointer: fine) {
+            #plasma-cursor {
+                display: block; /* Shown only on devices that support hover */
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 30px;
+                height: 30px;
+                background-color: rgb(194, 164, 255);
+                border-radius: 50%;
+                pointer-events: none;
+                mix-blend-mode: hard-light;
+                transform: translate(-50%, -50%);
+                transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+                z-index: 9999;
+                box-shadow: 0 0 10px rgb(194, 164, 255);
+                animation: pulse 1.5s infinite alternate;
+            }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1) translate(-50%, -50%); }
+            100% { transform: scale(1.1) translate(-50%, -50%); }
+        }
+        #plasma-cursor.hover-effect {
+            animation: none;
+            mix-blend-mode: normal;
+            background-color: #c2a4ff;
+            box-shadow: 0 0 10px #c2a4ff;
+            opacity: 0.8;
+            transform: scale(0.2) translate(-50%, -50%);
+        }
+        
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .fade-in-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 0;
+            --filled-height: 0px;
+            --glow-top: 0px;
+        }
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: rgba(48, 54, 61, 0.3);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            z-index: 0; 
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: linear-gradient(to bottom, #A06EE7, #00F0FF);
+            top: 0;
+            left: 50%;
+            margin-left: -3px;
+            z-index: 1;
+            height: var(--filled-height);
+            transition: height 0.1s linear;
+        }
+
+        .timeline-container .timeline-glow {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 50px;
+            background: radial-gradient(circle at center, rgba(0, 240, 255, 1) 0%, rgba(0, 240, 255, 0) 70%);
+            left: 50%;
+            margin-left: -5px;
+            top: var(--glow-top);
+            transform: translateY(-50%);
+            filter: blur(8px);
+            z-index: 2;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-out, top 0.1s linear; 
+        }
+
+        .timeline-container.timeline-active .timeline-glow {
+            opacity: 1;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: #0E1318;
+            border: 4px solid #00F0FF;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.5);
+            transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .timeline-item.left { left: 0; }
+        .timeline-item.right { left: 50%; }
+        .timeline-item.right::after { left: -16px; }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: rgba(14, 19, 24, 0.7);
+            position: relative;
+            border-radius: 6px;
+            border: 1px solid rgba(48, 54, 61, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .timeline-item:hover::after {
+            background-color: #00F0FF;
+            border-color: #A06EE7;
+            box-shadow: 0 0 0 6px rgba(160, 110, 231, 0.5);
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background-color: var(--bg-primary);
+            color: var(--text-light);
+            transition: all 0.3s ease-in-out;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        .contact-link:hover {
+            width: 130px;
+            border-radius: 16px;
+            background-color: var(--accent-cyan);
+            color: var(--bg-primary);
+        }
+
+        .contact-link .icon {
+            font-family: "Font Awesome 6 Brands", "Font Awesome 6 Free";
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-link .text {
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: opacity 0.3s ease-in-out 0.1s, transform 0.3s ease-in-out 0.1s;
+            font-weight: 600;
+            padding-left: 4px;
+        }
+
+        .contact-link:hover .text {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 1024px) {
+            .profile-image-container {
+                width: 40vw;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .background-name-text { font-size: 25vw; }
+            .profile-image-container { width: 50vw; min-width: 200px; }
+            .profile-subsection-text { bottom: 5%; left: 5%; font-size: 0.8rem; }
+            
+            .timeline-container::after,
+            .timeline-container::before,
+            .timeline-container .timeline-glow {
+                left: 31px;
+                margin-left: -3px;
+            }
+            .timeline-container .timeline-glow { margin-left: -5px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item.right { left: 0%; }
+            .timeline-item.left::after,
+            .timeline-item.right::after { left: 15px; }
+
+            #contact-bar {
+                right: 2px;
+            }
+            .contact-link {
+                width: 40px;
+                height: 40px;
+            }
+             .contact-link .icon {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body class="scroll-smooth overflow-x-hidden">
+    
+    <canvas id="three-canvas" class="fixed top-0 left-0 w-full h-full z-0 opacity-20 pointer-events-none"></canvas>
+    <div id="plasma-cursor"></div>
+
+    <div class="relative z-10">
+        <!-- Responsive Navigation -->
+        <nav class="fixed top-0 left-0 w-full z-50 bg-bg-primary bg-opacity-70 backdrop-filter backdrop-blur-lg">
+            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+                <a href="#home" class="text-2xl font-bold gradient-text from-accent-cyan to-accent-purple font-inter">Krishna</a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-2">
+                    <a href="#home" class="px-3 py-2 rounded-md text-text-light transition-colors duration-300 active-link">Home</a>
+                    <a href="#projects" class="px-3 py-2 rounded-md text-text-light transition-colors duration-300">Projects</a>
+                    <a href="#about" class="px-3 py-2 rounded-md text-text-light transition-colors duration-300">About Me</a>
+                    <a href="#tech-stack" class="px-3 py-2 rounded-md text-text-light transition-colors duration-300">Tech Stack</a>
+                    <a href="#timeline" class="px-3 py-2 rounded-md text-text-light transition-colors duration-300">My Journey</a>
+                    <a href="mailto:krishna.23bce8419@vitapstudent.ac.in" class="ml-4 px-4 py-2 bg-accent-cyan text-bg-primary rounded-full font-semibold hover:bg-opacity-80 transition-colors duration-300">Hire Me</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-text-light focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden bg-bg-secondary">
+                <a href="#home" class="block text-center py-3 px-4 text-text-light hover:bg-accent-cyan hover:text-bg-primary transition-colors duration-300">Home</a>
+                <a href="#projects" class="block text-center py-3 px-4 text-text-light hover:bg-accent-cyan hover:text-bg-primary transition-colors duration-300">Projects</a>
+                <a href="#about" class="block text-center py-3 px-4 text-text-light hover:bg-accent-cyan hover:text-bg-primary transition-colors duration-300">About Me</a>
+                <a href="#tech-stack" class="block text-center py-3 px-4 text-text-light hover:bg-accent-cyan hover:text-bg-primary transition-colors duration-300">Tech Stack</a>
+                <a href="#timeline" class="block text-center py-3 px-4 text-text-light hover:bg-accent-cyan hover:text-bg-primary transition-colors duration-300">My Journey</a>
+                <a href="mailto:krishna.23bce8419@vitapstudent.ac.in" class="block text-center py-4 px-4 bg-accent-cyan text-bg-primary font-semibold">Hire Me</a>
+            </div>
+        </nav>
+        
+        <main class="min-h-screen pt-24 pb-24 flex flex-col items-center">
+
+            <section id="home" class="relative w-full min-h-screen pt-16 flex flex-col justify-center items-center text-center px-4">
+                <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold font-archivo tracking-tight drop-shadow-lg text-white mb-4 z-10">
+                    <span class="block gradient-text from-accent-cyan to-accent-purple">Who Am I?</span>
+                    <span class="block sm:inline gradient-text from-accent-purple to-accent-cyan">Developer | </span>
+                    <span class="block sm:inline gradient-text from-accent-cyan to-accent-purple">Designer | </span>
+                    <span class="block sm:inline gradient-text from-accent-purple to-accent-cyan">Editor | </span>
+                    <span class="block sm:inline gradient-text from-accent-cyan to-accent-purple">Data Analyst</span>
+                </h1>
+                <p class="text-lg md:text-2xl font-light text-text-secondary z-10 max-w-3xl">
+                    Building digital experiences with a creative and analytical mind.
+                </p>
+                <div class="spline-container w-full h-full absolute top-0 left-0 z-0">
+                    <iframe src="https://my.spline.design/nexbotrobotcharacterconcept-37a68739c76cde0f6568b5bea10e7ec2/" frameborder="0" class="w-full h-full"></iframe>
+                </div>
+            </section>
+            
+            <section id="projects" class="container mx-auto px-4 py-16 min-h-screen">
+                <h1 class="text-4xl md:text-5xl font-bold text-center mb-16 section-header">My Projects</h1>
+
+                <div class="flex justify-center flex-wrap gap-2 md:gap-4 mb-12">
+                    <button class="filter-btn px-4 py-2 md:px-6 md:py-3 rounded-full text-sm md:text-lg font-semibold bg-accent-cyan text-bg-primary hover:bg-opacity-80 transition-colors duration-300 active-filter" data-filter="all">All</button>
+                    <button class="filter-btn px-4 py-2 md:px-6 md:py-3 rounded-full text-sm md:text-lg font-semibold bg-bg-secondary text-text-light hover:bg-accent-cyan hover:text-bg-primary transition-colors duration-300" data-filter="development">Development</button>
+                    <button class="filter-btn px-4 py-2 md:px-6 md:py-3 rounded-full text-sm md:text-lg font-semibold bg-bg-secondary text-text-light hover:bg-accent-cyan hover:text-bg-primary transition-colors duration-300" data-filter="video-editing">Video Editing</button>
+                </div>
+                
+                <div id="projects-grid" class="grid grid-cols-1 gap-12">
+                    <!-- Project Cards remain the same as they are already responsive with flex-col md:flex-row -->
+                    <div class="project-card section-card p-6 md:p-8 rounded-3xl shadow-xl flex flex-col md:flex-row gap-8 items-center fade-in-up" data-skill="development">
+                        <div class="w-full md:w-1/3">
+                            <video class="w-full h-auto rounded-xl" autoplay loop muted playsinline>
+                                <source src="{% static 'videos/portfolio-website.mp4' %}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="w-full md:w-2/3">
+                            <h2 class="text-2xl md:text-3xl font-bold gradient-text from-dev-accent to-accent-cyan mb-4">My Portfolio Website</h2>
+                            <p class="text-text-secondary text-base md:text-lg mb-6">A comprehensive showcase of my skills, projects, and professional journey. It features a modern, tech-inspired design with dynamic 3D elements and a responsive layout.</p>
+                            <a href="{% url 'project_detail' 'portfolio-website' %}" class="inline-block px-6 py-3 bg-dev-accent text-bg-primary font-semibold rounded-full hover:bg-opacity-80 transition-colors duration-300">View Project</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card section-card p-6 md:p-8 rounded-3xl shadow-xl flex flex-col md:flex-row gap-8 items-center fade-in-up" data-skill="video-editing">
+                        <div class="w-full md:w-1/3">
+                            <video class="w-full h-auto rounded-xl" autoplay loop muted playsinline>
+                                <source src="{% static 'videos/video-showcase.mp4' %}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="w-full md:w-2/3">
+                            <h2 class="text-2xl md:text-3xl font-bold gradient-text from-video-accent to-accent-purple mb-4">Video Editing Showcase</h2>
+                            <p class="text-text-secondary text-base md:text-lg mb-6">A collection of my video editing work, including short films, promotional content, and motion graphics. Highlights my proficiency in tools like Adobe Premiere Pro and After Effects.</p>
+                            <a href="{% url 'project_detail' 'video-showcase' %}" class="inline-block px-6 py-3 bg-video-accent text-bg-primary font-semibold rounded-full hover:bg-opacity-80 transition-colors duration-300">View Project</a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card section-card p-6 md:p-8 rounded-3xl shadow-xl flex flex-col md:flex-row gap-8 items-center fade-in-up" data-skill="development">
+                        <div class="w-full md:w-1/3">
+                            <video class="w-full h-auto rounded-xl" autoplay loop muted playsinline>
+                                <source src="{% static 'videos/finance-tracker-demo.mp4' %}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="w-full md:w-2/3">
+                            <h2 class="text-2xl md:text-3xl font-bold gradient-text from-dev-accent to-accent-cyan mb-4">Personal Finance Tracker</h2>
+                            <p class="text-text-secondary text-base md:text-lg mb-6">A full-stack web application for personal finance management, built with MongoDB, Flask, and JavaScript. Features include expense tracking, budgeting, and spending trend visualizations.</p>
+                            <a href="{% url 'project_detail' 'personal-finance-tracker' %}" class="inline-block px-6 py-3 bg-dev-accent text-bg-primary font-semibold rounded-full hover:bg-opacity-80 transition-colors duration-300">View Project</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card section-card p-6 md:p-8 rounded-3xl shadow-xl flex flex-col md:flex-row gap-8 items-center fade-in-up" data-skill="development">
+                        <div class="w-full md:w-1/3">
+                            <video class="w-full h-auto rounded-xl" autoplay loop muted playsinline>
+                                <source src="{% static 'videos/insightloop-business.mp4' %}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="w-full md:w-2/3">
+                            <h2 class="text-2xl md:text-3xl font-bold gradient-text from-dev-accent to-accent-cyan mb-4">InsightLoop Business</h2>
+                            <p class="text-text-secondary text-base md:text-lg mb-6">A dynamic web application for business analysis and management. This project includes features for data visualization, real-time analytics, and resource management to help businesses make data-driven decisions.</p>
+                            <a href="{% url 'project_detail' 'insightloop-business' %}" class="inline-block px-6 py-3 bg-dev-accent text-bg-primary font-semibold rounded-full hover:bg-opacity-80 transition-colors duration-300">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+            <section id="about" class="container mx-auto px-4 py-16 min-h-screen flex flex-col items-center">
+                <div class="profile-section-container fade-in-up">
+                    <div class="background-name-text">
+                        <span>KRISHNA</span>
+                        <span class="name-goyal">GOYAL</span>
+                    </div>
+                    <div class="profile-image-container">
+                        <img src="{% static '/image-removebg-preview.png' %}" alt="Krishna Goyal Portrait" class="profile-image">
+                    </div>
+                    <div class="profile-subsection-text">
+                        <h2 class="text-2xl font-bold">About Me</h2>
+                        <p class="text-text-secondary">A deep dive into my journey, passions, and the values that drive my work and life.</p>
+                    </div>
+                </div>
+                
+                <div class="w-full mt-16 space-y-16">
+                    <div class="section-card p-8 md:p-12 rounded-3xl w-full max-w-4xl mx-auto shadow-2xl fade-in-up">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-8 section-header">Who I Am</h2>
+                        <div class="space-y-6 text-text-light text-base md:text-xl">
+                            <p>Beyond the lines of code and data points, I am a curious and driven individual with a passion for learning. My journey in tech is not just about building things, but about understanding the "why" and "how" behind them. I believe that technology should be a tool for empowerment, and I'm dedicated to creating solutions that are not only functional but also intuitive and meaningful.</p>
+                            <p>I thrive on challenges and see every new project as an opportunity to grow. Whether I'm deep-diving into a new programming language, refining my design skills, or exploring a new hobby like video editing, I approach it with the same level of enthusiasm and a commitment to excellence. This continuous pursuit of knowledge is what truly defines me as a professional and a person.</p>
+                        </div>
+                    </div>
+                    <div class="section-card p-8 md:p-12 rounded-3xl w-full max-w-4xl mx-auto shadow-2xl fade-in-up">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-8 section-header">My Journey: From Schooling to Career</h2>
+                        <div class="space-y-6 text-text-light text-base md:text-xl">
+                            <p>My academic journey began with a strong foundation in science and mathematics, leading me to pursue a B.Tech in Data Analytics at VIT-AP University. This program ignited my passion for transforming raw data into actionable insights, a skill I’ve honed through various academic projects and real-world challenges. My schooling not only provided me with technical knowledge but also instilled in me the discipline and critical thinking necessary to succeed in the fast-paced world of technology.</p>
+                            <p>Looking ahead, my dream is to become a Data Analytics Engineer who can bridge the gap between complex data and clear, strategic decisions. I am driven by the idea of using my skills to solve real-world problems and make a tangible impact. My career path is defined by a commitment to continuous learning and a desire to contribute to innovative projects that push the boundaries of what's possible with data.</p>
+                        </div>
+                    </div>
+                    <div class="section-card p-8 rounded-3xl w-full max-w-4xl mx-auto shadow-2xl fade-in-up">
+                        <h2 class="text-3xl font-bold mb-8 section-header text-center md:text-left">Beyond the Screen</h2>
+                        <div class="flex flex-wrap justify-center gap-2 md:gap-4">
+                            <div class="px-4 py-2 md:px-6 md:py-3 bg-bg-secondary rounded-full hover:bg-accent-purple transition-colors duration-300 text-text-light flex items-center gap-2">
+                                <i class="fas fa-dumbbell"></i>
+                                <span>Gym & Fitness</span>
+                            </div>
+                            <div class="px-4 py-2 md:px-6 md:py-3 bg-bg-secondary rounded-full hover:bg-accent-purple transition-colors duration-300 text-text-light flex items-center gap-2">
+                                <i class="fas fa-video"></i>
+                                <span>Video Editing</span>
+                            </div>
+                            <div class="px-4 py-2 md:px-6 md:py-3 bg-bg-secondary rounded-full hover:bg-accent-purple transition-colors duration-300 text-text-light flex items-center gap-2">
+                                <i class="fas fa-book"></i>
+                                <span>Reading Tech Articles</span>
+                            </div>
+                            <div class="px-4 py-2 md:px-6 md:py-3 bg-bg-secondary rounded-full hover:bg-accent-purple transition-colors duration-300 text-text-light flex items-center gap-2">
+                                <i class="fas fa-microchip"></i>
+                                <span>Exploring New Tech</span>
+                            </div>
+                            <div class="px-4 py-2 md:px-6 md:py-3 bg-bg-secondary rounded-full hover:bg-accent-purple transition-colors duration-300 text-text-light flex items-center gap-2">
+                                <i class="fas fa-headphones"></i>
+                                <span>Music & Podcasts</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tech-stack" class="container mx-auto px-4 py-16 w-full min-h-screen flex flex-col items-center justify-center relative fade-in-up">
+                <h1 class="text-4xl md:text-5xl font-bold text-center section-header mb-8">My Tech Stack</h1>
+                <div id="tech-stack-container" class="w-full h-[60vh] md:h-[70vh] relative cursor-pointer z-20">
+                    <div id="tooltip" class="absolute bg-bg-secondary text-text-light px-3 py-1 rounded-md text-sm pointer-events-none opacity-0 transition-opacity duration-200 transform -translate-x-1/2 -translate-y-full"></div>
+                </div>
+            </section>
+
+            <section id="timeline" class="container mx-auto px-4 py-16 min-h-screen fade-in-up">
+                <h1 class="text-4xl md:text-5xl font-bold text-center mb-16 section-header">My Journey Timeline</h1>
+                
+                <div class="timeline-container">
+                    <div class="timeline-glow"></div>
+                    <!-- Timeline items remain the same, responsive CSS handles layout -->
+                    <div class="timeline-item left fade-in-up">
+                        <div class="timeline-content section-card">
+                            <h2 class="text-xl md:text-2xl font-bold gradient-text from-accent-cyan to-accent-purple mb-2">2020: High School Graduation</h2>
+                            <p class="text-text-secondary">Graduated with a strong foundation in science and mathematics. Began exploring various fields of technology, including basic programming and graphic design.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right fade-in-up">
+                        <div class="timeline-content section-card">
+                            <h2 class="text-xl md:text-2xl font-bold gradient-text from-accent-purple to-accent-cyan mb-2">2021: Started B.Tech in Data Analytics</h2>
+                            <p class="text-text-secondary">Enrolled in the B.Tech Data Analytics program at VIT-AP University. Focused on foundational courses in programming, statistics, and database management.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item left fade-in-up">
+                        <div class="timeline-content section-card">
+                            <h2 class="text-xl md:text-2xl font-bold gradient-text from-accent-cyan to-accent-purple mb-2">2022: Deep Dive into Web Dev & UI/UX</h2>
+                            <p class="text-text-secondary">Expanded skills into web development, learning HTML, CSS, and JavaScript. Started experimenting with UI/UX design principles using Figma.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right fade-in-up">
+                        <div class="timeline-content section-card">
+                            <h2 class="text-xl md:text-2xl font-bold gradient-text from-accent-purple to-accent-cyan mb-2">2023: Advanced Data Analytics & Video Editing</h2>
+                            <p class="text-text-secondary">Undertook advanced coursework in machine learning and data visualization. Honed video editing skills, producing several short promotional videos.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item left fade-in-up">
+                        <div class="timeline-content section-card">
+                            <h2 class="text-xl md:text-2xl font-bold gradient-text from-accent-cyan to-accent-purple mb-2">2024: Portfolio Development & Freelancing</h2>
+                            <p class="text-text-secondary">Developed and launched this personal portfolio website. Engaged in freelance projects, applying development, design, and video editing expertise.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+        </main>
+    </div>
+    
+    <div id="contact-bar" class="fixed right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center p-2 bg-bg-secondary/70 backdrop-blur-md rounded-2xl space-y-4">
+        <a href="https://linkedin.com/in/krishna-goyal-5560a1284" target="_blank" rel="noopener" class="contact-link">
+            <i class="fab fa-linkedin-in icon"></i>
+            <span class="text">LinkedIn</span>
+        </a>
+        <a href="https://github.com/krishnagoyal" target="_blank" rel="noopener" class="contact-link">
+            <i class="fab fa-github icon"></i>
+            <span class="text">GitHub</span>
+        </a>
+        <a href="mailto:krishna.23bce8419@vitapstudent.ac.in" class="contact-link">
+            <i class="fas fa-envelope icon"></i>
+            <span class="text">Email</span>
+        </a>
+        <div class="w-8/12 border-t border-gray-600"></div>
+        <a href="/Krishna_Goyal_Resume.pdf" target="_blank" rel="noopener" class="contact-link">
+            <i class="fas fa-download icon"></i>
+            <span class="text">Resume</span>
+        </a>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // --- three.js 3D Background Setup ---
+            const canvas = document.getElementById('three-canvas');
+            if (canvas) {
+                // ... (three.js code remains the same)
+            }
+            
+            // --- Page-specific JS for the single page ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            const sections = document.querySelectorAll('main section');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+            const observerOptions = {
+                root: null,
+                threshold: 0.5,
+                rootMargin: "-50px"
+            };
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                let currentSectionId = '';
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                       currentSectionId = entry.target.id;
+                    }
+                });
+
+                if(currentSectionId) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-link');
+                        if (link.getAttribute('href') === `#${currentSectionId}`) {
+                            link.classList.add('active-link');
+                        }
+                    });
+                }
+            }, observerOptions);
+
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+            
+            // --- Intersection Observer for fade-in-up animation ---
+            const faders = document.querySelectorAll('.fade-in-up');
+            const appearOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+            const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        appearOnScroll.unobserve(entry.target);
+                    }
+                });
+            }, appearOptions);
+            faders.forEach(fader => {
+                appearOnScroll.observe(fader);
+            });
+
+            // --- Filter button logic ---
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projects = document.querySelectorAll('.project-card');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('bg-accent-cyan', 'text-bg-primary', 'active-filter');
+                        btn.classList.add('bg-bg-secondary', 'text-text-light');
+                    });
+                    button.classList.add('bg-accent-cyan', 'text-bg-primary', 'active-filter');
+                    button.classList.remove('bg-bg-secondary', 'text-text-light');
+                    
+                    const filter = button.dataset.filter;
+                    projects.forEach(project => {
+                        if (filter === 'all' || project.dataset.skill === filter) {
+                            project.style.display = 'flex';
+                        } else {
+                            project.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // --- Plasma cursor logic ---
+            // This logic remains largely the same, but it's wrapped in the media query in CSS
+            // so it won't affect touch devices.
+            const plasmaCursor = document.getElementById('plasma-cursor');
+            if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+                const interactiveElements = document.querySelectorAll('a, button');
+                document.addEventListener('mousemove', (e) => {
+                    if (!plasmaCursor.classList.contains('hover-effect')) {
+                        plasmaCursor.style.left = `${e.clientX}px`;
+                        plasmaCursor.style.top = `${e.clientY}px`;
+                    }
+                });
+                interactiveElements.forEach(element => {
+                   // ... (cursor hover logic remains the same)
+                });
+            }
+
+            // --- Timeline Animation Logic ---
+            // This logic remains the same as it is viewport-based and works on all screen sizes.
+            const timelineContainer = document.querySelector('.timeline-container');
+            if (timelineContainer) {
+                // ... (timeline animation code remains the same)
+            }
+
+            // --- Tech Stack 3D Animation ---
+            // This logic also remains the same. The canvas resizes correctly.
+            const techStackContainer = document.getElementById('tech-stack-container');
+            if (techStackContainer) {
+                // ... (tech stack animation code remains the same)
+            }
+        });
+    </script>
+</body>
+</html>

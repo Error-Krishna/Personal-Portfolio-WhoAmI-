@@ -1,0 +1,333 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ project.title }} - Krishna Goyal</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'playfair': ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        'bg-primary': '#050709',
+                        'bg-secondary': '#0E1318',
+                        'card-bg': 'rgba(14, 19, 24, 0.7)',
+                        'accent-cyan': '#00F0FF',
+                        'accent-purple': '#A06EE7',
+                        'text-light': '#E6E6E6',
+                        'text-secondary': '#A0AEC0',
+                        'video-accent': '#E76EE7'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        body {
+            background-color: #050709;
+            background-image: linear-gradient(160deg, #0E1318 0%, #050709 74%);
+            color: #E6E6E6;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .section-card {
+            background-color: rgba(14, 19, 24, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(48, 54, 61, 0.5);
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #E76EE7, #A06EE7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 177.77%; /* 9:16 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            background-color: #000;
+            cursor: pointer;
+        }
+        .video-container video, .video-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .instagram-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .video-container:hover .instagram-overlay {
+            opacity: 1;
+        }
+
+        /* --- Desktop-Only Multi-Column Carousel Styles --- */
+        @media (min-width: 1024px) {
+            .multi-carousel-container {
+                display: flex;
+                gap: 2rem;
+                width: 100%;
+                max-width: 1600px;
+                margin: auto;
+                height: 100vh; 
+                overflow: hidden;
+                position: relative;
+                -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+                mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+            }
+
+            .carousel-column {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                position: relative;
+            }
+            
+            .carousel-column::before, .carousel-column::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                width: 10px;
+                background-image: radial-gradient(circle at center, #050709 3px, transparent 3px);
+                background-size: 10px 20px;
+            }
+            .carousel-column::before { left: -15px; }
+            .carousel-column::after { right: -15px; }
+
+            .carousel-scroller {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                animation: linear infinite;
+            }
+            
+            .carousel-scroller[data-direction="up"] { animation-name: scroll-up; }
+            .carousel-scroller[data-direction="down"] { animation-name: scroll-down; }
+            .carousel-scroller[data-speed="fast"] { animation-duration: 10s; }
+            .carousel-scroller[data-speed="medium"] { animation-duration: 18s; }
+            .carousel-scroller[data-speed="slow"] { animation-duration: 25s; }
+
+            .carousel-item {
+                flex-shrink: 0;
+                width: 100%;
+                padding: 1rem 0;
+            }
+
+            @keyframes scroll-up {
+                from { transform: translateY(0); }
+                to { transform: translateY(-50%); }
+            }
+            @keyframes scroll-down {
+                from { transform: translateY(-50%); }
+                to { transform: translateY(0); }
+            }
+        }
+
+        /* --- MODAL STYLES --- */
+        #video-modal {
+            transition: opacity 0.3s ease;
+        }
+        #video-modal.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .modal-content {
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        #video-modal:not(.hidden) .modal-content {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="bg-bg-primary text-text-light">
+
+    <main class="min-h-screen py-12 md:py-16 px-4">
+        <div class="container mx-auto">
+
+            <div class="mb-8 text-center">
+                <a href="{% url 'home' %}#projects" class="inline-flex items-center gap-2 text-text-secondary hover:text-accent-cyan transition-colors duration-300">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back to All Projects</span>
+                </a>
+            </div>
+
+            <div class="text-center mb-12">
+                <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold font-playfair gradient-text mb-4">{{ project.title }}</h1>
+                <p class="text-lg sm:text-xl md:text-2xl text-text-secondary">{{ project.tagline }}</p>
+            </div>
+
+            <!-- Responsive Video Gallery -->
+            <!-- Mobile/Tablet: Grid Layout -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 lg:hidden">
+                 {% for video in project.videos %}
+                    <div class="carousel-item">
+                        <div class="section-card rounded-3xl shadow-xl p-4">
+                            <div class="video-container mb-4">
+                                {% if video.type == 'local' %}
+                                    <video src="{% static video.video_url %}" autoplay muted loop playsinline></video>
+                                {% elif video.type == 'instagram' %}
+                                    <a href="{{ video.instagram_url }}" target="_blank" rel="noopener noreferrer">
+                                        <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}">
+                                        <div class="instagram-overlay">
+                                            <i class="fab fa-instagram text-white text-6xl"></i>
+                                        </div>
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <h3 class="font-bold text-center text-text-light">{{ video.title }}</h3>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Desktop: Animated Multi-Column Carousel -->
+            <div class="hidden lg:flex multi-carousel-container">
+                {% with project.videos as videos %}
+                    {% for i in "123" %}
+                    <div class="carousel-column">
+                        <div class="carousel-scroller" 
+                             data-direction="{% if i == '2' %}down{% else %}up{% endif %}" 
+                             data-speed="{% if i == '1' %}fast{% elif i == '2' %}medium{% else %}slow{% endif %}">
+                            
+                            {% for video in videos %}
+                                {% cycle '1' '2' '3' as video_col silent %}
+                                {% if video_col == i %}
+                                <div class="carousel-item">
+                                    <div class="section-card rounded-3xl shadow-xl p-4">
+                                        <div class="video-container mb-4">
+                                            {% if video.type == 'local' %}
+                                                <video src="{% static video.video_url %}" autoplay muted loop playsinline></video>
+                                            {% elif video.type == 'instagram' %}
+                                                <a href="{{ video.instagram_url }}" target="_blank" rel="noopener noreferrer">
+                                                    <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}">
+                                                    <div class="instagram-overlay">
+                                                        <i class="fab fa-instagram text-white text-6xl"></i>
+                                                    </div>
+                                                </a>
+                                            {% endif %}
+                                        </div>
+                                        <h3 class="font-bold text-center text-text-light">{{ video.title }}</h3>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endwith %}
+            </div>
+
+            <div class="mt-16 section-card p-8 rounded-3xl max-w-2xl mx-auto">
+                <h2 class="text-3xl font-bold mb-6 font-playfair text-center">Tools & Technologies</h2>
+                <div class="flex flex-wrap gap-3 justify-center">
+                    {% for tech in project.tech_stack %}
+                    <span class="bg-bg-secondary px-4 py-2 rounded-full font-semibold text-sm">{{ tech }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="video-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 z-50 hidden">
+        <div class="modal-content bg-bg-secondary rounded-2xl p-2 relative w-full max-w-sm">
+            <button id="close-modal" class="absolute -top-3 -right-3 w-8 h-8 bg-white text-black rounded-full text-xl z-10 flex items-center justify-center">&times;</button>
+            <div id="modal-video-container" class="rounded-xl overflow-hidden"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const scrollers = document.querySelectorAll('.carousel-scroller');
+            const videoModal = document.getElementById('video-modal');
+            const closeModalBtn = document.getElementById('close-modal');
+            const modalVideoContainer = document.getElementById('modal-video-container');
+            const galleryContainer = document.querySelector('main'); // Use main container for event delegation
+
+            // --- Carousel Cloning for Seamless Loop (for desktop view) ---
+            if (window.innerWidth >= 1024) {
+                scrollers.forEach(scroller => {
+                    const items = Array.from(scroller.children);
+                    if (items.length > 0) {
+                        items.forEach(item => {
+                            const clone = item.cloneNode(true);
+                            scroller.appendChild(clone);
+                        });
+                    }
+                });
+            }
+
+            // --- Modal Logic ---
+            const pauseCarousels = () => {
+                if (window.innerWidth >= 1024) {
+                    scrollers.forEach(scroller => scroller.style.animationPlayState = 'paused');
+                }
+            };
+
+            const resumeCarousels = () => {
+                if (window.innerWidth >= 1024) {
+                    scrollers.forEach(scroller => scroller.style.animationPlayState = 'running');
+                }
+            };
+
+            galleryContainer.addEventListener('click', (e) => {
+                const videoContainer = e.target.closest('.video-container');
+
+                if (videoContainer && videoContainer.querySelector('video')) {
+                    e.preventDefault();
+                    pauseCarousels();
+
+                    const videoClone = videoContainer.querySelector('video').cloneNode(true);
+                    
+                    videoClone.muted = false;
+                    videoClone.controls = true;
+                    videoClone.loop = false;
+                    
+                    modalVideoContainer.innerHTML = '';
+                    modalVideoContainer.appendChild(videoClone);
+
+                    videoModal.classList.remove('hidden');
+                    videoClone.play();
+                }
+            });
+
+            const closeModal = () => {
+                modalVideoContainer.innerHTML = '';
+                videoModal.classList.add('hidden');
+                resumeCarousels();
+            };
+
+            closeModalBtn.addEventListener('click', closeModal);
+            videoModal.addEventListener('click', (e) => {
+                if (e.target === videoModal) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
