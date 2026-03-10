@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {% block title %}
+    <title>Krishna Goyal Portfolio</title>
+    {% endblock %}
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'playfair': ['"Playfair Display"', 'serif'],
+                        'archivo': ['"Archivo Black"', 'sans-serif']
+                    },
+                    colors: {
+                        'bg-primary': '#050709',
+                        'bg-secondary': '#0E1318',
+                        'card-bg': 'rgba(14, 19, 24, 0.7)',
+                        'accent-cyan': '#00F0FF',
+                        'accent-purple': '#A06EE7',
+                        'text-light': '#E6E6E6',
+                        'text-secondary': '#A0AEC0',
+                        'dev-accent': '#00FFC8',
+                        'design-accent': '#FFD700',
+                        'video-accent': '#E76EE7'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-primary: #050709;
+            --bg-secondary: #0E1318;
+            --card-bg: rgba(14, 19, 24, 0.7);
+            --accent-cyan: #00F0FF;
+            --accent-purple: #A06EE7;
+            --text-light: #E6E6E6;
+            --text-secondary: #A0AEC0;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            background-image: linear-gradient(160deg, var(--bg-secondary) 0%, var(--bg-primary) 74%);
+            color: var(--text-light);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .active-link {
+            color: var(--accent-cyan) !important;
+            position: relative;
+        }
+
+        .active-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent-cyan);
+            border-radius: 50%;
+        }
+    </style>
+
+    {% block CSSLinks %}{% endblock %}
+</head>
+<body class="bg-bg-primary text-text-light scroll-smooth overflow-x-hidden">
+
+    <!-- Navigation Bar - EXACTLY SAME AS home.html -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-bg-primary bg-opacity-70 backdrop-filter backdrop-blur-lg">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="{% url 'home' %}" class="text-2xl font-bold gradient-text from-accent-cyan to-accent-purple font-inter">
+                Krishna
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-2">
+                <a href="{% url 'home' %}" class="px-3 py-2 rounded-md text-text-light transition-colors duration-300 {% block home_active %}{% endblock %}">
+                    Home
+                </a>
+                <a href="{% url 'home' %}#projects" class="px-3 py-2 rounded-md text-text-light transition-colors duration-300 {% block projects_active %}{% endblock %}">
+                    Projects
+                </a>
+                <a href="{% url 'home' %}#about" class="px-3 py-2 rounded-md text-text-light transition-colors duration-300 {% block about_active %}{% endblock %}">
+                    About Me
+                </a>
+                <a href="{% url 'home' %}#tech-stack" class="px-3 py-2 rounded-md text-text-light transition-colors duration-300 {% block techstack_active %}{% endblock %}">
+                    Tech Stack
+                </a>
+                <a href="{% url 'home' %}#timeline" class="px-3 py-2 rounded-md text-text-light transition-colors duration-300 {% block timeline_active %}{% endblock %}">
+                    My Journey
+                </a>
+                <a href="mailto:krishna.23bce8419@vitapstudent.ac.in" class="ml-4 px-4 py-2 bg-accent-cyan text-bg-primary rounded-full font-semibold hover:bg-opacity-80 transition-colors duration-300">
+                    Hire Me
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-text-light focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu (hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-bg-secondary">
+            <a href="{% url 'home' %}" class="block text-center py-3 px-4 text-text-light hover:bg-accent-cyan hover:text-bg-primary transition-colors duration-300">Home</a>
+            <a href="{% url 'home' %}#projects" class="block text-center py-3 px-4 text-text-light hover:bg-accent-cyan hover:text-bg-primary transition-colors duration-300">Projects</a>
+            <a href="{% url 'home' %}#about" class="block text-center py-3 px-4 text-text-light hover:bg-accent-cyan hover:text-bg-primary transition-colors duration-300">About Me</a>
+            <a href="{% url 'home' %}#tech-stack" class="block text-center py-3 px-4 text-text-light hover:bg-accent-cyan hover:text-bg-primary transition-colors duration-300">Tech Stack</a>
+            <a href="{% url 'home' %}#timeline" class="block text-center py-3 px-4 text-text-light hover:bg-accent-cyan hover:text-bg-primary transition-colors duration-300">My Journey</a>
+            <a href="mailto:krishna.23bce8419@vitapstudent.ac.in" class="block text-center py-4 px-4 bg-accent-cyan text-bg-primary font-semibold">Hire Me</a>
+        </div>
+    </nav>
+
+    <main class="pt-24 min-h-screen">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="bg-bg-secondary py-8 text-center text-gray-500 text-sm">
+        <p>&copy; 2024 Krishna Goyal. All rights reserved.</p>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        });
+    </script>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

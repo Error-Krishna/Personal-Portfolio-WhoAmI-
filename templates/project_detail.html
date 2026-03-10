@@ -1,0 +1,129 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+<title>{{ project.title }} - Krishna Goyal</title>
+{% endblock %}
+
+{% block projects_active %}active-link{% endblock %}
+
+{% block CSSLinks %}
+<style>
+    .tech-stack-item {
+        background-color: #0E1318;
+        transition: all 0.3s ease;
+    }
+    .tech-stack-item:hover {
+        transform: translateY(-5px);
+        background-color: #00F0FF;
+        color: #050709;
+    }
+    
+    /* Video container for project detail */
+    .project-video-container {
+        position: relative;
+        width: 100%;
+        border-radius: 1rem;
+        overflow: hidden;
+        background-color: #000;
+    }
+    
+    .project-video-container video {
+        width: 100%;
+        height: auto;
+        border-radius: 1rem;
+    }
+    
+    /* Gradient text specific for development vs video projects */
+    .dev-gradient-text {
+        background: linear-gradient(90deg, #00F0FF, #A06EE7);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    .video-gradient-text {
+        background: linear-gradient(90deg, #E76EE7, #A06EE7);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="min-h-screen py-12 md:py-16 px-4">
+    <div class="container mx-auto max-w-5xl">
+
+        <div class="mb-8">
+            <a href="{% url 'home' %}#projects" class="inline-flex items-center gap-2 text-text-secondary hover:text-accent-cyan transition-colors duration-300">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to All Projects</span>
+            </a>
+        </div>
+
+        <div class="text-center mb-12">
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold font-playfair 
+                {% if project.category == 'video-editing' %}video-gradient-text{% else %}dev-gradient-text{% endif %} 
+                mb-4">
+                {{ project.title }}
+            </h1>
+            <p class="text-lg sm:text-xl md:text-2xl text-text-secondary">{{ project.tagline }}</p>
+        </div>
+
+        {% if project.video_file %}
+        <div class="section-card rounded-3xl shadow-xl p-2 sm:p-4 md:p-8 mb-12">
+            <div class="project-video-container">
+                <video class="w-full h-auto" autoplay loop muted playsinline controls>
+                    <source src="{{ project.video_file.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12">
+            <div class="lg:col-span-2 section-card p-6 md:p-8 rounded-3xl">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 font-playfair">About the Project</h2>
+                <div class="text-text-secondary text-base md:text-lg space-y-4 prose prose-invert max-w-none">
+                    {{ project.detailed_description|safe }}
+                </div>
+            </div>
+
+            <div class="space-y-8">
+                <div class="section-card p-6 md:p-8 rounded-3xl">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-6 font-playfair">Tech Stack</h2>
+                    <div class="flex flex-wrap gap-3">
+                        {% for tech in project.tech_stack %}
+                        <span class="tech-stack-item px-4 py-2 rounded-full font-semibold text-sm">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="section-card p-6 md:p-8 rounded-3xl">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-6 font-playfair">Project Links</h2>
+                    <div class="flex flex-col space-y-4">
+                        {% if project.live_url %}
+                        <a href="{{ project.live_url }}" target="_blank" rel="noopener noreferrer" 
+                           class="text-center px-6 py-3 
+                                  {% if project.category == 'video-editing' %}bg-video-accent{% else %}bg-dev-accent{% endif %} 
+                                  text-bg-primary font-bold rounded-full text-lg shadow-lg hover:bg-opacity-80 transition-colors">
+                            <i class="fas fa-external-link-alt mr-2"></i> View Live Site
+                        </a>
+                        {% endif %}
+                        
+                        {% if project.github_url %}
+                        <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer" 
+                           class="text-center px-6 py-3 bg-bg-secondary text-text-light font-bold rounded-full text-lg shadow-lg hover:bg-gray-700 transition-colors">
+                            <i class="fab fa-github mr-2"></i> View on GitHub
+                        </a>
+                        {% endif %}
+                        
+                        {% if not project.live_url and not project.github_url %}
+                        <p class="text-text-secondary text-center py-4">Project links coming soon!</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

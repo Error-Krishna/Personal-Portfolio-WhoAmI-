@@ -1,0 +1,1011 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block home_active %}active-link{% endblock %}
+
+{% block CSSLinks %}
+<style>
+    @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+    * {
+      -webkit-font-smoothing: antialiased;
+      box-sizing: border-box;
+    }
+    html {
+      margin: 0;
+      height: 100%;
+    }
+    .perspective-1000 {
+        perspective: 1000px;
+    }
+    .transform-gpu {
+        transform-style: preserve-3d;
+        backface-visibility: hidden;
+    }
+    body {
+        background-color: #050709;
+        background-image: linear-gradient(160deg, #0E1318 0%, #050709 74%);
+        font-family: 'Inter', sans-serif;
+        color: #E6E6E6;
+        cursor: default;
+    }
+    @media (hover: hover) and (pointer: fine) {
+        body {
+            cursor: none;
+        }
+    }
+    a {
+      text-decoration: none;
+    }
+    
+    #three-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.2;
+    }
+
+    /* Unified Showcase Card Styles */
+    .showcase-card {
+        background: rgba(14, 19, 24, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(48, 54, 61, 0.5);
+        border-radius: 24px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        overflow: hidden;
+    }
+
+    .showcase-media-container {
+        position: relative;
+        background: #000;
+        overflow: hidden;
+    }
+
+    .showcase-media-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1;
+    }
+
+    .showcase-media-item.active {
+        opacity: 1;
+        z-index: 2;
+    }
+
+    .showcase-media-item video, 
+    .showcase-media-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Scroll Snapping */
+    .showcase-scroll-panel {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none;  /* IE and Edge */
+        scroll-behavior: smooth;
+    }
+    .showcase-scroll-panel::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+    }
+
+    .project-detail-snap {
+        scroll-snap-align: start;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2rem;
+        opacity: 0.3;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        transform: scale(0.95);
+    }
+
+    .project-detail-snap.is-active {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* Rest of existing styles */
+    .section-card {
+        background-color: rgba(14, 19, 24, 0.7);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(48, 54, 61, 0.5);
+        transition: all 0.5s ease;
+    }
+    .section-card:hover {
+        border-color: var(--accent-cyan);
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    }
+    .section-header {
+        font-family: 'Inter', sans-serif, serif;
+        position: relative;
+        display: inline-block;
+        transition: all 0.5s ease;
+    }
+    .section-header::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+        transition: width 0.5s ease;
+    }
+    .section-header:hover::after {
+        width: 100%;
+    }
+
+    .profile-section-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 80vh;
+        overflow: hidden;
+    }
+
+    .background-name-text {
+        font-family: 'Archivo Black', sans-serif;
+        font-size: 18vw;
+        font-weight: 900;
+        color: white;
+        position: absolute;
+        z-index: 1;
+        text-align: center;
+        line-height: 0.9;
+        user-select: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        transform: translateY(-5%);
+    }
+    
+    .name-goyal {
+        opacity: 0.2;
+    }
+
+    .profile-image-container {
+        position: relative;
+        z-index: 2;
+        width: 30vw;
+        max-width: 450px;
+        min-width: 250px;
+    }
+
+    .profile-image {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        filter: grayscale(100%);
+        transition: filter 0.3s ease;
+        mix-blend-mode: exclusion;
+    }
+    .profile-image:hover {
+        filter: grayscale(0%);
+    }
+
+    .profile-subsection-text {
+        position: absolute;
+        z-index: 3;
+        bottom: 10%;
+        left: 5%;
+        max-width: 250px;
+        color: white;
+    }
+
+    #plasma-cursor {
+        display: none;
+    }
+    @media (hover: hover) and (pointer: fine) {
+        #plasma-cursor {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 30px;
+            height: 30px;
+            background-color: rgb(194, 164, 255);
+            border-radius: 50%;
+            pointer-events: none;
+            mix-blend-mode: hard-light;
+            transform: translate(-50%, -50%);
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            z-index: 9999;
+            box-shadow: 0 0 10px rgb(194, 164, 255);
+            animation: pulse 1.5s infinite alternate;
+        }
+    }
+    @keyframes pulse {
+        0% { transform: scale(1) translate(-50%, -50%); }
+        100% { transform: scale(1.1) translate(-50%, -50%); }
+    }
+    #plasma-cursor.hover-effect {
+        animation: none;
+        mix-blend-mode: normal;
+        background-color: #c2a4ff;
+        box-shadow: 0 0 10px #c2a4ff;
+        opacity: 0.8;
+        transform: scale(0.2) translate(-50%, -50%);
+    }
+    
+    .fade-in-up {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+    .fade-in-up.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .timeline-container {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 0;
+    --filled-height: 0px;
+    --glow-top: 0px;
+}
+
+/* Base timeline line */
+.timeline-container::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background-color: rgba(48, 54, 61, 0.3);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 0;
+}
+
+/* Progress line (fills on scroll) */
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background: linear-gradient(to bottom, #A06EE7, #00F0FF);
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    height: var(--filled-height);
+    transition: height 0.15s linear;
+}
+
+/* Moving glow beam */
+.timeline-glow {
+    position: absolute;
+    width: 12px;
+    height: 80px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: var(--glow-top);
+    background: radial-gradient(circle at center,
+        rgba(0,240,255,0.9) 0%,
+        rgba(160,110,231,0.6) 40%,
+        rgba(0,240,255,0) 80%);
+    filter: blur(10px);
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.timeline-container.timeline-active .timeline-glow {
+    opacity: 1;
+}
+
+/* Timeline items */
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+}
+
+.timeline-item.left {
+    left: 0;
+}
+
+.timeline-item.right {
+    left: 50%;
+}
+
+/* Timeline circles (FIXED CENTERING) */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    top: 18px;
+    border-radius: 50%;
+    background: #0E1318;
+    border: 4px solid #00F0FF;
+    box-shadow: 0 0 0 4px rgba(0,240,255,0.2);
+    z-index: 3;
+}
+
+.timeline-item.left::after {
+    right: -11px;
+}
+
+.timeline-item.right::after {
+    left: -11px;
+}
+
+/* Timeline content cards */
+.timeline-content {
+    padding: 22px 30px;
+    border-radius: 12px;
+    border: 1px solid rgba(48, 54, 61, 0.5);
+    background-color: rgba(14, 19, 24, 0.7);
+    backdrop-filter: blur(10px);
+    transition: all 0.35s ease;
+}
+
+/* Card glow when active */
+.timeline-content.active {
+    transform: translateY(-4px);
+    border-color: #00F0FF;
+    box-shadow: 0 0 25px rgba(0,240,255,0.25);
+}
+
+/* --- Mobile Layout --- */
+
+@media screen and (max-width: 768px) {
+
+    .timeline-container::after,
+    .timeline-container::before {
+        left: 32px;
+        transform: none;
+    }
+
+    .timeline-glow {
+        left: 32px;
+        transform: translateY(-50%);
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+
+    .timeline-item.right {
+        left: 0;
+    }
+
+    .timeline-item.left::after,
+    .timeline-item.right::after {
+        left: 21px;
+    }
+}
+
+    .contact-link {
+        display: flex;
+        align-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background-color: var(--bg-primary);
+        color: var(--text-light);
+        transition: all 0.3s ease-in-out;
+        overflow: hidden;
+        text-decoration: none;
+    }
+
+    .contact-link:hover {
+        width: 130px;
+        border-radius: 16px;
+        background-color: var(--accent-cyan);
+        color: var(--bg-primary);
+    }
+
+    .contact-link .icon {
+        font-family: "Font Awesome 6 Brands", "Font Awesome 6 Free";
+        font-weight: 900;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 44px;
+        height: 44px;
+        font-size: 1.1rem;
+        transition: color 0.3s ease;
+    }
+    
+    .contact-link .text {
+        white-space: nowrap;
+        opacity: 0;
+        transform: translateX(-10px);
+        transition: opacity 0.3s ease-in-out 0.1s, transform 0.3s ease-in-out 0.1s;
+        font-weight: 600;
+        padding-left: 4px;
+    }
+
+    .contact-link:hover .text {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /* --- Responsive Adjustments --- */
+    @media (max-width: 1024px) {
+        .profile-image-container {
+            width: 40vw;
+        }
+        .showcase-card {
+            flex-direction: column;
+            height: auto !important;
+        }
+        .showcase-media-container {
+            height: 300px;
+            width: 100%;
+        }
+        .showcase-scroll-panel {
+            height: auto !important;
+            overflow-y: visible !important;
+            scroll-snap-type: none !important;
+        }
+        .project-detail-snap {
+            min-height: auto !important;
+            padding: 3rem 1.5rem;
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .background-name-text { font-size: 25vw; }
+        .profile-image-container { width: 50vw; min-width: 200px; }
+        .profile-subsection-text { bottom: 5%; left: 5%; font-size: 0.8rem; }
+        
+        .timeline-container::after,
+        .timeline-container::before,
+        .timeline-container .timeline-glow {
+            left: 31px;
+            margin-left: -3px;
+        }
+        .timeline-container .timeline-glow { margin-left: -5px; }
+        .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+        .timeline-item.right { left: 0%; }
+        .timeline-item.left::after,
+        .timeline-item.right::after { left: 15px; }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<canvas id="three-canvas" class="fixed top-0 left-0 w-full h-full z-0 opacity-20 pointer-events-none"></canvas>
+<div id="plasma-cursor"></div>
+
+<div class="relative z-10">
+    <main class="min-h-screen pt-24 pb-24 flex flex-col items-center">
+        <!-- Hero Section -->
+        <section id="home" class="relative w-full min-h-screen pt-16 flex flex-col justify-center items-center text-center px-4">
+            <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold font-archivo tracking-tight drop-shadow-lg text-white mb-4 z-10">
+                <span class="block gradient-text from-accent-cyan to-accent-purple">Who Am I?</span>
+                <span class="block sm:inline gradient-text from-accent-purple to-accent-cyan">Developer | </span>
+                <span class="block sm:inline gradient-text from-accent-cyan to-accent-purple">Designer | </span>
+                <span class="block sm:inline gradient-text from-accent-purple to-accent-cyan">Editor | </span>
+                <span class="block sm:inline gradient-text from-accent-cyan to-accent-purple">Data Analyst</span>
+            </h1>
+            <p class="text-lg md:text-2xl font-light text-text-secondary z-10 max-w-3xl">
+                Building digital experiences with a creative and analytical mind.
+            </p>
+            <div class="spline-container w-full h-full absolute top-0 left-0 z-0">
+                <iframe src="https://my.spline.design/nexbotrobotcharacterconcept-37a68739c76cde0f6568b5bea10e7ec2/" frameborder="0" class="w-full h-full"></iframe>
+            </div>
+        </section>
+        
+        <!-- REDESIGNED PROJECTS SECTION -->
+        <section id="projects" class="container mx-auto px-4 py-16 min-h-screen flex flex-col items-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-center mb-16 section-header">
+                My Projects
+            </h1>
+
+            <!-- Unified Showcase Component -->
+            <div class="showcase-card flex flex-col lg:flex-row w-full max-w-6xl h-[600px] lg:h-[700px]">
+                
+                <!-- Left: Dynamic Media Viewport -->
+                <div class="showcase-media-container lg:w-1/2 w-full h-full">
+                    <!-- 0: Portfolio -->
+                    <div class="showcase-media-item active" data-project-media="0">
+                        <video src="{% static 'videos/portfolio_preview.mp4' %}" autoplay muted loop playsinline poster="{% static 'images/portfolio_thumb.jpg' %}"></video>
+                    </div>
+
+                    <!-- 1: Finance -->
+                    <div class="showcase-media-item" data-project-media="1">
+                        <video src="{% static 'videos/finance_preview.mp4' %}" autoplay muted loop playsinline poster="{% static 'images/finance_thumb.jpg' %}"></video>
+                    </div>
+
+                    <!-- 2: InsightLoop -->
+                    <div class="showcase-media-item" data-project-media="2">
+                        <video src="{% static 'videos/insight_preview.mp4' %}" autoplay muted loop playsinline poster="{% static 'images/insight_thumb.jpg' %}"></video>
+                    </div>
+
+                    <!-- 3: HotReload -->
+                    <div class="showcase-media-item" data-project-media="3">
+                        <video src="{% static 'videos/hotreload_preview.mp4' %}" autoplay muted loop playsinline poster="{% static 'images/hotreload_thumb.jpg' %}"></video>
+                        <img src="{% static 'images/hotreload_thumb.jpg' %}" alt="HotReload Placeholder" class="hidden">
+                    </div>
+
+                    <!-- 4: SaaS Startup -->
+                    <div class="showcase-media-item" data-project-media="4">
+                        <div class="w-full h-full bg-gradient-to-tr from-accent-purple/20 to-accent-cyan/20 flex items-center justify-center">
+                            <i class="fas fa-rocket text-6xl text-white/20 animate-pulse"></i>
+                        </div>
+                    </div>
+
+                    
+                </div>
+
+                <!-- Right: Scrollable Info Panel -->
+                <div id="project-scroll-panel" class="showcase-scroll-panel lg:w-1/2 w-full h-full overflow-y-auto snap-y snap-mandatory bg-white/5">
+                    
+                    <!-- 0: Portfolio -->
+                    <div class="project-detail-snap min-h-full" data-project-id="0">
+                        <span class="text-accent-cyan font-mono text-sm mb-2">01 / Featured Project</span>
+                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Personal Portfolio</h2>
+                        <p class="text-text-secondary text-lg mb-6">
+                            A showcase of my creative and technical work, featuring 3D visuals with Three.js and a highly interactive UI designed for performance.
+                        </p>
+                        <div class="mb-8">
+                            <h4 class="text-sm font-bold text-white uppercase tracking-widest mb-3">Tech Stack</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-accent-purple">Django</span>
+                                <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-accent-purple">Three.js</span>
+                                <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-accent-purple">Tailwind CSS</span>
+                            </div>
+                        </div>
+                        <a href="{% url 'project_detail' 'portfolio-website' %}" class="inline-flex items-center px-6 py-3 bg-accent-cyan text-black font-bold rounded-full transition-transform hover:scale-105 active:scale-95">
+                            Explore Project <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+
+                    <!-- 1: Finance -->
+                    <div class="project-detail-snap min-h-full" data-project-id="1">
+                        <span class="text-accent-purple font-mono text-sm mb-2">02 / FinTech</span>
+                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Finance Tracker</h2>
+                        <p class="text-text-secondary text-lg mb-6">
+                            A robust dashboard for managing personal assets and liabilities. Includes real-time data visualization and spending analytics.
+                        </p>
+                        <div class="mb-8">
+                            <h4 class="text-sm font-bold text-white uppercase tracking-widest mb-3">Tech Stack</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-accent-cyan">Flask</span>
+                                <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-accent-cyan">MongoDB</span>
+                                <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-accent-cyan">Chart.js</span>
+                            </div>
+                        </div>
+                        <a href="{% url 'project_detail' 'personal-finance-tracker' %}" class="inline-flex items-center px-6 py-3 bg-accent-purple text-white font-bold rounded-full transition-transform hover:scale-105">
+                            View Dashboard <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+
+                    <!-- 2: InsightLoop -->
+                    <div class="project-detail-snap min-h-full" data-project-id="2">
+                        <span class="text-accent-cyan font-mono text-sm mb-2">03 / Analytics</span>
+                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">InsightLoop Business</h2>
+                        <p class="text-text-secondary text-lg mb-6">
+                            Scalable business intelligence tool designed to process large datasets and provide actionable strategic insights.
+                        </p>
+                        <div class="mb-8">
+                            <h4 class="text-sm font-bold text-white uppercase tracking-widest mb-3">Tech Stack</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-accent-purple">Python</span>
+                                <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-accent-purple">Pandas</span>
+                                <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-accent-purple">Tableau</span>
+                            </div>
+                        </div>
+                        <a href="{% url 'project_detail' 'insightloop-business' %}" class="inline-flex items-center px-6 py-3 bg-accent-cyan text-black font-bold rounded-full transition-transform hover:scale-105">
+                            See Insights <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+
+                    <!-- 3: HotReload -->
+                    <div class="project-detail-snap min-h-full" data-project-id="3">
+                        <span class="text-accent-purple font-mono text-sm mb-2">04 / Automation</span>
+                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">HotReload</h2>
+                        <p class="text-text-secondary text-lg mb-6">
+                            A network automation tool designed to automatically switch broadband logins when moving between access points, improving connectivity continuity in campus environments.
+                        </p>
+                        <div class="mb-8">
+                            <h4 class="text-sm font-bold text-white uppercase tracking-widest mb-3">Tech Stack</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-accent-cyan">Python</span>
+                                <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-accent-cyan">Networking</span>
+                                <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-accent-cyan">Automation</span>
+                            </div>
+                        </div>
+                        <button class="inline-flex items-center px-6 py-3 bg-accent-purple text-white font-bold rounded-full transition-transform hover:scale-105">
+                            Learn More <i class="fas fa-microchip ml-2"></i>
+                        </button>
+                    </div>
+
+                    <!-- 4: SaaS Project -->
+                    <div class="project-detail-snap min-h-full" data-project-id="4">
+                        <span class="text-accent-cyan font-mono text-sm mb-2">05 / Entrepreneurship</span>
+                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Building My SaaS Platform</h2>
+                        <p class="text-text-secondary text-lg mb-6">
+                            Developing a scalable Software-as-a-Service platform to solve real-world problems. This project reflects my journey into product development and startup ambition.
+                        </p>
+                        <div class="mb-8">
+                            <h4 class="text-sm font-bold text-white uppercase tracking-widest mb-3">Focus Areas</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-accent-purple">SaaS</span>
+                                <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-accent-purple">Cloud Architecture</span>
+                                <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-accent-purple">Scalability</span>
+                            </div>
+                        </div>
+                        <button class="inline-flex items-center px-6 py-3 border-2 border-accent-cyan text-accent-cyan font-bold rounded-full transition-all hover:bg-accent-cyan hover:text-black">
+                            Coming Soon <i class="fas fa-hourglass-start ml-2"></i>
+                        </button>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Section -->
+        <section id="about" class="container mx-auto px-4 py-16 min-h-screen flex flex-col items-center">
+            <div class="profile-section-container fade-in-up">
+                <div class="background-name-text">
+                    <span>KRISHNA</span>
+                    <span class="name-goyal">GOYAL</span>
+                </div>
+
+                <div class="profile-image-container">
+                    <img src="{% static 'images/image-removebg-preview.png' %}" alt="Krishna Goyal Portrait" class="profile-image">
+                </div>
+
+                <div class="profile-subsection-text">
+                    <h2 class="text-2xl font-bold">About Me</h2>
+                    <p class="text-text-secondary">Builder. Developer. Visionary. Creating technology that solves real problems.</p>
+                </div>
+            </div>
+            
+            <div class="w-full mt-16 space-y-16">
+                <div class="section-card p-8 md:p-12 rounded-3xl w-full max-w-4xl mx-auto shadow-2xl fade-in-up">
+                    
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8 section-header">Who Am I?</h2>
+
+                    <div class="space-y-8 text-text-light text-base md:text-lg">
+
+                        <p class="leading-relaxed">
+                            I'm <strong>Krishna Goyal</strong>, a 3rd year B.Tech Data Analytics student at <strong>VIT-AP University</strong>. 
+                            I enjoy building digital products that combine strong backend systems, clean user experiences, and scalable data architecture.
+                        </p>
+
+                        <p class="leading-relaxed">
+                            Over time I’ve worked deeply with the <strong>MERN stack</strong>, <strong>Django</strong>, and <strong>MongoDB</strong>, developing projects that solve real developer problems and improve productivity.
+                        </p>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+
+                            <div>
+                                <h3 class="font-semibold text-xl mb-2">⚡ What I Build</h3>
+                                <ul class="space-y-2 text-text-secondary">
+                                    <li>• Full Stack Web Applications</li>
+                                    <li>• Developer Productivity Tools</li>
+                                    <li>• Data-driven platforms</li>
+                                    <li>• Backend systems & APIs</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h3 class="font-semibold text-xl mb-2">🛠 Tech Stack</h3>
+                                <ul class="space-y-2 text-text-secondary">
+                                    <li>• MERN Stack</li>
+                                    <li>• Django</li>
+                                    <li>• MongoDB</li>
+                                    <li>• Frontend & Backend Development</li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        <p class="leading-relaxed">
+                            Currently, I’m building <strong>Udhyog Saathi</strong>, a venture aimed at empowering businesses with smarter digital solutions. 
+                            As the <strong>visionary behind the project</strong>, my focus is on turning ideas into impactful platforms that create real-world value.
+                        </p>
+
+                        <p class="text-text-secondary italic">
+                            My goal is simple — keep building, keep learning, and eventually create ventures that shape the future.
+                        </p>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack -->
+        <section id="tech-stack" class="container mx-auto px-4 py-16 w-full min-h-screen flex flex-col items-center justify-center relative fade-in-up">
+    
+            <h1 class="text-4xl md:text-5xl font-bold text-center section-header mb-8">
+                My Tech Stack
+            </h1>
+
+            <!-- Interactive Bubble Container (UNCHANGED) -->
+            <div id="tech-stack-container" class="w-full h-[60vh] md:h-[70vh] relative cursor-pointer z-20">
+                <div id="tooltip" class="absolute bg-bg-secondary text-text-light px-3 py-1 rounded-md text-sm pointer-events-none opacity-0 transition-opacity duration-200 transform -translate-x-1/2 -translate-y-full"></div>
+            </div>
+
+            <!-- Know More Button -->
+            <button
+                onclick="toggleTechStack()"
+                class="mt-10 px-8 py-3 rounded-full border border-white/20
+                hover:border-white/60 hover:scale-105
+                transition-all duration-300">
+                Explore Full Tech Stack
+                </button>
+
+            <!-- Expandable Tech Stack Details -->
+            <div id="tech-stack-details" class="w-full max-w-5xl mt-10 section-card p-8 rounded-3xl shadow-2xl max-h-0 opacity-0 overflow-hidden translate-y-4 transition-all duration-700 ease-in-out">
+
+                <div class="grid md:grid-cols-3 gap-10 text-text-light">
+
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">🚀 Worked With</h3>
+                        <ul class="space-y-2 text-text-secondary">
+                            <li>• MongoDB</li>
+                            <li>• Express.js</li>
+                            <li>• React.js</li>
+                            <li>• Node.js</li>
+                            <li>• Django</li>
+                            <li>• Python</li>
+                            <li>• REST APIs</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">🛠 Tools</h3>
+                        <ul class="space-y-2 text-text-secondary">
+                            <li>• Git & GitHub</li>
+                            <li>• VS Code</li>
+                            <li>• Postman</li>
+                            <li>• MongoDB Atlas</li>
+                            <li>• Figma</li>
+                            <li>• Linux Terminal</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">📚 Currently Learning</h3>
+                        <ul class="space-y-2 text-text-secondary">
+                            <li>• System Design</li>
+                            <li>• Scalable Backend</li>
+                            <li>• SaaS Architecture</li>
+                            <li>• AI Integration</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Timeline -->
+        <section id="timeline" class="container mx-auto px-4 py-16 min-h-screen fade-in-up">
+    <h1 class="text-4xl md:text-5xl font-bold text-center mb-16 section-header">My Journey Timeline</h1>
+    
+    <div class="timeline-container">
+        <div class="timeline-glow"></div>
+
+        <div class="timeline-item left fade-in-up">
+            <div class="timeline-content section-card">
+                <h2 class="text-xl md:text-2xl font-bold gradient-text from-accent-cyan to-accent-purple mb-2">2021 — 10th Board Graduation</h2>
+                <p class="text-text-secondary">
+                    Successfully completed my Class 10 board examinations. Around this time I began developing curiosity for technology and computers, which slowly led me toward the world of programming and software development.
+                </p>
+            </div>
+        </div>
+
+        <div class="timeline-item right fade-in-up">
+            <div class="timeline-content section-card">
+                <h2 class="text-xl md:text-2xl font-bold gradient-text from-accent-purple to-accent-cyan mb-2">2023 — 12th Board & University Journey Begins</h2>
+                <p class="text-text-secondary">
+                    Completed my Class 12 boards and joined <strong>VIT-AP University</strong> as a B.Tech Data Analytics student. This marked the beginning of my formal journey into technology, programming, and data systems.
+                </p>
+            </div>
+        </div>
+
+        <div class="timeline-item left fade-in-up">
+            <div class="timeline-content section-card">
+                <h2 class="text-xl md:text-2xl font-bold gradient-text from-accent-cyan to-accent-purple mb-2">2023 — First Projects & Skill Development</h2>
+                <p class="text-text-secondary">
+                    Started learning web technologies and programming seriously. Built early development projects, explored databases, and began understanding how real-world software systems are designed and built.
+                </p>
+            </div>
+        </div>
+
+        <div class="timeline-item right fade-in-up">
+            <div class="timeline-content section-card">
+                <h2 class="text-xl md:text-2xl font-bold gradient-text from-accent-purple to-accent-cyan mb-2">2024 — Deep Dive into Development</h2>
+                <p class="text-text-secondary">
+                    Expanded my technical stack and began working with technologies like <strong>MongoDB, MERN stack, Django, and backend systems</strong>. Built multiple personal tools and developer projects to improve my understanding of scalable web platforms.
+                </p>
+            </div>
+        </div>
+
+        <div class="timeline-item left fade-in-up">
+            <div class="timeline-content section-card">
+                <h2 class="text-xl md:text-2xl font-bold gradient-text from-accent-cyan to-accent-purple mb-2">Mid 2025 — Idea of Udhyog Saathi</h2>
+                <p class="text-text-secondary">
+                    Conceptualized the idea of <strong>Udhyog Saathi</strong> — a platform aimed at empowering businesses with digital tools and smarter operational systems. This marked the beginning of my journey from developer to builder and founder.
+                </p>
+            </div>
+        </div>
+
+        <div class="timeline-item right fade-in-up">
+            <div class="timeline-content section-card">
+                <h2 class="text-xl md:text-2xl font-bold gradient-text from-accent-purple to-accent-cyan mb-2">January 2026 — Building the Team</h2>
+                <p class="text-text-secondary">
+                    Formed a team and began turning the Udhyog Saathi idea into reality. Started working on architecture, product design, and early-stage implementation of the platform.
+                </p>
+            </div>
+        </div>
+
+        <div class="timeline-item left fade-in-up">
+            <div class="timeline-content section-card">
+                <h2 class="text-xl md:text-2xl font-bold gradient-text from-accent-cyan to-accent-purple mb-2">2026 — Research, Development & Strategy</h2>
+                <p class="text-text-secondary">
+                    Currently focused on research and development for Udhyog Saathi. Exploring scalable SaaS architecture, refining the product vision, and building strategies to transform it into a sustainable business platform.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+    </main>
+</div>
+
+<!-- Floating Contact Bar -->
+<div id="contact-bar" class="fixed right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center p-2 bg-bg-secondary/70 backdrop-blur-md rounded-2xl space-y-4">
+    <a href="https://linkedin.com/in/krishna-goyal-5560a1284" target="_blank" rel="noopener" class="contact-link">
+        <i class="fab fa-linkedin-in icon"></i>
+        <span class="text">LinkedIn</span>
+    </a>
+    <a href="https://github.com/krishnagoyal" target="_blank" rel="noopener" class="contact-link">
+        <i class="fab fa-github icon"></i>
+        <span class="text">GitHub</span>
+    </a>
+    <a href="mailto:krishna.23bce8419@vitapstudent.ac.in" class="contact-link">
+        <i class="fas fa-envelope icon"></i>
+        <span class="text">Email</span>
+    </a>
+    <div class="w-8/12 border-t border-gray-600"></div>
+    <a href="{% static 'Documents/Krishna_Goyal_Resume.pdf' %}" target="_blank" rel="noopener" class="contact-link">
+        <i class="fas fa-download icon"></i>
+        <span class="text">Resume</span>
+    </a>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/tech-stack-3d.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+
+function toggleTechStack() {
+
+    const section = document.getElementById("tech-stack-details");
+
+    if (section.classList.contains("max-h-0")) {
+
+        section.classList.remove("max-h-0","opacity-0","translate-y-4");
+        section.classList.add("max-h-[800px]","opacity-100","translate-y-0");
+
+    } else {
+
+        section.classList.remove("max-h-[800px]","opacity-100","translate-y-0");
+        section.classList.add("max-h-0","opacity-0","translate-y-4");
+
+    }
+
+}
+document.addEventListener('DOMContentLoaded', function() {
+        
+        // --- IntersectionObserver for Unified Showcase ---
+        const scrollPanel = document.getElementById('project-scroll-panel');
+        const mediaItems = document.querySelectorAll('.showcase-media-item');
+        const detailSections = document.querySelectorAll('.project-detail-snap');
+
+        if (scrollPanel && mediaItems.length && detailSections.length) {
+            const observerOptions = {
+                root: scrollPanel,
+                threshold: 0.6
+            };
+
+            const projectObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const projectId = entry.target.getAttribute('data-project-id');
+                        
+                        detailSections.forEach(ds => ds.classList.toggle('is-active', ds === entry.target));
+                        
+                        updateShowcaseMedia(projectId);
+                    }
+                });
+            }, observerOptions);
+
+            detailSections.forEach(section => projectObserver.observe(section));
+        }
+
+        function updateShowcaseMedia(id) {
+            mediaItems.forEach(item => {
+                if (item.getAttribute('data-project-media') === id) {
+                    item.classList.add('active');
+                    const video = item.querySelector('video');
+                    if (video) video.play().catch(() => {});
+                } else {
+                    item.classList.remove('active');
+                    const video = item.querySelector('video');
+                    if (video) video.pause();
+                }
+            });
+        }
+
+        // --- Active navigation link on scroll ---
+        const sections = document.querySelectorAll('main section');
+        const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    navLinks.forEach(link => {
+                        link.classList.toggle('active-link', link.getAttribute('href') === `#${id}`);
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+
+        sections.forEach(s => navObserver.observe(s));
+
+        // --- Fade animation ---
+        const faders = document.querySelectorAll('.fade-in-up');
+        const appearOnScroll = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        faders.forEach(f => appearOnScroll.observe(f));
+
+        // --- Plasma cursor ---
+        const plasmaCursor = document.getElementById('plasma-cursor');
+
+        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            document.addEventListener('mousemove', (e) => {
+                plasmaCursor.style.left = `${e.clientX}px`;
+                plasmaCursor.style.top = `${e.clientY}px`;
+            });
+        }
+
+});
+
+</script>
+{% endblock %}

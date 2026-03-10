@@ -1,0 +1,320 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+<title>{{ project.title }} - Krishna Goyal</title>
+{% endblock %}
+
+{% block projects_active %}active-link{% endblock %}
+
+{% block CSSLinks %}
+<style>
+    .video-container {
+        position: relative;
+        padding-bottom: 177.77%; /* 9:16 aspect ratio */
+        height: 0;
+        overflow: hidden;
+        border-radius: 0.75rem;
+        background-color: #000;
+    }
+
+    .video-container iframe, 
+    .video-container video, 
+    .video-container img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border: none;
+    }
+    
+    /* Cursor pointer only for local videos that open modals */
+    .video-container.local-video {
+        cursor: pointer;
+    }
+
+    .instagram-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+
+    .video-container:hover .instagram-overlay {
+        opacity: 1;
+    }
+
+    /* --- Desktop-Only Multi-Column Carousel Styles --- */
+    @media (min-width: 1024px) {
+        .multi-carousel-container {
+            display: flex;
+            gap: 2rem;
+            width: 100%;
+            max-width: 1600px;
+            margin: auto;
+            height: 100vh; 
+            overflow: hidden;
+            position: relative;
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+        }
+
+        .carousel-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .carousel-column:hover .carousel-scroller {
+            animation-play-state: paused;
+        }
+        
+        .carousel-column::before, .carousel-column::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 10px;
+            background-image: radial-gradient(circle at center, #050709 3px, transparent 3px);
+            background-size: 10px 20px;
+        }
+        .carousel-column::before { left: -15px; }
+        .carousel-column::after { right: -15px; }
+
+        .carousel-scroller {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            animation: linear infinite;
+            will-change: transform;
+        }
+        
+        .carousel-scroller[data-direction="up"] { animation-name: scroll-up; }
+        .carousel-scroller[data-direction="down"] { animation-name: scroll-down; }
+        
+        .carousel-scroller[data-speed="fast"] { animation-duration: 20s; } 
+        .carousel-scroller[data-speed="medium"] { animation-duration: 30s; }
+        .carousel-scroller[data-speed="slow"] { animation-duration: 40s; }
+
+        .carousel-item {
+            flex-shrink: 0;
+            width: 100%;
+            padding: 1rem 0;
+        }
+
+        @keyframes scroll-up {
+            from { transform: translateY(0); }
+            to { transform: translateY(-50%); }
+        }
+        @keyframes scroll-down {
+            from { transform: translateY(-50%); }
+            to { transform: translateY(0); }
+        }
+    }
+    
+    .instagram-iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 0.75rem;
+    }
+
+    /* --- MODAL STYLES --- */
+    #video-modal {
+        transition: opacity 0.3s ease;
+    }
+    #video-modal.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+    .modal-content {
+        transform: scale(0.95);
+        transition: transform 0.3s ease;
+    }
+    #video-modal:not(.hidden) .modal-content {
+        transform: scale(1);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="min-h-screen py-12 md:py-16 px-4">
+    <div class="container mx-auto">
+
+        <div class="mb-8 text-center">
+            <a href="{% url 'home' %}#projects" class="inline-flex items-center gap-2 text-text-secondary hover:text-accent-cyan transition-colors duration-300">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to All Projects</span>
+            </a>
+        </div>
+
+        <div class="text-center mb-12">
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold font-playfair gradient-text mb-4">{{ project.title }}</h1>
+            <p class="text-lg sm:text-xl md:text-2xl text-text-secondary">{{ project.tagline }}</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 lg:hidden">
+            {% for video in project.videos.all %}
+            <div class="carousel-item">
+                <div class="section-card rounded-3xl shadow-xl p-4">
+                    {% if video.type == 'local' %}
+                        <div class="video-container local-video mb-4">
+                            <video src="{{ video.video_file.url }}" autoplay muted loop playsinline></video>
+                        </div>
+                    {% elif video.type == 'instagram' %}
+                        <div class="video-container mb-4">
+                            <iframe class="instagram-iframe" src="{{ video.instagram_url }}" loading="lazy" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                        </div>
+                    {% endif %}
+                    <h3 class="font-bold text-center text-text-light">{{ video.title }}</h3>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-span-3 text-center text-gray-500 py-8">
+                <p>No videos added to this project yet.</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="hidden lg:flex multi-carousel-container">
+            {% with project.videos.all as videos %}
+                {% if videos %}
+                    {% for i in "123" %}
+                    <div class="carousel-column">
+                        <div class="carousel-scroller" 
+                             data-direction="{% if i == '2' %}down{% else %}up{% endif %}" 
+                             data-speed="{% if i == '1' %}fast{% elif i == '2' %}medium{% else %}slow{% endif %}">
+                            
+                            {% for video in videos %}
+                                {% cycle '1' '2' '3' as video_col silent %}
+                                {% if video_col == i %}
+                                <div class="carousel-item">
+                                    <div class="section-card rounded-3xl shadow-xl p-4">
+                                        {% if video.type == 'local' %}
+                                            <div class="video-container local-video mb-4">
+                                                <video src="{{ video.video_file.url }}" autoplay muted loop playsinline></video>
+                                            </div>
+                                        {% elif video.type == 'instagram' %}
+                                            <div class="video-container mb-4">
+                                                <iframe class="instagram-iframe" src="{{ video.instagram_url }}" loading="lazy" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                                            </div>
+                                        {% endif %}
+                                        <h3 class="font-bold text-center text-text-light">{{ video.title }}</h3>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                     <div class="w-full text-center text-gray-500 mt-20">
+                        <p>No videos to display.</p>
+                     </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <div class="mt-16 section-card p-8 rounded-3xl max-w-2xl mx-auto">
+            <h2 class="text-3xl font-bold mb-6 font-playfair text-center">Tools & Technologies</h2>
+            <div class="flex flex-wrap gap-3 justify-center">
+                {% for tech in project.tech_stack %}
+                <span class="bg-bg-secondary px-4 py-2 rounded-full font-semibold text-sm">{{ tech }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<div id="video-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 z-50 hidden">
+    <div class="modal-content bg-bg-secondary rounded-2xl p-2 relative w-full max-w-sm">
+        <button id="close-modal" class="absolute -top-3 -right-3 w-8 h-8 bg-white text-black rounded-full text-xl z-10 flex items-center justify-center">&times;</button>
+        <div id="modal-video-container" class="rounded-xl overflow-hidden"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script async src="//www.instagram.com/embed.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const scrollers = document.querySelectorAll('.carousel-scroller');
+        const videoModal = document.getElementById('video-modal');
+        const closeModalBtn = document.getElementById('close-modal');
+        const modalVideoContainer = document.getElementById('modal-video-container');
+        const galleryContainer = document.querySelector('main');
+
+        // --- Carousel Cloning for Seamless Loop (Desktop) ---
+        if (window.innerWidth >= 1024) {
+            scrollers.forEach(scroller => {
+                const items = Array.from(scroller.children);
+                if (items.length > 0) {
+                    items.forEach(item => {
+                        const clone = item.cloneNode(true);
+                        scroller.appendChild(clone);
+                    });
+                }
+            });
+        }
+
+        // --- Modal Logic ---
+        const pauseCarousels = () => {
+            if (window.innerWidth >= 1024) {
+                scrollers.forEach(scroller => scroller.style.animationPlayState = 'paused');
+            }
+        };
+
+        const resumeCarousels = () => {
+            if (window.innerWidth >= 1024) {
+                scrollers.forEach(scroller => scroller.style.animationPlayState = 'running');
+            }
+        };
+
+        galleryContainer.addEventListener('click', (e) => {
+            // Only trigger modal for containers marked as 'local-video'
+            const videoContainer = e.target.closest('.video-container.local-video');
+
+            if (videoContainer && videoContainer.querySelector('video')) {
+                e.preventDefault();
+                pauseCarousels();
+
+                const videoClone = videoContainer.querySelector('video').cloneNode(true);
+                videoClone.muted = false;
+                videoClone.controls = true;
+                videoClone.loop = false;
+                
+                modalVideoContainer.innerHTML = '';
+                modalVideoContainer.appendChild(videoClone);
+
+                videoModal.classList.remove('hidden');
+                videoClone.play();
+            }
+        });
+
+        const closeModal = () => {
+            modalVideoContainer.innerHTML = '';
+            videoModal.classList.add('hidden');
+            resumeCarousels();
+        };
+
+        closeModalBtn.addEventListener('click', closeModal);
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) {
+                closeModal();
+            }
+        });
+    });
+</script>
+{% endblock %}
