@@ -62,20 +62,40 @@
         }
 
         .active-link {
-            color: var(--accent-cyan) !important;
-            position: relative;
+            color: var(--bg-primary) !important;
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.95), rgba(160, 110, 231, 0.9));
+            box-shadow: 0 12px 30px rgba(0, 240, 255, 0.2);
         }
 
-        .active-link::after {
+        .floating-nav-shell {
+            background: linear-gradient(135deg, rgba(8, 12, 18, 0.78), rgba(18, 24, 38, 0.58));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 18px 55px rgba(0, 0, 0, 0.28);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .floating-nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .floating-nav-link::before {
             content: '';
             position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 6px;
-            height: 6px;
-            background-color: var(--accent-cyan);
-            border-radius: 50%;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.18), rgba(160, 110, 231, 0.18));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .floating-nav-link:hover::before {
+            opacity: 1;
+        }
+
+        .floating-nav-link > span {
+            position: relative;
+            z-index: 1;
         }
     </style>
 
@@ -83,60 +103,55 @@
 </head>
 <body class="bg-bg-primary text-text-light scroll-smooth overflow-x-hidden">
 
-    <!-- Navigation Bar - EXACTLY SAME AS home.html -->
-    <nav class="fixed top-0 left-0 w-full z-50 bg-bg-primary bg-opacity-70 backdrop-filter backdrop-blur-lg">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="{% url 'home' %}" class="text-2xl font-bold gradient-text from-accent-cyan to-accent-purple font-inter">
-                Krishna
-            </a>
-            
-            <div class="hidden md:flex items-center space-x-2">
-                <a href="{% url 'home' %}" class="px-3 py-2 rounded-md text-text-light transition-colors duration-300 {% block home_active %}{% endblock %}">
-                    Home
+    <nav class="fixed top-3 sm:top-4 left-1/2 z-50 w-[min(92vw,860px)] -translate-x-1/2">
+        <div class="hidden lg:flex items-center justify-center">
+            <div class="floating-nav-shell flex items-center justify-center gap-1 rounded-full px-1.5 xl:px-2.5 py-1.5 xl:py-2">
+                <a href="{% url 'home' %}" class="floating-nav-link rounded-full px-3.5 xl:px-4 py-2 text-[11px] xl:text-xs font-semibold tracking-[0.14em] xl:tracking-[0.16em] uppercase text-text-light transition-all duration-300 hover:text-white {% block home_active %}{% endblock %}">
+                    <span>Home</span>
                 </a>
-                <a href="{% url 'home' %}#projects" class="px-3 py-2 rounded-md text-text-light transition-colors duration-300 {% block projects_active %}{% endblock %}">
-                    Projects
+                <a href="{% url 'home' %}#projects" class="floating-nav-link rounded-full px-3.5 xl:px-4 py-2 text-[11px] xl:text-xs font-semibold tracking-[0.14em] xl:tracking-[0.16em] uppercase text-text-light transition-all duration-300 hover:text-white {% block projects_active %}{% endblock %}">
+                    <span>Projects</span>
                 </a>
-                <a href="{% url 'home' %}#about" class="px-3 py-2 rounded-md text-text-light transition-colors duration-300 {% block about_active %}{% endblock %}">
-                    About Me
+                <a href="{% url 'home' %}#about" class="floating-nav-link rounded-full px-3.5 xl:px-4 py-2 text-[11px] xl:text-xs font-semibold tracking-[0.14em] xl:tracking-[0.16em] uppercase text-text-light transition-all duration-300 hover:text-white {% block about_active %}{% endblock %}">
+                    <span>About</span>
                 </a>
-                <a href="{% url 'home' %}#tech-stack" class="px-3 py-2 rounded-md text-text-light transition-colors duration-300 {% block techstack_active %}{% endblock %}">
-                    Tech Stack
+                <a href="{% url 'home' %}#tech-stack" class="floating-nav-link rounded-full px-3.5 xl:px-4 py-2 text-[11px] xl:text-xs font-semibold tracking-[0.14em] xl:tracking-[0.16em] uppercase text-text-light transition-all duration-300 hover:text-white {% block techstack_active %}{% endblock %}">
+                    <span>Tech Stack</span>
                 </a>
-                <a href="{% url 'home' %}#timeline" class="px-3 py-2 rounded-md text-text-light transition-colors duration-300 {% block timeline_active %}{% endblock %}">
-                    My Journey
+                <a href="{% url 'home' %}#timeline" class="floating-nav-link rounded-full px-3.5 xl:px-4 py-2 text-[11px] xl:text-xs font-semibold tracking-[0.14em] xl:tracking-[0.16em] uppercase text-text-light transition-all duration-300 hover:text-white {% block timeline_active %}{% endblock %}">
+                    <span>Journey</span>
                 </a>
-                <a href="mailto:krishna.23bce8419@vitapstudent.ac.in" class="ml-4 px-4 py-2 bg-accent-cyan text-bg-primary rounded-full font-semibold hover:bg-opacity-80 transition-colors duration-300">
+                <a href="mailto:krishna.23bce8419@vitapstudent.ac.in" class="rounded-full bg-white/10 px-3.5 xl:px-4 py-2 text-[11px] xl:text-xs font-semibold tracking-[0.14em] xl:tracking-[0.16em] uppercase text-text-light transition-all duration-300 hover:bg-accent-cyan hover:text-bg-primary">
                     Hire Me
                 </a>
             </div>
-
-            <!-- Mobile Menu Button -->
-            <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-text-light focus:outline-none">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
-            </div>
         </div>
-        
-        <!-- Mobile Menu (hidden by default) -->
-        <div id="mobile-menu" class="hidden md:hidden bg-bg-secondary">
-            <a href="{% url 'home' %}" class="block text-center py-3 px-4 text-text-light hover:bg-accent-cyan hover:text-bg-primary transition-colors duration-300">Home</a>
-            <a href="{% url 'home' %}#projects" class="block text-center py-3 px-4 text-text-light hover:bg-accent-cyan hover:text-bg-primary transition-colors duration-300">Projects</a>
-            <a href="{% url 'home' %}#about" class="block text-center py-3 px-4 text-text-light hover:bg-accent-cyan hover:text-bg-primary transition-colors duration-300">About Me</a>
-            <a href="{% url 'home' %}#tech-stack" class="block text-center py-3 px-4 text-text-light hover:bg-accent-cyan hover:text-bg-primary transition-colors duration-300">Tech Stack</a>
-            <a href="{% url 'home' %}#timeline" class="block text-center py-3 px-4 text-text-light hover:bg-accent-cyan hover:text-bg-primary transition-colors duration-300">My Journey</a>
-            <a href="mailto:krishna.23bce8419@vitapstudent.ac.in" class="block text-center py-4 px-4 bg-accent-cyan text-bg-primary font-semibold">Hire Me</a>
+
+        <div class="flex justify-end lg:hidden">
+            <button id="mobile-menu-button" class="floating-nav-shell inline-flex h-12 w-12 items-center justify-center rounded-full text-text-light transition-colors duration-300 hover:text-white focus:outline-none">
+                <i class="fas fa-bars text-lg"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="floating-nav-shell mt-3 hidden rounded-[28px] p-3 lg:hidden">
+            <div class="flex flex-col gap-2">
+                <a href="{% url 'home' %}" class="rounded-2xl px-4 py-3 text-center text-sm font-semibold tracking-[0.18em] uppercase text-text-light transition-all duration-300 hover:bg-white/10 hover:text-white">Home</a>
+                <a href="{% url 'home' %}#projects" class="rounded-2xl px-4 py-3 text-center text-sm font-semibold tracking-[0.18em] uppercase text-text-light transition-all duration-300 hover:bg-white/10 hover:text-white">Projects</a>
+                <a href="{% url 'home' %}#about" class="rounded-2xl px-4 py-3 text-center text-sm font-semibold tracking-[0.18em] uppercase text-text-light transition-all duration-300 hover:bg-white/10 hover:text-white">About</a>
+                <a href="{% url 'home' %}#tech-stack" class="rounded-2xl px-4 py-3 text-center text-sm font-semibold tracking-[0.18em] uppercase text-text-light transition-all duration-300 hover:bg-white/10 hover:text-white">Tech Stack</a>
+                <a href="{% url 'home' %}#timeline" class="rounded-2xl px-4 py-3 text-center text-sm font-semibold tracking-[0.18em] uppercase text-text-light transition-all duration-300 hover:bg-white/10 hover:text-white">Journey</a>
+                <a href="mailto:krishna.23bce8419@vitapstudent.ac.in" class="rounded-2xl bg-accent-cyan px-4 py-3 text-center text-sm font-semibold tracking-[0.18em] uppercase text-bg-primary transition-all duration-300 hover:bg-white hover:text-bg-primary">Hire Me</a>
+            </div>
         </div>
     </nav>
 
-    <main class="pt-24 min-h-screen">
+    <main class="pt-20 sm:pt-28 min-h-screen">
         {% block content %}
         {% endblock %}
     </main>
 
     <footer class="bg-bg-secondary py-8 text-center text-gray-500 text-sm">
-        <p>&copy; 2024 Krishna Goyal. All rights reserved.</p>
+        <p>&copy; {% now "Y" %} Krishna Goyal. All rights reserved.</p>
     </footer>
 
     <!-- Mobile Menu Script -->

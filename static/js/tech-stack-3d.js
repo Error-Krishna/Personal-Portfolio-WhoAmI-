@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Geometry Construction ---
 
-    const sphereGeometry = new THREE.SphereGeometry(config.sphereRadius, 64, 64);
+    const sphereGeometry = new THREE.SphereGeometry(config.sphereRadius, 32, 32);
 
     
 

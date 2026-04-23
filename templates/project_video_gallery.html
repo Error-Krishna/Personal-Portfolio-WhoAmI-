@@ -159,9 +159,9 @@
             </a>
         </div>
 
-        <div class="text-center mb-12">
-            <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold font-playfair gradient-text mb-4">{{ project.title }}</h1>
-            <p class="text-lg sm:text-xl md:text-2xl text-text-secondary">{{ project.tagline }}</p>
+        <div class="text-center mb-10 sm:mb-12">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-playfair gradient-text mb-4">{{ project.title }}</h1>
+            <p class="text-base sm:text-lg md:text-xl text-text-secondary max-w-3xl mx-auto">{{ project.tagline }}</p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 lg:hidden">
@@ -226,8 +226,8 @@
             {% endwith %}
         </div>
 
-        <div class="mt-16 section-card p-8 rounded-3xl max-w-2xl mx-auto">
-            <h2 class="text-3xl font-bold mb-6 font-playfair text-center">Tools & Technologies</h2>
+        <div class="mt-12 sm:mt-16 section-card p-6 sm:p-8 rounded-3xl max-w-2xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-bold mb-6 font-playfair text-center">Tools & Technologies</h2>
             <div class="flex flex-wrap gap-3 justify-center">
                 {% for tech in project.tech_stack %}
                 <span class="bg-bg-secondary px-4 py-2 rounded-full font-semibold text-sm">{{ tech }}</span>

@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% load static %}
 
-{% block home_active %}active-link{% endblock %}
+{% block home_active %}{% endblock %}
 
 {% block CSSLinks %}
 <style>
@@ -37,52 +37,77 @@
     <div class="relative z-10">
         <main class="min-h-screen pt-24 pb-24 flex flex-col items-center">
             <!-- Hero Section -->
-            <section id="home" class="relative w-full min-h-screen pt-16 flex flex-col justify-center items-center text-center px-4">
-                <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold font-archivo tracking-tight drop-shadow-lg text-white mb-4 z-10">
+            <section id="home" class="relative w-full min-h-[88svh] sm:min-h-screen pt-8 sm:pt-24 flex flex-col justify-center items-center text-center px-4 sm:px-6">
+                <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold font-archivo tracking-tight leading-[1.05] drop-shadow-lg text-white mb-4 z-10 max-w-5xl">
                     <span class="block bg-gradient-to-r from-[#00F0FF] to-[#A06EE7] bg-clip-text text-transparent">Who Am I?</span>
                     <span class="block sm:inline bg-gradient-to-r from-[#A06EE7] to-[#00F0FF] bg-clip-text text-transparent">Developer | </span>
                     <span class="block sm:inline bg-gradient-to-r from-[#00F0FF] to-[#A06EE7] bg-clip-text text-transparent">Designer | </span>
                     <span class="block sm:inline bg-gradient-to-r from-[#A06EE7] to-[#00F0FF] bg-clip-text text-transparent">Editor | </span>
                     <span class="block sm:inline bg-gradient-to-r from-[#00F0FF] to-[#A06EE7] bg-clip-text text-transparent">Data Analyst</span>
                 </h1>
-                <p class="text-lg md:text-2xl font-light text-[#E6E6E6]/80 z-10 max-w-3xl">
+                <p class="text-base sm:text-lg md:text-xl font-light text-[#E6E6E6]/80 z-10 max-w-2xl px-2">
                     Building digital experiences with a creative and analytical mind.
                 </p>
-                <div class="spline-container w-full h-full absolute top-0 left-0 z-0">
-                    <iframe src="https://my.spline.design/nexbotrobotcharacterconcept-37a68739c76cde0f6568b5bea10e7ec2/" frameborder="0" class="w-full h-full"></iframe>
+                <div class="spline-container w-full absolute -top-8 left-0 h-[calc(100%+2rem)] sm:top-0 sm:h-full z-0">
+                    <iframe src="https://my.spline.design/nexbotrobotcharacterconcept-37a68739c76cde0f6568b5bea10e7ec2/" frameborder="0" class="w-full h-full" loading="lazy"></iframe>
                 </div>
             </section>
+
+
             
             <!-- REDESIGNED PROJECTS SECTION -->
-            <section id="projects" class="container mx-auto px-4 py-16 min-h-screen flex flex-col items-center">
-                <h1 class="text-4xl md:text-5xl font-bold text-center mb-16 relative inline-block transition-all duration-500 after:absolute after:left-0 after:-bottom-1 after:h-[3px] after:bg-gradient-to-r after:from-[#00F0FF] after:to-[#A06EE7] after:transition-all after:duration-500 after:w-0 hover:after:w-full">
+            <section id="projects" class="container mx-auto px-4 py-14 sm:py-16 min-h-screen flex flex-col items-center">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 sm:mb-16 relative inline-block transition-all duration-500 after:absolute after:left-0 after:-bottom-1 after:h-[3px] after:bg-gradient-to-r after:from-[#00F0FF] after:to-[#A06EE7] after:transition-all after:duration-500 after:w-0 hover:after:w-full">
                     My Projects
                 </h1>
 
                 <!-- Unified Showcase Component -->
-                <div class="bg-[#0E1318]/70 backdrop-blur-xl border border-[#30363D]/50 rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row w-full max-w-6xl h-[600px] lg:h-[700px] max-lg:h-auto">
+                <div class="bg-[#0E1318]/70 backdrop-blur-xl border border-[#30363D]/50 rounded-[28px] sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row w-full max-w-6xl min-h-[560px] lg:h-[700px] max-lg:h-auto">
                     
                     <!-- Left: Dynamic Media Viewport -->
-                    <div class="relative bg-black overflow-hidden lg:w-1/2 w-full h-full max-lg:h-[300px]">
+                    <div class="relative bg-black overflow-hidden lg:w-1/2 w-full h-full h-[240px] sm:h-[300px] lg:h-full">
                         <!-- 0: Portfolio -->
-                        <div class="showcase-media-item absolute inset-0 w-full h-full opacity-0 transition-opacity duration-800 ease-[cubic-bezier(0.4,0,0.2,1)] z-10 active:opacity-100 active:z-20" data-project-media="0">
-                            <video src="{% static 'videos/portfolio_preview.mp4' %}" autoplay muted loop playsinline poster="{% static 'images/portfolio_thumb.jpg' %}" class="w-full h-full object-cover"></video>
+                        <div class="showcase-media-item is-active absolute inset-0 w-full h-full opacity-0 transition-opacity duration-800 ease-[cubic-bezier(0.4,0,0.2,1)] z-10 [&.is-active]:opacity-100 [&.is-active]:z-20" data-project-media="0">
+                            <div class="w-full h-full bg-[radial-gradient(circle_at_top,rgba(0,240,255,0.35),transparent_48%),linear-gradient(135deg,#0b1016_0%,#111827_45%,#050709_100%)] flex items-end p-8">
+                                <div class="rounded-2xl border border-white/10 bg-black/30 backdrop-blur-md p-6 max-w-md">
+                                    <p class="text-xs uppercase tracking-[0.3em] text-[#00F0FF] mb-3">Featured Build</p>
+                                    <h3 class="text-3xl font-bold text-white mb-2">Personal Portfolio</h3>
+                                    <p class="text-white/70">Interactive case-study driven portfolio built to highlight projects, craft, and technical range.</p>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- 1: Finance -->
-                        <div class="showcase-media-item absolute inset-0 w-full h-full opacity-0 transition-opacity duration-800 ease-[cubic-bezier(0.4,0,0.2,1)] z-10 active:opacity-100 active:z-20" data-project-media="1">
-                            <video src="{% static 'videos/finance_preview.mp4' %}" autoplay muted loop playsinline poster="{% static 'images/finance_thumb.jpg' %}" class="w-full h-full object-cover"></video>
+                        <div class="showcase-media-item absolute inset-0 w-full h-full opacity-0 transition-opacity duration-800 ease-[cubic-bezier(0.4,0,0.2,1)] z-10 [&.is-active]:opacity-100 [&.is-active]:z-20" data-project-media="1">
+                            <div class="w-full h-full bg-[radial-gradient(circle_at_bottom_right,rgba(160,110,231,0.35),transparent_45%),linear-gradient(140deg,#121826_0%,#10172b_55%,#050709_100%)] flex items-end p-8">
+                                <div class="rounded-2xl border border-white/10 bg-black/30 backdrop-blur-md p-6 max-w-md">
+                                    <p class="text-xs uppercase tracking-[0.3em] text-[#A06EE7] mb-3">FinTech</p>
+                                    <h3 class="text-3xl font-bold text-white mb-2">Finance Tracker</h3>
+                                    <p class="text-white/70">Expense and asset tracking with analytics-focused UX for clearer personal financial decisions.</p>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- 2: InsightLoop -->
-                        <div class="showcase-media-item absolute inset-0 w-full h-full opacity-0 transition-opacity duration-800 ease-[cubic-bezier(0.4,0,0.2,1)] z-10 active:opacity-100 active:z-20" data-project-media="2">
-                            <video src="{% static 'videos/insight_preview.mp4' %}" autoplay muted loop playsinline poster="{% static 'images/insight_thumb.jpg' %}" class="w-full h-full object-cover"></video>
+                        <div class="showcase-media-item absolute inset-0 w-full h-full opacity-0 transition-opacity duration-800 ease-[cubic-bezier(0.4,0,0.2,1)] z-10 [&.is-active]:opacity-100 [&.is-active]:z-20" data-project-media="2">
+                            <div class="w-full h-full bg-[radial-gradient(circle_at_center,rgba(0,240,255,0.22),transparent_35%),linear-gradient(145deg,#07111a_0%,#102235_50%,#050709_100%)] flex items-end p-8">
+                                <div class="rounded-2xl border border-white/10 bg-black/30 backdrop-blur-md p-6 max-w-md">
+                                    <p class="text-xs uppercase tracking-[0.3em] text-[#00F0FF] mb-3">Analytics</p>
+                                    <h3 class="text-3xl font-bold text-white mb-2">InsightLoop</h3>
+                                    <p class="text-white/70">Business intelligence workflows designed to surface operational trends from high-volume data.</p>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- 3: HotReload -->
-                        <div class="showcase-media-item absolute inset-0 w-full h-full opacity-0 transition-opacity duration-800 ease-[cubic-bezier(0.4,0,0.2,1)] z-10 active:opacity-100 active:z-20" data-project-media="3">
-                            <video src="{% static 'videos/hotreload_preview.mp4' %}" autoplay muted loop playsinline poster="{% static 'images/hotreload_thumb.jpg' %}" class="w-full h-full object-cover"></video>
-                            <img src="{% static 'images/hotreload_thumb.jpg' %}" alt="HotReload Placeholder" class="hidden w-full h-full object-cover">
+                        <div class="showcase-media-item absolute inset-0 w-full h-full opacity-0 transition-opacity duration-800 ease-[cubic-bezier(0.4,0,0.2,1)] z-10 [&.is-active]:opacity-100 [&.is-active]:z-20" data-project-media="3">
+                            <div class="w-full h-full bg-[radial-gradient(circle_at_top_left,rgba(160,110,231,0.28),transparent_40%),linear-gradient(145deg,#15101f_0%,#17112b_45%,#050709_100%)] flex items-end p-8">
+                                <div class="rounded-2xl border border-white/10 bg-black/30 backdrop-blur-md p-6 max-w-md">
+                                    <p class="text-xs uppercase tracking-[0.3em] text-[#A06EE7] mb-3">Automation</p>
+                                    <h3 class="text-3xl font-bold text-white mb-2">HotReload</h3>
+                                    <p class="text-white/70">Network automation concept focused on reducing access-point switching friction in campus environments.</p>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- 4: SaaS Startup -->
@@ -97,9 +122,9 @@
                     <div id="project-scroll-panel" class="showcase-scroll-panel lg:w-1/2 w-full h-full overflow-y-auto snap-y snap-mandatory bg-white/5 [&::-webkit-scrollbar]:hidden max-lg:overflow-y-visible max-lg:snap-none">
                         
                         <!-- 0: Portfolio -->
-                        <div class="project-detail-snap snap-start flex flex-col justify-center p-8 opacity-30 transition duration-500 ease-in-out scale-95 min-h-full [&.is-active]:opacity-100 [&.is-active]:scale-100 max-lg:min-h-0 max-lg:p-12 max-lg:opacity-100 max-lg:scale-100" data-project-id="0">
+                        <div class="project-detail-snap is-active snap-start flex flex-col justify-center p-8 opacity-30 transition duration-500 ease-in-out scale-95 min-h-full [&.is-active]:opacity-100 [&.is-active]:scale-100 max-lg:min-h-0 max-lg:p-12 max-lg:opacity-100 max-lg:scale-100" data-project-id="0">
                             <span class="text-[#00F0FF] font-mono text-sm mb-2">01 / Featured Project</span>
-                            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Personal Portfolio</h2>
+                            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Personal Portfolio</h2>
                             <p class="text-[#E6E6E6]/80 text-lg mb-6">
                                 A showcase of my creative and technical work, featuring 3D visuals with Three.js and a highly interactive UI designed for performance.
                             </p>
@@ -111,15 +136,21 @@
                                     <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-[#A06EE7]">Tailwind CSS</span>
                                 </div>
                             </div>
+                            {% if 'portfolio-website' in available_project_slugs %}
                             <a href="{% url 'project_detail' 'portfolio-website' %}" class="inline-flex items-center px-6 py-3 bg-[#00F0FF] text-black font-bold rounded-full transition-transform hover:scale-105 active:scale-95">
                                 Explore Project <i class="fas fa-arrow-right ml-2"></i>
                             </a>
+                            {% else %}
+                            <span class="inline-flex items-center px-6 py-3 bg-white/10 text-white/60 font-bold rounded-full cursor-not-allowed">
+                                Project Details Coming Soon
+                            </span>
+                            {% endif %}
                         </div>
 
                         <!-- 1: Finance -->
                         <div class="project-detail-snap snap-start flex flex-col justify-center p-8 opacity-30 transition duration-500 ease-in-out scale-95 min-h-full [&.is-active]:opacity-100 [&.is-active]:scale-100 max-lg:min-h-0 max-lg:p-12 max-lg:opacity-100 max-lg:scale-100" data-project-id="1">
                             <span class="text-[#A06EE7] font-mono text-sm mb-2">02 / FinTech</span>
-                            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Finance Tracker</h2>
+                            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Finance Tracker</h2>
                             <p class="text-[#E6E6E6]/80 text-lg mb-6">
                                 A robust dashboard for managing personal assets and liabilities. Includes real-time data visualization and spending analytics.
                             </p>
@@ -131,15 +162,21 @@
                                     <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-[#00F0FF]">Chart.js</span>
                                 </div>
                             </div>
+                            {% if 'personal-finance-tracker' in available_project_slugs %}
                             <a href="{% url 'project_detail' 'personal-finance-tracker' %}" class="inline-flex items-center px-6 py-3 bg-[#A06EE7] text-white font-bold rounded-full transition-transform hover:scale-105">
                                 View Dashboard <i class="fas fa-arrow-right ml-2"></i>
                             </a>
+                            {% else %}
+                            <span class="inline-flex items-center px-6 py-3 bg-white/10 text-white/60 font-bold rounded-full cursor-not-allowed">
+                                Project Details Coming Soon
+                            </span>
+                            {% endif %}
                         </div>
 
                         <!-- 2: InsightLoop -->
                         <div class="project-detail-snap snap-start flex flex-col justify-center p-8 opacity-30 transition duration-500 ease-in-out scale-95 min-h-full [&.is-active]:opacity-100 [&.is-active]:scale-100 max-lg:min-h-0 max-lg:p-12 max-lg:opacity-100 max-lg:scale-100" data-project-id="2">
                             <span class="text-[#00F0FF] font-mono text-sm mb-2">03 / Analytics</span>
-                            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">InsightLoop Business</h2>
+                            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">InsightLoop Business</h2>
                             <p class="text-[#E6E6E6]/80 text-lg mb-6">
                                 Scalable business intelligence tool designed to process large datasets and provide actionable strategic insights.
                             </p>
@@ -151,15 +188,21 @@
                                     <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-[#A06EE7]">Tableau</span>
                                 </div>
                             </div>
+                            {% if 'insightloop-business' in available_project_slugs %}
                             <a href="{% url 'project_detail' 'insightloop-business' %}" class="inline-flex items-center px-6 py-3 bg-[#00F0FF] text-black font-bold rounded-full transition-transform hover:scale-105">
                                 See Insights <i class="fas fa-arrow-right ml-2"></i>
                             </a>
+                            {% else %}
+                            <span class="inline-flex items-center px-6 py-3 bg-white/10 text-white/60 font-bold rounded-full cursor-not-allowed">
+                                Project Details Coming Soon
+                            </span>
+                            {% endif %}
                         </div>
 
                         <!-- 3: HotReload -->
                         <div class="project-detail-snap snap-start flex flex-col justify-center p-8 opacity-30 transition duration-500 ease-in-out scale-95 min-h-full [&.is-active]:opacity-100 [&.is-active]:scale-100 max-lg:min-h-0 max-lg:p-12 max-lg:opacity-100 max-lg:scale-100" data-project-id="3">
                             <span class="text-[#A06EE7] font-mono text-sm mb-2">04 / Automation</span>
-                            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">HotReload</h2>
+                            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">HotReload</h2>
                             <p class="text-[#E6E6E6]/80 text-lg mb-6">
                                 A network automation tool designed to automatically switch broadband logins when moving between access points, improving connectivity continuity in campus environments.
                             </p>
@@ -171,15 +214,15 @@
                                     <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-[#00F0FF]">Automation</span>
                                 </div>
                             </div>
-                            <button class="inline-flex items-center px-6 py-3 bg-[#A06EE7] text-white font-bold rounded-full transition-transform hover:scale-105">
-                                Learn More <i class="fas fa-microchip ml-2"></i>
-                            </button>
+                            <span class="inline-flex items-center px-6 py-3 bg-white/10 text-white/60 font-bold rounded-full cursor-not-allowed">
+                                Case Study In Progress <i class="fas fa-microchip ml-2"></i>
+                            </span>
                         </div>
 
                         <!-- 4: SaaS Project -->
                         <div class="project-detail-snap snap-start flex flex-col justify-center p-8 opacity-30 transition duration-500 ease-in-out scale-95 min-h-full [&.is-active]:opacity-100 [&.is-active]:scale-100 max-lg:min-h-0 max-lg:p-12 max-lg:opacity-100 max-lg:scale-100" data-project-id="4">
                             <span class="text-[#00F0FF] font-mono text-sm mb-2">05 / Entrepreneurship</span>
-                            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Building My SaaS Platform</h2>
+                            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Building My SaaS Platform</h2>
                             <p class="text-[#E6E6E6]/80 text-lg mb-6">
                                 Developing a scalable Software-as-a-Service platform to solve real-world problems. This project reflects my journey into product development and startup ambition.
                             </p>
@@ -200,29 +243,29 @@
             </section>
             
             <!-- About Section -->
-            <section id="about" class="container mx-auto px-4 py-16 min-h-screen flex flex-col items-center">
-                <div class="relative flex justify-center items-center w-full h-[80vh] overflow-hidden opacity-0 translate-y-5 transition-all duration-1000 [&.is-visible]:opacity-100 [&.is-visible]:translate-y-0">
-                    <div class="font-archivo font-black text-[18vw] text-white absolute z-10 text-center leading-[0.9] select-none flex flex-col justify-center items-center w-full h-full top-0 left-0 -translate-y-[5%]">
+            <section id="about" class="container mx-auto px-4 py-14 sm:py-16 min-h-screen flex flex-col items-center">
+                <div class="relative flex flex-col lg:flex-row justify-center items-center w-full min-h-[520px] lg:h-[80vh] overflow-hidden gap-6 sm:gap-8 py-8 sm:py-10 opacity-0 translate-y-5 transition-all duration-1000 [&.is-visible]:opacity-100 [&.is-visible]:translate-y-0">
+                    <div class="font-archivo font-black text-[20vw] sm:text-[16vw] lg:text-[18vw] text-white absolute z-10 text-center leading-[0.9] select-none flex flex-col justify-center items-center w-full h-full top-0 left-0 -translate-y-[5%] opacity-20 sm:opacity-100">
                         <span>KRISHNA</span>
                         <span class="opacity-20">GOYAL</span>
                     </div>
 
-                    <div class="relative z-20 w-[30vw] max-w-[450px] min-w-[250px]">
+                    <div class="relative z-20 w-[58vw] sm:w-[42vw] lg:w-[30vw] max-w-[420px] min-w-[220px]">
                         <img src="{% static 'images/image-removebg-preview.png' %}" alt="Krishna Goyal Portrait" class="w-full h-auto object-contain grayscale transition-[filter] duration-300 mix-blend-exclusion hover:grayscale-0">
                     </div>
 
-                    <div class="absolute z-30 bottom-[10%] left-[5%] max-w-[250px] text-white">
-                        <h2 class="text-2xl font-bold">About Me</h2>
-                        <p class="text-[#E6E6E6]/80">Builder. Developer. Visionary. Creating technology that solves real problems.</p>
+                    <div class="relative lg:absolute z-30 lg:bottom-[10%] lg:left-[5%] max-w-[320px] text-white text-center lg:text-left px-4 lg:px-0">
+                        <h2 class="text-xl sm:text-2xl font-bold">About Me</h2>
+                        <p class="text-sm sm:text-base text-[#E6E6E6]/80">Builder. Developer. Visionary. Creating technology that solves real problems.</p>
                     </div>
                 </div>
                 
-                <div class="w-full mt-16 space-y-16">
-                    <div class="bg-[#0E1318]/70 backdrop-blur-md border border-[#30363D]/50 transition-all duration-500 hover:border-[#00F0FF] hover:shadow-[0_0_20px_rgba(0,240,255,0.3)] p-8 md:p-12 rounded-3xl w-full max-w-4xl mx-auto shadow-2xl opacity-0 translate-y-5 transition-all duration-1000 [&.is-visible]:opacity-100 [&.is-visible]:translate-y-0">
+                <div class="w-full mt-10 sm:mt-16 space-y-12 sm:space-y-16">
+                    <div class="bg-[#0E1318]/70 backdrop-blur-md border border-[#30363D]/50 transition-all duration-500 hover:border-[#00F0FF] hover:shadow-[0_0_20px_rgba(0,240,255,0.3)] p-6 sm:p-8 md:p-12 rounded-[28px] sm:rounded-3xl w-full max-w-4xl mx-auto shadow-2xl opacity-0 translate-y-5 transition-all duration-1000 [&.is-visible]:opacity-100 [&.is-visible]:translate-y-0">
                         
-                        <h2 class="text-3xl md:text-4xl font-bold mb-8 relative inline-block transition-all duration-500 after:absolute after:left-0 after:-bottom-1 after:h-[3px] after:bg-gradient-to-r after:from-[#00F0FF] after:to-[#A06EE7] after:transition-all after:duration-500 after:w-0 hover:after:w-full">Who Am I?</h2>
+                        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 relative inline-block transition-all duration-500 after:absolute after:left-0 after:-bottom-1 after:h-[3px] after:bg-gradient-to-r after:from-[#00F0FF] after:to-[#A06EE7] after:transition-all after:duration-500 after:w-0 hover:after:w-full">Who Am I?</h2>
 
-                        <div class="space-y-8 text-[#E6E6E6] text-base md:text-lg">
+                        <div class="space-y-6 sm:space-y-8 text-[#E6E6E6] text-sm sm:text-base md:text-lg">
 
                             <p class="leading-relaxed">
                                 I'm <strong>Krishna Goyal</strong>, a 3rd year B.Tech Data Analytics student at <strong>VIT-AP University</strong>. 
@@ -236,7 +279,7 @@
                             <div class="grid md:grid-cols-2 gap-6">
 
                                 <div>
-                                    <h3 class="font-semibold text-xl mb-2">⚡ What I Build</h3>
+                                    <h3 class="font-semibold text-lg sm:text-xl mb-2">What I Build</h3>
                                     <ul class="space-y-2 text-[#E6E6E6]/80">
                                         <li>• Full Stack Web Applications</li>
                                         <li>• Developer Productivity Tools</li>
@@ -246,7 +289,7 @@
                                 </div>
 
                                 <div>
-                                    <h3 class="font-semibold text-xl mb-2">🛠 Tech Stack</h3>
+                                    <h3 class="font-semibold text-lg sm:text-xl mb-2">Tech Stack</h3>
                                     <ul class="space-y-2 text-[#E6E6E6]/80">
                                         <li>• MERN Stack</li>
                                         <li>• Django</li>
@@ -273,29 +316,29 @@
             </section>
 
             <!-- Tech Stack -->
-            <section id="tech-stack" class="container mx-auto px-4 py-16 w-full min-h-screen flex flex-col items-center justify-center relative opacity-0 translate-y-5 transition-all duration-1000 [&.is-visible]:opacity-100 [&.is-visible]:translate-y-0">
+            <section id="tech-stack" class="container mx-auto px-4 py-14 sm:py-16 w-full min-h-screen flex flex-col items-center justify-center relative opacity-0 translate-y-5 transition-all duration-1000 [&.is-visible]:opacity-100 [&.is-visible]:translate-y-0">
         
-                <h1 class="text-4xl md:text-5xl font-bold text-center relative inline-block transition-all duration-500 after:absolute after:left-0 after:-bottom-1 after:h-[3px] after:bg-gradient-to-r after:from-[#00F0FF] after:to-[#A06EE7] after:transition-all after:duration-500 after:w-0 hover:after:w-full mb-8">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center relative inline-block transition-all duration-500 after:absolute after:left-0 after:-bottom-1 after:h-[3px] after:bg-gradient-to-r after:from-[#00F0FF] after:to-[#A06EE7] after:transition-all after:duration-500 after:w-0 hover:after:w-full mb-8">
                     My Tech Stack
                 </h1>
 
                 <!-- Interactive Bubble Container (UNCHANGED) -->
-                <div id="tech-stack-container" class="w-full h-[60vh] md:h-[70vh] relative cursor-pointer z-20">
+                <div id="tech-stack-container" class="w-full h-[42vh] sm:h-[50vh] md:h-[70vh] relative cursor-pointer z-20">
                     <div id="tooltip" class="absolute bg-[#0E1318] text-[#E6E6E6] px-3 py-1 rounded-md text-sm pointer-events-none opacity-0 transition-opacity duration-200 -translate-x-1/2 -translate-y-full"></div>
                 </div>
 
                 <!-- Know More Button -->
-                <button onclick="toggleTechStack()" class="mt-10 px-8 py-3 rounded-full border border-white/20 hover:border-white/60 hover:scale-105 transition-all duration-300">
+                <button onclick="toggleTechStack()" class="mt-8 sm:mt-10 px-6 sm:px-8 py-3 rounded-full border border-white/20 text-sm sm:text-base hover:border-white/60 hover:scale-105 transition-all duration-300">
                     Explore Full Tech Stack
                 </button>
 
                 <!-- Expandable Tech Stack Details -->
-                <div id="tech-stack-details" class="w-full max-w-5xl mt-10 bg-[#0E1318]/70 backdrop-blur-md border border-[#30363D]/50 p-8 rounded-3xl shadow-2xl max-h-0 opacity-0 overflow-hidden translate-y-4 transition-all duration-700 ease-in-out">
+                <div id="tech-stack-details" class="w-full max-w-5xl mt-10 bg-[#0E1318]/70 backdrop-blur-md border border-[#30363D]/50 p-6 sm:p-8 rounded-[28px] sm:rounded-3xl shadow-2xl max-h-0 opacity-0 overflow-hidden translate-y-4 transition-all duration-700 ease-in-out">
 
                     <div class="grid md:grid-cols-3 gap-10 text-[#E6E6E6]">
 
                         <div>
-                            <h3 class="text-xl font-semibold mb-4">🚀 Worked With</h3>
+                            <h3 class="text-lg sm:text-xl font-semibold mb-4">Worked With</h3>
                             <ul class="space-y-2 text-[#E6E6E6]/80">
                                 <li>• MongoDB</li>
                                 <li>• Express.js</li>
@@ -308,7 +351,7 @@
                         </div>
 
                         <div>
-                            <h3 class="text-xl font-semibold mb-4">🛠 Tools</h3>
+                            <h3 class="text-lg sm:text-xl font-semibold mb-4">Tools</h3>
                             <ul class="space-y-2 text-[#E6E6E6]/80">
                                 <li>• Git & GitHub</li>
                                 <li>• VS Code</li>
@@ -320,7 +363,7 @@
                         </div>
 
                         <div>
-                            <h3 class="text-xl font-semibold mb-4">📚 Currently Learning</h3>
+                            <h3 class="text-lg sm:text-xl font-semibold mb-4">Currently Learning</h3>
                             <ul class="space-y-2 text-[#E6E6E6]/80">
                                 <li>• System Design</li>
                                 <li>• Scalable Backend</li>
@@ -336,8 +379,8 @@
             </section>
 
             <!-- Timeline -->
-            <section id="timeline" class="container mx-auto px-4 py-16 min-h-screen opacity-0 translate-y-5 transition-all duration-1000 [&.is-visible]:opacity-100 [&.is-visible]:translate-y-0">
-                <h1 class="text-4xl md:text-5xl font-bold text-center mb-16 relative inline-block transition-all duration-500 after:absolute after:left-0 after:-bottom-1 after:h-[3px] after:bg-gradient-to-r after:from-[#00F0FF] after:to-[#A06EE7] after:transition-all after:duration-500 after:w-0 hover:after:w-full">My Journey Timeline</h1>
+            <section id="timeline" class="container mx-auto px-4 py-14 sm:py-16 min-h-screen opacity-0 translate-y-5 transition-all duration-1000 [&.is-visible]:opacity-100 [&.is-visible]:translate-y-0">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 sm:mb-16 relative inline-block transition-all duration-500 after:absolute after:left-0 after:-bottom-1 after:h-[3px] after:bg-gradient-to-r after:from-[#00F0FF] after:to-[#A06EE7] after:transition-all after:duration-500 after:w-0 hover:after:w-full">My Journey Timeline</h1>
                 
                 <div class="timeline-container relative max-w-4xl mx-auto py-5 before:absolute before:w-1 before:bg-gradient-to-b before:from-[#A06EE7] before:to-[#00F0FF] before:top-0 before:left-1/2 before:-translate-x-1/2 before:z-10 before:h-[var(--filled-height)] before:transition-[height] before:duration-150 before:ease-linear after:absolute after:w-1 after:bg-[#30363D]/30 after:top-0 after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:z-0 max-md:before:left-[31px] max-md:after:left-[31px]">
                     <div class="timeline-glow absolute w-3 h-20 left-1/2 -translate-x-1/2 top-[var(--glow-top)] bg-[radial-gradient(circle_at_center,rgba(0,240,255,0.9)_0%,rgba(160,110,231,0.6)_40%,rgba(0,240,255,0)_80%)] blur-xl z-20 pointer-events-none opacity-0 transition-opacity duration-500 [.timeline-active_&]:opacity-100 max-md:left-[31px] max-md:-translate-x-0"></div>
@@ -411,23 +454,23 @@
     </div>
 
     <!-- Floating Contact Bar -->
-    <div id="contact-bar" class="fixed right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center p-2 bg-[#0E1318]/70 backdrop-blur-md rounded-2xl space-y-4">
-        <a href="https://linkedin.com/in/krishna-goyal-5560a1284" target="_blank" rel="noopener" class="flex items-center w-11 h-11 rounded-full bg-[#0E1318] text-[#E6E6E6] transition-all duration-300 ease-in-out overflow-hidden hover:w-32 hover:rounded-2xl hover:bg-[#00F0FF] hover:text-[#0E1318] group">
+    <div id="contact-bar" class="fixed z-50 flex items-center p-2 bg-[#0E1318]/70 backdrop-blur-md rounded-2xl gap-2 sm:gap-4 left-1/2 -translate-x-1/2 bottom-4 w-[calc(100%-1.5rem)] justify-center sm:w-auto sm:justify-start sm:left-auto sm:right-4 sm:top-1/2 sm:-translate-y-1/2 sm:translate-x-0 sm:flex-col sm:space-y-4 sm:gap-0">
+        <a href="https://linkedin.com/in/krishna-goyal-5560a1284" target="_blank" rel="noopener" class="flex items-center w-11 h-11 rounded-full bg-[#0E1318] text-[#E6E6E6] transition-all duration-300 ease-in-out overflow-hidden group sm:hover:w-32 sm:hover:rounded-2xl hover:bg-[#00F0FF] hover:text-[#0E1318]">
             <i class="fab fa-linkedin-in icon flex items-center justify-center flex-shrink-0 w-11 h-11 text-[1.1rem]"></i>
-            <span class="text whitespace-nowrap opacity-0 -translate-x-2 transition-all duration-300 ease-in-out delay-100 group-hover:opacity-100 group-hover:translate-x-0 font-semibold pl-1">LinkedIn</span>
+            <span class="hidden sm:block text whitespace-nowrap opacity-0 -translate-x-2 transition-all duration-300 ease-in-out delay-100 group-hover:opacity-100 group-hover:translate-x-0 font-semibold pl-1">LinkedIn</span>
         </a>
-        <a href="https://github.com/krishnagoyal" target="_blank" rel="noopener" class="flex items-center w-11 h-11 rounded-full bg-[#0E1318] text-[#E6E6E6] transition-all duration-300 ease-in-out overflow-hidden hover:w-32 hover:rounded-2xl hover:bg-[#00F0FF] hover:text-[#0E1318] group">
+        <a href="https://github.com/krishnagoyal" target="_blank" rel="noopener" class="flex items-center w-11 h-11 rounded-full bg-[#0E1318] text-[#E6E6E6] transition-all duration-300 ease-in-out overflow-hidden group sm:hover:w-32 sm:hover:rounded-2xl hover:bg-[#00F0FF] hover:text-[#0E1318]">
             <i class="fab fa-github icon flex items-center justify-center flex-shrink-0 w-11 h-11 text-[1.1rem]"></i>
-            <span class="text whitespace-nowrap opacity-0 -translate-x-2 transition-all duration-300 ease-in-out delay-100 group-hover:opacity-100 group-hover:translate-x-0 font-semibold pl-1">GitHub</span>
+            <span class="hidden sm:block text whitespace-nowrap opacity-0 -translate-x-2 transition-all duration-300 ease-in-out delay-100 group-hover:opacity-100 group-hover:translate-x-0 font-semibold pl-1">GitHub</span>
         </a>
-        <a href="mailto:krishna.23bce8419@vitapstudent.ac.in" class="flex items-center w-11 h-11 rounded-full bg-[#0E1318] text-[#E6E6E6] transition-all duration-300 ease-in-out overflow-hidden hover:w-32 hover:rounded-2xl hover:bg-[#00F0FF] hover:text-[#0E1318] group">
+        <a href="mailto:krishna.23bce8419@vitapstudent.ac.in" class="flex items-center w-11 h-11 rounded-full bg-[#0E1318] text-[#E6E6E6] transition-all duration-300 ease-in-out overflow-hidden group sm:hover:w-32 sm:hover:rounded-2xl hover:bg-[#00F0FF] hover:text-[#0E1318]">
             <i class="fas fa-envelope icon flex items-center justify-center flex-shrink-0 w-11 h-11 text-[1.1rem]"></i>
-            <span class="text whitespace-nowrap opacity-0 -translate-x-2 transition-all duration-300 ease-in-out delay-100 group-hover:opacity-100 group-hover:translate-x-0 font-semibold pl-1">Email</span>
+            <span class="hidden sm:block text whitespace-nowrap opacity-0 -translate-x-2 transition-all duration-300 ease-in-out delay-100 group-hover:opacity-100 group-hover:translate-x-0 font-semibold pl-1">Email</span>
         </a>
-        <div class="w-8/12 border-t border-gray-600"></div>
-        <a href="{% static 'Documents/Krishna_Goyal_Resume.pdf' %}" target="_blank" rel="noopener" class="flex items-center w-11 h-11 rounded-full bg-[#0E1318] text-[#E6E6E6] transition-all duration-300 ease-in-out overflow-hidden hover:w-32 hover:rounded-2xl hover:bg-[#00F0FF] hover:text-[#0E1318] group">
+        <div class="hidden sm:block w-8/12 border-t border-gray-600"></div>
+        <a href="mailto:krishna.23bce8419@vitapstudent.ac.in?subject=Resume%20Request" class="flex items-center w-11 h-11 rounded-full bg-[#0E1318] text-[#E6E6E6] transition-all duration-300 ease-in-out overflow-hidden group sm:hover:w-40 sm:hover:rounded-2xl hover:bg-[#00F0FF] hover:text-[#0E1318]">
             <i class="fas fa-download icon flex items-center justify-center flex-shrink-0 w-11 h-11 text-[1.1rem]"></i>
-            <span class="text whitespace-nowrap opacity-0 -translate-x-2 transition-all duration-300 ease-in-out delay-100 group-hover:opacity-100 group-hover:translate-x-0 font-semibold pl-1">Resume</span>
+            <span class="hidden sm:block text whitespace-nowrap opacity-0 -translate-x-2 transition-all duration-300 ease-in-out delay-100 group-hover:opacity-100 group-hover:translate-x-0 font-semibold pl-1">Resume</span>
         </a>
     </div>
 </div>
@@ -473,16 +516,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }, observerOptions);
 
         detailSections.forEach(section => projectObserver.observe(section));
+        updateShowcaseMedia('0');
     }
 
     function updateShowcaseMedia(id) {
         mediaItems.forEach(item => {
             if (item.getAttribute('data-project-media') === id) {
-                item.classList.add('active');
+                item.classList.add('is-active');
                 const video = item.querySelector('video');
                 if (video) video.play().catch(() => {});
             } else {
-                item.classList.remove('active');
+                item.classList.remove('is-active');
                 const video = item.querySelector('video');
                 if (video) video.pause();
             }
@@ -491,14 +535,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Active navigation link on scroll ---
     const sections = document.querySelectorAll('main section');
-    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+    const navLinks = document.querySelectorAll('nav a[href]');
 
     const navObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const id = entry.target.id;
                 navLinks.forEach(link => {
-                    link.classList.toggle('active-link', link.getAttribute('href') === `#${id}`);
+                    const href = link.getAttribute('href') || '';
+                    const isHomeLink = id === 'home' && (href === '{% url "home" %}' || href === '{% url "home" %}#home');
+                    const isSectionLink = href.endsWith(`#${id}`);
+                    link.classList.toggle('active-link', isHomeLink || isSectionLink);
                 });
             }
         });

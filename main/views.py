@@ -3,7 +3,21 @@ from django.shortcuts import render, get_object_or_404
 from .models import Project
 
 def home(request):
-    return render(request, 'home.html')
+    available_project_slugs = set(
+        Project.objects.filter(
+            slug__in=[
+                'portfolio-website',
+                'personal-finance-tracker',
+                'insightloop-business',
+                'hotreload',
+            ]
+        ).values_list('slug', flat=True)
+    )
+    return render(
+        request,
+        'home.html',
+        {'available_project_slugs': available_project_slugs},
+    )
 
 def project_detail(request, slug):
     project = get_object_or_404(Project, slug=slug)

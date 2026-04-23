@@ -60,13 +60,13 @@
             </a>
         </div>
 
-        <div class="text-center mb-12">
-            <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold font-playfair 
+        <div class="text-center mb-10 sm:mb-12">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-playfair 
                 {% if project.category == 'video-editing' %}video-gradient-text{% else %}dev-gradient-text{% endif %} 
                 mb-4">
                 {{ project.title }}
             </h1>
-            <p class="text-lg sm:text-xl md:text-2xl text-text-secondary">{{ project.tagline }}</p>
+            <p class="text-base sm:text-lg md:text-xl text-text-secondary max-w-3xl mx-auto">{{ project.tagline }}</p>
         </div>
 
         {% if project.video_file %}
@@ -105,14 +105,14 @@
                         <a href="{{ project.live_url }}" target="_blank" rel="noopener noreferrer" 
                            class="text-center px-6 py-3 
                                   {% if project.category == 'video-editing' %}bg-video-accent{% else %}bg-dev-accent{% endif %} 
-                                  text-bg-primary font-bold rounded-full text-lg shadow-lg hover:bg-opacity-80 transition-colors">
+                                  text-bg-primary font-bold rounded-full text-base md:text-lg shadow-lg hover:bg-opacity-80 transition-colors">
                             <i class="fas fa-external-link-alt mr-2"></i> View Live Site
                         </a>
                         {% endif %}
                         
                         {% if project.github_url %}
                         <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer" 
-                           class="text-center px-6 py-3 bg-bg-secondary text-text-light font-bold rounded-full text-lg shadow-lg hover:bg-gray-700 transition-colors">
+                           class="text-center px-6 py-3 bg-bg-secondary text-text-light font-bold rounded-full text-base md:text-lg shadow-lg hover:bg-gray-700 transition-colors">
                             <i class="fab fa-github mr-2"></i> View on GitHub
                         </a>
                         {% endif %}
