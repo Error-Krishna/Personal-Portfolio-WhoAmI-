@@ -66,178 +66,52 @@
                     
                     <!-- Left: Dynamic Media Viewport -->
                     <div class="relative bg-black overflow-hidden lg:w-1/2 w-full h-full h-[240px] sm:h-[300px] lg:h-full">
-                        <!-- 0: Portfolio -->
-                        <div class="showcase-media-item is-active absolute inset-0 w-full h-full opacity-0 transition-opacity duration-800 ease-[cubic-bezier(0.4,0,0.2,1)] z-10 [&.is-active]:opacity-100 [&.is-active]:z-20" data-project-media="0">
-                            <div class="w-full h-full bg-[radial-gradient(circle_at_top,rgba(0,240,255,0.35),transparent_48%),linear-gradient(135deg,#0b1016_0%,#111827_45%,#050709_100%)] flex items-end p-8">
-                                <div class="rounded-2xl border border-white/10 bg-black/30 backdrop-blur-md p-6 max-w-md">
-                                    <p class="text-xs uppercase tracking-[0.3em] text-[#00F0FF] mb-3">Featured Build</p>
-                                    <h3 class="text-3xl font-bold text-white mb-2">Personal Portfolio</h3>
-                                    <p class="text-white/70">Interactive case-study driven portfolio built to highlight projects, craft, and technical range.</p>
+                        {% for project in home_projects %}
+                        <div class="showcase-media-item {% if forloop.first %}is-active{% endif %} absolute inset-0 w-full h-full opacity-0 transition-opacity duration-800 ease-[cubic-bezier(0.4,0,0.2,1)] z-10 [&.is-active]:opacity-100 [&.is-active]:z-20" data-project-media="{{ forloop.counter0 }}">
+                            <div class="w-full h-full {{ project.home_media_class }} flex items-end p-6 sm:p-8 {% if project.slug == 'udhyog-saathi-platform' %}justify-center sm:justify-center{% endif %}">
+                                <div class="rounded-2xl border border-white/10 bg-black/30 backdrop-blur-md p-5 sm:p-6 max-w-md {% if project.slug == 'udhyog-saathi-platform' %}text-center{% endif %}">
+                                    <p class="text-xs uppercase tracking-[0.3em] {{ project.home_badge_color_class }} mb-3">{{ project.home_badge }}</p>
+                                    <h3 class="text-2xl sm:text-3xl font-bold text-white mb-2">{{ project.title }}</h3>
+                                    <p class="text-white/70">{{ project.home_summary }}</p>
+                                    {% if project.slug == 'udhyog-saathi-platform' %}
+                                    <div class="mt-5 flex justify-center">
+                                        <i class="fas fa-rocket text-4xl text-white/25 animate-pulse"></i>
+                                    </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
-
-                        <!-- 1: Finance -->
-                        <div class="showcase-media-item absolute inset-0 w-full h-full opacity-0 transition-opacity duration-800 ease-[cubic-bezier(0.4,0,0.2,1)] z-10 [&.is-active]:opacity-100 [&.is-active]:z-20" data-project-media="1">
-                            <div class="w-full h-full bg-[radial-gradient(circle_at_bottom_right,rgba(160,110,231,0.35),transparent_45%),linear-gradient(140deg,#121826_0%,#10172b_55%,#050709_100%)] flex items-end p-8">
-                                <div class="rounded-2xl border border-white/10 bg-black/30 backdrop-blur-md p-6 max-w-md">
-                                    <p class="text-xs uppercase tracking-[0.3em] text-[#A06EE7] mb-3">FinTech</p>
-                                    <h3 class="text-3xl font-bold text-white mb-2">Finance Tracker</h3>
-                                    <p class="text-white/70">Expense and asset tracking with analytics-focused UX for clearer personal financial decisions.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 2: InsightLoop -->
-                        <div class="showcase-media-item absolute inset-0 w-full h-full opacity-0 transition-opacity duration-800 ease-[cubic-bezier(0.4,0,0.2,1)] z-10 [&.is-active]:opacity-100 [&.is-active]:z-20" data-project-media="2">
-                            <div class="w-full h-full bg-[radial-gradient(circle_at_center,rgba(0,240,255,0.22),transparent_35%),linear-gradient(145deg,#07111a_0%,#102235_50%,#050709_100%)] flex items-end p-8">
-                                <div class="rounded-2xl border border-white/10 bg-black/30 backdrop-blur-md p-6 max-w-md">
-                                    <p class="text-xs uppercase tracking-[0.3em] text-[#00F0FF] mb-3">Analytics</p>
-                                    <h3 class="text-3xl font-bold text-white mb-2">InsightLoop</h3>
-                                    <p class="text-white/70">Business intelligence workflows designed to surface operational trends from high-volume data.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 3: HotReload -->
-                        <div class="showcase-media-item absolute inset-0 w-full h-full opacity-0 transition-opacity duration-800 ease-[cubic-bezier(0.4,0,0.2,1)] z-10 [&.is-active]:opacity-100 [&.is-active]:z-20" data-project-media="3">
-                            <div class="w-full h-full bg-[radial-gradient(circle_at_top_left,rgba(160,110,231,0.28),transparent_40%),linear-gradient(145deg,#15101f_0%,#17112b_45%,#050709_100%)] flex items-end p-8">
-                                <div class="rounded-2xl border border-white/10 bg-black/30 backdrop-blur-md p-6 max-w-md">
-                                    <p class="text-xs uppercase tracking-[0.3em] text-[#A06EE7] mb-3">Automation</p>
-                                    <h3 class="text-3xl font-bold text-white mb-2">HotReload</h3>
-                                    <p class="text-white/70">Network automation concept focused on reducing access-point switching friction in campus environments.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 4: SaaS Startup -->
-                        <div class="showcase-media-item absolute inset-0 w-full h-full opacity-0 transition-opacity duration-800 ease-[cubic-bezier(0.4,0,0.2,1)] z-10 active:opacity-100 active:z-20" data-project-media="4">
-                            <div class="w-full h-full bg-gradient-to-tr from-[#A06EE7]/20 to-[#00F0FF]/20 flex items-center justify-center">
-                                <i class="fas fa-rocket text-6xl text-white/20 animate-pulse"></i>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
 
                     <!-- Right: Scrollable Info Panel -->
                     <div id="project-scroll-panel" class="showcase-scroll-panel lg:w-1/2 w-full h-full overflow-y-auto snap-y snap-mandatory bg-white/5 [&::-webkit-scrollbar]:hidden max-lg:overflow-y-visible max-lg:snap-none">
-                        
-                        <!-- 0: Portfolio -->
-                        <div class="project-detail-snap is-active snap-start flex flex-col justify-center p-8 opacity-30 transition duration-500 ease-in-out scale-95 min-h-full [&.is-active]:opacity-100 [&.is-active]:scale-100 max-lg:min-h-0 max-lg:p-12 max-lg:opacity-100 max-lg:scale-100" data-project-id="0">
-                            <span class="text-[#00F0FF] font-mono text-sm mb-2">01 / Featured Project</span>
-                            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Personal Portfolio</h2>
+                        {% for project in home_projects %}
+                        <div class="project-detail-snap {% if forloop.first %}is-active{% endif %} snap-start flex flex-col justify-center p-8 opacity-30 transition duration-500 ease-in-out scale-95 min-h-full [&.is-active]:opacity-100 [&.is-active]:scale-100 max-lg:min-h-0 max-lg:p-12 max-lg:opacity-100 max-lg:scale-100" data-project-id="{{ forloop.counter0 }}">
+                            <span class="{{ project.home_badge_color_class }} font-mono text-sm mb-2">{{ project.home_index_label }} / {{ project.home_badge }}</span>
+                            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">{{ project.title }}</h2>
                             <p class="text-[#E6E6E6]/80 text-lg mb-6">
-                                A showcase of my creative and technical work, featuring 3D visuals with Three.js and a highly interactive UI designed for performance.
+                                {{ project.home_summary }}
                             </p>
                             <div class="mb-8">
-                                <h4 class="text-sm font-bold text-white uppercase tracking-widest mb-3">Tech Stack</h4>
+                                <h4 class="text-sm font-bold text-white uppercase tracking-widest mb-3">{% if project.slug == 'udhyog-saathi-platform' %}Focus Areas{% else %}Tech Stack{% endif %}</h4>
                                 <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-[#A06EE7]">Django</span>
-                                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-[#A06EE7]">Three.js</span>
-                                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-[#A06EE7]">Tailwind CSS</span>
+                                    {% for tech in project.tech_stack %}
+                                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs {{ project.home_tag_class }}">{{ tech }}</span>
+                                    {% endfor %}
                                 </div>
                             </div>
-                            {% if 'portfolio-website' in available_project_slugs %}
-                            <a href="{% url 'project_detail' 'portfolio-website' %}" class="inline-flex items-center px-6 py-3 bg-[#00F0FF] text-black font-bold rounded-full transition-transform hover:scale-105 active:scale-95">
-                                Explore Project <i class="fas fa-arrow-right ml-2"></i>
+                            {% if project.show_detail_link %}
+                            <a href="{% url 'project_detail' project.slug %}" class="inline-flex items-center px-6 py-3 {{ project.home_button_class }} font-bold rounded-full transition-all {{ project.home_button_hover_class }}">
+                                {{ project.home_cta_label }} <i class="fas {{ project.home_button_icon }} ml-2"></i>
                             </a>
                             {% else %}
-                            <span class="inline-flex items-center px-6 py-3 bg-white/10 text-white/60 font-bold rounded-full cursor-not-allowed">
-                                Project Details Coming Soon
+                            <span class="inline-flex items-center px-6 py-3 {{ project.home_button_class }} font-bold rounded-full cursor-not-allowed">
+                                {{ project.home_cta_label }} <i class="fas {{ project.home_button_icon }} ml-2"></i>
                             </span>
                             {% endif %}
                         </div>
-
-                        <!-- 1: Finance -->
-                        <div class="project-detail-snap snap-start flex flex-col justify-center p-8 opacity-30 transition duration-500 ease-in-out scale-95 min-h-full [&.is-active]:opacity-100 [&.is-active]:scale-100 max-lg:min-h-0 max-lg:p-12 max-lg:opacity-100 max-lg:scale-100" data-project-id="1">
-                            <span class="text-[#A06EE7] font-mono text-sm mb-2">02 / FinTech</span>
-                            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Finance Tracker</h2>
-                            <p class="text-[#E6E6E6]/80 text-lg mb-6">
-                                A robust dashboard for managing personal assets and liabilities. Includes real-time data visualization and spending analytics.
-                            </p>
-                            <div class="mb-8">
-                                <h4 class="text-sm font-bold text-white uppercase tracking-widest mb-3">Tech Stack</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-[#00F0FF]">Flask</span>
-                                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-[#00F0FF]">MongoDB</span>
-                                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-[#00F0FF]">Chart.js</span>
-                                </div>
-                            </div>
-                            {% if 'personal-finance-tracker' in available_project_slugs %}
-                            <a href="{% url 'project_detail' 'personal-finance-tracker' %}" class="inline-flex items-center px-6 py-3 bg-[#A06EE7] text-white font-bold rounded-full transition-transform hover:scale-105">
-                                View Dashboard <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                            {% else %}
-                            <span class="inline-flex items-center px-6 py-3 bg-white/10 text-white/60 font-bold rounded-full cursor-not-allowed">
-                                Project Details Coming Soon
-                            </span>
-                            {% endif %}
-                        </div>
-
-                        <!-- 2: InsightLoop -->
-                        <div class="project-detail-snap snap-start flex flex-col justify-center p-8 opacity-30 transition duration-500 ease-in-out scale-95 min-h-full [&.is-active]:opacity-100 [&.is-active]:scale-100 max-lg:min-h-0 max-lg:p-12 max-lg:opacity-100 max-lg:scale-100" data-project-id="2">
-                            <span class="text-[#00F0FF] font-mono text-sm mb-2">03 / Analytics</span>
-                            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">InsightLoop Business</h2>
-                            <p class="text-[#E6E6E6]/80 text-lg mb-6">
-                                Scalable business intelligence tool designed to process large datasets and provide actionable strategic insights.
-                            </p>
-                            <div class="mb-8">
-                                <h4 class="text-sm font-bold text-white uppercase tracking-widest mb-3">Tech Stack</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-[#A06EE7]">Python</span>
-                                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-[#A06EE7]">Pandas</span>
-                                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-[#A06EE7]">Tableau</span>
-                                </div>
-                            </div>
-                            {% if 'insightloop-business' in available_project_slugs %}
-                            <a href="{% url 'project_detail' 'insightloop-business' %}" class="inline-flex items-center px-6 py-3 bg-[#00F0FF] text-black font-bold rounded-full transition-transform hover:scale-105">
-                                See Insights <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                            {% else %}
-                            <span class="inline-flex items-center px-6 py-3 bg-white/10 text-white/60 font-bold rounded-full cursor-not-allowed">
-                                Project Details Coming Soon
-                            </span>
-                            {% endif %}
-                        </div>
-
-                        <!-- 3: HotReload -->
-                        <div class="project-detail-snap snap-start flex flex-col justify-center p-8 opacity-30 transition duration-500 ease-in-out scale-95 min-h-full [&.is-active]:opacity-100 [&.is-active]:scale-100 max-lg:min-h-0 max-lg:p-12 max-lg:opacity-100 max-lg:scale-100" data-project-id="3">
-                            <span class="text-[#A06EE7] font-mono text-sm mb-2">04 / Automation</span>
-                            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">HotReload</h2>
-                            <p class="text-[#E6E6E6]/80 text-lg mb-6">
-                                A network automation tool designed to automatically switch broadband logins when moving between access points, improving connectivity continuity in campus environments.
-                            </p>
-                            <div class="mb-8">
-                                <h4 class="text-sm font-bold text-white uppercase tracking-widest mb-3">Tech Stack</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-[#00F0FF]">Python</span>
-                                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-[#00F0FF]">Networking</span>
-                                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-[#00F0FF]">Automation</span>
-                                </div>
-                            </div>
-                            <span class="inline-flex items-center px-6 py-3 bg-white/10 text-white/60 font-bold rounded-full cursor-not-allowed">
-                                Case Study In Progress <i class="fas fa-microchip ml-2"></i>
-                            </span>
-                        </div>
-
-                        <!-- 4: SaaS Project -->
-                        <div class="project-detail-snap snap-start flex flex-col justify-center p-8 opacity-30 transition duration-500 ease-in-out scale-95 min-h-full [&.is-active]:opacity-100 [&.is-active]:scale-100 max-lg:min-h-0 max-lg:p-12 max-lg:opacity-100 max-lg:scale-100" data-project-id="4">
-                            <span class="text-[#00F0FF] font-mono text-sm mb-2">05 / Entrepreneurship</span>
-                            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Building My SaaS Platform</h2>
-                            <p class="text-[#E6E6E6]/80 text-lg mb-6">
-                                Developing a scalable Software-as-a-Service platform to solve real-world problems. This project reflects my journey into product development and startup ambition.
-                            </p>
-                            <div class="mb-8">
-                                <h4 class="text-sm font-bold text-white uppercase tracking-widest mb-3">Focus Areas</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-[#A06EE7]">SaaS</span>
-                                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-[#A06EE7]">Cloud Architecture</span>
-                                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs text-[#A06EE7]">Scalability</span>
-                                </div>
-                            </div>
-                            <button class="inline-flex items-center px-6 py-3 border-2 border-[#00F0FF] text-[#00F0FF] font-bold rounded-full transition-all hover:bg-[#00F0FF] hover:text-black">
-                                Coming Soon <i class="fas fa-hourglass-start ml-2"></i>
-                            </button>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </section>

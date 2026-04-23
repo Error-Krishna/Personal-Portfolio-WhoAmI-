@@ -165,12 +165,12 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 lg:hidden">
-            {% for video in project.videos.all %}
+            {% for video in project.videos %}
             <div class="carousel-item">
                 <div class="section-card rounded-3xl shadow-xl p-4">
                     {% if video.type == 'local' %}
                         <div class="video-container local-video mb-4">
-                            <video src="{{ video.video_file.url }}" autoplay muted loop playsinline></video>
+                            <video src="{{ video.video_url }}" autoplay muted loop playsinline></video>
                         </div>
                     {% elif video.type == 'instagram' %}
                         <div class="video-container mb-4">
@@ -188,7 +188,7 @@
         </div>
 
         <div class="hidden lg:flex multi-carousel-container">
-            {% with project.videos.all as videos %}
+            {% with project.videos as videos %}
                 {% if videos %}
                     {% for i in "123" %}
                     <div class="carousel-column">
@@ -203,7 +203,7 @@
                                     <div class="section-card rounded-3xl shadow-xl p-4">
                                         {% if video.type == 'local' %}
                                             <div class="video-container local-video mb-4">
-                                                <video src="{{ video.video_file.url }}" autoplay muted loop playsinline></video>
+                                                <video src="{{ video.video_url }}" autoplay muted loop playsinline></video>
                                             </div>
                                         {% elif video.type == 'instagram' %}
                                             <div class="video-container mb-4">

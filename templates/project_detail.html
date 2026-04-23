@@ -69,11 +69,11 @@
             <p class="text-base sm:text-lg md:text-xl text-text-secondary max-w-3xl mx-auto">{{ project.tagline }}</p>
         </div>
 
-        {% if project.video_file %}
+        {% if project.video_file_url %}
         <div class="section-card rounded-3xl shadow-xl p-2 sm:p-4 md:p-8 mb-12">
             <div class="project-video-container">
                 <video class="w-full h-auto" autoplay loop muted playsinline controls>
-                    <source src="{{ project.video_file.url }}" type="video/mp4">
+                    <source src="{{ project.video_file_url }}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>

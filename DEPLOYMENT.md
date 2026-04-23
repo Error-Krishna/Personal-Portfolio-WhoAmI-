@@ -1,32 +1,45 @@
 # Deployment Notes
 
-## Required environment variables
+## Recommended hosting model
 
-- `DJANGO_DEBUG=false`
-- `DJANGO_SECRET_KEY=<long-random-secret>`
-- `DJANGO_ALLOWED_HOSTS=<comma-separated-hosts>`
-- `DJANGO_CSRF_TRUSTED_ORIGINS=<comma-separated-https-origins>`
+This portfolio now supports a static-export workflow. That means you can generate HTML, CSS, JS, and static assets into `dist/` and deploy the result on fast free hosts.
 
-## Install command
+## Build the static site
 
 ```bash
-pip install -r requirements.txt
+bash build_static.sh
 ```
 
-## Build command
+This generates:
+
+- `dist/index.html`
+- `dist/project/<slug>/index.html`
+- `dist/static/...`
+
+## Render Static Site
+
+- Build command: `bash build_static.sh`
+- Publish directory: `dist`
+
+## Cloudflare Pages
+
+- Build command: `bash build_static.sh`
+- Build output directory: `dist`
+
+## Local validation
+
+Before deploying, verify the build locally:
 
 ```bash
-bash build.sh
+python manage.py check
+python manage.py test
+python manage.py buildstatic
 ```
 
-## Start command
+## Editing content
 
-```bash
-gunicorn portfolio_core.wsgi:application --log-file -
-```
+Public portfolio content now lives in:
 
-## Important note about the current database
+- `content/projects.json`
 
-This project currently uses the committed `db.sqlite3` file. That works for a read-mostly portfolio, but on platforms with ephemeral filesystems, admin edits made after deployment may not persist across restarts or redeploys.
-
-If you want persistent runtime edits, the next step is moving the project to PostgreSQL.
+That file controls homepage project cards and project detail pages.
