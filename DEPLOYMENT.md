@@ -1,45 +1,74 @@
-# Deployment Notes
+# Deployment Guide
 
-## Recommended hosting model
+## Pre-Deployment Checklist
 
-This portfolio now supports a static-export workflow. That means you can generate HTML, CSS, JS, and static assets into `dist/` and deploy the result on fast free hosts.
+- Copy `.env.example` to `.env`
+- Set `DJANGO_ENV=production`
+- Set `DJANGO_DEBUG=false`
+- Set a real `DJANGO_SECRET_KEY`
+- Set a real `GROQ_API_KEY`
+- Set a private `KRISH_ADMIN_PASSPHRASE`
+- Set `DJANGO_ALLOWED_HOSTS`
+- Set `DJANGO_CSRF_TRUSTED_ORIGINS`
+- Keep secure cookie and SSL settings enabled
 
-## Build the static site
+## Production `.env` Example
+
+```dotenv
+DJANGO_ENV=production
+DJANGO_DEBUG=false
+DJANGO_LOG_LEVEL=INFO
+
+DJANGO_SECRET_KEY=replace-with-a-long-random-secret
+GROQ_API_KEY=replace-with-your-groq-api-key
+KRISH_ADMIN_PASSPHRASE=replace-with-a-private-admin-passphrase
+
+DJANGO_ALLOWED_HOSTS=your-domain.com,www.your-domain.com
+DJANGO_CSRF_TRUSTED_ORIGINS=https://your-domain.com,https://www.your-domain.com
+
+DJANGO_SESSION_COOKIE_SECURE=true
+DJANGO_CSRF_COOKIE_SECURE=true
+DJANGO_SECURE_SSL_REDIRECT=true
+DJANGO_SECURE_HSTS_SECONDS=31536000
+DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS=true
+DJANGO_SECURE_HSTS_PRELOAD=true
+```
+
+## Django App Deployment
+
+This repo already includes:
+
+- `Procfile`
+- `gunicorn`
+- WhiteNoise-compatible static settings
+
+Typical steps:
+
+```bash
+pip install -r requirements.txt
+python3 manage.py collectstatic --noinput
+gunicorn portfolio_core.wsgi:application --log-file -
+```
+
+## Static Export Deployment
+
+To build the static site:
 
 ```bash
 bash build_static.sh
 ```
 
-This generates:
+Deploy the generated `dist/` folder to a static host such as:
 
-- `dist/index.html`
-- `dist/project/<slug>/index.html`
-- `dist/static/...`
+- Cloudflare Pages
+- Render Static Site
 
-## Render Static Site
+## Validation Before Deploy
 
-- Build command: `bash build_static.sh`
-- Publish directory: `dist`
-
-## Cloudflare Pages
-
-- Build command: `bash build_static.sh`
-- Build output directory: `dist`
-
-## Local validation
-
-Before deploying, verify the build locally:
+Run:
 
 ```bash
-python manage.py check
-python manage.py test
-python manage.py buildstatic
+python3 manage.py check
+python3 manage.py test
+python3 manage.py buildstatic
 ```
-
-## Editing content
-
-Public portfolio content now lives in:
-
-- `content/projects.json`
-
-That file controls homepage project cards and project detail pages.

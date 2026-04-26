@@ -121,6 +121,9 @@
                 <a href="{% url 'home' %}#timeline" class="floating-nav-link rounded-full px-3.5 xl:px-4 py-2 text-[11px] xl:text-xs font-semibold tracking-[0.14em] xl:tracking-[0.16em] uppercase text-text-light transition-all duration-300 hover:text-white {% block timeline_active %}{% endblock %}">
                     <span>Journey</span>
                 </a>
+                <a href="{% url 'assistant' %}" class="floating-nav-link rounded-full px-3.5 xl:px-4 py-2 text-[11px] xl:text-xs font-semibold tracking-[0.14em] xl:tracking-[0.16em] uppercase text-text-light transition-all duration-300 hover:text-white {% block assistant_active %}{% endblock %}">
+                    <span>Ask Krish</span>
+                </a>
                 <a href="mailto:krishna.23bce8419@vitapstudent.ac.in" class="rounded-full bg-white/10 px-3.5 xl:px-4 py-2 text-[11px] xl:text-xs font-semibold tracking-[0.14em] xl:tracking-[0.16em] uppercase text-text-light transition-all duration-300 hover:bg-accent-cyan hover:text-bg-primary">
                     Hire Me
                 </a>
@@ -140,6 +143,7 @@
                 <a href="{% url 'home' %}#about" class="rounded-2xl px-4 py-3 text-center text-sm font-semibold tracking-[0.18em] uppercase text-text-light transition-all duration-300 hover:bg-white/10 hover:text-white">About</a>
                 <a href="{% url 'home' %}#tech-stack" class="rounded-2xl px-4 py-3 text-center text-sm font-semibold tracking-[0.18em] uppercase text-text-light transition-all duration-300 hover:bg-white/10 hover:text-white">Tech Stack</a>
                 <a href="{% url 'home' %}#timeline" class="rounded-2xl px-4 py-3 text-center text-sm font-semibold tracking-[0.18em] uppercase text-text-light transition-all duration-300 hover:bg-white/10 hover:text-white">Journey</a>
+                <a href="{% url 'assistant' %}" class="rounded-2xl px-4 py-3 text-center text-sm font-semibold tracking-[0.18em] uppercase text-text-light transition-all duration-300 hover:bg-white/10 hover:text-white">Ask Krish</a>
                 <a href="mailto:krishna.23bce8419@vitapstudent.ac.in" class="rounded-2xl bg-accent-cyan px-4 py-3 text-center text-sm font-semibold tracking-[0.18em] uppercase text-bg-primary transition-all duration-300 hover:bg-white hover:text-bg-primary">Hire Me</a>
             </div>
         </div>
@@ -175,5 +179,190 @@
     </script>
 
     {% block scripts %}{% endblock %}
+    {% if request.resolver_match and request.resolver_match.url_name != 'assistant' %}
+    <div id="krish-widget" style="position:fixed;bottom:80px;right:1.5rem;z-index:9998;display:flex;flex-direction:column;align-items:flex-end;gap:0.75rem;">
+      <div id="krish-bubble" style="display:none;flex-direction:column;width:320px;max-height:420px;background:#0E1318;border:1px solid rgba(48,54,61,0.7);border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+        <div style="padding:0.9rem 1rem;border-bottom:1px solid rgba(48,54,61,0.5);display:flex;align-items:center;gap:0.6rem;">
+          <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,rgba(0,240,255,0.14),rgba(160,110,231,0.16));border:1px solid rgba(0,240,255,0.35);display:flex;align-items:center;justify-content:center;font-size:1rem;color:#E6E6E6;"><i class="fas fa-robot"></i></div>
+          <div>
+            <div style="font-size:0.85rem;font-weight:600;color:#E6E6E6;">Krish</div>
+            <div style="font-size:0.7rem;color:rgba(230,230,230,0.34);">Krishna's AI Secretary</div>
+          </div>
+          <a href="{% url 'assistant' %}" style="margin-left:auto;font-size:0.7rem;color:rgba(0,240,255,0.55);text-decoration:none;" title="Open full chat">
+            <i class="fas fa-expand-alt"></i>
+          </a>
+        </div>
+
+        <div id="widget-messages" style="flex:1;overflow-y:auto;padding:0.9rem;display:flex;flex-direction:column;gap:0.7rem;max-height:260px;scrollbar-width:thin;scrollbar-color:#30363D transparent;"></div>
+
+        <div style="padding:0.7rem;border-top:1px solid rgba(48,54,61,0.5);display:flex;gap:0.5rem;">
+          <input id="widget-input" type="text" placeholder="Ask me about Krishna..." style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(48,54,61,0.8);border-radius:10px;padding:0.5rem 0.75rem;color:#E6E6E6;font-family:inherit;font-size:0.82rem;outline:none;" />
+          <button id="widget-send" type="button" style="width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#00F0FF,#A06EE7);border:none;cursor:pointer;color:#050709;font-size:0.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-paper-plane"></i></button>
+        </div>
+      </div>
+
+      <button id="krish-toggle" type="button" style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#00F0FF,#A06EE7);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 8px 24px rgba(0,240,255,0.3);transition:transform 0.2s, box-shadow 0.2s;position:relative;color:#050709;" title="Chat with Krish">
+        <i class="fas fa-robot"></i>
+        <span id="krish-notif" style="position:absolute;top:2px;right:2px;width:10px;height:10px;border-radius:50%;background:#00F0FF;border:2px solid #050709;animation:blink 2s ease-in-out infinite;display:none;"></span>
+      </button>
+    </div>
+
+    <script>
+    (function() {
+      const toggleBtn = document.getElementById("krish-toggle");
+      const bubble = document.getElementById("krish-bubble");
+      const messagesEl = document.getElementById("widget-messages");
+      const inputEl = document.getElementById("widget-input");
+      const sendBtn = document.getElementById("widget-send");
+      const notifDot = document.getElementById("krish-notif");
+
+      let isOpen = false;
+      let introduced = false;
+      let widgetHistory = [];
+      let isAdmin = false;
+
+      function getCookie(name) {
+        const cookies = document.cookie ? document.cookie.split(";") : [];
+        for (const cookie of cookies) {
+          const trimmed = cookie.trim();
+          if (trimmed.startsWith(name + "=")) {
+            return decodeURIComponent(trimmed.slice(name.length + 1));
+          }
+        }
+        return "";
+      }
+
+      function getTime() {
+        return new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+      }
+
+      function escapeHtml(text) {
+        const div = document.createElement("div");
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      function appendMsg(role, text) {
+        const isBot = role === "bot";
+        const div = document.createElement("div");
+        div.style.cssText = "display:flex;flex-direction:column;align-items:" + (isBot ? "flex-start" : "flex-end") + ";gap:2px;";
+        div.innerHTML = `
+          <div style="max-width:85%;padding:0.55rem 0.8rem;font-size:0.82rem;line-height:1.5;border-radius:${isBot ? "12px 12px 12px 3px" : "12px 12px 3px 12px"};background:${isBot ? "rgba(0,240,255,0.07)" : "rgba(160,110,231,0.18)"};border:1px solid ${isBot ? "rgba(0,240,255,0.18)" : "rgba(160,110,231,0.3)"};color:#E6E6E6;">${escapeHtml(text).replace(/\n/g, "<br>")}</div>
+          <div style="font-size:0.65rem;color:rgba(230,230,230,0.27);padding:0 4px;">${getTime()}</div>
+        `;
+        messagesEl.appendChild(div);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+
+      function showTyping() {
+        const div = document.createElement("div");
+        div.id = "w-typing";
+        div.style.cssText = "display:flex;gap:5px;align-items:center;padding:0.55rem 0.8rem;background:rgba(0,240,255,0.07);border:1px solid rgba(0,240,255,0.18);border-radius:12px 12px 12px 3px;width:fit-content;";
+        div.innerHTML = `
+          <div style="width:6px;height:6px;border-radius:50%;background:rgba(0,240,255,0.6);animation:typingBounce 1.2s ease-in-out infinite;"></div>
+          <div style="width:6px;height:6px;border-radius:50%;background:rgba(0,240,255,0.6);animation:typingBounce 1.2s ease-in-out infinite 0.2s;"></div>
+          <div style="width:6px;height:6px;border-radius:50%;background:rgba(0,240,255,0.6);animation:typingBounce 1.2s ease-in-out infinite 0.4s;"></div>
+        `;
+        messagesEl.appendChild(div);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+
+      function hideTyping() {
+        const el = document.getElementById("w-typing");
+        if (el) {
+          el.remove();
+        }
+      }
+
+      function setOpen(nextOpen) {
+        isOpen = nextOpen;
+        bubble.style.display = isOpen ? "flex" : "none";
+        bubble.style.flexDirection = "column";
+        notifDot.style.display = isOpen ? "none" : "";
+        if (isOpen) {
+          inputEl.focus();
+        }
+      }
+
+      function maybeIntroduce() {
+        if (introduced) {
+          return;
+        }
+        introduced = true;
+        const intro = "Hi! I'm Krish, Krishna's AI secretary. Ask me anything about his work, projects, or background.";
+        appendMsg("bot", intro);
+        widgetHistory.push({ role: "assistant", content: intro });
+      }
+
+      async function sendMessage(text) {
+        if (!text.trim()) {
+          return;
+        }
+
+        appendMsg("user", text);
+        widgetHistory.push({ role: "user", content: text });
+        inputEl.value = "";
+        sendBtn.disabled = true;
+        showTyping();
+
+        try {
+          const response = await fetch("{% url 'chat_api' %}", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-CSRFToken": getCookie("csrftoken"),
+            },
+            body: JSON.stringify({
+              messages: widgetHistory,
+              is_admin: isAdmin,
+              session_info: "Visitor on portfolio page.",
+            }),
+          });
+          const data = await response.json();
+          hideTyping();
+          const reply = data.error ? "Sorry, something went wrong." : data.reply;
+          if (data.is_admin) {
+            isAdmin = true;
+          }
+          appendMsg("bot", reply);
+          widgetHistory.push({ role: "assistant", content: reply });
+        } catch (error) {
+          hideTyping();
+          appendMsg("bot", "Connection error. Please try again.");
+        }
+
+        sendBtn.disabled = false;
+      }
+
+      toggleBtn.addEventListener("click", () => {
+        setOpen(!isOpen);
+        if (isOpen) {
+          maybeIntroduce();
+        }
+      });
+
+      setTimeout(() => {
+        notifDot.style.display = "";
+        setOpen(true);
+        maybeIntroduce();
+      }, 3000);
+
+      sendBtn.addEventListener("click", () => sendMessage(inputEl.value));
+      inputEl.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          sendMessage(inputEl.value);
+        }
+      });
+    })();
+    </script>
+
+    <style>
+    @keyframes typingBounce {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+      30% { transform: translateY(-5px); opacity: 1; }
+    }
+    </style>
+    {% endif %}
 </body>
 </html>

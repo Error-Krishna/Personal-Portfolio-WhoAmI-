@@ -1,11 +1,12 @@
 import json
-from functools import lru_cache
 from pathlib import Path
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 CONTENT_DIR = BASE_DIR / "content"
 PROJECTS_FILE = CONTENT_DIR / "projects.json"
+KRISH_PUBLIC_FILE = CONTENT_DIR / "krish_public.md"
+KRISH_PRIVATE_FILE = CONTENT_DIR / "krish_private.md"
 
 HOME_THEME_CONFIG = {
     "portfolio-website": {
@@ -59,11 +60,40 @@ DEFAULT_HOME_THEME = {
     "home_button_icon": "fa-arrow-right",
 }
 
+_CACHE = {}
 
-@lru_cache(maxsize=1)
+
+def _read_cached_json(path: Path):
+    stat = path.stat()
+    cache_key = str(path)
+    cached = _CACHE.get(cache_key)
+
+    if cached and cached["mtime"] == stat.st_mtime_ns:
+        return cached["data"]
+
+    data = json.loads(path.read_text(encoding="utf-8"))
+    _CACHE[cache_key] = {"mtime": stat.st_mtime_ns, "data": data}
+    return data
+
+
+def _read_cached_text(path: Path) -> str:
+    if not path.exists():
+        return ""
+
+    stat = path.stat()
+    cache_key = str(path)
+    cached = _CACHE.get(cache_key)
+
+    if cached and cached["mtime"] == stat.st_mtime_ns:
+        return cached["data"]
+
+    data = path.read_text(encoding="utf-8")
+    _CACHE[cache_key] = {"mtime": stat.st_mtime_ns, "data": data}
+    return data
+
+
 def load_projects():
-    projects = json.loads(PROJECTS_FILE.read_text())
-    return projects
+    return _read_cached_json(PROJECTS_FILE)
 
 
 def get_home_projects():
@@ -89,3 +119,11 @@ def get_project(slug):
 
 def get_project_slugs():
     return {project["slug"] for project in load_projects()}
+
+
+def load_public_knowledge():
+    return _read_cached_text(KRISH_PUBLIC_FILE)
+
+
+def load_private_knowledge():
+    return _read_cached_text(KRISH_PRIVATE_FILE)
