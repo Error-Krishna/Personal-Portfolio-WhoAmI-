@@ -78,6 +78,14 @@ CSRF_TRUSTED_ORIGINS = _get_list_env(
     else [],
 )
 
+render_hostname = os.environ.get("RENDER_EXTERNAL_HOSTNAME", "").strip()
+if render_hostname and render_hostname not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(render_hostname)
+
+render_origin = f"https://{render_hostname}" if render_hostname else ""
+if render_origin and render_origin not in CSRF_TRUSTED_ORIGINS:
+    CSRF_TRUSTED_ORIGINS.append(render_origin)
+
 if DJANGO_ENV == "production" and not ALLOWED_HOSTS:
     raise ImproperlyConfigured(
         "DJANGO_ALLOWED_HOSTS must be configured in .env for production."

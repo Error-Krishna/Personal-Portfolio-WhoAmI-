@@ -134,6 +134,10 @@ def assistant_page(request):
     return render(request, "assistant.html", {})
 
 
+def health_check(request):
+    return JsonResponse({"status": "ok"})
+
+
 @require_POST
 def chat_api(request):
     """Handle assistant chat messages and return a JSON reply."""

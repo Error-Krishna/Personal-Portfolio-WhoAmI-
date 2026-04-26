@@ -1,22 +1,22 @@
 # Krishna Goyal Portfolio
 
-A Django-based portfolio and AI assistant project with file-driven content, static export support, and a deployment-ready `.env` configuration model.
+A Django-based portfolio and AI assistant project with file-driven content, live chat support, and deployment-ready configuration for both local development and Render Web Service hosting.
 
-## What Changed
+## Highlights
 
-- Environment variables are loaded from the project `.env` file at startup.
-- Secrets and credentials are no longer hardcoded in Python or frontend templates.
-- Development and production modes are controlled from `.env`, not by editing source code.
-- The assistant admin passphrase is now validated server-side and is no longer exposed in page source.
-- The README and deployment flow now assume a safer, production-ready setup.
+- Portfolio pages driven by `content/projects.json`
+- Public and private assistant knowledge files
+- Live assistant routes at `/assistant/` and `/api/chat/`
+- Render Web Service support for full Django deployment
+- Optional static export for portfolio-only hosting
 
 ## Stack
 
 - Django 5
+- Gunicorn
 - WhiteNoise
 - Groq API
 - Vanilla JavaScript
-- File-driven content in `content/`
 
 ## Project Structure
 
@@ -28,6 +28,7 @@ content/
 main/
   content.py
   views.py
+  urls.py
   tests.py
   management/commands/buildstatic.py
 portfolio_core/
@@ -35,38 +36,34 @@ portfolio_core/
 templates/
 static/
 .env.example
+render.yaml
 ```
 
-## Configuration Model
+## Configuration
 
-The app reads configuration from:
+Local development reads settings from:
 
 ```text
 .env
 ```
 
-Do not commit `.env`. Copy the example file first:
+Create it from the example:
 
 ```bash
 cp .env.example .env
 ```
 
+For local work, uncomment the development section in `.env.example` and paste it into `.env`.
+
 ## Local Development
 
-1. Create and activate a virtual environment.
-2. Install dependencies:
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Copy the example env and fill in real values:
-
-```bash
-cp .env.example .env
-```
-
-4. Start the development server:
+Start the server:
 
 ```bash
 python3 manage.py runserver 127.0.0.1:8000
@@ -78,126 +75,59 @@ Open:
 http://127.0.0.1:8000/
 ```
 
-## Switching Between Development And Production
+## Assistant Modes
 
-Switching modes is done only through `.env`.
+- Public mode reads from `content/krish_public.md`
+- Admin mode can access `content/krish_private.md`
+- Admin unlock happens server-side and persists in the Django session
 
-### Development
+## Production Deployment
 
-Use:
+For a live assistant in production, deploy this as a Render Web Service, not a static site.
 
-```dotenv
-DJANGO_ENV=development
-DJANGO_DEBUG=true
-DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost
-DJANGO_CSRF_TRUSTED_ORIGINS=http://127.0.0.1:8000,http://localhost:8000
-DJANGO_SESSION_COOKIE_SECURE=false
-DJANGO_CSRF_COOKIE_SECURE=false
-DJANGO_SECURE_SSL_REDIRECT=false
-DJANGO_SECURE_HSTS_SECONDS=0
-```
+This repo includes:
 
-### Production
+- [render.yaml](/Users/krishnagoyal/Desktop/krishna_portfolio/render.yaml)
+- [Procfile](/Users/krishnagoyal/Desktop/krishna_portfolio/Procfile)
+- [build.sh](/Users/krishnagoyal/Desktop/krishna_portfolio/build.sh)
+- `/health/` health check endpoint
 
-Use:
-
-```dotenv
-DJANGO_ENV=production
-DJANGO_DEBUG=false
-DJANGO_ALLOWED_HOSTS=your-domain.com,www.your-domain.com
-DJANGO_CSRF_TRUSTED_ORIGINS=https://your-domain.com,https://www.your-domain.com
-DJANGO_SESSION_COOKIE_SECURE=true
-DJANGO_CSRF_COOKIE_SECURE=true
-DJANGO_SECURE_SSL_REDIRECT=true
-DJANGO_SECURE_HSTS_SECONDS=31536000
-DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS=true
-DJANGO_SECURE_HSTS_PRELOAD=true
-```
-
-No code changes are required when switching environments.
-
-## Required Environment Variables
+### Required production environment variables
 
 - `DJANGO_SECRET_KEY`
 - `GROQ_API_KEY`
 - `KRISH_ADMIN_PASSPHRASE`
-
-## Optional Environment Variables
-
-- `DJANGO_ENV`
-- `DJANGO_DEBUG`
 - `DJANGO_ALLOWED_HOSTS`
 - `DJANGO_CSRF_TRUSTED_ORIGINS`
-- `DJANGO_LOG_LEVEL`
-- `DJANGO_SQLITE_NAME`
-- `DJANGO_LANGUAGE_CODE`
-- `DJANGO_TIME_ZONE`
-- `GROQ_MODEL`
-- `GROQ_MAX_TOKENS`
-- `GROQ_TEMPERATURE`
 
-## Assistant Security Notes
+Render can provide these through its dashboard or via `render.yaml` for non-secret defaults.
 
-- Public mode uses only `content/krish_public.md`
-- Admin mode can access `content/krish_private.md`
-- The admin passphrase is checked on the server and is not exposed to the browser
-- The passphrase unlock persists in the Django session for that browser session
+## Static Export
 
-## Content Editing
+This project still supports a portfolio-only static export:
 
-### Projects
+```bash
+bash build_static.sh
+```
 
-Edit:
-
-- `content/projects.json`
-
-### Public assistant knowledge
-
-Edit:
-
-- `content/krish_public.md`
-
-### Private assistant knowledge
-
-Edit:
-
-- `content/krish_private.md`
+Use that only when you do not need the live chat API in production.
 
 ## Checks
 
-Run:
+Run before pushing:
 
 ```bash
 python3 manage.py check
 python3 manage.py test
 ```
 
-## Static Export
+## Security Notes
 
-Build the static version with:
+- `.env` is gitignored and should never be committed
+- Do not commit real API keys or admin passphrases
+- Rotate any credential that has been exposed in screenshots, commits, or chats
+- Production should keep HTTPS, secure cookies, and HSTS enabled
 
-```bash
-bash build_static.sh
-```
+## More Deployment Details
 
-This generates:
-
-- `dist/index.html`
-- `dist/project/<slug>/index.html`
-- `dist/static/...`
-
-## Deployment Notes
-
-This project can be deployed in two ways:
-
-1. As a Django app with Gunicorn
-2. As a static export using `buildstatic`
-
-For Django deployment, make sure your production `.env` is present on the server and includes the correct hosts, trusted origins, and secure cookie settings.
-
-## Security Checklist
-
-- Keep `.env` out of git
-- Never commit real API keys or admin passphrases
-- Rotate any secret that was previously exposed in local files, screenshots, or commits
-- Use production-only secure cookies and HTTPS settings in deployment
+See [DEPLOYMENT.md](/Users/krishnagoyal/Desktop/krishna_portfolio/DEPLOYMENT.md) for the full Render setup.

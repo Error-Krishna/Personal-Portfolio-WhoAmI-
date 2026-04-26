@@ -1,30 +1,56 @@
 # Deployment Guide
 
-## Pre-Deployment Checklist
+## Recommended Production Mode
 
-- Copy `.env.example` to `.env`
-- Set `DJANGO_ENV=production`
-- Set `DJANGO_DEBUG=false`
-- Set a real `DJANGO_SECRET_KEY`
-- Set a real `GROQ_API_KEY`
-- Set a private `KRISH_ADMIN_PASSPHRASE`
-- Set `DJANGO_ALLOWED_HOSTS`
-- Set `DJANGO_CSRF_TRUSTED_ORIGINS`
-- Keep secure cookie and SSL settings enabled
+Use Render Web Service for the live site if you want these routes to work in production:
 
-## Production `.env` Example
+- `/assistant/`
+- `/api/chat/`
+
+A static deployment cannot serve the Django chat API.
+
+## Render Web Service Setup
+
+This repo now includes:
+
+- [render.yaml](/Users/krishnagoyal/Desktop/krishna_portfolio/render.yaml)
+- [Procfile](/Users/krishnagoyal/Desktop/krishna_portfolio/Procfile)
+- [build.sh](/Users/krishnagoyal/Desktop/krishna_portfolio/build.sh)
+- WhiteNoise static file support
+- `/health/` for health checks
+
+### Render settings
+
+- Service type: `Web Service`
+- Runtime: `Python`
+- Build command: `bash build.sh`
+- Start command: `gunicorn portfolio_core.wsgi:application --bind 0.0.0.0:$PORT --workers 3 --log-file -`
+- Health check path: `/health/`
+
+## Environment Variables On Render
+
+Set these in the Render dashboard or let `render.yaml` define the non-secret defaults:
+
+### Required secrets
+
+- `DJANGO_SECRET_KEY`
+- `GROQ_API_KEY`
+- `KRISH_ADMIN_PASSPHRASE`
+
+### Required production config
+
+- `DJANGO_ALLOWED_HOSTS`
+- `DJANGO_CSRF_TRUSTED_ORIGINS`
+
+### Recommended production values
 
 ```dotenv
 DJANGO_ENV=production
 DJANGO_DEBUG=false
 DJANGO_LOG_LEVEL=INFO
 
-DJANGO_SECRET_KEY=replace-with-a-long-random-secret
-GROQ_API_KEY=replace-with-your-groq-api-key
-KRISH_ADMIN_PASSPHRASE=replace-with-a-private-admin-passphrase
-
-DJANGO_ALLOWED_HOSTS=your-domain.com,www.your-domain.com
-DJANGO_CSRF_TRUSTED_ORIGINS=https://your-domain.com,https://www.your-domain.com
+DJANGO_ALLOWED_HOSTS=krishna-portfolio-v7ow.onrender.com
+DJANGO_CSRF_TRUSTED_ORIGINS=https://krishna-portfolio-v7ow.onrender.com
 
 DJANGO_SESSION_COOKIE_SECURE=true
 DJANGO_CSRF_COOKIE_SECURE=true
@@ -34,41 +60,42 @@ DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS=true
 DJANGO_SECURE_HSTS_PRELOAD=true
 ```
 
-## Django App Deployment
+## Local `.env` vs Render Environment Variables
 
-This repo already includes:
+- Local development uses your local `.env`
+- Render production uses environment variables configured in Render
 
-- `Procfile`
-- `gunicorn`
-- WhiteNoise-compatible static settings
+The app supports both:
 
-Typical steps:
+- it loads `.env` locally
+- it also respects environment variables already provided by the hosting platform
+
+## What `build.sh` Does
+
+`build.sh` now runs:
 
 ```bash
-pip install -r requirements.txt
+python3 manage.py migrate --noinput
 python3 manage.py collectstatic --noinput
-gunicorn portfolio_core.wsgi:application --log-file -
 ```
 
-## Static Export Deployment
+This prepares the deployed app before startup.
 
-To build the static site:
+## Validation Before Deploy
+
+Run locally:
+
+```bash
+python3 manage.py check
+python3 manage.py test
+```
+
+## Optional Static Export
+
+You can still build a static version with:
 
 ```bash
 bash build_static.sh
 ```
 
-Deploy the generated `dist/` folder to a static host such as:
-
-- Cloudflare Pages
-- Render Static Site
-
-## Validation Before Deploy
-
-Run:
-
-```bash
-python3 manage.py check
-python3 manage.py test
-python3 manage.py buildstatic
-```
+But that mode is only for a portfolio-only deployment and will not support the live assistant API.
