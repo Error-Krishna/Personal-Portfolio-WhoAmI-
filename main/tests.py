@@ -25,6 +25,12 @@ class PortfolioViewsTests(TestCase):
 
         self.assertEqual(response.status_code, 404)
 
+    def test_health_check_returns_ok(self):
+        response = self.client.get(reverse("health_check"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertJSONEqual(response.content, {"status": "ok"})
+
 
 @override_settings(SECURE_SSL_REDIRECT=False)
 class AssistantViewTests(TestCase):
