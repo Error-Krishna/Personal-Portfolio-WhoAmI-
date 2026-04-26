@@ -1,192 +1,203 @@
 # Krishna Goyal Portfolio
 
-An interactive personal portfolio built with Django templates, Tailwind CDN styling, custom JavaScript, and a content-first workflow powered by JSON.
+A Django-based portfolio and AI assistant project with file-driven content, static export support, and a deployment-ready `.env` configuration model.
 
-The public site no longer depends on database entries for project content. Instead, portfolio data is maintained in a single file and can be exported into a static site for fast, free hosting.
+## What Changed
 
-## Highlights
+- Environment variables are loaded from the project `.env` file at startup.
+- Secrets and credentials are no longer hardcoded in Python or frontend templates.
+- Development and production modes are controlled from `.env`, not by editing source code.
+- The assistant admin passphrase is now validated server-side and is no longer exposed in page source.
+- The README and deployment flow now assume a safer, production-ready setup.
 
-- Responsive portfolio homepage with animated hero, floating navigation, project showcase, about section, tech stack, and timeline
-- File-driven project content via `content/projects.json`
-- Project detail pages generated from content data instead of database records
-- Static-export workflow for fast hosting on platforms like Render Static Sites or Cloudflare Pages
-- Django still available locally as the authoring and preview environment
-
-## Tech Stack
+## Stack
 
 - Django 5
-- Tailwind via CDN
+- WhiteNoise
+- Groq API
 - Vanilla JavaScript
-- Three.js
-- WhiteNoise-compatible static handling
+- File-driven content in `content/`
 
 ## Project Structure
 
 ```text
 content/
-  projects.json          # Main content source for project cards and detail pages
+  projects.json
+  krish_public.md
+  krish_private.md
 main/
-  content.py             # Content loader and homepage enrichment helpers
-  views.py               # Public routes
-  management/commands/
-    buildstatic.py       # Static export command
+  content.py
+  views.py
+  tests.py
+  management/commands/buildstatic.py
 portfolio_core/
-  settings.py            # Django settings
+  settings.py
 templates/
-  home.html
-  layout.html
-  project_detail.html
-  project_video_gallery.html
 static/
-  js/tech-stack-3d.js
+.env.example
 ```
 
-## How Content Works Now
+## Configuration Model
 
-The public portfolio reads from:
+The app reads configuration from:
 
-- `content/projects.json`
+```text
+.env
+```
 
-Each project entry can control:
+Do not commit `.env`. Copy the example file first:
 
-- `slug`
-- `title`
-- `tagline`
-- `category`
-- `tech_stack`
-- `detailed_description`
-- `live_url`
-- `github_url`
-- `featured_on_home`
-- `show_detail_link`
-- `home_badge`
-- `home_summary`
-- `home_cta_label`
-
-### Editing a Project
-
-To add or edit a project:
-
-1. Open `content/projects.json`
-2. Update an existing object or add a new one
-3. If you want it on the homepage showcase, set:
-   - `"featured_on_home": true`
-4. If you want its detail page linked from the homepage, set:
-   - `"show_detail_link": true`
-5. Commit and redeploy
-
-### Adding a New Homepage Project
-
-The homepage showcase renders in the same order as the featured entries appear in `content/projects.json`.
-
-If you add a new featured project, it will automatically:
-
-- appear in the homepage showcase
-- get a project detail page at `/project/<slug>/`
+```bash
+cp .env.example .env
+```
 
 ## Local Development
 
-Install dependencies:
+1. Create and activate a virtual environment.
+2. Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the Django development server:
+3. Copy the example env and fill in real values:
 
 ```bash
-DJANGO_DEBUG=true python manage.py runserver 127.0.0.1:8000
+cp .env.example .env
 ```
 
-Visit:
+4. Start the development server:
+
+```bash
+python3 manage.py runserver 127.0.0.1:8000
+```
+
+Open:
 
 ```text
 http://127.0.0.1:8000/
 ```
 
-## Checks and Tests
+## Switching Between Development And Production
 
-Run framework checks:
+Switching modes is done only through `.env`.
 
-```bash
-python manage.py check
+### Development
+
+Use:
+
+```dotenv
+DJANGO_ENV=development
+DJANGO_DEBUG=true
+DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost
+DJANGO_CSRF_TRUSTED_ORIGINS=http://127.0.0.1:8000,http://localhost:8000
+DJANGO_SESSION_COOKIE_SECURE=false
+DJANGO_CSRF_COOKIE_SECURE=false
+DJANGO_SECURE_SSL_REDIRECT=false
+DJANGO_SECURE_HSTS_SECONDS=0
 ```
 
-Run tests:
+### Production
 
-```bash
-python manage.py test
+Use:
+
+```dotenv
+DJANGO_ENV=production
+DJANGO_DEBUG=false
+DJANGO_ALLOWED_HOSTS=your-domain.com,www.your-domain.com
+DJANGO_CSRF_TRUSTED_ORIGINS=https://your-domain.com,https://www.your-domain.com
+DJANGO_SESSION_COOKIE_SECURE=true
+DJANGO_CSRF_COOKIE_SECURE=true
+DJANGO_SECURE_SSL_REDIRECT=true
+DJANGO_SECURE_HSTS_SECONDS=31536000
+DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS=true
+DJANGO_SECURE_HSTS_PRELOAD=true
 ```
 
-## Static Export Workflow
+No code changes are required when switching environments.
 
-This project supports generating a static build for fast hosting.
+## Required Environment Variables
 
-Build the static site:
+- `DJANGO_SECRET_KEY`
+- `GROQ_API_KEY`
+- `KRISH_ADMIN_PASSPHRASE`
+
+## Optional Environment Variables
+
+- `DJANGO_ENV`
+- `DJANGO_DEBUG`
+- `DJANGO_ALLOWED_HOSTS`
+- `DJANGO_CSRF_TRUSTED_ORIGINS`
+- `DJANGO_LOG_LEVEL`
+- `DJANGO_SQLITE_NAME`
+- `DJANGO_LANGUAGE_CODE`
+- `DJANGO_TIME_ZONE`
+- `GROQ_MODEL`
+- `GROQ_MAX_TOKENS`
+- `GROQ_TEMPERATURE`
+
+## Assistant Security Notes
+
+- Public mode uses only `content/krish_public.md`
+- Admin mode can access `content/krish_private.md`
+- The admin passphrase is checked on the server and is not exposed to the browser
+- The passphrase unlock persists in the Django session for that browser session
+
+## Content Editing
+
+### Projects
+
+Edit:
+
+- `content/projects.json`
+
+### Public assistant knowledge
+
+Edit:
+
+- `content/krish_public.md`
+
+### Private assistant knowledge
+
+Edit:
+
+- `content/krish_private.md`
+
+## Checks
+
+Run:
+
+```bash
+python3 manage.py check
+python3 manage.py test
+```
+
+## Static Export
+
+Build the static version with:
 
 ```bash
 bash build_static.sh
 ```
 
-Or directly:
-
-```bash
-python manage.py buildstatic
-```
-
-The generated output goes to:
+This generates:
 
 - `dist/index.html`
 - `dist/project/<slug>/index.html`
 - `dist/static/...`
 
-## Recommended Hosting
+## Deployment Notes
 
-### Best free and fast option
+This project can be deployed in two ways:
 
-- Cloudflare Pages
+1. As a Django app with Gunicorn
+2. As a static export using `buildstatic`
 
-### Good alternative
+For Django deployment, make sure your production `.env` is present on the server and includes the correct hosts, trusted origins, and secure cookie settings.
 
-- Render Static Site
+## Security Checklist
 
-For both, use:
-
-- Build command: `bash build_static.sh`
-- Output directory: `dist`
-
-## Render Static Site Setup
-
-If you deploy on Render as a static site:
-
-1. Create a new Static Site
-2. Connect the GitHub repository
-3. Configure:
-   - Build command: `bash build_static.sh`
-   - Publish directory: `dist`
-4. Deploy
-
-## Environment Variables
-
-For the static export workflow, environment variables are generally minimal.
-
-If you still run the Django app directly in preview/development, you can use:
-
-- `DJANGO_DEBUG=true` locally
-
-Example values are in:
-
-- `.env.example`
-
-## Notes
-
-- The public portfolio no longer relies on database entries for project content
-- Existing Django models remain in the repo, but the public-facing project pages now use file content
-- This makes updates simpler and hosting faster
-
-## Future Improvements
-
-- Move non-project homepage content into a dedicated JSON content file too
-- Add a content schema validator for `projects.json`
-- Add generated Open Graph metadata per project
-- Add a lightweight AI/about-me assistant backed by a safe public knowledge file
+- Keep `.env` out of git
+- Never commit real API keys or admin passphrases
+- Rotate any secret that was previously exposed in local files, screenshots, or commits
+- Use production-only secure cookies and HTTPS settings in deployment

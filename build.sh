@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -o errexit
 
-python manage.py collectstatic --noinput
+python3 manage.py collectstatic --noinput
