@@ -46,6 +46,10 @@
             --accent-purple: #A06EE7;
             --text-light: #E6E6E6;
             --text-secondary: #A0AEC0;
+            --motion-fast: 180ms;
+            --motion-base: 320ms;
+            --motion-slow: 650ms;
+            --motion-spring: cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         body {
@@ -53,12 +57,15 @@
             background-image: linear-gradient(160deg, var(--bg-secondary) 0%, var(--bg-primary) 74%);
             color: var(--text-light);
             font-family: 'Inter', sans-serif;
+            transition: background-color var(--motion-slow) ease, color var(--motion-base) ease;
         }
 
         .gradient-text {
             background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-size: 160% 160%;
+            transition: filter var(--motion-base) ease, transform var(--motion-base) var(--motion-spring);
         }
 
         .active-link {
@@ -73,11 +80,13 @@
             box-shadow: 0 18px 55px rgba(0, 0, 0, 0.28);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
+            transition: transform var(--motion-base) var(--motion-spring), box-shadow var(--motion-base) ease, border-color var(--motion-base) ease, background var(--motion-base) ease;
         }
 
         .floating-nav-link {
             position: relative;
             overflow: hidden;
+            transition: transform var(--motion-fast) ease, color var(--motion-base) ease, background-color var(--motion-base) ease, box-shadow var(--motion-base) ease;
         }
 
         .floating-nav-link::before {
@@ -86,22 +95,71 @@
             inset: 0;
             background: linear-gradient(135deg, rgba(0, 240, 255, 0.18), rgba(160, 110, 231, 0.18));
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity var(--motion-base) ease;
         }
 
         .floating-nav-link:hover::before {
             opacity: 1;
         }
 
+        .floating-nav-link:hover {
+            transform: translateY(-1px);
+        }
+
         .floating-nav-link > span {
             position: relative;
             z-index: 1;
+        }
+
+        main {
+            animation: siteFadeIn 0.8s var(--motion-spring) both;
+        }
+
+        @keyframes siteFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        :is(a, button, input, textarea, select, summary, img, iframe, .gradient-text) {
+            transition:
+                color var(--motion-base) ease,
+                background-color var(--motion-base) ease,
+                border-color var(--motion-base) ease,
+                opacity var(--motion-base) ease,
+                transform var(--motion-fast) ease,
+                box-shadow var(--motion-base) ease,
+                filter var(--motion-base) ease;
+        }
+
+        :is(button, [role="button"], a[href], .floating-nav-shell):hover {
+            will-change: transform;
+        }
+
+        :is(button, [role="button"], a[href]):active {
+            transform: scale(0.985);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition-duration: 0.01ms !important;
+                transition-delay: 0ms !important;
+                scroll-behavior: auto !important;
+            }
         }
     </style>
 
     {% block CSSLinks %}{% endblock %}
 </head>
-<body class="bg-bg-primary text-text-light scroll-smooth overflow-x-hidden">
+<body class="bg-bg-primary text-text-light scroll-smooth overflow-x-hidden {% block body_classes %}{% endblock %}">
 
     <nav class="fixed top-3 sm:top-4 left-1/2 z-50 w-[min(92vw,860px)] -translate-x-1/2">
         <div class="hidden lg:flex items-center justify-center">
@@ -149,14 +207,16 @@
         </div>
     </nav>
 
-    <main class="pt-20 sm:pt-28 min-h-screen">
+    <main class="{% block main_classes %}pt-20 sm:pt-28 min-h-screen{% endblock %}">
         {% block content %}
         {% endblock %}
     </main>
 
+    {% block footer %}
     <footer class="bg-bg-secondary py-8 text-center text-gray-500 text-sm">
         <p>&copy; {% now "Y" %} Krishna Goyal. All rights reserved.</p>
     </footer>
+    {% endblock %}
 
     <!-- Mobile Menu Script -->
     <script>
@@ -178,6 +238,14 @@
         });
     </script>
 
+    <script>
+      window.KRISH_CHAT_CONFIG = {
+        chatApiUrl: "{% url 'chat_api' %}",
+        assistantUrl: "{% url 'assistant' %}",
+        assistantStatsUrl: "{% url 'assistant_stats_api' %}"
+      };
+    </script>
+    <script src="{% static 'js/krish-chat.js' %}"></script>
     {% block scripts %}{% endblock %}
     {% if request.resolver_match and request.resolver_match.url_name != 'assistant' %}
     <div id="krish-widget" style="position:fixed;bottom:80px;right:1.5rem;z-index:9998;display:flex;flex-direction:column;align-items:flex-end;gap:0.75rem;">
@@ -209,17 +277,24 @@
 
     <script>
     (function() {
+      const store = window.KrishChatStore;
       const toggleBtn = document.getElementById("krish-toggle");
       const bubble = document.getElementById("krish-bubble");
       const messagesEl = document.getElementById("widget-messages");
       const inputEl = document.getElementById("widget-input");
       const sendBtn = document.getElementById("widget-send");
       const notifDot = document.getElementById("krish-notif");
+      const intro = "Hi! I'm Krish, Krishna's AI secretary. Ask me anything about Krishna's work, projects, or background.";
 
       let isOpen = false;
-      let introduced = false;
-      let widgetHistory = [];
-      let isAdmin = false;
+      let isTyping = false;
+
+      if (!store || !toggleBtn || !bubble || !messagesEl || !inputEl || !sendBtn || !notifDot) {
+        return;
+      }
+
+      store.trackVisit();
+      store.ensureIntro(intro);
 
       function getCookie(name) {
         const cookies = document.cookie ? document.cookie.split(";") : [];
@@ -232,46 +307,43 @@
         return "";
       }
 
-      function getTime() {
-        return new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-      }
-
       function escapeHtml(text) {
         const div = document.createElement("div");
         div.textContent = text;
         return div.innerHTML;
       }
 
-      function appendMsg(role, text) {
-        const isBot = role === "bot";
-        const div = document.createElement("div");
-        div.style.cssText = "display:flex;flex-direction:column;align-items:" + (isBot ? "flex-start" : "flex-end") + ";gap:2px;";
-        div.innerHTML = `
-          <div style="max-width:85%;padding:0.55rem 0.8rem;font-size:0.82rem;line-height:1.5;border-radius:${isBot ? "12px 12px 12px 3px" : "12px 12px 3px 12px"};background:${isBot ? "rgba(0,240,255,0.07)" : "rgba(160,110,231,0.18)"};border:1px solid ${isBot ? "rgba(0,240,255,0.18)" : "rgba(160,110,231,0.3)"};color:#E6E6E6;">${escapeHtml(text).replace(/\n/g, "<br>")}</div>
-          <div style="font-size:0.65rem;color:rgba(230,230,230,0.27);padding:0 4px;">${getTime()}</div>
-        `;
-        messagesEl.appendChild(div);
-        messagesEl.scrollTop = messagesEl.scrollHeight;
+      function formatTime(timestamp) {
+        return new Date(timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
       }
 
-      function showTyping() {
-        const div = document.createElement("div");
-        div.id = "w-typing";
-        div.style.cssText = "display:flex;gap:5px;align-items:center;padding:0.55rem 0.8rem;background:rgba(0,240,255,0.07);border:1px solid rgba(0,240,255,0.18);border-radius:12px 12px 12px 3px;width:fit-content;";
-        div.innerHTML = `
-          <div style="width:6px;height:6px;border-radius:50%;background:rgba(0,240,255,0.6);animation:typingBounce 1.2s ease-in-out infinite;"></div>
-          <div style="width:6px;height:6px;border-radius:50%;background:rgba(0,240,255,0.6);animation:typingBounce 1.2s ease-in-out infinite 0.2s;"></div>
-          <div style="width:6px;height:6px;border-radius:50%;background:rgba(0,240,255,0.6);animation:typingBounce 1.2s ease-in-out infinite 0.4s;"></div>
-        `;
-        messagesEl.appendChild(div);
-        messagesEl.scrollTop = messagesEl.scrollHeight;
-      }
+      function renderMessages(messages) {
+        messagesEl.innerHTML = "";
 
-      function hideTyping() {
-        const el = document.getElementById("w-typing");
-        if (el) {
-          el.remove();
+        messages.forEach((message) => {
+          const isBot = message.role !== "user";
+          const div = document.createElement("div");
+          div.style.cssText = "display:flex;flex-direction:column;align-items:" + (isBot ? "flex-start" : "flex-end") + ";gap:2px;";
+          div.innerHTML = `
+            <div style="max-width:85%;padding:0.55rem 0.8rem;font-size:0.82rem;line-height:1.5;border-radius:${isBot ? "12px 12px 12px 3px" : "12px 12px 3px 12px"};background:${isBot ? "rgba(0,240,255,0.07)" : "rgba(160,110,231,0.18)"};border:1px solid ${isBot ? "rgba(0,240,255,0.18)" : "rgba(160,110,231,0.3)"};color:#E6E6E6;">${escapeHtml(message.content).replace(/\n/g, "<br>")}</div>
+            <div style="font-size:0.65rem;color:rgba(230,230,230,0.27);padding:0 4px;">${formatTime(message.timestamp)}</div>
+          `;
+          messagesEl.appendChild(div);
+        });
+
+        if (isTyping) {
+          const typingEl = document.createElement("div");
+          typingEl.id = "w-typing";
+          typingEl.style.cssText = "display:flex;gap:5px;align-items:center;padding:0.55rem 0.8rem;background:rgba(0,240,255,0.07);border:1px solid rgba(0,240,255,0.18);border-radius:12px 12px 12px 3px;width:fit-content;";
+          typingEl.innerHTML = `
+            <div style="width:6px;height:6px;border-radius:50%;background:rgba(0,240,255,0.6);animation:typingBounce 1.2s ease-in-out infinite;"></div>
+            <div style="width:6px;height:6px;border-radius:50%;background:rgba(0,240,255,0.6);animation:typingBounce 1.2s ease-in-out infinite 0.2s;"></div>
+            <div style="width:6px;height:6px;border-radius:50%;background:rgba(0,240,255,0.6);animation:typingBounce 1.2s ease-in-out infinite 0.4s;"></div>
+          `;
+          messagesEl.appendChild(typingEl);
         }
+
+        messagesEl.scrollTop = messagesEl.scrollHeight;
       }
 
       function setOpen(nextOpen) {
@@ -284,67 +356,59 @@
         }
       }
 
-      function maybeIntroduce() {
-        if (introduced) {
-          return;
-        }
-        introduced = true;
-        const intro = "Hi! I'm Krish, Krishna's AI secretary. Ask me anything about his work, projects, or background.";
-        appendMsg("bot", intro);
-        widgetHistory.push({ role: "assistant", content: intro });
-      }
-
       async function sendMessage(text) {
-        if (!text.trim()) {
+        const trimmed = text.trim();
+        if (!trimmed) {
           return;
         }
 
-        appendMsg("user", text);
-        widgetHistory.push({ role: "user", content: text });
+        store.addMessage("user", trimmed);
         inputEl.value = "";
         sendBtn.disabled = true;
-        showTyping();
+        isTyping = true;
+        renderMessages(store.getState().messages);
 
         try {
-          const response = await fetch("{% url 'chat_api' %}", {
+          const response = await fetch(window.KRISH_CHAT_CONFIG.chatApiUrl, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
               "X-CSRFToken": getCookie("csrftoken"),
             },
             body: JSON.stringify({
-              messages: widgetHistory,
-              is_admin: isAdmin,
-              session_info: "Visitor on portfolio page.",
+              messages: store.getConversationPayload(),
+              is_admin: store.getState().isAdmin,
+              session_info: store.getSessionInfo(),
             }),
           });
           const data = await response.json();
-          hideTyping();
-          const reply = data.error ? "Sorry, something went wrong." : data.reply;
           if (data.is_admin) {
-            isAdmin = true;
+            store.setAdmin(true);
           }
-          appendMsg("bot", reply);
-          widgetHistory.push({ role: "assistant", content: reply });
+          store.addMessage("assistant", data.error ? "Sorry, something went wrong." : data.reply);
         } catch (error) {
-          hideTyping();
-          appendMsg("bot", "Connection error. Please try again.");
+          store.addMessage("assistant", "Connection error. Please try again.");
+        } finally {
+          isTyping = false;
+          sendBtn.disabled = false;
+          renderMessages(store.getState().messages);
         }
-
-        sendBtn.disabled = false;
       }
+
+      store.subscribe((state) => {
+        renderMessages(state.messages);
+        if (!isOpen && state.messages.length > 1) {
+          notifDot.style.display = "";
+        }
+      });
 
       toggleBtn.addEventListener("click", () => {
         setOpen(!isOpen);
-        if (isOpen) {
-          maybeIntroduce();
-        }
       });
 
       setTimeout(() => {
         notifDot.style.display = "";
         setOpen(true);
-        maybeIntroduce();
       }, 3000);
 
       sendBtn.addEventListener("click", () => sendMessage(inputEl.value));

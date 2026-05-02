@@ -3,38 +3,98 @@
 
 {% block title %}<title>Krish - Krishna's AI Secretary</title>{% endblock %}
 {% block assistant_active %}active-link{% endblock %}
+{% block body_classes %}assistant-body{% endblock %}
+{% block main_classes %}assistant-main{% endblock %}
+{% block footer %}{% endblock %}
 
 {% block CSSLinks %}
 <style>
+  body.assistant-body {
+    overflow: hidden;
+  }
+
+  body.assistant-body .assistant-main {
+    height: 100dvh;
+    min-height: 0;
+    padding-top: clamp(5rem, 8vw, 7rem);
+    box-sizing: border-box;
+  }
+
   .assistant-wrap {
-    display: flex;
-    min-height: calc(100vh - 80px);
-    max-width: 1200px;
+    display: grid;
+    grid-template-columns: 320px minmax(0, 1fr);
+    height: 100%;
+    min-height: 0;
+    max-width: 1280px;
     margin: 0 auto;
-    gap: 1.5rem;
-    padding: 1.5rem 1rem 2rem;
+    gap: 1.25rem;
+    padding: 1rem 1rem 1.25rem;
+    position: relative;
+    isolation: isolate;
+    transition: transform 0.8s ease, filter 0.8s ease;
+  }
+
+  .assistant-wrap.admin-live {
+    filter: saturate(1.08);
+  }
+
+  .assistant-wrap.admin-transition {
+    transform: scale(1.008);
+    filter: saturate(1.18) brightness(1.04);
+  }
+
+  .admin-transition-flash {
+    position: absolute;
+    inset: 0;
+    border-radius: 32px;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(0, 240, 255, 0.24), transparent 24%),
+      radial-gradient(circle at 80% 18%, rgba(160, 110, 231, 0.3), transparent 26%),
+      linear-gradient(135deg, rgba(0, 240, 255, 0.08), rgba(160, 110, 231, 0.14));
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.98);
+    z-index: 0;
+  }
+
+  .admin-transition-flash.active {
+    animation: adminFlash 1.15s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes adminFlash {
+    0% { opacity: 0; transform: scale(0.97); }
+    22% { opacity: 1; transform: scale(1.01); }
+    100% { opacity: 0; transform: scale(1.04); }
   }
 
   .office-panel {
-    width: 300px;
-    flex-shrink: 0;
-    background: #0E1318;
-    border: 1px solid rgba(48, 54, 61, 0.5);
-    border-radius: 24px;
+    min-height: 0;
+    background:
+      radial-gradient(circle at top, rgba(0, 240, 255, 0.09), transparent 55%),
+      linear-gradient(180deg, rgba(14, 19, 24, 0.98), rgba(8, 12, 18, 0.96));
+    border: 1px solid rgba(76, 88, 102, 0.45);
+    border-radius: 28px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 1.5rem;
-    gap: 1rem;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 1.4rem;
+    gap: 1.25rem;
     position: relative;
     overflow: hidden;
-    transition: border-color 0.5s, box-shadow 0.5s;
+    z-index: 1;
+    transition: border-color 0.75s ease, box-shadow 0.75s ease, background 0.75s ease, transform 0.75s ease;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
   }
 
   .office-panel.admin-active {
-    border-color: rgba(160, 110, 231, 0.6);
-    box-shadow: 0 0 30px rgba(160, 110, 231, 0.1);
+    background:
+      radial-gradient(circle at 12% 12%, rgba(0, 240, 255, 0.16), transparent 34%),
+      radial-gradient(circle at 85% 18%, rgba(160, 110, 231, 0.22), transparent 32%),
+      linear-gradient(180deg, rgba(22, 14, 35, 0.98), rgba(9, 10, 24, 0.99));
+    border-color: rgba(160, 110, 231, 0.58);
+    box-shadow: 0 30px 90px rgba(84, 32, 130, 0.28);
+    transform: translateY(-2px);
   }
 
   .office-panel::before {
@@ -47,15 +107,61 @@
     height: 220px;
     background: radial-gradient(circle, rgba(0, 240, 255, 0.08) 0%, transparent 70%);
     pointer-events: none;
+    transition: transform 0.8s ease, opacity 0.8s ease, background 0.8s ease;
   }
 
   .office-panel.admin-active::before {
-    background: radial-gradient(circle, rgba(160, 110, 231, 0.12) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(160, 110, 231, 0.18) 0%, transparent 72%);
+    transform: translateX(-50%) scale(1.2);
+  }
+
+  .office-panel::after {
+    content: "";
+    position: absolute;
+    inset: auto -20% 10% auto;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05), transparent 68%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: translate3d(20px, 20px, 0);
+  }
+
+  .office-panel.admin-active::after {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .office-top {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .office-bottom {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(18px);
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  .office-panel.admin-active .office-bottom {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 260px;
+    transition: opacity 0.55s ease 0.22s, transform 0.55s ease 0.22s, max-height 0.55s ease 0.22s;
   }
 
   .krish-avatar {
-    width: 90px;
-    height: 90px;
+    width: 74px;
+    height: 74px;
     border-radius: 50%;
     background: linear-gradient(135deg, rgba(0, 240, 255, 0.14), rgba(160, 110, 231, 0.16));
     border: 2px solid rgba(0, 240, 255, 0.35);
@@ -65,6 +171,7 @@
     font-size: 2rem;
     position: relative;
     color: #E6E6E6;
+    transition: transform 0.75s ease, border-color 0.75s ease, box-shadow 0.75s ease, background 0.75s ease;
   }
 
   .krish-avatar::after {
@@ -78,6 +185,9 @@
 
   .office-panel.admin-active .krish-avatar {
     border-color: rgba(160, 110, 231, 0.35);
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.18), rgba(160, 110, 231, 0.24));
+    box-shadow: 0 0 0 10px rgba(160, 110, 231, 0.05), 0 0 28px rgba(160, 110, 231, 0.16);
+    transform: scale(1.04) rotate(-4deg);
   }
 
   .office-panel.admin-active .krish-avatar::after {
@@ -90,81 +200,167 @@
   }
 
   .krish-name {
-    font-size: 1.5rem;
+    font-size: 1.55rem;
     font-weight: 700;
     background: linear-gradient(90deg, #00F0FF, #A06EE7);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    transition: letter-spacing 0.6s ease, transform 0.6s ease, filter 0.6s ease;
+  }
+
+  .office-panel.admin-active .krish-name {
+    letter-spacing: 0.02em;
+    transform: translateY(-1px);
+    filter: drop-shadow(0 0 18px rgba(160, 110, 231, 0.18));
   }
 
   .krish-role {
-    font-size: 0.8rem;
+    font-size: 0.72rem;
     color: rgba(230, 230, 230, 0.67);
-    text-align: center;
+    text-align: left;
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
 
+  .office-copy {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(230, 230, 230, 0.72);
+    transition: color 0.5s ease, transform 0.5s ease;
+  }
+
+  .office-panel.admin-active .office-copy {
+    color: rgba(236, 231, 247, 0.82);
+    transform: translateY(-1px);
+  }
+
   .mode-badge {
+    width: fit-content;
     font-size: 0.72rem;
-    padding: 4px 12px;
+    padding: 5px 12px;
     border-radius: 999px;
     background: rgba(0, 240, 255, 0.1);
     color: #00F0FF;
     border: 1px solid rgba(0, 240, 255, 0.25);
     letter-spacing: 0.08em;
-    transition: all 0.4s;
+    transition: all 0.5s ease;
   }
 
   .office-panel.admin-active .mode-badge {
-    background: rgba(160, 110, 231, 0.15);
-    color: #A06EE7;
-    border-color: rgba(160, 110, 231, 0.3);
+    background: linear-gradient(135deg, rgba(160, 110, 231, 0.24), rgba(0, 240, 255, 0.16));
+    color: #efe7fb;
+    border-color: rgba(160, 110, 231, 0.4);
+    box-shadow: 0 0 24px rgba(160, 110, 231, 0.18);
   }
 
   .divider {
-    width: 60%;
+    width: 100%;
     height: 1px;
     background: linear-gradient(90deg, transparent, #30363D, transparent);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+    width: 100%;
   }
 
   .stat-row {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.2rem;
+    gap: 0.35rem;
+    padding: 0.9rem 1rem;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: transform 0.45s ease, border-color 0.45s ease, background 0.45s ease, box-shadow 0.45s ease;
+  }
+
+  .office-panel.admin-active .stat-row {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(160, 110, 231, 0.16);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  .office-panel.admin-active .stat-row:first-child {
+    transform: translateY(-2px);
+  }
+
+  .office-panel.admin-active .stat-row:last-child {
+    transform: translateY(2px);
   }
 
   .stat-number {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 700;
     color: #E6E6E6;
   }
 
   .stat-label {
     font-size: 0.72rem;
-    color: rgba(230, 230, 230, 0.67);
+    color: rgba(230, 230, 230, 0.58);
     text-transform: uppercase;
     letter-spacing: 0.08em;
   }
 
   .chat-panel {
-    flex: 1;
-    background: #0E1318;
-    border: 1px solid rgba(48, 54, 61, 0.5);
-    border-radius: 24px;
+    min-width: 0;
+    min-height: 0;
+    background:
+      radial-gradient(circle at top, rgba(255, 255, 255, 0.04), transparent 45%),
+      linear-gradient(180deg, rgba(14, 19, 24, 0.98), rgba(9, 13, 18, 0.98));
+    border: 1px solid rgba(76, 88, 102, 0.45);
+    border-radius: 28px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    min-height: 70vh;
+    height: 100%;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+    position: relative;
+    z-index: 1;
+    transition: border-color 0.75s ease, box-shadow 0.75s ease, background 0.75s ease, transform 0.75s ease;
+  }
+
+  .chat-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 12% 0%, rgba(0, 240, 255, 0.07), transparent 28%),
+      radial-gradient(circle at 92% 8%, rgba(160, 110, 231, 0.09), transparent 26%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.75s ease;
+  }
+
+  .assistant-wrap.admin-live .chat-panel {
+    background:
+      radial-gradient(circle at top, rgba(177, 126, 255, 0.08), transparent 44%),
+      linear-gradient(180deg, rgba(16, 12, 30, 0.99), rgba(7, 9, 20, 0.99));
+    border-color: rgba(124, 95, 186, 0.42);
+    box-shadow: 0 32px 95px rgba(39, 16, 70, 0.28);
+    transform: translateY(-2px);
+  }
+
+  .assistant-wrap.admin-live .chat-panel::before {
+    opacity: 1;
   }
 
   .chat-header {
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid rgba(48, 54, 61, 0.5);
+    padding: 1.1rem 1.4rem;
+    border-bottom: 1px solid rgba(48, 54, 61, 0.65);
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    background: rgba(11, 16, 23, 0.85);
+    backdrop-filter: blur(18px);
+    transition: background 0.75s ease, border-color 0.75s ease;
+  }
+
+  .assistant-wrap.admin-live .chat-header {
+    background: linear-gradient(90deg, rgba(17, 14, 34, 0.92), rgba(16, 22, 36, 0.86));
+    border-bottom-color: rgba(124, 95, 186, 0.34);
   }
 
   .status-dot {
@@ -174,6 +370,13 @@
     background: #00F0FF;
     box-shadow: 0 0 6px #00F0FF;
     animation: blink 2s ease-in-out infinite;
+    transition: background 0.55s ease, box-shadow 0.55s ease, transform 0.55s ease;
+  }
+
+  .assistant-wrap.admin-live .status-dot {
+    background: #c79dff;
+    box-shadow: 0 0 12px rgba(199, 157, 255, 0.9);
+    transform: scale(1.2);
   }
 
   @keyframes blink {
@@ -183,20 +386,22 @@
 
   .chat-messages {
     flex: 1;
+    min-height: 0;
     overflow-y: auto;
-    padding: 1.5rem;
+    padding: 1.6rem clamp(1rem, 2vw, 1.9rem);
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.2rem;
     scrollbar-width: thin;
     scrollbar-color: #30363D transparent;
+    overscroll-behavior: contain;
   }
 
   .msg {
     display: flex;
     flex-direction: column;
-    max-width: 80%;
-    gap: 4px;
+    max-width: min(82%, 760px);
+    gap: 0.35rem;
   }
 
   .msg.user {
@@ -210,10 +415,10 @@
   }
 
   .bubble {
-    padding: 0.7rem 1rem;
-    border-radius: 16px;
-    font-size: 0.9rem;
-    line-height: 1.55;
+    padding: 0.95rem 1.05rem;
+    border-radius: 22px;
+    font-size: 0.95rem;
+    line-height: 1.65;
     white-space: pre-wrap;
     word-break: break-word;
   }
@@ -223,13 +428,27 @@
     border: 1px solid rgba(160, 110, 231, 0.3);
     color: #E6E6E6;
     border-bottom-right-radius: 4px;
+    transition: background 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease;
   }
 
   .msg.bot .bubble {
-    background: rgba(0, 240, 255, 0.07);
-    border: 1px solid rgba(0, 240, 255, 0.18);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     color: #E6E6E6;
-    border-bottom-left-radius: 4px;
+    border-bottom-left-radius: 8px;
+    transition: background 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease;
+  }
+
+  .assistant-wrap.admin-live .msg.user .bubble {
+    background: linear-gradient(135deg, rgba(160, 110, 231, 0.26), rgba(112, 78, 176, 0.22));
+    border-color: rgba(186, 149, 255, 0.32);
+    box-shadow: 0 10px 24px rgba(74, 30, 119, 0.14);
+  }
+
+  .assistant-wrap.admin-live .msg.bot .bubble {
+    background: rgba(255, 255, 255, 0.055);
+    border-color: rgba(130, 141, 199, 0.12);
+    box-shadow: 0 10px 24px rgba(8, 10, 30, 0.12);
   }
 
   .msg-time {
@@ -242,11 +461,11 @@
     display: flex;
     gap: 5px;
     align-items: center;
-    padding: 0.7rem 1rem;
-    background: rgba(0, 240, 255, 0.07);
-    border: 1px solid rgba(0, 240, 255, 0.18);
-    border-radius: 16px;
-    border-bottom-left-radius: 4px;
+    padding: 0.8rem 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 18px;
+    border-bottom-left-radius: 8px;
     width: fit-content;
   }
 
@@ -267,36 +486,50 @@
   }
 
   .chat-input-wrap {
-    padding: 1rem 1.5rem;
-    border-top: 1px solid rgba(48, 54, 61, 0.5);
+    padding: 1rem 1.2rem 1.2rem;
+    border-top: 1px solid rgba(48, 54, 61, 0.65);
     display: flex;
     gap: 0.75rem;
     align-items: flex-end;
+    background: linear-gradient(180deg, rgba(10, 14, 20, 0.84), rgba(10, 14, 20, 0.98));
+    transition: background 0.75s ease, border-color 0.75s ease;
+  }
+
+  .assistant-wrap.admin-live .chat-input-wrap {
+    background: linear-gradient(180deg, rgba(14, 14, 28, 0.9), rgba(10, 11, 24, 0.99));
+    border-top-color: rgba(124, 95, 186, 0.28);
   }
 
   #chat-input {
     flex: 1;
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(48, 54, 61, 0.8);
-    border-radius: 14px;
-    padding: 0.7rem 1rem;
+    border: 1px solid rgba(77, 86, 99, 0.85);
+    border-radius: 24px;
+    padding: 0.95rem 1.1rem;
     color: #E6E6E6;
     font-family: inherit;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     resize: none;
     outline: none;
-    transition: border-color 0.2s;
-    max-height: 120px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    max-height: 180px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  }
+
+  .assistant-wrap.admin-live #chat-input {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(118, 105, 176, 0.68);
   }
 
   #chat-input:focus {
     border-color: rgba(0, 240, 255, 0.4);
+    box-shadow: 0 0 0 4px rgba(0, 240, 255, 0.08);
   }
 
   #send-btn {
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
     background: linear-gradient(135deg, #00F0FF, #A06EE7);
     border: none;
     cursor: pointer;
@@ -306,7 +539,18 @@
     color: #050709;
     font-size: 1rem;
     flex-shrink: 0;
-    transition: opacity 0.2s, transform 0.1s;
+    transition: opacity 0.2s, transform 0.1s, box-shadow 0.6s ease, filter 0.6s ease;
+  }
+
+  .assistant-wrap.admin-live #send-btn {
+    box-shadow: 0 0 26px rgba(160, 110, 231, 0.28);
+    filter: saturate(1.12);
+  }
+
+  .composer-note {
+    padding: 0 0.5rem;
+    font-size: 0.72rem;
+    color: rgba(230, 230, 230, 0.38);
   }
 
   #send-btn:hover { opacity: 0.85; }
@@ -315,34 +559,34 @@
 
   @media (max-width: 768px) {
     .assistant-wrap {
-      flex-direction: column;
-      min-height: auto;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto minmax(0, 1fr);
+      padding: 0.85rem;
+      gap: 0.85rem;
     }
 
     .office-panel {
-      width: 100%;
-      flex-direction: row;
-      justify-content: flex-start;
-      padding: 1rem 1.5rem;
-      gap: 1.2rem;
-      min-height: unset;
+      padding: 1rem;
     }
 
-    .office-panel::before,
-    .krish-avatar::after,
-    .divider,
-    .stat-row {
+    .office-panel::before {
       display: none;
     }
 
-    .krish-avatar {
-      width: 56px;
-      height: 56px;
-      font-size: 1.35rem;
+    .stats-grid {
+      grid-template-columns: 1fr 1fr;
     }
 
-    .chat-panel {
-      min-height: 60vh;
+    .chat-header {
+      padding: 1rem;
+    }
+
+    .chat-messages {
+      padding: 1rem;
+    }
+
+    .chat-input-wrap {
+      padding: 0.85rem;
     }
   }
 </style>
@@ -350,15 +594,29 @@
 
 {% block content %}
 <div class="assistant-wrap" id="assistant-wrap">
+  <div class="admin-transition-flash" id="admin-transition-flash"></div>
   <div class="office-panel" id="office-panel">
-    <div class="krish-avatar" id="krish-avatar"><i class="fas fa-robot"></i></div>
-    <div class="krish-name">Krish</div>
-    <div class="krish-role">Krishna's AI Secretary</div>
-    <div class="mode-badge" id="mode-badge">Public mode</div>
-    <div class="divider"></div>
-    <div class="stat-row">
-      <div class="stat-number" id="session-count">0</div>
-      <div class="stat-label">Messages this session</div>
+    <div class="office-top">
+      <div class="krish-avatar" id="krish-avatar"><i class="fas fa-robot"></i></div>
+      <div class="krish-name">Krish</div>
+      <div class="krish-role">Krishna's AI Secretary</div>
+      <div class="mode-badge" id="mode-badge">Public mode</div>
+      <div class="office-copy">
+        Ask about Krishna's projects, background, tech stack, or current work. Your conversation stays synced between this page and the floating chat.
+      </div>
+    </div>
+    <div class="office-bottom">
+      <div class="divider"></div>
+      <div class="stats-grid">
+        <div class="stat-row">
+          <div class="stat-number" id="session-count">0</div>
+          <div class="stat-label">Messages</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-number" id="visit-count">0</div>
+          <div class="stat-label">Unique users today</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -367,7 +625,7 @@
       <div class="status-dot"></div>
       <span style="font-size:0.85rem;color:rgba(230,230,230,0.67);">Krish is online</span>
       <span style="margin-left:auto;font-size:0.75rem;color:rgba(230,230,230,0.34);" id="admin-hint">
-        Tip: enter your admin passphrase to unlock private mode
+        Conversations stay available when you come back
       </span>
     </div>
 
@@ -377,6 +635,7 @@
       <textarea id="chat-input" rows="1" placeholder="Ask me anything about Krishna..."></textarea>
       <button id="send-btn" type="button" aria-label="Send message"><i class="fas fa-paper-plane"></i></button>
     </div>
+    <div class="composer-note">Press Enter to send and Shift + Enter for a new line.</div>
   </div>
 </div>
 {% endblock %}
@@ -384,33 +643,29 @@
 {% block scripts %}
 <script>
 (function() {
+  const store = window.KrishChatStore;
   const messagesEl = document.getElementById("chat-messages");
   const inputEl = document.getElementById("chat-input");
   const sendBtn = document.getElementById("send-btn");
+  const assistantWrapEl = document.getElementById("assistant-wrap");
   const officePanelEl = document.getElementById("office-panel");
   const modeBadgeEl = document.getElementById("mode-badge");
   const sessionCountEl = document.getElementById("session-count");
+  const visitCountEl = document.getElementById("visit-count");
   const adminHintEl = document.getElementById("admin-hint");
+  const transitionFlashEl = document.getElementById("admin-transition-flash");
 
-  let isAdmin = false;
-  let messageHistory = [];
-  let msgCount = 0;
+  const intro = "Hello! I'm Krish, Krishna Goyal's AI secretary. I'm here to help you learn about Krishna, his work, and his projects. Would you like a quick tour, or is there something specific you'd like to know?";
+  let isTyping = false;
+  let adminStats = null;
+  let adminTransitionTimer = null;
 
-  const today = new Date().toDateString();
-  const storageKey = "krish_visitor_sessions";
-  let sessions = {};
-
-  try {
-    sessions = JSON.parse(localStorage.getItem(storageKey) || "{}");
-  } catch (error) {
-    sessions = {};
+  if (!store || !messagesEl || !inputEl || !sendBtn) {
+    return;
   }
 
-  if (!sessions[today]) {
-    sessions[today] = 0;
-  }
-  sessions[today] += 1;
-  localStorage.setItem(storageKey, JSON.stringify(sessions));
+  store.trackVisit();
+  store.ensureIntro(intro);
 
   function getCookie(name) {
     const cookies = document.cookie ? document.cookie.split(";") : [];
@@ -423,122 +678,157 @@
     return "";
   }
 
-  function getSessionInfo() {
-    const total = Object.values(sessions).reduce((sum, value) => sum + value, 0);
-    const todayCount = sessions[today];
-    return "Today: " + todayCount + " session(s). Total sessions recorded: " + total + ". Date: " + today + ".";
-  }
-
-  function getTime() {
-    return new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-  }
-
   function escapeHtml(text) {
     const div = document.createElement("div");
     div.textContent = text;
     return div.innerHTML;
   }
 
-  function appendMessage(role, text) {
-    const div = document.createElement("div");
-    div.className = "msg " + (role === "user" ? "user" : "bot");
-    div.innerHTML = `
-      <div class="bubble">${escapeHtml(text).replace(/\n/g, "<br>")}</div>
-      <div class="msg-time">${getTime()}</div>
-    `;
-    messagesEl.appendChild(div);
-    messagesEl.scrollTop = messagesEl.scrollHeight;
+  function formatTime(timestamp) {
+    return new Date(timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
   }
 
-  function showTyping() {
-    const div = document.createElement("div");
-    div.className = "msg bot";
-    div.id = "typing-indicator";
-    div.innerHTML = `
-      <div class="typing-bubble">
-        <div class="typing-dot"></div>
-        <div class="typing-dot"></div>
-        <div class="typing-dot"></div>
-      </div>
-    `;
-    messagesEl.appendChild(div);
-    messagesEl.scrollTop = messagesEl.scrollHeight;
-  }
+  function renderMessages(messages) {
+    messagesEl.innerHTML = "";
 
-  function hideTyping() {
-    const el = document.getElementById("typing-indicator");
-    if (el) {
-      el.remove();
+    messages.forEach((message) => {
+      const div = document.createElement("div");
+      div.className = "msg " + (message.role === "user" ? "user" : "bot");
+      div.innerHTML = `
+        <div class="bubble">${escapeHtml(message.content).replace(/\n/g, "<br>")}</div>
+        <div class="msg-time">${formatTime(message.timestamp)}</div>
+      `;
+      messagesEl.appendChild(div);
+    });
+
+    if (isTyping) {
+      const div = document.createElement("div");
+      div.className = "msg bot";
+      div.id = "typing-indicator";
+      div.innerHTML = `
+        <div class="typing-bubble">
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+        </div>
+      `;
+      messagesEl.appendChild(div);
     }
+
+    messagesEl.scrollTop = messagesEl.scrollHeight;
   }
 
   function activateAdminMode() {
+    const isFreshUpgrade = !officePanelEl.classList.contains("admin-active");
+    officePanelEl.classList.add("admin-active");
+    if (assistantWrapEl) {
+      assistantWrapEl.classList.add("admin-live");
+    }
+    modeBadgeEl.textContent = "Admin mode - Hello, Krishna";
+    adminHintEl.textContent = "Admin mode active · private stats available";
+
+    if (isFreshUpgrade && assistantWrapEl && transitionFlashEl) {
+      transitionFlashEl.classList.remove("active");
+      void transitionFlashEl.offsetWidth;
+      transitionFlashEl.classList.add("active");
+      assistantWrapEl.classList.add("admin-transition");
+      window.clearTimeout(adminTransitionTimer);
+      adminTransitionTimer = window.setTimeout(() => {
+        assistantWrapEl.classList.remove("admin-transition");
+      }, 1100);
+    }
+  }
+
+  function applyMode(isAdmin) {
     if (isAdmin) {
+      activateAdminMode();
+      if (!adminStats) {
+        loadAdminStats();
+      }
       return;
     }
 
-    isAdmin = true;
-    officePanelEl.classList.add("admin-active");
-    modeBadgeEl.textContent = "Admin mode - Hello, Krishna";
-    adminHintEl.textContent = "Admin mode active";
+    officePanelEl.classList.remove("admin-active");
+    if (assistantWrapEl) {
+      assistantWrapEl.classList.remove("admin-live", "admin-transition");
+    }
+    modeBadgeEl.textContent = "Public mode";
+    adminHintEl.textContent = "Conversations stay available when you come back";
+    adminStats = null;
+  }
+
+  function updateStats(messages) {
+    const userMessages = messages.filter((message) => message.role === "user").length;
+    sessionCountEl.textContent = String(userMessages);
+    visitCountEl.textContent = String(adminStats ? adminStats.unique_users_today : 0);
+  }
+
+  async function loadAdminStats() {
+    try {
+      const response = await fetch(window.KRISH_CHAT_CONFIG.assistantStatsUrl, {
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+        },
+      });
+      const data = await response.json();
+      if (response.ok && data.stats) {
+        adminStats = data.stats;
+        updateStats(store.getState().messages);
+      }
+    } catch (error) {
+      adminStats = null;
+    }
   }
 
   async function sendMessage(userText) {
-    if (!userText.trim()) {
+    const trimmed = userText.trim();
+    if (!trimmed) {
       return;
     }
 
-    appendMessage("user", userText);
-    msgCount += 1;
-    sessionCountEl.textContent = String(msgCount);
-    messageHistory.push({ role: "user", content: userText });
-
+    store.addMessage("user", trimmed);
     inputEl.value = "";
     inputEl.style.height = "auto";
     sendBtn.disabled = true;
-    showTyping();
+    isTyping = true;
+    renderMessages(store.getState().messages);
 
     try {
-      const response = await fetch("{% url 'chat_api' %}", {
+      const response = await fetch(window.KRISH_CHAT_CONFIG.chatApiUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "X-CSRFToken": getCookie("csrftoken"),
         },
         body: JSON.stringify({
-          messages: messageHistory,
-          is_admin: isAdmin,
-          session_info: getSessionInfo(),
+          messages: store.getConversationPayload(),
+          is_admin: store.getState().isAdmin,
+          session_info: store.getSessionInfo(),
         }),
       });
       const data = await response.json();
-      hideTyping();
-
-      if (data.error) {
-        appendMessage("bot", "Sorry, something went wrong. Please try again.");
-      } else {
-        appendMessage("bot", data.reply);
-        messageHistory.push({ role: "assistant", content: data.reply });
-        if (data.is_admin) {
-          activateAdminMode();
+      if (data.is_admin) {
+        store.setAdmin(true);
+        if (data.admin_stats) {
+          adminStats = data.admin_stats;
         }
       }
+      store.addMessage("assistant", data.error ? "Sorry, something went wrong. Please try again." : data.reply);
     } catch (error) {
-      hideTyping();
-      appendMessage("bot", "Connection error. Please try again.");
+      store.addMessage("assistant", "Connection error. Please try again.");
+    } finally {
+      isTyping = false;
+      sendBtn.disabled = false;
+      renderMessages(store.getState().messages);
+      inputEl.focus();
     }
-
-    sendBtn.disabled = false;
-    inputEl.focus();
   }
 
-  setTimeout(() => {
-    const intro = isAdmin
-      ? "Hey Krishna! I'm Krish, your AI assistant. You've had " + sessions[today] + " session(s) today. What do you need?"
-      : "Hello! I'm Krish, Krishna Goyal's AI secretary. I'm here to help you learn about Krishna, his work, and his projects. Would you like a quick tour, or is there something specific you'd like to know?";
-    appendMessage("bot", intro);
-    messageHistory.push({ role: "assistant", content: intro });
-  }, 1000);
+  store.subscribe((state) => {
+    renderMessages(state.messages);
+    updateStats(state.messages);
+    applyMode(state.isAdmin);
+  });
 
   sendBtn.addEventListener("click", () => sendMessage(inputEl.value));
 
@@ -551,7 +841,7 @@
 
   inputEl.addEventListener("input", () => {
     inputEl.style.height = "auto";
-    inputEl.style.height = Math.min(inputEl.scrollHeight, 120) + "px";
+    inputEl.style.height = Math.min(inputEl.scrollHeight, 180) + "px";
   });
 })();
 </script>

@@ -1,0 +1,363 @@
+{% extends 'layout.html' %}
+
+{% block title %}<title>Resume - Krishna Goyal</title>{% endblock %}
+
+{% block CSSLinks %}
+{{ block.super }}
+<style>
+  :root {
+    --resume-paper: #ffffff;
+    --resume-ink: #111111;
+    --resume-muted: #4b5563;
+    --resume-rule: #1f2937;
+    --resume-bg: #eef2f7;
+  }
+
+  body {
+    background:
+      radial-gradient(circle at top left, rgba(0, 240, 255, 0.08), transparent 28%),
+      radial-gradient(circle at top right, rgba(160, 110, 231, 0.09), transparent 30%),
+      linear-gradient(160deg, #0e1318 0%, #050709 74%);
+  }
+
+  .resume-page-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .resume-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+  }
+
+  .resume-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.85rem 1.1rem;
+    border-radius: 999px;
+    background: #0f172a;
+    color: #ffffff;
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.18);
+  }
+
+  .resume-sheet {
+    width: min(100%, 8.5in);
+    min-height: 11in;
+    margin: 0 auto;
+    background: var(--resume-paper);
+    color: var(--resume-ink);
+    box-shadow: 0 28px 70px rgba(15, 23, 42, 0.16);
+    border-radius: 8px;
+    padding: 1.5cm 1.8cm;
+    box-sizing: border-box;
+    font-family: Charter, "Bitstream Charter", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  }
+
+  .resume-header {
+    text-align: center;
+    margin-bottom: 0.65rem;
+  }
+
+  .resume-name {
+    font-size: 2rem;
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  .resume-contact {
+    margin-top: 0.35rem;
+    font-size: 0.95rem;
+    color: var(--resume-ink);
+    line-height: 1.5;
+  }
+
+  .resume-contact a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .resume-contact a:hover {
+    text-decoration: underline;
+  }
+
+  .resume-sep {
+    margin: 0 0.45rem;
+    color: var(--resume-muted);
+  }
+
+  .resume-section {
+    margin-top: 0.8rem;
+  }
+
+  .resume-section-title {
+    margin: 0 0 0.2rem;
+    padding-bottom: 0.12rem;
+    border-bottom: 1px solid var(--resume-rule);
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .resume-entry {
+    margin-top: 0.38rem;
+  }
+
+  .resume-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .resume-row-main {
+    flex: 1;
+    min-width: 0;
+    font-size: 0.98rem;
+    line-height: 1.35;
+  }
+
+  .resume-row-side {
+    width: 4.5cm;
+    flex-shrink: 0;
+    text-align: right;
+    font-size: 0.94rem;
+    line-height: 1.35;
+    color: var(--resume-ink);
+  }
+
+  .resume-bullet-prefix {
+    margin-right: 0.28rem;
+  }
+
+  .resume-strong {
+    font-weight: 700;
+  }
+
+  .resume-subtext {
+    margin-top: 0.14rem;
+    margin-left: 0.62rem;
+    font-size: 0.95rem;
+    line-height: 1.35;
+  }
+
+  .resume-highlight-list {
+    margin: 0.12rem 0 0 0.95rem;
+    padding-left: 0.5rem;
+    font-size: 0.92rem;
+    line-height: 1.35;
+  }
+
+  .resume-highlight-list li {
+    margin: 0;
+  }
+
+  .resume-skill-line {
+    margin-top: 0.16rem;
+    font-size: 0.95rem;
+    line-height: 1.35;
+  }
+
+  .resume-link-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.45rem;
+  }
+
+  .resume-link-list a {
+    color: var(--resume-ink);
+    text-decoration: none;
+    font-size: 0.92rem;
+  }
+
+  .resume-link-list a:hover {
+    text-decoration: underline;
+  }
+
+  .resume-inline-title {
+    font-weight: 700;
+  }
+
+  @media (max-width: 900px) {
+    .resume-sheet {
+      padding: 1.1rem;
+    }
+
+    .resume-row {
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .resume-row-side {
+      width: auto;
+      text-align: left;
+      font-size: 0.88rem;
+      color: var(--resume-muted);
+    }
+
+    .resume-link-list {
+      justify-content: flex-start;
+    }
+  }
+
+  @media print {
+    body {
+      background: #ffffff;
+    }
+
+    .resume-page-wrap {
+      padding: 0;
+    }
+
+    .resume-toolbar,
+    nav,
+    footer,
+    #krish-widget {
+      display: none !important;
+    }
+
+    .resume-sheet {
+      box-shadow: none;
+      border-radius: 0;
+      width: 100%;
+      min-height: auto;
+      padding: 1.5cm 1.8cm;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="resume-page-wrap">
+  <div class="resume-toolbar">
+    <a href="{% url 'resume_download' %}" class="resume-download">
+      <i class="fas fa-download"></i>
+      <span>Download PDF</span>
+    </a>
+  </div>
+
+  <article class="resume-sheet">
+    <header class="resume-header">
+      <div class="resume-name">{{ resume.name }}</div>
+      <div class="resume-contact">
+        {% for item in resume.contact_links %}
+          <a href="{{ item.url }}" {% if "http" in item.url %}target="_blank" rel="noopener"{% endif %}>{{ item.label }}</a>{% if not forloop.last %}<span class="resume-sep">|</span>{% endif %}
+        {% endfor %}
+      </div>
+    </header>
+
+    <section class="resume-section">
+      <h2 class="resume-section-title">Education</h2>
+      {% for item in resume.education %}
+      <div class="resume-entry">
+        <div class="resume-row">
+          <div class="resume-row-main">
+            <span class="resume-bullet-prefix">&bullet;</span>
+            <span class="resume-strong">{{ item.title }}</span>, {{ item.subtitle }}
+          </div>
+          <div class="resume-row-side">{{ item.meta }}</div>
+        </div>
+        {% for detail in item.details %}
+        <div class="resume-subtext">{{ detail }}</div>
+        {% endfor %}
+        {% if item.highlights %}
+        <ul class="resume-highlight-list">
+          {% for detail in item.highlights %}
+          <li><span class="resume-strong">{{ detail.label }}:</span> {{ detail.text }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </section>
+
+    <section class="resume-section">
+      <h2 class="resume-section-title">Skills</h2>
+      {% for item in resume.skills %}
+      <div class="resume-skill-line"><span class="resume-strong">{{ item.label }}:</span> {{ item.value }}</div>
+      {% endfor %}
+    </section>
+
+    <section class="resume-section">
+      <h2 class="resume-section-title">Projects</h2>
+      {% for project in resume.projects %}
+      <div class="resume-entry">
+        <div class="resume-row">
+          <div class="resume-row-main">
+            <span class="resume-strong">{{ project.title }}</span> | {{ project.subtitle }}
+          </div>
+          <div class="resume-row-side">
+            <div class="resume-link-list">
+              {% for link in project.links %}
+              <a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <ul class="resume-highlight-list">
+          {% for detail in project.highlights %}
+          <li>
+            {% if detail.label %}
+            <span class="resume-strong">{{ detail.label }}:</span> {{ detail.text }}
+            {% else %}
+            {{ detail }}
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </section>
+
+    <section class="resume-section">
+      <h2 class="resume-section-title">Hackathons &amp; Competitions</h2>
+      <ul class="resume-highlight-list" style="margin-left: 0.1rem;">
+        {% for item in resume.hackathons %}
+        <li><span class="resume-strong">{{ item.label }}:</span> {{ item.text }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="resume-section">
+      <h2 class="resume-section-title">Certifications</h2>
+      {% for item in resume.certifications %}
+      <div class="resume-entry">
+        <div class="resume-row">
+          <div class="resume-row-main">
+            <a href="{{ item.url }}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">
+              <span class="resume-strong">{{ item.title }}</span> [Certificate]
+            </a>
+          </div>
+          <div class="resume-row-side">{{ item.issuer }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </section>
+
+    <section class="resume-section">
+      <h2 class="resume-section-title">Leadership Experience</h2>
+      {% for item in resume.leadership %}
+      <div class="resume-entry">
+        <div class="resume-row">
+          <div class="resume-row-main">
+            <span class="resume-strong">{{ item.title }}</span>, {{ item.subtitle }}
+          </div>
+          <div class="resume-row-side">{{ item.meta }}</div>
+        </div>
+        <ul class="resume-highlight-list">
+          {% for detail in item.highlights %}
+          <li>{{ detail }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </section>
+  </article>
+</div>
+{% endblock %}
