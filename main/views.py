@@ -3,6 +3,7 @@ import os
 import re
 
 from django.conf import settings
+from django.db import DatabaseError, IntegrityError
 from django.http import FileResponse, Http404, JsonResponse
 from django.shortcuts import render
 from django.utils.timezone import localdate
@@ -164,24 +165,33 @@ def _track_unique_portfolio_visit(request):
     today = localdate()
     today_key = today.isoformat()
 
-    if not request.session.session_key:
-        request.session.create()
+    try:
+        if not request.session.session_key:
+            request.session.create()
 
-    if request.session.get("portfolio_unique_visit_date") == today_key:
+        if request.session.get("portfolio_unique_visit_date") == today_key:
+            return
+
+        stat, _ = DailyVisitorStat.objects.get_or_create(date=today, defaults={"unique_visitors": 0})
+        stat.unique_visitors += 1
+        stat.save(update_fields=["unique_visitors"])
+        request.session["portfolio_unique_visit_date"] = today_key
+    except (DatabaseError, IntegrityError):
+        # Visitor analytics must never break the public site.
         return
-
-    stat, _ = DailyVisitorStat.objects.get_or_create(date=today, defaults={"unique_visitors": 0})
-    stat.unique_visitors += 1
-    stat.save(update_fields=["unique_visitors"])
-    request.session["portfolio_unique_visit_date"] = today_key
 
 
 def _get_admin_stats():
     today = localdate()
-    stat, _ = DailyVisitorStat.objects.get_or_create(date=today, defaults={"unique_visitors": 0})
+    try:
+        stat, _ = DailyVisitorStat.objects.get_or_create(date=today, defaults={"unique_visitors": 0})
+        unique_users_today = stat.unique_visitors
+    except (DatabaseError, IntegrityError):
+        unique_users_today = 0
+
     return {
         "date": today.isoformat(),
-        "unique_users_today": stat.unique_visitors,
+        "unique_users_today": unique_users_today,
     }
 
 
