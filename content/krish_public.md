@@ -1,78 +1,93 @@
 # Krishna Goyal - Public Profile
 
 ## Who is Krishna?
-Krishna Goyal is a 3rd year B.Tech Data Analytics student at VIT-AP University.
-He is a developer, designer, video editor, and data analyst who builds digital
-products combining strong backend systems, clean user experiences, and scalable
-data architecture.
+Krishna Goyal is a B.Tech Computer Science student at Vellore Institute of Technology, Amaravati, India, graduating in 2027.
+He is a builder focused on full-stack products, developer tools, SaaS systems, and practical software for real-world workflows.
+
+## Public Summary
+Krishna works across backend systems, product architecture, business software, and modern web development.
+He is especially interested in building tools that improve operations, reduce manual work, and turn ideas into scalable products.
 
 ## Education
-- B.Tech in Data Analytics, VIT-AP University (2023 - present, 3rd year)
-- Class 12 completed 2023
-- Class 10 completed 2021
+- Vellore Institute of Technology, B.Tech in Computer Science, Amaravati, India
+  Graduating in 2027
+  CGPA: 7.95/10.0
+  Relevant coursework: Computer Networks, Operating Systems, DBMS, Object-Oriented Programming, NoSQL Databases
+- Satynarayan Academy, PCM with Computer Science, West Bengal, India
+  Completed in May 2023
+  Class 12th Percentage: 86.2/100
 
-## Skills & Tech Stack
-Languages: Python, JavaScript, SQL
-Frameworks: Django, Flask, React, Node.js, Express.js
-Databases: MongoDB, PostgreSQL, MySQL
-Tools: Git, GitHub, Docker, Linux, Figma, Postman, MongoDB Atlas, n8n
-Other: Data Analytics, Pandas, Chart.js, Three.js, Tailwind CSS, REST APIs
+## Skills
+Languages: Java, Python, JavaScript, HTML/CSS, SQL
+Frameworks and Libraries: React.js, Node.js, Express.js, Django, Flask
+Databases: MongoDB, MySQL, Firebase, Redis
+Tools and Platforms: Git, GitHub, AWS, Notion, Trello (familiar), MongoDB Compass
 
 ## Projects
 
-### My Portfolio Website
-A comprehensive showcase built with Django, Tailwind CSS, Three.js, and JavaScript.
-Designed as an immersive introduction to his work, technical range, and creative perspective.
+### Udhyog Saathi
+Category: SaaS Product / Business Operating System
+Links:
+- Frontend GitHub: https://github.com/Manish-bhargava/udhyog-saathi-frontend
+- Backend GitHub: https://github.com/Manish-bhargava/udhyog-saath-backend/
+- Live: https://udhyogsaathi.in/
 
-### Personal Finance Tracker
-Full-stack web app for personal finance management.
-Tech: MongoDB, Flask, JavaScript, Chart.js
-Focused on usability, visibility into spending trends, and clean UX.
-
-### InsightLoop Business
-Business intelligence platform for turning data into actionable decisions.
-Tech: Python, Django, Pandas, Data Analytics
-Sits at the intersection of product thinking, backend logic, and data interpretation.
+Highlights:
+- Designed a SaaS-based business operating system for MSMEs
+- Focused on billing, inventory, and workforce management in one platform
+- Structured end-to-end workflows for billing, stock tracking, and worker management
+- Designed dashboards for real-time operational visibility and decision-making
+- Proposed automation workflows including event-based triggers and WhatsApp integration
 
 ### HotReload
-Network automation concept reducing access-point switching friction in campus environments.
-Tech: Python, Networking, Automation
-Status: Concept/in progress.
+Category: Developer Tool / CLI
+Links:
+- GitHub: https://github.com/Error-Krishna/hotreload
+- Demo: https://www.loom.com/share/773d4d8fdd1840128b92929643a08965
 
-### Building My SaaS Platform (Udhyog Saathi)
-A scalable SaaS platform direction around digital tools and business impact.
-Tech: SaaS, Cloud Architecture, Scalability
-Status: In active development with a team since January 2026.
+Highlights:
+- Built a CLI tool in Go that automates server rebuilds and restarts on file changes
+- Reduced manual stop/rebuild effort and improved development feedback loops
+- Implemented recursive file watching, debouncing, graceful restarts, and project auto-detection
+- Technologies used: Go, fsnotify, CLI design, process lifecycle management
 
-### Video Editing Showcase
-Curated showcase of video edits, reels, and promotional work.
-Tools: Adobe Premiere Pro, After Effects, Motion Design.
+### InsightLoop
+Category: Web Application
+Links:
+- GitHub: https://github.com/Error-Krishna/InsightLoop
+- Live: https://insightloop.onrender.com/
 
-## Journey / Timeline
-- 2021: Completed Class 10, began curiosity about technology
-- 2023: Completed Class 12, joined VIT-AP University
-- 2023: Started learning web technologies seriously, built early projects
-- 2024: Deep dive into MERN stack, Django, backend systems
-- Mid 2025: Conceptualised Udhyog Saathi - from developer to founder
-- January 2026: Formed team, began building Udhyog Saathi
-- 2026: Active R&D, SaaS architecture, product strategy
+Highlights:
+- Built a full-stack business management platform
+- Tracks sales, payments, workers, and profit/loss through a real-time dashboard
+- Integrated WebSockets for live sync and an AI assistant for operational support
+- Technologies used: MongoDB, Express.js, React.js, Node.js
 
-## What Krishna builds
-- Full stack web applications
-- Developer productivity tools
-- Data-driven platforms
-- Backend systems and APIs
-- Video editing and motion design
+## Hackathons and Competitions
+- EY Techathon 5.0: Successfully cleared Round 1 of the national competition
+- Smart India Hackathon 2023: Participated in the national-level hackathon
 
-## Goals
-Short term: Keep building, keep learning, ship Udhyog Saathi.
-Long term: Create ventures that shape the future. Build impactful platforms.
+## Certifications
+- Full Stack Development (MERN), BlackBucks
+  Certificate: https://drive.google.com/file/d/1XicthKv4BbeKMkCCEPDSseEfGlylK0Ce/view?usp=sharing
+- Cloud Computing (AWS), Corizo
+  Certificate: https://drive.google.com/file/d/1Vpar3ulUsRu0NGGT59QtBD-WaD4u_RAQ/view?usp=drive_link
 
-## Contact & Links
-Email: krishna.23bce8419@vitapstudent.ac.in
-LinkedIn: https://linkedin.com/in/krishna-goyal-5560a1284
-GitHub: https://github.com/krishnagoyal
+## Leadership Experience
+- President, Hindi Association, VIT-AP
+  Led the university's Hindi association and organized cultural activities for the student community
+- State-Coordinator, UP State Rally, University Fest
+  Coordinated a state-level rally, including logistics and participation support
 
-## Personality
-Builder mindset. Analytical and creative. Interested in product, engineering, and design equally.
-Goal-oriented, vision-driven, entrepreneurial.
+## Contact and Links
+Email: iamkrishnagoyal@gmail.com
+Phone: +91-9064700906
+Portfolio: https://personal-portfolio-whoami-1.onrender.com
+LinkedIn: https://linkedin.com/in/krishna2611
+GitHub: https://github.com/Error-Krishna
+
+## How Krish should present Krishna publicly
+- Speak about Krishna as a product-minded developer and student builder
+- Emphasize SaaS, developer tools, systems thinking, and execution
+- Keep the tone confident, helpful, and concise
+- Do not mention private planning, internal strategy, or anything not listed in this public file

@@ -7,6 +7,10 @@ CONTENT_DIR = BASE_DIR / "content"
 PROJECTS_FILE = CONTENT_DIR / "projects.json"
 KRISH_PUBLIC_FILE = CONTENT_DIR / "krish_public.md"
 KRISH_PRIVATE_FILE = CONTENT_DIR / "krish_private.md"
+KNOWLEDGE_FILES = {
+    "public": KRISH_PUBLIC_FILE,
+    "private": KRISH_PRIVATE_FILE,
+}
 
 HOME_THEME_CONFIG = {
     "portfolio-website": {
@@ -127,3 +131,30 @@ def load_public_knowledge():
 
 def load_private_knowledge():
     return _read_cached_text(KRISH_PRIVATE_FILE)
+
+
+def write_knowledge_file(target: str, content: str, mode: str = "append") -> Path:
+    normalized_target = str(target).strip().lower()
+    normalized_mode = str(mode).strip().lower()
+    path = KNOWLEDGE_FILES.get(normalized_target)
+
+    if path is None:
+        raise ValueError("Unsupported knowledge target")
+
+    if normalized_mode not in {"append", "replace"}:
+        raise ValueError("Unsupported write mode")
+
+    existing_text = path.read_text(encoding="utf-8") if path.exists() else ""
+    incoming_text = str(content).strip()
+    if not incoming_text:
+        raise ValueError("Cannot write empty knowledge content")
+
+    if normalized_mode == "replace":
+        next_text = incoming_text + "\n"
+    else:
+        separator = "\n\n" if existing_text.strip() else ""
+        next_text = existing_text.rstrip() + separator + incoming_text + "\n"
+
+    path.write_text(next_text, encoding="utf-8")
+    _CACHE.pop(str(path), None)
+    return path
