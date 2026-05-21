@@ -617,6 +617,15 @@
           <div class="stat-label">Unique users today</div>
         </div>
       </div>
+      <button
+        id="admin-logout-btn"
+        type="button"
+        style="display:none;"
+        class="w-full mt-2 px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase
+               border border-[rgba(160,110,231,0.4)] text-[rgba(236,231,247,0.7)]
+               hover:bg-[rgba(160,110,231,0.15)] transition-all duration-300">
+        Switch to Public Mode
+      </button>
     </div>
   </div>
 
@@ -654,6 +663,7 @@
   const visitCountEl = document.getElementById("visit-count");
   const adminHintEl = document.getElementById("admin-hint");
   const transitionFlashEl = document.getElementById("admin-transition-flash");
+  const adminLogoutBtnEl = document.getElementById("admin-logout-btn");
 
   const intro = "Hello! I'm Krish, Krishna Goyal's AI secretary. I'm here to help you learn about Krishna, his work, and his projects. Would you like a quick tour, or is there something specific you'd like to know?";
   let isTyping = false;
@@ -726,6 +736,9 @@
     }
     modeBadgeEl.textContent = "Admin mode - Hello, Krishna";
     adminHintEl.textContent = "Admin mode active · private stats available";
+    if (adminLogoutBtnEl) {
+      adminLogoutBtnEl.style.display = "";
+    }
 
     if (isFreshUpgrade && assistantWrapEl && transitionFlashEl) {
       transitionFlashEl.classList.remove("active");
@@ -754,6 +767,9 @@
     }
     modeBadgeEl.textContent = "Public mode";
     adminHintEl.textContent = "Conversations stay available when you come back";
+    if (adminLogoutBtnEl) {
+      adminLogoutBtnEl.style.display = "none";
+    }
     adminStats = null;
   }
 
@@ -831,6 +847,18 @@
   });
 
   sendBtn.addEventListener("click", () => sendMessage(inputEl.value));
+
+  if (adminLogoutBtnEl) {
+    adminLogoutBtnEl.addEventListener("click", async () => {
+      await fetch(window.KRISH_CHAT_CONFIG.adminLogoutUrl, {
+        method: "POST",
+        headers: { "X-CSRFToken": getCookie("csrftoken") },
+      });
+      store.setAdmin(false);
+      localStorage.removeItem("krish_chat_state_v1");
+      location.reload();
+    });
+  }
 
   inputEl.addEventListener("keydown", (event) => {
     if (event.key === "Enter" && !event.shiftKey) {

@@ -91,3 +91,6 @@ GitHub: https://github.com/Error-Krishna
 - Emphasize SaaS, developer tools, systems thinking, and execution
 - Keep the tone confident, helpful, and concise
 - Do not mention private planning, internal strategy, or anything not listed in this public file
+
+## Date of Birth
+- Date of Birth: 26 November 2005

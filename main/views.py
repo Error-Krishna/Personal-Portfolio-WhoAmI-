@@ -12,6 +12,7 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 
 from .content import (
+    delete_knowledge_section,
     get_home_projects,
     get_project,
     load_private_knowledge,
@@ -73,6 +74,11 @@ Admin writing protocol:
   content to write
   </krish_write>
 - Use `append` to add notes and `replace` only when Krishna clearly wants to overwrite a file or section wholesale
+- To DELETE content, use:
+  <krish_delete file="public|private">
+  exact text or section heading to remove
+  </krish_delete>
+- To READ/PREVIEW a file, Krishna can just ask and you will include the raw content inline in your reply (no special tag needed).
 - You can include a short normal response outside those tags if helpful
 - Never use write blocks unless Krishna is clearly asking for persistent changes
 
@@ -90,19 +96,19 @@ WRITE_BLOCK_RE = re.compile(
     r"<krish_write\s+file=\"(?P<file>public|private)\"\s+mode=\"(?P<mode>append|replace)\">(?P<content>.*?)</krish_write>",
     re.IGNORECASE | re.DOTALL,
 )
+DELETE_BLOCK_RE = re.compile(
+    r"<krish_delete\s+file=\"(?P<file>public|private)\">(?P<pattern>.*?)</krish_delete>",
+    re.IGNORECASE | re.DOTALL,
+)
 
 
 def _has_admin_passphrase(messages):
     if not ADMIN_PASSPHRASE:
         return False
 
-    for message in messages:
-        if message.get("role") != "user":
-            continue
-
-        content = str(message.get("content", "")).strip().lower()
-        if content == ADMIN_PASSPHRASE.lower():
-            return True
+    for msg in reversed(messages):
+        if msg.get("role") == "user":
+            return str(msg.get("content", "")).strip().lower() == ADMIN_PASSPHRASE.lower()
 
     return False
 
@@ -136,12 +142,13 @@ def _apply_admin_write_actions(reply: str, is_admin: bool):
     if not is_admin:
         return reply
 
-    matches = list(WRITE_BLOCK_RE.finditer(reply or ""))
-    if not matches:
+    write_matches = list(WRITE_BLOCK_RE.finditer(reply or ""))
+    delete_matches = list(DELETE_BLOCK_RE.finditer(reply or ""))
+    if not write_matches and not delete_matches:
         return reply
 
     write_summaries = []
-    for match in matches:
+    for match in write_matches:
         target = match.group("file").lower()
         mode = match.group("mode").lower()
         content = match.group("content").strip()
@@ -153,6 +160,15 @@ def _apply_admin_write_actions(reply: str, is_admin: bool):
             write_summaries.append(f"Could not write `{target}` knowledge: {exc}.")
 
     cleaned_reply = WRITE_BLOCK_RE.sub("", reply).strip()
+    for match in DELETE_BLOCK_RE.finditer(reply or ""):
+        target = match.group("file").lower()
+        pattern = match.group("pattern").strip()
+        try:
+            delete_knowledge_section(target, pattern)
+            write_summaries.append(f"Deleted matching content from `{target}`.")
+        except ValueError as exc:
+            write_summaries.append(f"Could not delete from `{target}`: {exc}.")
+    cleaned_reply = DELETE_BLOCK_RE.sub("", cleaned_reply).strip()
     summary_text = " ".join(write_summaries).strip()
     if cleaned_reply and summary_text:
         return cleaned_reply + "\n\n" + summary_text
@@ -390,6 +406,12 @@ def assistant_stats_api(request):
         return JsonResponse({"error": "Admin mode required"}, status=403)
 
     return JsonResponse({"stats": _get_admin_stats()})
+
+
+@require_POST
+def admin_logout(request):
+    request.session.pop("assistant_is_admin", None)
+    return JsonResponse({"ok": True})
 
 
 @require_POST

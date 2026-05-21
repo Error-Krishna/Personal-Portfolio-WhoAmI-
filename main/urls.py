@@ -11,5 +11,6 @@ urlpatterns = [
     path('resume/download/', views.resume_download, name='resume_download'),
     path('assistant/', views.assistant_page, name='assistant'),
     path('api/assistant-stats/', views.assistant_stats_api, name='assistant_stats_api'),
+    path('api/admin-logout/', views.admin_logout, name='admin_logout'),
     path('api/chat/', views.chat_api, name='chat_api'),
 ]

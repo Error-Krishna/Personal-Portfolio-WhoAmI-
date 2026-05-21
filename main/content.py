@@ -158,3 +158,23 @@ def write_knowledge_file(target: str, content: str, mode: str = "append") -> Pat
     path.write_text(next_text, encoding="utf-8")
     _CACHE.pop(str(path), None)
     return path
+
+
+def delete_knowledge_section(target: str, pattern: str) -> Path:
+    normalized_target = str(target).strip().lower()
+    path = KNOWLEDGE_FILES.get(normalized_target)
+    if path is None:
+        raise ValueError("Unsupported knowledge target")
+
+    pattern = pattern.strip()
+    if not pattern:
+        raise ValueError("Cannot delete empty pattern")
+
+    existing = path.read_text(encoding="utf-8") if path.exists() else ""
+    if pattern not in existing:
+        raise ValueError(f"Pattern not found in `{normalized_target}`")
+
+    updated = existing.replace(pattern, "").strip() + "\n"
+    path.write_text(updated, encoding="utf-8")
+    _CACHE.pop(str(path), None)
+    return path

@@ -3,12 +3,22 @@ from unittest.mock import patch
 
 from django.test import TestCase, override_settings
 from django.urls import reverse
+from django.utils.timezone import localdate
 
 from main import views
 from main.models import DailyVisitorStat
 
+TEST_STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
 
-@override_settings(SECURE_SSL_REDIRECT=False)
+
+@override_settings(SECURE_SSL_REDIRECT=False, STORAGES=TEST_STORAGES)
 class PortfolioViewsTests(TestCase):
     def test_home_page_loads(self):
         response = self.client.get(reverse("home"))
@@ -35,7 +45,7 @@ class PortfolioViewsTests(TestCase):
         self.assertJSONEqual(response.content, {"status": "ok"})
 
 
-@override_settings(SECURE_SSL_REDIRECT=False)
+@override_settings(SECURE_SSL_REDIRECT=False, STORAGES=TEST_STORAGES)
 class AssistantViewTests(TestCase):
     def test_assistant_page_loads(self):
         response = self.client.get(reverse("assistant"))
@@ -83,6 +93,10 @@ class AssistantViewTests(TestCase):
             {
                 "reply": "Admin mode unlocked. Ask me anything when you're ready.",
                 "is_admin": True,
+                "admin_stats": {
+                    "date": localdate().isoformat(),
+                    "unique_users_today": 0,
+                },
             },
         )
         self.assertTrue(self.client.session["assistant_is_admin"])
@@ -122,8 +136,22 @@ class AssistantViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["stats"]["unique_users_today"], 1)
 
+    def test_admin_logout_clears_session(self):
+        session = self.client.session
+        session["assistant_is_admin"] = True
+        session.save()
 
-@override_settings(SECURE_SSL_REDIRECT=False)
+        response = self.client.post(reverse("admin_logout"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(self.client.session.get("assistant_is_admin", False))
+
+    def test_admin_logout_rejects_get(self):
+        response = self.client.get(reverse("admin_logout"))
+        self.assertEqual(response.status_code, 405)
+
+
+@override_settings(SECURE_SSL_REDIRECT=False, STORAGES=TEST_STORAGES)
 class ResumeViewTests(TestCase):
     def test_resume_page_loads(self):
         response = self.client.get(reverse("resume"))
