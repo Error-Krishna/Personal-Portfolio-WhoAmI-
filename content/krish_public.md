@@ -1,71 +1,209 @@
-# Krishna Goyal - Public Profile
+# Krishna Goyal — Public Profile & Professional Knowledge
 
-## Who is Krishna?
-Krishna Goyal is a B.Tech Computer Science student at Vellore Institute of Technology, Amaravati, India, graduating in 2027.
-He is a builder focused on full-stack products, developer tools, SaaS systems, and practical software for real-world workflows.
+## Identity
+- Name: Krishna Goyal
+- Preferred name: Krishna
+- Current role: 4th-year B.Tech Computer Science student
+- Institution: Vellore Institute of Technology (VIT-AP), Amaravati, India
+- Expected graduation: 2027
+- Current CGPA: 8.15/10.0
+- Previous schooling: Satynarayan Academy, PCM with Computer Science, West Bengal, India
+- Class 12 completion: May 2023
+- Class 12 percentage: 86.2/100
 
-## Public Summary
-Krishna works across backend systems, product architecture, business software, and modern web development.
-He is especially interested in building tools that improve operations, reduce manual work, and turn ideas into scalable products.
+## Professional Summary
+Krishna is a product-minded frontend/full-stack engineer and student builder interested in turning real-world problems into practical software. He works across modern web development, backend systems, SaaS products, developer tooling, automation, data-oriented applications, and product architecture.
 
-## Education
-- Vellore Institute of Technology, B.Tech in Computer Science, Amaravati, India
-  Graduating in 2027
-  CGPA: 7.95/10.0
-  Relevant coursework: Computer Networks, Operating Systems, DBMS, Object-Oriented Programming, NoSQL Databases
-- Satynarayan Academy, PCM with Computer Science, West Bengal, India
-  Completed in May 2023
-  Class 12th Percentage: 86.2/100
+He particularly enjoys:
+- Building polished frontend experiences and learning React deeply
+- Designing full-stack systems and APIs
+- Building SaaS products for real operational workflows
+- Developer productivity and automation
+- Dashboards, data visualization, and business software
+- Systems thinking and understanding how software works end-to-end
+- Turning repetitive/manual workflows into reliable software
+- Exploring AI-assisted products and intelligent operational tools
 
-## Skills
-Languages: Java, Python, JavaScript, HTML/CSS, SQL
-Frameworks and Libraries: React.js, Node.js, Express.js, Django, Flask
-Databases: MongoDB, MySQL, Firebase, Redis
-Tools and Platforms: Git, GitHub, AWS, Notion, Trello (familiar), MongoDB Compass
+## Career Direction
+- Seeking strong frontend, full-stack, software engineering, and related product-engineering opportunities.
+- Interested in remote international opportunities and strong engineering roles in India.
+- Wants to build a career around high-quality engineering, product ownership, and real-world impact.
+- Comfortable presenting himself as a frontend engineer, full-stack engineer, product-minded developer, or software engineer depending on the role.
+- Actively preparing for technical interviews, including React, JavaScript, DSA, OS, OOP, DBMS, Computer Networks, and System Design.
 
-## Projects
+## Core Technical Skills
+
+### Languages
+- Java
+- Python
+- JavaScript
+- HTML
+- CSS
+- SQL
+- Go
+
+### Frontend
+- React.js
+- JavaScript
+- HTML/CSS
+- Chart.js
+- Responsive web development
+- UI/UX and product-interface design
+- React hooks and component architecture
+- Frontend performance and browser fundamentals
+
+### Backend
+- Node.js
+- Express.js
+- Django
+- Flask
+- REST APIs
+- WebSockets
+- ASGI/Daphne/Uvicorn concepts
+- Backend integration and deployment
+
+### Databases / Data
+- MongoDB
+- MongoDB Atlas
+- MongoDB Compass
+- MySQL
+- Firebase
+- Redis
+- SQL
+- Data visualization
+- EDA/data-analysis fundamentals
+
+### Tools / Platforms
+- Git
+- GitHub
+- AWS
+- Render
+- Docker
+- Notion
+- Trello (familiar)
+- Postman
+- Homebrew
+- macOS development environment
+- Android Studio / Flutter tooling
+- Figma/AI-assisted design workflows
+
+### Additional Engineering Areas
+- CLI development
+- Automation
+- Process lifecycle management
+- File watching
+- WebSockets and real-time applications
+- Deployment/debugging
+- Environment and dependency management
+- Browser/frontend architecture
+- API integration
+- SaaS architecture
+- Product architecture
+
+## Major Projects
 
 ### Udhyog Saathi
-Category: SaaS Product / Business Operating System
+**Category:** SaaS Product / Business Operating System  
+**Tagline:** “Har Udhyog Ka Digital Saathi”
+
+Udhyog Saathi is a business operating system for small and mid-sized manufacturers, with an initial focus on textile/manufacturing workflows. Krishna is a co-founder and frontend/product-focused developer working on the product with a two-person founding team.
+
+Core areas:
+- Business dashboard
+- Invoice generation
+- Kacha bill / Pakka bill workflows
+- Inventory and raw-material tracking
+- Worker management
+- Warehouse operations
+- Production monitoring
+- Billing analytics
+- Payment tracking
+- Operational visibility
+- Automation workflows
+- Potential/event-driven WhatsApp integrations
+
+Product direction:
+- Reduce manual operational work for manufacturers
+- Bring billing, inventory, workforce, production, and payment workflows into one system
+- Build practical software around the realities of small/mid-sized manufacturing businesses
+
 Links:
 - Frontend GitHub: https://github.com/Manish-bhargava/udhyog-saathi-frontend
 - Backend GitHub: https://github.com/Manish-bhargava/udhyog-saath-backend/
 - Live: https://udhyogsaathi.in/
 
-Highlights:
-- Designed a SaaS-based business operating system for MSMEs
-- Focused on billing, inventory, and workforce management in one platform
-- Structured end-to-end workflows for billing, stock tracking, and worker management
-- Designed dashboards for real-time operational visibility and decision-making
-- Proposed automation workflows including event-based triggers and WhatsApp integration
-
 ### HotReload
-Category: Developer Tool / CLI
+**Category:** Developer Tool / CLI
+
+A Go-based CLI that automates server rebuilds and restarts when files change.
+
+Highlights:
+- Recursive file watching
+- Debouncing
+- Graceful restarts
+- Project auto-detection
+- Process lifecycle management
+- Faster development feedback loops
+
+Technologies:
+- Go
+- fsnotify
+- CLI design
+
 Links:
 - GitHub: https://github.com/Error-Krishna/hotreload
 - Demo: https://www.loom.com/share/773d4d8fdd1840128b92929643a08965
 
-Highlights:
-- Built a CLI tool in Go that automates server rebuilds and restarts on file changes
-- Reduced manual stop/rebuild effort and improved development feedback loops
-- Implemented recursive file watching, debouncing, graceful restarts, and project auto-detection
-- Technologies used: Go, fsnotify, CLI design, process lifecycle management
-
 ### InsightLoop
-Category: Web Application
+**Category:** Full-stack Web Application / Business Management Platform
+
+A business management and analytics application designed around operational visibility.
+
+Features/areas:
+- Sales tracking
+- Payment tracking
+- Worker management
+- Profit/loss visibility
+- Real-time dashboard
+- WebSocket-based live synchronization
+- AI assistant for operational support
+
+Technologies:
+- React.js
+- Node.js
+- Express.js
+- MongoDB
+- WebSockets
+
 Links:
 - GitHub: https://github.com/Error-Krishna/InsightLoop
 - Live: https://insightloop.onrender.com/
 
-Highlights:
-- Built a full-stack business management platform
-- Tracks sales, payments, workers, and profit/loss through a real-time dashboard
-- Integrated WebSockets for live sync and an AI assistant for operational support
-- Technologies used: MongoDB, Express.js, React.js, Node.js
+### Personal Finance Tracker
+- Built a personal finance tracking application using Flask and MongoDB.
+- Used Chart.js for visualization.
+- Previously deployed on Render.
+- Later explored/migrated related backend work toward Django.
 
-## Hackathons and Competitions
-- EY Techathon 5.0: Successfully cleared Round 1 of the national competition
-- Smart India Hackathon 2023: Participated in the national-level hackathon
+### Job Automation System
+A personal job-discovery/application automation project.
+
+Known capabilities/workflows:
+- Searches jobs across sources such as Indeed, LinkedIn, Wellfound, Glassdoor, Naukri, and Unstop.
+- Uses configurable job keywords and remote location preferences.
+- CLI commands include dashboard, driver checks, run, and apply-all workflows.
+- Uses Python, virtual environments, Selenium/browser automation, CSV tracking, and local configuration/data directories.
+- Designed to limit daily processing and track discovered/opened/applied jobs.
+
+### React Learning / Frontend Practice
+- Actively learning React in depth.
+- Following the Namaste React course by Akshay Saini.
+- Studying React hooks, component architecture, rendering, browser behavior, and frontend interview concepts.
+- Building toward strong practical frontend-engineering understanding rather than only framework-level familiarity.
+
+## Hackathons / Competitions
+- EY Techathon 5.0 — successfully cleared Round 1 of the national competition.
+- Smart India Hackathon 2023 — participated in the national-level hackathon.
 
 ## Certifications
 - Full Stack Development (MERN), BlackBucks
@@ -73,24 +211,42 @@ Highlights:
 - Cloud Computing (AWS), Corizo
   Certificate: https://drive.google.com/file/d/1Vpar3ulUsRu0NGGT59QtBD-WaD4u_RAQ/view?usp=drive_link
 
-## Leadership Experience
+## Leadership
 - President, Hindi Association, VIT-AP
-  Led the university's Hindi association and organized cultural activities for the student community
+  - Led the university Hindi association.
+  - Organized cultural activities for the student community.
 - State-Coordinator, UP State Rally, University Fest
-  Coordinated a state-level rally, including logistics and participation support
+  - Coordinated logistics and participation support for a state-level rally.
 
-## Contact and Links
-Email: iamkrishnagoyal@gmail.com
-Phone: +91-9064700906
-Portfolio: https://personal-portfolio-whoami-1.onrender.com
-LinkedIn: https://linkedin.com/in/krishna2611
-GitHub: https://github.com/Error-Krishna
+## Interests
+- Frontend engineering
+- React
+- Full-stack development
+- SaaS
+- Developer tools
+- Automation
+- AI-assisted software
+- Data analytics and visualization
+- Product design
+- Systems thinking
+- Business software
+- Manufacturing technology
+- Developer productivity
+- Building products from scratch
 
-## How Krish should present Krishna publicly
-- Speak about Krishna as a product-minded developer and student builder
-- Emphasize SaaS, developer tools, systems thinking, and execution
-- Keep the tone confident, helpful, and concise
-- Do not mention private planning, internal strategy, or anything not listed in this public file
+## Public Links
+- Email: iamkrishnagoyal@gmail.com
+- Phone: +91-9064700906
+- Portfolio: https://personal-portfolio-whoami-1.onrender.com
+- LinkedIn: https://linkedin.com/in/krishna2611
+- GitHub: https://github.com/Error-Krishna
+- Udhyog Saathi: https://udhyogsaathi.in/
 
-## Date of Birth
-- Date of Birth: 26 November 2005
+## Public Positioning
+When presenting Krishna publicly:
+- Position him as a product-minded developer and student builder.
+- Emphasize frontend engineering, SaaS, developer tools, systems thinking, automation, and execution.
+- Highlight real projects rather than generic skill lists.
+- Keep the tone confident, technically grounded, helpful, and concise.
+- Adapt the emphasis to the target role: frontend, full-stack, software engineering, or product engineering.
+- Do not expose private personal information, private career strategy, health/lifestyle information, financial expectations, internal company strategy, or private administrative notes.
