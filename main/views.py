@@ -1,8 +1,10 @@
 import json
 import os
 import re
+import time
 
 from django.conf import settings
+from django.core.mail import EmailMessage
 from django.db import DatabaseError, IntegrityError
 from django.http import FileResponse, Http404, JsonResponse
 from django.shortcuts import render
@@ -395,6 +397,67 @@ def resume_download(request):
         content_type="application/pdf",
         filename=RESUME_FILE_NAME,
     )
+
+
+EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+CONTACT_RATE_LIMIT_SECONDS = 45
+
+
+@ensure_csrf_cookie
+@require_POST
+def contact_submit(request):
+    """Handle the on-site contact form and email Krishna directly."""
+    try:
+        body = json.loads(request.body.decode("utf-8"))
+    except json.JSONDecodeError:
+        return JsonResponse({"error": "Invalid request."}, status=400)
+
+    # Honeypot field: real visitors never fill this hidden input, bots often do.
+    if str(body.get("website", "")).strip():
+        return JsonResponse({"ok": True})
+
+    name = str(body.get("name", "")).strip()[:120]
+    email = str(body.get("email", "")).strip()[:200]
+    message = str(body.get("message", "")).strip()[:5000]
+
+    if not name or not email or not message:
+        return JsonResponse({"error": "Please fill in your name, email, and a message."}, status=400)
+
+    if not EMAIL_RE.match(email):
+        return JsonResponse({"error": "That email address doesn't look right."}, status=400)
+
+    last_submit = request.session.get("last_contact_submit_ts")
+    now_ts = time.time()
+    if last_submit and (now_ts - last_submit) < CONTACT_RATE_LIMIT_SECONDS:
+        return JsonResponse(
+            {"error": "You're sending messages a little too fast -- please wait a moment and try again."},
+            status=429,
+        )
+
+    receiver = getattr(settings, "CONTACT_RECEIVER_EMAIL", "").strip()
+    if not receiver:
+        return JsonResponse(
+            {"error": "The contact form isn't configured yet. Please email Krishna directly for now."},
+            status=500,
+        )
+
+    try:
+        email_message = EmailMessage(
+            subject=f"Portfolio contact from {name}",
+            body=f"From: {name} <{email}>\n\n{message}",
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[receiver],
+            reply_to=[email],
+        )
+        email_message.send(fail_silently=False)
+    except Exception:
+        return JsonResponse(
+            {"error": "Something went wrong sending your message. Please try emailing directly instead."},
+            status=500,
+        )
+
+    request.session["last_contact_submit_ts"] = now_ts
+    return JsonResponse({"ok": True})
 
 
 def health_check(request):

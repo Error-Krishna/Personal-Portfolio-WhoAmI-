@@ -210,6 +210,23 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = "DENY"
 SECURE_REFERRER_POLICY = "same-origin"
 
+# --- Contact form email ---
+# In development, if no SMTP host is configured, emails are printed to the
+# console instead of actually being sent, so the form still "works" locally.
+EMAIL_HOST = _get_env("EMAIL_HOST", default="")
+EMAIL_PORT = int(_get_env("EMAIL_PORT", default="587"))
+EMAIL_HOST_USER = _get_env("EMAIL_HOST_USER", default="")
+EMAIL_HOST_PASSWORD = _get_env("EMAIL_HOST_PASSWORD", default="")
+EMAIL_USE_TLS = _get_bool_env("EMAIL_USE_TLS", default=True)
+EMAIL_BACKEND = (
+    "django.core.mail.backends.smtp.EmailBackend"
+    if EMAIL_HOST
+    else "django.core.mail.backends.console.EmailBackend"
+)
+DEFAULT_FROM_EMAIL = _get_env("DEFAULT_FROM_EMAIL", default=EMAIL_HOST_USER or "no-reply@localhost")
+# The inbox that should actually receive messages sent through the site's contact form.
+CONTACT_RECEIVER_EMAIL = _get_env("CONTACT_RECEIVER_EMAIL", default=EMAIL_HOST_USER or "")
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
