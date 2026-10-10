@@ -1,0 +1,24 @@
+<article class="project-card{% if variant %} project-card--{{ variant }}{% endif %} card card--hover">
+  <div class="project-card__art">
+    {% if project.image %}<img class="project-card__image" src="{{ project.image }}" alt="{{ project.image_alt|default:project.title }}" loading="lazy" width="640" height="360">
+    {% else %}<span class="project-card__monogram" aria-hidden="true">{{ project.title|first|upper }}</span>{% endif %}
+  </div>
+  <div class="project-card__body">
+    <div class="project-card__meta">
+      {% if variant %}{% include "components/badge.html" with label=project.home_badge|default:project.category %}{% else %}{% include "components/badge.html" with label=project.category %}{% endif %}
+      {% if project.status %}<span class="project-card__status">{{ project.status|capfirst }}</span>{% endif %}
+    </div>
+    <h3 class="project-card__title">{{ project.title }}</h3>
+    <p class="project-card__summary">{{ project.summary|default:project.tagline }}</p>
+    {% if project.stack %}<div class="project-card__tags" role="list" aria-label="Technology">
+      {% for technology in project.stack|slice:":4" %}{% include "components/tag.html" with label=technology %}{% endfor %}
+    </div>{% endif %}
+    {% if project.show_detail_link %}
+      <a class="button button--text project-card__link" href="{% url 'work_project_detail' project.slug %}">View project <span aria-hidden="true">→</span></a>
+    {% elif project.live_url %}
+      <a class="button button--text project-card__link" href="{{ project.live_url }}" target="_blank" rel="noopener noreferrer">Visit project <span aria-hidden="true">↗</span></a>
+    {% else %}
+      <span class="project-card__link u-muted">{{ project.home_cta_label|default:"Case study in progress" }}</span>
+    {% endif %}
+  </div>
+</article>

@@ -3,7 +3,7 @@ services:
     name: krishna-portfolio
     runtime: python
     buildCommand: bash build.sh
-    startCommand: gunicorn portfolio_core.wsgi:application --bind 0.0.0.0:$PORT --workers 3 --log-file -
+    startCommand: gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 3 --log-file -
     healthCheckPath: /health/
     autoDeploy: true
     envVars:
@@ -14,6 +14,10 @@ services:
       - key: DJANGO_ALLOWED_HOSTS
         sync: false
       - key: DJANGO_CSRF_TRUSTED_ORIGINS
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: REDIS_URL
         sync: false
       - key: DJANGO_SECRET_KEY
         sync: false
@@ -32,6 +36,6 @@ services:
       - key: DJANGO_SECURE_HSTS_SECONDS
         value: "31536000"
       - key: DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS
-        value: "true"
+        value: "false"
       - key: DJANGO_SECURE_HSTS_PRELOAD
-        value: "true"
+        value: "false"

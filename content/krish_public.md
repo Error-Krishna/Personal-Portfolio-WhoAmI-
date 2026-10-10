@@ -250,3 +250,30 @@ When presenting Krishna publicly:
 - Keep the tone confident, technically grounded, helpful, and concise.
 - Adapt the emphasis to the target role: frontend, full-stack, software engineering, or product engineering.
 - Do not expose private personal information, private career strategy, health/lifestyle information, financial expectations, internal company strategy, or private administrative notes.
+
+## Education
+
+- **Vellore Institute of Technology, Amaravati (VIT‑AP)**
+  - B.Tech in Computer Science  
+  - Expected graduation: 2027  
+  - Current CGPA: 8.15 / 10.0  
+  - Relevant coursework: Computer Networks, Operating Systems, DBMS, OOP, NoSQL Databases, Web Technology, Data Warehousing & Data Mining.
+
+- **Satynarayan Academy**
+  - Higher Secondary (PCM with Computer Science)  
+  - Completed: May 2023  
+  - Class 12 percentage: 86.2 %
+
+## Education
+
+- **Vellore Institute of Technology, Amaravati (VIT‑AP)**
+  - B.Tech in Computer Science  
+  - Current academic stage: 4th-year student  
+  - Expected graduation: 2027  
+  - Relevant coursework: Computer Networks, Operating Systems, DBMS, OOP, NoSQL Databases, Web Technology, Data Warehousing & Data Mining.
+  - college CGPA: 8.15
+
+- **Satynarayan Academy**
+  - Higher Secondary (PCM with Computer Science)  
+  - Completed: May 2023  
+  - Class 12 percentage: 86.2 %

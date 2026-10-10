@@ -1,0 +1,1 @@
+<textarea class="form-control" id="{{ id }}" name="{{ name }}" rows="{{ rows|default:5 }}"{% if placeholder %} placeholder="{{ placeholder }}"{% endif %}{% if required %} required{% endif %}{% if disabled %} disabled{% endif %}{% if described_by %} aria-describedby="{{ described_by }}"{% endif %}>{{ value|default:"" }}</textarea>

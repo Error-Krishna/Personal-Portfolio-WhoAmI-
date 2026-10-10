@@ -1,0 +1,10 @@
+<article class="work-card work-card--{{ variant }}">
+  <a class="work-card__art" href="{% url 'work_project_detail' project.slug %}" aria-label="Read the {{ project.case_study.title }} case study"><span aria-hidden="true">{{ project.case_study.title|first|upper }}</span><small>{{ project.case_study.category }}</small></a>
+  <div class="work-card__body">
+    <div class="work-card__meta"><p class="eyebrow">{{ project.case_study.category }}</p>{% if project.case_study.status %}<span class="work-card__status">{{ project.case_study.status }}</span>{% endif %}</div>
+    <h3><a href="{% url 'work_project_detail' project.slug %}">{{ project.case_study.title }}</a></h3>
+    <p>{{ project.case_study.summary }}</p>
+    {% if project.case_study.technologies %}<ul class="work-card__tags" aria-label="Technology">{% for technology in project.case_study.technologies|slice:":4" %}<li>{{ technology }}</li>{% endfor %}</ul>{% endif %}
+    <a class="button button--text" href="{% url 'work_project_detail' project.slug %}">Read case study <span aria-hidden="true">→</span></a>
+  </div>
+</article>

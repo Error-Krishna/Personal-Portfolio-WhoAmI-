@@ -1,149 +1,41 @@
 (function() {
-  const CHAT_STORAGE_KEY = "krish_chat_state_v1";
   const VISIT_STORAGE_KEY = "krish_visit_state_v1";
-
-  function clone(value) {
-    return JSON.parse(JSON.stringify(value));
-  }
-
-  function loadJson(key, fallback) {
-    try {
-      const raw = localStorage.getItem(key);
-      return raw ? JSON.parse(raw) : clone(fallback);
-    } catch (error) {
-      return clone(fallback);
-    }
-  }
-
-  function createDefaultChatState() {
-    return {
-      isAdmin: false,
-      messages: [],
-    };
-  }
-
-  function createDefaultVisitState() {
-    return {
-      totalVisits: 0,
-      visitsByDay: {},
-      lastTrackedDate: null,
-    };
-  }
-
-  let chatState = loadJson(CHAT_STORAGE_KEY, createDefaultChatState());
-  let visitState = loadJson(VISIT_STORAGE_KEY, createDefaultVisitState());
+  // Discard conversations saved by older versions (which could contain private admin output).
+  try { localStorage.removeItem("krish_chat_state_v1"); } catch (_) {}
+  let chatState = { messages: [] };
+  let visitState = { totalVisits: 0, visitsByDay: {}, lastTrackedDate: null };
+  try {
+    const saved = JSON.parse(localStorage.getItem(VISIT_STORAGE_KEY) || "null");
+    if (saved && typeof saved === "object") visitState = { ...visitState, ...saved };
+  } catch (_) {}
   const listeners = new Set();
-
-  function persistChatState() {
-    localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(chatState));
-  }
-
-  function persistVisitState() {
-    localStorage.setItem(VISIT_STORAGE_KEY, JSON.stringify(visitState));
-  }
-
+  const clone = (value) => JSON.parse(JSON.stringify(value));
   function notify() {
     const snapshot = clone(chatState);
     listeners.forEach((listener) => listener(snapshot));
     window.dispatchEvent(new CustomEvent("krish-chat:updated", { detail: snapshot }));
   }
-
-  function getTodayKey() {
-    return new Date().toDateString();
-  }
-
-  function formatMessage(message) {
-    return {
-      id: message.id || String(Date.now() + Math.random()),
-      role: message.role,
-      content: message.content,
-      timestamp: message.timestamp || new Date().toISOString(),
-    };
-  }
-
-  window.addEventListener("storage", (event) => {
-    if (event.key === CHAT_STORAGE_KEY) {
-      chatState = loadJson(CHAT_STORAGE_KEY, createDefaultChatState());
-      notify();
-    }
-
-    if (event.key === VISIT_STORAGE_KEY) {
-      visitState = loadJson(VISIT_STORAGE_KEY, createDefaultVisitState());
-    }
-  });
-
   window.KrishChatStore = {
-    getState() {
-      return clone(chatState);
-    },
-
-    subscribe(listener) {
-      listeners.add(listener);
-      listener(clone(chatState));
-      return function unsubscribe() {
-        listeners.delete(listener);
-      };
-    },
-
+    getState: () => clone(chatState),
+    subscribe(listener) { listeners.add(listener); listener(clone(chatState)); return () => listeners.delete(listener); },
     trackVisit() {
-      const today = getTodayKey();
-      visitState.totalVisits += 1;
+      const today = new Date().toDateString();
+      visitState.totalVisits++;
       visitState.visitsByDay[today] = (visitState.visitsByDay[today] || 0) + 1;
       visitState.lastTrackedDate = today;
-      persistVisitState();
+      try { localStorage.setItem(VISIT_STORAGE_KEY, JSON.stringify(visitState)); } catch (_) {}
       return clone(visitState);
     },
-
-    getVisitState() {
-      return clone(visitState);
-    },
-
-    getSessionInfo() {
-      const today = getTodayKey();
-      const todayVisits = visitState.visitsByDay[today] || 0;
-      return "Today: " + todayVisits + " visit(s). Total visits recorded: " + visitState.totalVisits + ". Date: " + today + ".";
-    },
-
-    ensureIntro(introText) {
-      if (chatState.messages.length > 0) {
-        return false;
+    ensureIntro(content) { if (!chatState.messages.length) { chatState.messages.push({ role: "assistant", content }); notify(); } },
+    addMessage(role, content, links = []) { chatState.messages.push({ role, content, links }); notify(); },
+    clearConversation(content = "") {
+      chatState.messages = [];
+      if (content) {
+        chatState.messages.push({ role: "assistant", content, links: [] });
       }
-
-      chatState.messages.push(
-        formatMessage({
-          role: "assistant",
-          content: introText,
-        })
-      );
-      persistChatState();
       notify();
-      return true;
+      window.dispatchEvent(new CustomEvent("krish-chat:cleared"));
     },
-
-    addMessage(role, content) {
-      chatState.messages.push(
-        formatMessage({
-          role: role,
-          content: content,
-        })
-      );
-      persistChatState();
-      notify();
-    },
-
-    setAdmin(nextValue) {
-      chatState.isAdmin = Boolean(nextValue);
-      persistChatState();
-      notify();
-    },
-
-    getConversationPayload() {
-      return chatState.messages.map(function(message) {
-        return {
-          role: message.role,
-          content: message.content,
-        };
-      });
-    },
+    getConversationPayload() { return chatState.messages.filter((m) => m.role === "user").slice(-19).map((m) => ({ role: "user", content: m.content })); },
   };
 })();

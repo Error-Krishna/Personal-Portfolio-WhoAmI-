@@ -1,0 +1,192 @@
+{% extends "base/layout.html" %}
+{% load static %}
+{% block title %}<title>{{ home_seo.title|default:"Krishna Goyal — Product-minded engineer" }}</title>{% endblock %}
+{% block seo %}
+<meta name="description" content="{{ home_seo.description }}">
+<link rel="canonical" href="{{ home_canonical }}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ home_seo.og_title|default:home_seo.title }}">
+<meta property="og:description" content="{{ home_seo.og_description|default:home_seo.description }}">
+<meta property="og:url" content="{{ home_canonical }}">
+<meta name="twitter:card" content="{{ home_seo.twitter_card|default:'summary' }}">
+<meta name="twitter:title" content="{{ home_seo.og_title|default:home_seo.title }}">
+<meta name="twitter:description" content="{{ home_seo.og_description|default:home_seo.description }}">
+{{ person_jsonld }}
+{{ website_jsonld }}
+{% endblock %}
+{% block content %}
+<section class="home-hero container" aria-labelledby="home-title">
+  <div class="home-hero__content">
+    <p class="eyebrow home-hero__eyebrow">Product-minded engineer</p>
+    <h1 id="home-title" class="home-hero__title">I build digital products that move ideas forward.</h1>
+    <p class="home-hero__copy">Product-minded frontend and full-stack engineering for founders, businesses, and teams.</p>
+    <div class="home-hero__actions">
+      <a class="button button--primary" href="{% url 'book' %}">Book a Session</a>
+      <a class="button button--secondary" href="{% if home_has_projects %}#selected-work{% else %}{% url 'work_index' %}{% endif %}">View Selected Work</a>
+    </div>
+  </div>
+</section>
+
+<section class="home-context section--compact" aria-label="Technical and product context">
+  <div class="section__inner home-context__inner">
+    <p>Project work across SaaS, business workflows, analytics, and personal finance.</p>
+    <ul class="home-context__stack" aria-label="Technologies in public project work">
+      <li>Django</li><li>Flask</li><li>JavaScript</li><li>MongoDB</li><li>Chart.js</li>
+    </ul>
+  </div>
+</section>
+
+{% if home_has_capabilities %}<section id="services" class="section" aria-labelledby="capabilities-heading">
+  <div class="section__inner">
+    {% include "components/section-header.html" with eyebrow="Capabilities" heading="What I do" heading_id="capabilities-heading" %}
+    {% if published_services %}
+      <div class="grid grid--3 home-capabilities">
+        {% for service in published_services %}{% include "components/service-card.html" with service=service %}{% endfor %}
+      </div>
+    {% else %}
+      <div class="grid grid--3 home-capabilities">
+        {% for capability in capabilities %}{% if capability.content_state == "published" %}{% include "components/capability-card.html" with capability=capability %}{% endif %}{% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>{% endif %}
+
+{% if lead_project or secondary_project or supporting_projects %}
+<section id="selected-work" class="section section--soft" aria-labelledby="work-heading">
+  <div class="section__inner">
+    {% include "components/section-header.html" with eyebrow="Selected work" heading="Projects and explorations" description="A selection of software projects and product work." heading_id="work-heading" %}
+    {% if lead_project or secondary_project %}
+      <div class="home-work-featured">
+        {% if lead_project %}{% include "components/project-card.html" with project=lead_project variant="lead" %}{% endif %}
+        {% if secondary_project %}{% include "components/project-card.html" with project=secondary_project variant="secondary" %}{% endif %}
+      </div>
+    {% endif %}
+    {% if supporting_projects %}
+      <div class="home-work-supporting" aria-label="Supporting projects">
+        <p class="eyebrow">More work</p>
+        <div class="grid grid--2">
+          {% for project in supporting_projects %}{% include "components/project-card.html" with project=project variant="supporting" %}{% endfor %}
+        </div>
+      </div>
+    {% endif %}
+    <p class="u-mt-8"><a class="button button--text" href="{% url 'work_index' %}">Explore all work <span aria-hidden="true">→</span></a></p>
+  </div>
+</section>
+{% endif %}
+
+{% if process_steps %}
+<section id="process" class="section" aria-labelledby="process-heading">
+  <div class="section__inner">
+    {% include "components/section-header.html" with eyebrow="Process" description="From understanding the problem through launch and improvement." heading="How I work" heading_id="process-heading" %}
+    <div class="process-list">
+      {% for step in process_steps %}{% include "components/process-step.html" with step=step %}{% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if current_build %}
+<section class="section section--dark" aria-labelledby="current-build-heading">
+  <div class="section__inner home-current-build">
+    <div>
+      <p class="eyebrow">Currently building</p>
+      <h2 id="current-build-heading">{{ current_build.title }}</h2>
+      <p class="home-current-build__summary">{{ current_build.summary }}</p>
+      {% if current_build.url %}<a class="button button--light" href="{{ current_build.url }}" target="_blank" rel="noopener noreferrer">Visit project <span aria-hidden="true">↗</span></a>{% endif %}
+    </div>
+    <span class="home-current-build__status">{{ current_build.status|capfirst }}</span>
+  </div>
+</section>
+{% endif %}
+
+{% if engagement_models %}
+<section id="engagements" class="section" aria-labelledby="engagement-heading">
+  <div class="section__inner">
+    {% include "components/section-header.html" with eyebrow="Engagement models" heading="Ways to scope a project" heading_id="engagement-heading" %}
+    <div class="grid grid--3 home-engagements">
+      {% for model in engagement_models %}
+        <article class="pricing-card card">
+          <p class="eyebrow">{{ forloop.counter|stringformat:"02d" }}</p>
+          <h3 class="pricing-card__title">{{ model.name }}</h3>
+          {% if model.ideal_for %}<ul class="pricing-card__list">{% for item in model.ideal_for %}<li>{{ item }}</li>{% endfor %}</ul>{% endif %}
+          <a class="button button--secondary" href="{% url 'book' %}">Discuss your project</a>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if published_testimonials %}
+<section class="section section--soft" aria-labelledby="testimonials-heading">
+  <div class="section__inner">
+    {% include "components/section-header.html" with eyebrow="Testimonials" heading="What people say" heading_id="testimonials-heading" %}
+    <div class="grid grid--3">{% for testimonial in published_testimonials %}{% include "components/testimonial-card.html" with testimonial=testimonial %}{% endfor %}</div>
+  </div>
+</section>
+{% endif %}
+
+<section id="about" class="section" aria-labelledby="about-heading">
+  <div class="section__inner home-about">
+    <div class="home-about__portrait-wrap">
+      <img class="home-about__portrait" src="{% static 'images/image-removebg-preview.png' %}" alt="Krishna Goyal" width="393" height="635" loading="lazy">
+    </div>
+    <div class="home-about__content">
+      <p class="eyebrow">About</p>
+      <h2 id="about-heading" class="home-about__lead">Product thinking, grounded in practical software.</h2>
+      <p class="home-about__copy">I’m Krishna Goyal, a product-minded frontend and full-stack engineer interested in turning real-world problems into practical software.</p>
+      <p class="home-about__copy">I’m especially interested in SaaS products, business workflows, dashboards, and automation.</p>
+      <a class="button button--text" href="{% url 'resume' %}">View my resume <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+{% if published_faq %}
+<section class="section section--soft" aria-labelledby="faq-heading">
+  <div class="section__inner">
+    {% include "components/section-header.html" with eyebrow="FAQ" heading="A few useful details" heading_id="faq-heading" %}
+    <div class="home-faq">{% for entry in published_faq %}{% include "components/faq-item.html" with entry=entry %}{% endfor %}</div>
+  </div>
+</section>
+{% endif %}
+
+<section id="ask-krish" class="section section--soft" aria-labelledby="assistant-heading">
+  <div class="section__inner home-assistant">
+    <div>
+      <p class="eyebrow">Portfolio guide</p>
+      <h2 id="assistant-heading">Not sure what you’re looking for? Ask Krish.</h2>
+      <p class="home-assistant__copy">Explore projects, understand the work, or find the next place to go.</p>
+      <p class="home-assistant__prompt-label">You could ask:</p>
+      <ul class="home-assistant__prompts">
+        {% for prompt in assistant_prompts %}<li><a href="{% url 'assistant' %}?prompt={{ prompt|urlencode }}">{{ prompt }}</a></li>{% endfor %}
+      </ul>
+    </div>
+    <a class="button button--primary" href="{% url 'assistant' %}">Ask Krish <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+
+<section class="section section--compact" aria-labelledby="booking-heading">
+  <div class="section__inner home-booking">
+    <div>
+      <p class="eyebrow">Start a conversation</p>
+      <h2 id="booking-heading">Have a project in mind?</h2>
+      <p>Tell me what you’re building, where you are now, and what you need help with.</p>
+      <p class="u-muted">Your name, email, and project details are enough to start.</p>
+    </div>
+    <a class="button button--primary" href="{% url 'book' %}">Book a Session <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+
+<section class="section section--dark home-final" aria-labelledby="final-cta-heading">
+  <div class="section__inner home-final__inner">
+    <div>
+      <p class="eyebrow">Krishna Goyal</p>
+      <h2 id="final-cta-heading">I build digital products that move ideas forward.</h2>
+    </div>
+    <div class="home-final__actions">
+      <a class="button button--light" href="{% url 'book' %}">Book a Session</a>
+      <a class="button button--dark-secondary" href="{% if home_has_projects %}#selected-work{% else %}{% url 'work_index' %}{% endif %}">View Work</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

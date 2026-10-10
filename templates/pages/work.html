@@ -1,0 +1,27 @@
+{% extends "base/layout.html" %}
+{% block title %}<title>Selected Work — Krishna Goyal</title>{% endblock %}
+{% block seo %}<meta name="description" content="{{ work_description }}"><link rel="canonical" href="{{ work_canonical }}"><meta property="og:type" content="website"><meta property="og:title" content="Selected Work — Krishna Goyal"><meta property="og:description" content="{{ work_description }}"><meta property="og:url" content="{{ work_canonical }}"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Selected Work — Krishna Goyal"><meta name="twitter:description" content="{{ work_description }}">{% endblock %}
+{% block content %}
+<div class="container work-page">
+  <header class="work-intro">
+    <p class="eyebrow">Selected work</p>
+    <h1>Products built for real workflows.</h1>
+    <p class="work-intro__copy">A selection of software and product work across manufacturing, business operations, and developer tooling.</p>
+  </header>
+  {% if featured_projects %}
+  <section class="work-featured" aria-labelledby="work-featured-heading">
+    <div class="work-section-heading"><p class="eyebrow">Product work</p><h2 id="work-featured-heading">Built around the way people work.</h2></div>
+    {% for project in featured_projects %}{% include "components/work-project-card.html" with project=project variant=forloop.counter %}{% endfor %}
+  </section>
+  {% endif %}
+  {% if supporting_projects %}
+  <section class="work-supporting" aria-labelledby="work-supporting-heading">
+    <div class="work-section-heading"><p class="eyebrow">More work</p><h2 id="work-supporting-heading">Tools, systems, and experiments.</h2></div>
+    <div class="work-supporting__list">
+      {% for project in supporting_projects %}{% include "components/work-project-card.html" with project=project variant="supporting" %}{% endfor %}
+    </div>
+  </section>
+  {% endif %}
+  <section class="work-contact" aria-labelledby="work-contact-heading"><div><p class="eyebrow">Have a similar project?</p><h2 id="work-contact-heading">Let’s talk about what you’re building.</h2></div><a class="button button--dark-secondary" href="{% url 'book' %}">Book a Session</a></section>
+</div>
+{% endblock %}

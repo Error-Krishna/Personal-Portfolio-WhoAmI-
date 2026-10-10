@@ -1,0 +1,10 @@
+<li class="process-detail-step">
+  <p class="process-detail-step__number">{{ forloop.counter|stringformat:"02d" }}</p>
+  <h2>{{ step.name }}</h2>
+  <p class="process-detail-step__description">{{ step.description }}</p>
+  <dl>
+    <div><dt>What happens</dt><dd>{{ step.what_happens }}</dd></div>
+    <div><dt>What you can expect</dt><dd>{{ step.client_can_expect }}</dd></div>
+    <div><dt>Purpose</dt><dd>{{ step.purpose }}</dd></div>
+  </dl>
+</li>

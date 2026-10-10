@@ -1,0 +1,11 @@
+{% extends "base/layout.html" %}
+{% block title %}<title>Something went wrong — Krishna Goyal</title>{% endblock %}
+{% block seo %}<meta name="robots" content="noindex">{% endblock %}
+{% block content %}
+<section class="container section" aria-labelledby="error-title">
+  <p class="eyebrow">500 · Server error</p>
+  <h1 id="error-title">Something went wrong.</h1>
+  <p>Please try again in a little while.</p>
+  <p><a href="{% url 'home' %}">Return home</a></p>
+</section>
+{% endblock %}

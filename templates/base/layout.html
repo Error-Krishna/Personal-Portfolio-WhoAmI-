@@ -1,0 +1,66 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f5f0">
+  <link rel="icon" type="image/svg+xml" href="{% static 'icons/favicon.svg' %}">
+  {% block title %}<title>{{ site_settings.title|default:"Krishna Goyal Portfolio" }}</title>{% endblock %}
+  {% block seo %}{% endblock %}
+  {% if site_settings.seo.og_image %}
+  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ site_settings.seo.og_image }}">
+  <meta property="og:image:alt" content="Portrait of Krishna Goyal">
+  <meta property="og:image:width" content="393">
+  <meta property="og:image:height" content="635">
+  <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ site_settings.seo.og_image }}">
+  {% endif %}
+  <link rel="stylesheet" href="{% static 'css/tokens.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components.css' %}">
+  <link rel="stylesheet" href="{% static 'css/utilities.css' %}">
+  <link rel="stylesheet" href="{% static 'css/pages.css' %}">
+  {% block CSSLinks %}{% endblock %}
+</head>
+<body data-chat-api-url="{% url 'chat_api' %}"
+      data-assistant-url="{% url 'assistant' %}"
+      data-assistant-stats-url="{% url 'assistant_stats_api' %}"
+      data-admin-logout-url="{% url 'admin_logout' %}"
+      data-admin-login-url="{% url 'admin_login' %}"
+      data-admin-status-url="{% url 'admin_mode_status' %}"
+      data-admin-private-url="{% url 'admin-private-knowledge' %}"
+      class="{% block body_classes %}{% endblock %}">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  {% include "components/navigation.html" %}
+
+  <main id="main-content" class="site-main {% block main_classes %}{% endblock %}">
+    {% block content %}{% endblock %}
+  </main>
+
+  {% block footer %}{% include "components/footer.html" %}{% endblock %}
+
+  <script src="{% static 'js/krish-chat.js' %}" defer></script>
+  <script src="{% static 'js/site.js' %}" defer></script>
+  {% block scripts %}{% endblock %}
+
+  {% if request.resolver_match and request.resolver_match.url_name != 'assistant' %}
+  <aside class="chat-widget" aria-label="Portfolio guide">
+    <section id="krish-bubble" class="chat-widget__panel" aria-label="Ask Krish" aria-hidden="true" hidden>
+      <header class="chat-widget__header">
+        <div><p class="chat-widget__title">Krish</p><p class="chat-widget__subtitle">Portfolio guide</p></div>
+        <a class="chat-widget__expand" href="{% url 'assistant' %}">Open assistant</a>
+      </header>
+      <div id="widget-messages" class="chat-widget__messages" aria-live="polite"></div>
+      <form id="widget-form" class="chat-widget__composer">
+        <label class="u-sr-only" for="widget-input">Ask a question about Krishna’s work</label>
+        <input id="widget-input" class="form-control" type="text" maxlength="4000" placeholder="Ask about the work">
+        <button id="widget-send" class="button button--primary" type="submit" aria-label="Send message">Send</button>
+      </form>
+    </section>
+    <button id="krish-toggle" class="chat-widget__toggle" type="button" aria-expanded="false" aria-controls="krish-bubble" aria-label="Open portfolio guide">Ask</button>
+  </aside>
+  <script src="{% static 'js/widget.js' %}" defer></script>
+  {% endif %}
+</body>
+</html>

@@ -1,7 +1,10 @@
 venv/
 env/
+.venv/
 .env
+project_code.txt
 __pycache__/
+*.py[cod]
 *.pyc
 .pytest_cache/
 .coverage
@@ -13,3 +16,11 @@ Videos/
 staticfiles/
 dist/
 db.sqlite3
+*.sqlite3
+*.log
+.claude/
+admin_mode_review.txt
+static/vision.txt
+
+# Private personal knowledge — never commit
+/content/krish_private.md

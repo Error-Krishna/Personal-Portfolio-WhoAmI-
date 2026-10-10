@@ -1,0 +1,25 @@
+{% extends "base/layout.html" %}
+{% block title %}<title>{{ project.title }} — Krishna Goyal</title>{% endblock %}
+{% block content %}
+<div class="container section">
+  <header class="page-heading">
+    <p class="eyebrow">{{ project.category }}</p>
+    <h1 class="page-heading__title">{{ project.title }}</h1>
+    <p class="page-heading__copy">{{ project.summary|default:project.tagline }}</p>
+  </header>
+  {% if project.videos %}
+    <div class="video-gallery">
+      {% for video in project.videos %}
+      <article class="video-gallery__item card card--padded">
+        {% if video.type == "local" and video.video_url %}<video controls playsinline preload="metadata"><source src="{{ video.video_url }}">Your browser does not support the video element.</video>
+        {% elif video.type == "instagram" and video.instagram_url %}<iframe class="video-gallery__embed" src="{{ video.instagram_url }}" title="{{ video.title }}" loading="lazy" allowfullscreen></iframe>{% endif %}
+        <h2>{{ video.title }}</h2>
+      </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    {% include "components/empty-state.html" with title="Video work will appear here" message="There are no videos in this showcase yet." %}
+  {% endif %}
+  <p class="u-mt-8"><a class="button button--text" href="{% url 'work_index' %}"><span aria-hidden="true">←</span> Back to work</a></p>
+</div>
+{% endblock %}

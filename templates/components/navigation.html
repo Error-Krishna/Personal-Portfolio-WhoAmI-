@@ -1,0 +1,30 @@
+{% load static %}
+{# Primary navigation. Work/Services/Process/About are homepage sections on every page (plain /#anchor links, so no JS is needed); #}
+{# Ask Krish and Book a Session are dedicated pages. Keep the desktop and mobile lists identical (enforced by apps/core/tests.py). #}
+<header class="site-header">
+  <nav class="site-nav container" aria-label="Primary navigation">
+    <a class="site-brand" href="{% url 'home' %}" aria-label="Krishna Goyal home">
+      <span class="site-brand__mark" aria-hidden="true">K</span>
+      <span>KRISHNA</span>
+    </a>
+    <ul class="site-nav__links site-nav__links--desktop">
+      <li><a class="site-nav__link" href="{% url 'home' %}#selected-work">Work</a></li>
+      <li><a class="site-nav__link" href="{% url 'home' %}#services">Services</a></li>
+      <li><a class="site-nav__link" href="{% url 'home' %}#process">Process</a></li>
+      <li><a class="site-nav__link" href="{% url 'home' %}#about">About</a></li>
+      <li><a class="site-nav__link" href="{% url 'assistant' %}"{% if request.resolver_match.url_name == 'assistant' %} aria-current="page"{% endif %}>Ask Krish</a></li>
+      <li><a class="button button--primary site-nav__cta" href="{% url 'book' %}"{% if request.resolver_match.url_name == 'book' %} aria-current="page"{% endif %}>Book a Session</a></li>
+    </ul>
+    <details class="site-nav__mobile">
+      <summary aria-label="Open navigation menu">Menu</summary>
+      <div class="site-nav__mobile-menu">
+        <a href="{% url 'home' %}#selected-work">Work</a>
+        <a href="{% url 'home' %}#services">Services</a>
+        <a href="{% url 'home' %}#process">Process</a>
+        <a href="{% url 'home' %}#about">About</a>
+        <a href="{% url 'assistant' %}"{% if request.resolver_match.url_name == 'assistant' %} aria-current="page"{% endif %}>Ask Krish</a>
+        <a class="button button--primary" href="{% url 'book' %}"{% if request.resolver_match.url_name == 'book' %} aria-current="page"{% endif %}>Book a Session</a>
+      </div>
+    </details>
+  </nav>
+</header>

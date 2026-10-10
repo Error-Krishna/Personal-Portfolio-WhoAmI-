@@ -1,0 +1,7 @@
+{% if capability.content_state == "published" %}
+<article class="service-card card home-capability">
+  <span class="process-step__number">{{ forloop.counter|stringformat:"02d" }}</span>
+  <h3 class="service-card__title">{{ capability.name }}</h3>
+  <p class="service-card__description">{{ capability.description }}</p>
+</article>
+{% endif %}

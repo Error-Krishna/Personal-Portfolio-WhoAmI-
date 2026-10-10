@@ -1,0 +1,17 @@
+{% extends "base/layout.html" %}
+{% block content %}
+<div class="container">
+  <header class="page-heading">
+    <p class="eyebrow">How I work</p>
+    <h1 class="page-heading__title">{{ page_title }}</h1>
+    <p class="page-heading__copy">A clear process helps turn an idea into useful software.</p>
+  </header>
+  {% if process_steps %}
+    <div class="process-list section--compact">
+      {% for step in process_steps %}{% include "components/process-step.html" with step=step %}{% endfor %}
+    </div>
+  {% else %}
+    {% include "components/empty-state.html" with title="Process details are being prepared" message="Please check back soon." %}
+  {% endif %}
+</div>
+{% endblock %}

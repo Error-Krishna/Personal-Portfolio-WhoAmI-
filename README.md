@@ -1,133 +1,68 @@
 # Krishna Goyal Portfolio
 
-A Django-based portfolio and AI assistant project with file-driven content, live chat support, and deployment-ready configuration for both local development and Render Web Service hosting.
+This is a server-rendered Django portfolio. Django remains the application framework, and [blueprint.md](blueprint.md) remains the architecture source of truth.
 
-## Highlights
+## Current foundation
 
-- Portfolio pages driven by `content/projects.json`
-- Public and private assistant knowledge files
-- Live assistant routes at `/assistant/` and `/api/chat/`
-- Render Web Service support for full Django deployment
-- Optional static export for portfolio-only hosting
+- Django templates with incremental boundaries under `apps/`
+- Local SQLite database; production PostgreSQL provider is still TBD
+- File-driven portfolio content with repository and validation services
+- Optional Groq-powered assistant, with public and private knowledge files
+- Existing `main` models and migrations retained for database compatibility
+- Gunicorn and WhiteNoise deployment on Render
+- Optional static export using `build_static.sh`
 
-## Stack
+The settings entry points are `config/settings/development.py` and `config/settings/production.py`. Shared configuration lives in `config/settings/base.py`.
 
-- Django 5
-- Gunicorn
-- WhiteNoise
-- Groq API
-- Vanilla JavaScript
+## Application boundaries
 
-## Project Structure
+- `apps.core`: shared health endpoint and site infrastructure
+- `apps.portfolio`: project, service, testimonial, site configuration, profile, and resume content; portfolio routes
+- `apps.assistant`: request policy, knowledge loading, Groq provider adapter, and assistant API
+- `apps.booking`: project inquiry form, email service, and `/book/` boundary; scheduling provider remains TBD
+- `apps.analytics`: visitor tracking and assistant statistics API
 
-```text
-content/
-  projects.json
-  krish_public.md
-  krish_private.md
-main/
-  content.py
-  views.py
-  urls.py
-  tests.py
-  management/commands/buildstatic.py
-portfolio_core/
-  settings.py
-templates/
-static/
-.env.example
-render.yaml
-```
+`main` remains installed to preserve the current admin models and migration history. In particular, `DailyVisitorStat` remains registered under its existing app label so this refactor does not create a table move or migration.
 
-## Configuration
+## Content flow
 
-Local development reads settings from:
+JSON/Markdown files under `content/` are read by domain repositories, checked by `validate_content`, normalized into view-ready dictionaries, and passed from views to templates. Assistant knowledge files remain in the assistant boundary and are not part of portfolio content loading. The existing six project records remain the source of truth; repository adapters expose aliases such as `summary`, `stack`, and `featured` without changing stored content.
 
-```text
-.env
-```
+## Local setup
 
-Create it from the example:
+Use a Python version supported by the pinned requirements, create a virtual environment, and install the project requirements:
 
 ```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
 cp .env.example .env
 ```
 
-For local work, uncomment the development section in `.env.example` and paste it into `.env`.
+Replace `DJANGO_SECRET_KEY` in `.env` with a locally generated random value. Add `GROQ_API_KEY` only if you want to use the assistant. Set `KRISH_ADMIN_PASSPHRASE` only if you use assistant admin mode. These credentials were previously exposed and must be rotated before production use. `.env` is local and must never be committed.
 
-## Local Development
-
-Install dependencies:
+Start Django:
 
 ```bash
-pip install -r requirements.txt
+python manage.py runserver 127.0.0.1:8000
 ```
 
-Start the server:
+## Validation
 
 ```bash
-python3 manage.py runserver 127.0.0.1:8000
+python manage.py check
+python manage.py validate_content
+python manage.py test
 ```
 
-Open:
-
-```text
-http://127.0.0.1:8000/
-```
-
-## Assistant Modes
-
-- Public mode reads from `content/krish_public.md`
-- Admin mode can access `content/krish_private.md`
-- Admin unlock happens server-side and persists in the Django session
-
-## Production Deployment
-
-For a live assistant in production, deploy this as a Render Web Service, not a static site.
-
-This repo includes:
-
-- [render.yaml](/Users/krishnagoyal/Desktop/krishna_portfolio/render.yaml)
-- [Procfile](/Users/krishnagoyal/Desktop/krishna_portfolio/Procfile)
-- [build.sh](/Users/krishnagoyal/Desktop/krishna_portfolio/build.sh)
-- `/health/` health check endpoint
-
-### Required production environment variables
-
-- `DJANGO_SECRET_KEY`
-- `GROQ_API_KEY`
-- `KRISH_ADMIN_PASSPHRASE`
-- `DJANGO_ALLOWED_HOSTS`
-- `DJANGO_CSRF_TRUSTED_ORIGINS`
-
-Render can provide these through its dashboard or via `render.yaml` for non-secret defaults.
-
-## Static Export
-
-This project still supports a portfolio-only static export:
+For production configuration:
 
 ```bash
-bash build_static.sh
+DJANGO_ENV=production python manage.py check --deploy
 ```
 
-Use that only when you do not need the live chat API in production.
+## Routes and deployment
 
-## Checks
+Routes include `/`, `/work/`, `/work/<slug>/`, the compatible `/project/<slug>/`, `/services/`, `/about/`, `/process/`, `/book/`, `/assistant/`, `/resume/`, and `/health/`. Render starts `config.wsgi:application` and checks `/health/`. The assistant requires server-side Groq configuration; static export does not include live APIs. Services and process pages remain truthful empty states until their content is supplied; `/about/` points to the existing About section.
 
-Run before pushing:
-
-```bash
-python3 manage.py check
-python3 manage.py test
-```
-
-## Security Notes
-
-- `.env` is gitignored and should never be committed
-- Do not commit real API keys or admin passphrases
-- Rotate any credential that has been exposed in screenshots, commits, or chats
-- Production should keep HTTPS, secure cookies, and HSTS enabled
-
-## More Deployment Details
-
-See [DEPLOYMENT.md](/Users/krishnagoyal/Desktop/krishna_portfolio/DEPLOYMENT.md) for the full Render setup.
+See [DEPLOYMENT.md](DEPLOYMENT.md) for deployment details and remaining production decisions. Do not treat the README as overriding the blueprint.

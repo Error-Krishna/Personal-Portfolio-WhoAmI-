@@ -1,0 +1,103 @@
+{% extends "base/layout.html" %}
+{% load static %}
+{% block title %}<title>{{ seo.title|default:'Ask Krish — Portfolio Guide' }}</title>{% endblock %}
+{% block seo %}
+<meta name="description" content="{{ seo.description|default:'Ask about Krishna Goyal’s published projects, services, process, and how to start a project conversation.' }}">
+<link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{% url 'assistant' %}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ seo.title|default:'Ask Krish — Portfolio Guide' }}">
+<meta property="og:description" content="{{ seo.description|default:'Ask about Krishna Goyal’s published projects, services, process, and how to start a project conversation.' }}">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ seo.title|default:'Ask Krish — Portfolio Guide' }}">
+<meta name="twitter:description" content="{{ seo.description|default:'Ask about Krishna Goyal’s published projects, services, process, and how to start a project conversation.' }}">
+{% endblock %}
+{% block body_classes %}assistant-page{% endblock %}
+{% block main_classes %}assistant-main{% endblock %}
+{% block footer %}{% endblock %}
+{% block CSSLinks %}
+<link rel="stylesheet" href="{% static 'css/assistant.css' %}">
+<link rel="stylesheet" href="{% static 'css/admin-mode.css' %}">
+{% endblock %}
+{% block content %}
+<div class="assistant-wrap" id="assistant-wrap">
+  <aside class="assistant-info" id="office-panel">
+    <div>
+      <p class="eyebrow">Portfolio guide</p>
+      <h1 class="assistant-info__title">Ask Krish</h1>
+      <p class="assistant-info__copy">Explore Krishna’s work, projects, and the best place to start.</p>
+    </div>
+
+    <section class="admin-mode" id="admin-mode" aria-labelledby="admin-mode-title">
+      <div class="admin-mode__heading">
+        <div>
+          <p class="eyebrow">Private workspace</p>
+          <h2 id="admin-mode-title">Admin Mode</h2>
+        </div>
+        <span class="admin-mode__badge" id="admin-mode-badge">Locked</span>
+      </div>
+
+      <p class="admin-mode__status" id="admin-mode-status" role="status">
+        Checking authentication…
+      </p>
+
+      <form class="admin-mode__login" id="admin-mode-login" hidden>
+        <label for="admin-mode-password">Admin password</label>
+        <input
+          id="admin-mode-password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          maxlength="1024"
+          required
+        >
+        <button class="button button--primary" type="submit" id="admin-mode-login-button">
+          Unlock Admin Mode
+        </button>
+        <p class="admin-mode__error" id="admin-mode-error" role="alert" hidden></p>
+      </form>
+
+      <div class="admin-mode__private" id="admin-mode-private" hidden>
+        <div class="admin-mode__private-heading">
+          <h3>Private knowledge</h3>
+          <button class="button button--secondary" type="button" id="admin-mode-refresh">
+            Reload
+          </button>
+        </div>
+
+        <p class="admin-mode__status" id="admin-mode-private-status" role="status">
+          Loading private knowledge…
+        </p>
+
+        <pre class="admin-mode__document" id="admin-mode-document" hidden></pre>
+
+        <button class="button button--secondary" type="button" id="admin-mode-logout">
+          Lock Admin Mode
+        </button>
+      </div>
+    </section>
+  </aside>
+
+  <section class="assistant-chat" aria-label="Conversation with the portfolio guide">
+    <header class="assistant-chat__header">
+      <span class="assistant-status" aria-hidden="true"></span>
+      <div><p class="assistant-chat__title">Portfolio guide</p><p class="assistant-chat__subtitle">Krishna Goyal’s work and services</p></div>
+      <span class="assistant-chat__hint">Ask about projects, services, or next steps.</span>
+    </header>
+    <div class="assistant-prompts" aria-label="Suggested questions">
+      {% for prompt in starter_prompts %}<button type="button" data-prompt="{{ prompt }}">{{ prompt }}</button>{% endfor %}
+    </div>
+    <div class="assistant-messages" id="chat-messages" aria-live="polite" aria-relevant="additions text"></div>
+    <form class="assistant-composer" id="assistant-form">
+      <label class="u-sr-only" for="chat-input">Your message</label>
+      <textarea id="chat-input" rows="1" maxlength="4000" placeholder="Ask a question about the work"></textarea>
+      <button id="send-btn" class="button button--primary" type="submit" aria-label="Send message">Send</button>
+    </form>
+    <p class="assistant-composer__note">Enter to send · Shift + Enter for a new line</p>
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'js/assistant.js' %}" defer></script>
+<script src="{% static 'js/admin-mode.js' %}" defer></script>
+{% endblock %}

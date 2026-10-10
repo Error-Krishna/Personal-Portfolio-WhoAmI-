@@ -1,0 +1,188 @@
+{
+  "name": "Krishna Goyal Portfolio",
+  "title": "Krishna Goyal Portfolio",
+  "seo": {
+    "title": "Krishna Goyal — Product-minded engineer",
+    "description": "Product-minded frontend and full-stack engineering for founders, businesses, and teams.",
+    "og_title": "Krishna Goyal — Product-minded engineer",
+    "og_description": "Product-minded frontend and full-stack engineering for founders, businesses, and teams.",
+    "og_image": "/static/images/image-removebg-preview.png",
+    "twitter_card": "summary",
+    "services": {
+      "title": "Services — Krishna Goyal",
+      "description": "Product-minded frontend and full-stack engineering for founders, businesses, and teams. Explore services, engagement models, and the project process."
+    },
+    "about": {
+      "title": "About Krishna Goyal — Product-minded engineer",
+      "description": "Meet Krishna Goyal, a product-minded frontend and full-stack engineer interested in turning real-world problems into practical software."
+    },
+    "process": {
+      "title": "How I Work — Krishna Goyal",
+      "description": "A practical five-stage approach to understanding a project, defining its scope, building, launching, and improving software."
+    },
+    "booking": {
+      "title": "Start a Project Inquiry — Krishna Goyal",
+      "description": "Share your project goals and context with Krishna Goyal to start a conversation about product-minded frontend and full-stack engineering."
+    },
+    "resume": {
+      "title": "Resume — Krishna Goyal | Product-minded engineer",
+      "description": "Resume of Krishna Goyal, a product-minded frontend and full-stack engineer."
+    },
+    "assistant": {
+      "title": "Ask Krish — Portfolio Guide",
+      "description": "Ask about Krishna Goyal’s published projects, services, process, and how to start a project conversation."
+    }
+  },
+  "assistant_starter_prompts": [
+    "What does Krish build?",
+    "Tell me about Udhyog Saathi.",
+    "What does InsightLoop do?",
+    "What services are available?",
+    "How does a project work?",
+    "How can I start a project?"
+  ],
+  "capabilities": [
+    {
+      "name": "Websites",
+      "description": "For portfolios, company websites, landing pages, and product websites.",
+      "content_state": "published"
+    },
+    {
+      "name": "Web Applications",
+      "description": "For dashboards, internal tools, customer portals, and business applications.",
+      "content_state": "published"
+    },
+    {
+      "name": "Product Development",
+      "description": "For MVPs, SaaS, prototypes, and new product features.",
+      "content_state": "published"
+    },
+    {
+      "name": "Automation",
+      "description": "For repetitive workflows, internal automation, integrations, and data workflows.",
+      "content_state": "published"
+    },
+    {
+      "name": "Data & Analytics",
+      "description": "For dashboards, reporting, business insights, and visualization.",
+      "content_state": "published"
+    }
+  ],
+  "process": [
+    {
+      "name": "Understand",
+      "description": "Clarify the business goal, users, requirements, constraints, and success criteria.",
+      "what_happens": "We talk through the problem, who it affects, what is already in place, and the constraints around the work.",
+      "client_can_expect": "A shared understanding of the goal, open questions, and the information still needed to shape the work.",
+      "purpose": "Make sure the work starts with the problem to solve rather than an assumed solution.",
+      "content_state": "published"
+    },
+    {
+      "name": "Plan",
+      "description": "Define the scope, architecture, milestones, and deliverables.",
+      "what_happens": "We turn the agreed goal into a practical scope, outline the technical approach, and identify dependencies and deliverables.",
+      "client_can_expect": "A clear view of what is included, the decisions to make, and how the work will be organized.",
+      "purpose": "Create a useful boundary for the project before implementation begins.",
+      "content_state": "published"
+    },
+    {
+      "name": "Build",
+      "description": "Develop the interface, backend, integrations, and tests.",
+      "what_happens": "The agreed product is implemented across its interface, backend, integrations, and relevant tests.",
+      "client_can_expect": "Progress that can be reviewed against the agreed scope, with questions and decisions surfaced as they arise.",
+      "purpose": "Turn the plan into working software while keeping the product goal in view.",
+      "content_state": "published"
+    },
+    {
+      "name": "Launch",
+      "description": "Handle deployment, production configuration, QA, and handoff.",
+      "what_happens": "The software is prepared for its intended environment through deployment, production configuration, quality checks, and handoff.",
+      "client_can_expect": "A review of the launch-ready work and the relevant handoff information for the project.",
+      "purpose": "Make the completed scope usable in its intended setting.",
+      "content_state": "published"
+    },
+    {
+      "name": "Improve",
+      "description": "Continue with optional maintenance, analytics, iteration, and new features.",
+      "what_happens": "If useful, follow-on work can address maintenance, analytics, iteration, or additional features.",
+      "client_can_expect": "A conversation about what is working, what needs attention, and whether another piece of work makes sense.",
+      "purpose": "Leave room for the product to evolve as needs and feedback become clearer.",
+      "content_state": "published"
+    }
+  ],
+  "process_journey": {
+    "summary": "Start with an inquiry through Book a Session. We use the first conversation to understand the project; if the work is a fit, we define its scope before building. Launch may be followed by optional improvement work.",
+    "labels": ["Inquiry", "Understand", "Scope", "Build", "Launch", "Improve"]
+  },
+  "booking_journey": {
+    "summary": "Share the project context that you have. A first conversation can clarify the goals and requirements, then define a practical scope before you decide whether to move forward.",
+    "labels": [
+      "Share the project",
+      "Understand requirements",
+      "Define the scope",
+      "Decide next steps"
+    ]
+  },
+  "currently_building": {
+    "title": "Currently Building",
+    "project": "udhyog-saathi-platform",
+    "status": "building",
+    "summary": "Developing a scalable SaaS product direction around digital tools, systems, and business impact.",
+    "content_state": "published"
+  },
+  "engagement_models": [
+    {
+      "name": "Launch",
+      "ideal_for": [
+        "Landing page",
+        "Portfolio",
+        "Simple business site",
+        "Focused MVP surface"
+      ],
+      "content_state": "published"
+    },
+    {
+      "name": "Build",
+      "ideal_for": [
+        "Web application",
+        "Dashboard",
+        "Internal tool",
+        "Multi-page product"
+      ],
+      "content_state": "published"
+    },
+    {
+      "name": "Scale",
+      "ideal_for": [
+        "Larger application",
+        "SaaS",
+        "Ongoing development",
+        "Integrations",
+        "Automation"
+      ],
+      "content_state": "published"
+    }
+  ],
+  "audiences": [
+    {
+      "name": "Founders & startups",
+      "description": "MVPs, SaaS products, dashboards, internal tools, automation, websites, and prototypes.",
+      "content_state": "published"
+    },
+    {
+      "name": "Small businesses",
+      "description": "Websites, internal business software, automation, dashboards, operational tools, and analytics.",
+      "content_state": "published"
+    },
+    {
+      "name": "Agencies & technical partners",
+      "description": "Frontend or full-stack implementation, backend and API work, feature development, and technical support.",
+      "content_state": "published"
+    },
+    {
+      "name": "Individuals & professionals",
+      "description": "Personal websites, portfolios, landing pages, automation, and small applications.",
+      "content_state": "published"
+    }
+  ]
+}

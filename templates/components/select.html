@@ -1,0 +1,4 @@
+<select class="form-control" id="{{ id }}" name="{{ name }}"{% if required %} required{% endif %}{% if disabled %} disabled{% endif %}{% if described_by %} aria-describedby="{{ described_by }}"{% endif %}>
+  {% if placeholder %}<option value="">{{ placeholder }}</option>{% endif %}
+  {% for option in options %}<option value="{{ option.value }}"{% if option.value == selected %} selected{% endif %}>{{ option.label }}</option>{% endfor %}
+</select>

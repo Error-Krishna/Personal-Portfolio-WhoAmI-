@@ -1,0 +1,48 @@
+[
+  {
+    "slug": "launch",
+    "name": "Launch",
+    "description": "A focused scope for a landing page, portfolio, simple business site, or MVP surface.",
+    "ideal_for": [
+      "Landing page",
+      "Portfolio",
+      "Simple business site",
+      "Focused MVP surface"
+    ],
+    "pricing_note": "Scope and pricing are discussed after discovery.",
+    "starting_price": null,
+    "cta": "Discuss a Launch scope",
+    "content_state": "published"
+  },
+  {
+    "slug": "build",
+    "name": "Build",
+    "description": "A substantial scope for an application, dashboard, internal tool, or multi-page product.",
+    "ideal_for": [
+      "Web application",
+      "Dashboard",
+      "Internal tool",
+      "Multi-page product"
+    ],
+    "pricing_note": "Scope and pricing are discussed after discovery.",
+    "starting_price": null,
+    "cta": "Discuss a Build scope",
+    "content_state": "published"
+  },
+  {
+    "slug": "scale",
+    "name": "Scale",
+    "description": "A broader scope for a larger application, SaaS product, integrations, automation, or ongoing development.",
+    "ideal_for": [
+      "Larger application",
+      "SaaS",
+      "Ongoing development",
+      "Integrations",
+      "Automation"
+    ],
+    "pricing_note": "Scope and pricing are discussed after discovery.",
+    "starting_price": null,
+    "cta": "Discuss a Scale scope",
+    "content_state": "published"
+  }
+]

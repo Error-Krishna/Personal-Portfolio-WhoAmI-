@@ -1,180 +1,31 @@
-import json
-from pathlib import Path
+"""Compatibility imports; new code should use the owning application services."""
 
+from apps.assistant.knowledge import (
+    delete_knowledge_section,
+    load_private_knowledge,
+    load_public_knowledge,
+    write_knowledge_file,
+)
+from apps.portfolio.content.repositories import projects
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-CONTENT_DIR = BASE_DIR / "content"
-PROJECTS_FILE = CONTENT_DIR / "projects.json"
-KRISH_PUBLIC_FILE = CONTENT_DIR / "krish_public.md"
-KRISH_PRIVATE_FILE = CONTENT_DIR / "krish_private.md"
-KNOWLEDGE_FILES = {
-    "public": KRISH_PUBLIC_FILE,
-    "private": KRISH_PRIVATE_FILE,
-}
+# Legacy imports retained for compatibility; the new presentation uses shared CSS.
+HOME_THEME_CONFIG = {}
+DEFAULT_HOME_THEME = {}
 
-HOME_THEME_CONFIG = {
-    "portfolio-website": {
-        "home_badge_color_class": "text-[#00F0FF]",
-        "home_tag_class": "text-[#A06EE7]",
-        "home_media_class": "bg-[radial-gradient(circle_at_top,rgba(0,240,255,0.35),transparent_48%),linear-gradient(135deg,#0b1016_0%,#111827_45%,#050709_100%)]",
-        "home_button_class": "bg-[#00F0FF] text-black",
-        "home_button_hover_class": "hover:scale-105 active:scale-95",
-        "home_button_icon": "fa-arrow-right",
-    },
-    "personal-finance-tracker": {
-        "home_badge_color_class": "text-[#A06EE7]",
-        "home_tag_class": "text-[#00F0FF]",
-        "home_media_class": "bg-[radial-gradient(circle_at_bottom_right,rgba(160,110,231,0.35),transparent_45%),linear-gradient(140deg,#121826_0%,#10172b_55%,#050709_100%)]",
-        "home_button_class": "bg-[#A06EE7] text-white",
-        "home_button_hover_class": "hover:scale-105",
-        "home_button_icon": "fa-arrow-right",
-    },
-    "insightloop-business": {
-        "home_badge_color_class": "text-[#00F0FF]",
-        "home_tag_class": "text-[#A06EE7]",
-        "home_media_class": "bg-[radial-gradient(circle_at_center,rgba(0,240,255,0.22),transparent_35%),linear-gradient(145deg,#07111a_0%,#102235_50%,#050709_100%)]",
-        "home_button_class": "bg-[#00F0FF] text-black",
-        "home_button_hover_class": "hover:scale-105",
-        "home_button_icon": "fa-arrow-right",
-    },
-    "hotreload": {
-        "home_badge_color_class": "text-[#A06EE7]",
-        "home_tag_class": "text-[#00F0FF]",
-        "home_media_class": "bg-[radial-gradient(circle_at_top_left,rgba(160,110,231,0.28),transparent_40%),linear-gradient(145deg,#15101f_0%,#17112b_45%,#050709_100%)]",
-        "home_button_class": "bg-white/10 text-white/60",
-        "home_button_hover_class": "",
-        "home_button_icon": "fa-microchip",
-    },
-    "udhyog-saathi-platform": {
-        "home_badge_color_class": "text-[#00F0FF]",
-        "home_tag_class": "text-[#A06EE7]",
-        "home_media_class": "bg-gradient-to-tr from-[#A06EE7]/20 to-[#00F0FF]/20",
-        "home_button_class": "border-2 border-[#00F0FF] text-[#00F0FF]",
-        "home_button_hover_class": "hover:bg-[#00F0FF] hover:text-black",
-        "home_button_icon": "fa-hourglass-start",
-    },
-}
+get_home_projects = projects.featured
+get_project = projects.get
+get_project_slugs = projects.slugs
+load_projects = projects.all
 
-DEFAULT_HOME_THEME = {
-    "home_badge_color_class": "text-[#00F0FF]",
-    "home_tag_class": "text-[#A06EE7]",
-    "home_media_class": "bg-[linear-gradient(135deg,#0b1016_0%,#111827_45%,#050709_100%)]",
-    "home_button_class": "bg-[#00F0FF] text-black",
-    "home_button_hover_class": "hover:scale-105",
-    "home_button_icon": "fa-arrow-right",
-}
-
-_CACHE = {}
-
-
-def _read_cached_json(path: Path):
-    stat = path.stat()
-    cache_key = str(path)
-    cached = _CACHE.get(cache_key)
-
-    if cached and cached["mtime"] == stat.st_mtime_ns:
-        return cached["data"]
-
-    data = json.loads(path.read_text(encoding="utf-8"))
-    _CACHE[cache_key] = {"mtime": stat.st_mtime_ns, "data": data}
-    return data
-
-
-def _read_cached_text(path: Path) -> str:
-    if not path.exists():
-        return ""
-
-    stat = path.stat()
-    cache_key = str(path)
-    cached = _CACHE.get(cache_key)
-
-    if cached and cached["mtime"] == stat.st_mtime_ns:
-        return cached["data"]
-
-    data = path.read_text(encoding="utf-8")
-    _CACHE[cache_key] = {"mtime": stat.st_mtime_ns, "data": data}
-    return data
-
-
-def load_projects():
-    return _read_cached_json(PROJECTS_FILE)
-
-
-def get_home_projects():
-    featured_projects = [project for project in load_projects() if project.get("featured_on_home")]
-    home_projects = []
-
-    for index, project in enumerate(featured_projects, start=1):
-        enriched_project = dict(project)
-        enriched_project["home_index"] = index
-        enriched_project["home_index_label"] = f"{index:02d}"
-        enriched_project.update(HOME_THEME_CONFIG.get(project["slug"], DEFAULT_HOME_THEME))
-        home_projects.append(enriched_project)
-
-    return home_projects
-
-
-def get_project(slug):
-    for project in load_projects():
-        if project["slug"] == slug:
-            return project
-    return None
-
-
-def get_project_slugs():
-    return {project["slug"] for project in load_projects()}
-
-
-def load_public_knowledge():
-    return _read_cached_text(KRISH_PUBLIC_FILE)
-
-
-def load_private_knowledge():
-    return _read_cached_text(KRISH_PRIVATE_FILE)
-
-
-def write_knowledge_file(target: str, content: str, mode: str = "append") -> Path:
-    normalized_target = str(target).strip().lower()
-    normalized_mode = str(mode).strip().lower()
-    path = KNOWLEDGE_FILES.get(normalized_target)
-
-    if path is None:
-        raise ValueError("Unsupported knowledge target")
-
-    if normalized_mode not in {"append", "replace"}:
-        raise ValueError("Unsupported write mode")
-
-    existing_text = path.read_text(encoding="utf-8") if path.exists() else ""
-    incoming_text = str(content).strip()
-    if not incoming_text:
-        raise ValueError("Cannot write empty knowledge content")
-
-    if normalized_mode == "replace":
-        next_text = incoming_text + "\n"
-    else:
-        separator = "\n\n" if existing_text.strip() else ""
-        next_text = existing_text.rstrip() + separator + incoming_text + "\n"
-
-    path.write_text(next_text, encoding="utf-8")
-    _CACHE.pop(str(path), None)
-    return path
-
-
-def delete_knowledge_section(target: str, pattern: str) -> Path:
-    normalized_target = str(target).strip().lower()
-    path = KNOWLEDGE_FILES.get(normalized_target)
-    if path is None:
-        raise ValueError("Unsupported knowledge target")
-
-    pattern = pattern.strip()
-    if not pattern:
-        raise ValueError("Cannot delete empty pattern")
-
-    existing = path.read_text(encoding="utf-8") if path.exists() else ""
-    if pattern not in existing:
-        raise ValueError(f"Pattern not found in `{normalized_target}`")
-
-    updated = existing.replace(pattern, "").strip() + "\n"
-    path.write_text(updated, encoding="utf-8")
-    _CACHE.pop(str(path), None)
-    return path
+__all__ = [
+    "DEFAULT_HOME_THEME",
+    "HOME_THEME_CONFIG",
+    "delete_knowledge_section",
+    "get_home_projects",
+    "get_project",
+    "get_project_slugs",
+    "load_private_knowledge",
+    "load_public_knowledge",
+    "load_projects",
+    "write_knowledge_file",
+]
