@@ -1,0 +1,11 @@
+{
+  "name": "@portfolio/eslint-config",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "react.js",
+    "node.js"
+  ]
+}

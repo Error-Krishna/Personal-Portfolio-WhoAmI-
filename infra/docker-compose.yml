@@ -1,0 +1,42 @@
+services:
+  mongodb:
+    image: mongo:7-jammy
+    container_name: krishna_portfolio_db
+    restart: unless-stopped
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_DATABASE: krishna_portfolio
+    volumes:
+      - mongo_data:/data/db
+
+  api:
+    build:
+      context: ..
+      dockerfile: docker/api/Dockerfile
+    container_name: krishna_portfolio_api
+    restart: unless-stopped
+    ports:
+      - '5000:5000'
+    environment:
+      NODE_ENV: production
+      PORT: 5000
+      API_PREFIX: /api/v1
+      MONGODB_URI: mongodb://mongodb:27017/krishna_portfolio
+      CORS_ORIGIN: http://localhost:3000
+    depends_on:
+      - mongodb
+
+  web:
+    build:
+      context: ..
+      dockerfile: docker/web/Dockerfile
+    container_name: krishna_portfolio_web
+    restart: unless-stopped
+    ports:
+      - '3000:80'
+    depends_on:
+      - api
+
+volumes:
+  mongo_data:
