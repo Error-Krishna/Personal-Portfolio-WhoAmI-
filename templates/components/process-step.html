@@ -1,3 +1,0 @@
-{% if step.content_state == "published" %}
-<article class="process-step card"><span class="process-step__number">{{ step.number|default:forloop.counter|stringformat:"02d" }}</span><h3 class="process-step__title">{{ step.name }}</h3><p class="process-step__description">{{ step.description }}</p></article>
-{% endif %}

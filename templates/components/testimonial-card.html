@@ -1,6 +1,0 @@
-{% if testimonial.approved and testimonial.content_state == "published" %}
-<figure class="testimonial-card card">
-  <blockquote class="testimonial-card__quote">“{{ testimonial.quote }}”</blockquote>
-  <figcaption><p class="testimonial-card__name">{{ testimonial.name }}</p><p class="testimonial-card__meta">{{ testimonial.role }}{% if testimonial.company %}, {{ testimonial.company }}{% endif %}</p></figcaption>
-</figure>
-{% endif %}
