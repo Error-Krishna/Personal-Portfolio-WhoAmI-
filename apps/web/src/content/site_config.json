@@ -84,10 +84,7 @@
         "Core business workflows, live dashboards & admin views",
         "Automated testing, containerization (Docker) & deployment"
       ],
-      "exclusions": [
-        "Third-party paid service API quotas",
-        "Proprietary hardware integrations"
-      ],
+      "exclusions": ["Third-party paid service API quotas", "Proprietary hardware integrations"],
       "estimatedDelivery": "2–4 weeks",
       "revisionAllowance": 3,
       "supportPeriod": "30 days post-launch",
@@ -111,9 +108,7 @@
         "Interactive API documentation & Postman collections",
         "Query optimization and database indexing"
       ],
-      "exclusions": [
-        "High-frequency custom trading engine logic"
-      ],
+      "exclusions": ["High-frequency custom trading engine logic"],
       "estimatedDelivery": "1–3 weeks",
       "revisionAllowance": 2,
       "supportPeriod": "14 days post-launch",
@@ -137,9 +132,7 @@
         "Error handling, alert notifications & process logging",
         "Handover documentation and installation scripts"
       ],
-      "exclusions": [
-        "Legacy mainframe database migrations"
-      ],
+      "exclusions": ["Legacy mainframe database migrations"],
       "estimatedDelivery": "1–2 weeks",
       "revisionAllowance": 2,
       "supportPeriod": "14 days post-launch",
@@ -163,9 +156,7 @@
         "Platform-specific exports (Vertical 9:16 & Widescreen 16:9)",
         "Defined revision cycles for pacing and visual feedback"
       ],
-      "exclusions": [
-        "On-location filming and hardware cameras"
-      ],
+      "exclusions": ["On-location filming and hardware cameras"],
       "estimatedDelivery": "3–5 days",
       "revisionAllowance": 2,
       "supportPeriod": "7 days post-delivery",
@@ -313,8 +304,9 @@
       "id": "udhyog-saathi",
       "slug": "udhyog-saathi",
       "title": "Udhyog Saathi",
-      "subtitle": "SaaS Business Operating System for MSME Manufacturers",
+      "subtitle": "Business Operating System for Manufacturers",
       "shortDescription": "A specialized SaaS platform engineered for small and mid-sized manufacturing enterprises, centralizing dual-mode invoicing, raw-material inventory, worker operations, and real-time production analytics.",
+      "cardDescription": "Turning traditional manufacturing into a digital system.",
       "category": "SAAS & PRODUCTS",
       "status": "Active Development",
       "featured": true,
@@ -322,6 +314,9 @@
       "liveUrl": "https://udhyogsaathi.in/",
       "githubUrl": "https://github.com/Manish-bhargava/udhyog-saathi-frontend",
       "backendGithubUrl": "https://github.com/Manish-bhargava/udhyog-saath-backend/",
+      "accentColor": "#991b1b",
+      "displayOrder": 1,
+      "published": true,
       "role": "Co-founder & Full-Stack Developer",
       "date": "2024 - Present",
       "overview": "Small and mid-sized manufacturers in India often manage mission-critical operations with fragmented paper slips, physical ledgers, and informal WhatsApp chats. Udhyog Saathi replaces disjointed tracking with a single intuitive operational workspace.",
@@ -334,20 +329,39 @@
         "Worker management module for tracking shifts, task completions, and wage disbursements",
         "Production line throughput analytics to uncover bottleneck operations"
       ],
-      "myContribution": "Architected the frontend UI with React and Tailwind CSS, structured the operational data models in MongoDB, built RESTful endpoints in Express, and designed the intuitive invoice and inventory creation flows."
+      "stats": [
+        { "label": "Core Modules", "value": "5+" },
+        { "label": "In-House Build", "value": "100%" },
+        { "label": "In Production", "value": "Live" }
+      ],
+      "architecture": {
+        "description": "Decoupled React client communicating with a resilient Express REST service backed by MongoDB document stores for dynamic invoice schemas.",
+        "components": ["React SPA", "Express Gateway", "MongoDB Database", "Inventory Alert Engine"]
+      },
+      "myContribution": "Architected the frontend UI with React and Tailwind CSS, structured the operational data models in MongoDB, built RESTful endpoints in Express, and designed the intuitive invoice and inventory creation flows.",
+      "outcomes": [
+        "Eliminated manual paper ledgers across regional manufacturing plants.",
+        "Prevented production halts with automatic stock threshold warnings.",
+        "Reduced invoice preparation time from 15 minutes to under 2 minutes."
+      ],
+      "relatedProjects": ["insightloop", "parallel", "hotreload", "personal-finance-tracker"]
     },
     {
       "id": "insightloop",
       "slug": "insightloop",
       "title": "InsightLoop",
-      "subtitle": "Real-Time Business Management & Analytics Platform",
+      "subtitle": "Real-Time Business Intelligence Platform",
       "shortDescription": "A full-stack operational intelligence platform tracking multi-stream sales, worker payouts, and profit-and-loss margins via a synchronized live dashboard and integrated AI assistant.",
-      "category": "FULL-STACK",
+      "cardDescription": "Real-time business intelligence and multi-stream analytics.",
+      "category": "SAAS & PRODUCTS",
       "status": "Shipped",
       "featured": true,
       "technologies": ["React", "Express.js", "MongoDB", "Node.js", "WebSockets"],
       "liveUrl": "https://insightloop.onrender.com/",
       "githubUrl": "https://github.com/Error-Krishna/InsightLoop",
+      "accentColor": "#0f172a",
+      "displayOrder": 2,
+      "published": true,
       "role": "Solo Full-Stack Developer",
       "date": "2024",
       "overview": "InsightLoop is an operational command center built to turn high-velocity transactional data into clear business decisions, providing operators with immediate clarity into their cash position and team performance.",
@@ -360,14 +374,65 @@
         "Integrated conversational AI assistant to answer natural language queries about metrics",
         "Role-aware access control protecting confidential business financials"
       ],
-      "myContribution": "Built the entire application from ground up: React frontend interface, Node/Express REST backend, MongoDB schemas, WebSocket bidirectional communication channels, and AI assistance integration."
+      "stats": [
+        { "label": "Sync Latency", "value": "0ms" },
+        { "label": "WebSocket Live", "value": "100%" },
+        { "label": "React + Node", "value": "Full-Stack" }
+      ],
+      "myContribution": "Built the entire application from ground up: React frontend interface, Node/Express REST backend, MongoDB schemas, WebSocket bidirectional communication channels, and AI assistance integration.",
+      "outcomes": [
+        "Real-time WebSocket synchronization across client terminals.",
+        "Automated daily profit and loss calculations.",
+        "Conversational AI assistant answering natural language financial queries."
+      ],
+      "relatedProjects": ["udhyog-saathi", "parallel", "hotreload", "krishna-portfolio"]
+    },
+    {
+      "id": "parallel",
+      "slug": "parallel",
+      "title": "Parallel",
+      "subtitle": "A Social Platform for Shared Interests",
+      "shortDescription": "A modern social platform for shared interests, discussions, and collaborative community spaces.",
+      "cardDescription": "Connecting communities through focused discussions.",
+      "category": "SAAS & PRODUCTS",
+      "status": "Shipped",
+      "featured": true,
+      "technologies": ["React", "TypeScript", "Node.js", "WebSockets", "Tailwind CSS"],
+      "liveUrl": "",
+      "githubUrl": "https://github.com/Error-Krishna",
+      "accentColor": "#1e1b4b",
+      "displayOrder": 3,
+      "published": true,
+      "role": "Full-Stack Developer",
+      "date": "2024",
+      "overview": "Parallel is an interest-first community platform designed to replace noisy algorithmic timelines with topic-focused spaces where members can organize discussions, share work, and collaborate.",
+      "problem": "Modern social feeds prioritize viral sensationalism over thoughtful group discussion, making it difficult for niche communities to hold focused conversations.",
+      "solution": "A structured workspace with topic-based channels, real-time message broadcasting, rich media sharing, and member reputation signals.",
+      "features": [
+        "Topic-segmented interest channels with real-time WebSocket communication",
+        "Rich markdown posting and snippet sharing for developer and creator communities",
+        "Member roles, direct messaging, and community moderation toolsets",
+        "Responsive, distraction-free UI optimized for both desktop and mobile"
+      ],
+      "stats": [
+        { "label": "Chat & Feeds", "value": "Real-Time" },
+        { "label": "Type Safety", "value": "100%" },
+        { "label": "Architecture", "value": "Modular" }
+      ],
+      "myContribution": "Designed the frontend interface and interaction flows, implemented WebSocket chat listeners, and structured channel data models.",
+      "outcomes": [
+        "Low-latency real-time discussion rooms with WebSocket integration.",
+        "Topic-isolated channel architecture preventing feed pollution."
+      ],
+      "relatedProjects": ["udhyog-saathi", "insightloop", "hotreload", "krishna-portfolio"]
     },
     {
       "id": "hotreload",
       "slug": "hotreload",
       "title": "HotReload",
-      "subtitle": "High-Performance Developer Tooling CLI in Go",
+      "subtitle": "Go CLI File Watcher Tool",
       "shortDescription": "A lightweight, compiled command-line utility built in Go that monitors source code changes recursively, applies debouncing, and triggers automatic server rebuilds and graceful process restarts.",
+      "cardDescription": "Zero-dependency file watcher and process runner in Go.",
       "category": "TOOLS",
       "status": "Shipped",
       "featured": true,
@@ -375,6 +440,9 @@
       "liveUrl": "",
       "githubUrl": "https://github.com/Error-Krishna/hotreload",
       "demoUrl": "https://www.loom.com/share/773d4d8fdd1840128b92929643a08965",
+      "accentColor": "#18181b",
+      "displayOrder": 4,
+      "published": true,
       "role": "Creator & Systems Developer",
       "date": "2024",
       "overview": "Developed to eliminate the friction of manually terminating, recompiling, and restarting backend services during active development, HotReload provides rapid feedback loops for developers in any language ecosystem.",
@@ -387,20 +455,39 @@
         "Graceful process termination handling (SIGTERM / SIGKILL) to prevent zombie port locks",
         "Zero external runtime dependencies; compiled directly into a single cross-platform executable"
       ],
-      "myContribution": "Authored the complete Go CLI architecture: created separate modular packages for filesystem watching, process execution, stack detection, and user configuration flags."
+      "stats": [
+        { "label": "External Deps", "value": "0" },
+        { "label": "Debounce Window", "value": "<5ms" },
+        { "label": "Compiled Binary", "value": "Cross-Platform" }
+      ],
+      "myContribution": "Authored the complete Go CLI architecture: created separate modular packages for filesystem watching, process execution, stack detection, and user configuration flags.",
+      "outcomes": [
+        "Lightweight single binary distribution requiring zero dependencies.",
+        "Debounced file watching eliminating redundant multi-rebuild cycles."
+      ],
+      "relatedProjects": [
+        "udhyog-saathi",
+        "insightloop",
+        "personal-finance-tracker",
+        "krishna-portfolio"
+      ]
     },
     {
       "id": "personal-finance-tracker",
       "slug": "personal-finance-tracker",
       "title": "Personal Finance Tracker",
-      "subtitle": "Financial Tracking & Wealth Management Web App",
+      "subtitle": "Track Expenses, Plan Better",
       "shortDescription": "A streamlined financial dashboard for logging assets, categorizing recurring liabilities, and visualizing net worth trajectory over time with interactive Chart.js summaries.",
+      "cardDescription": "Private financial clarity without ads or intrusive banking sync.",
       "category": "FULL-STACK",
       "status": "Shipped",
       "featured": false,
       "technologies": ["Flask", "MongoDB", "JavaScript", "Chart.js", "HTML/CSS"],
       "liveUrl": "",
       "githubUrl": "https://github.com/Error-Krishna",
+      "accentColor": "#064e3b",
+      "displayOrder": 5,
+      "published": true,
       "role": "Solo Developer",
       "date": "2023 - 2024",
       "overview": "A private, privacy-conscious finance tracking tool built to consolidate fragmented bank statements, credit obligations, and investments into a single unified visual dashboard.",
@@ -412,20 +499,34 @@
         "Interactive graphical trends powered by Chart.js",
         "Exportable data summaries for personal record keeping"
       ],
-      "myContribution": "Developed the Flask backend API, designed MongoDB document collections, and implemented interactive front-end charts using vanilla JavaScript and Chart.js."
+      "stats": [
+        { "label": "Data Ownership", "value": "100% Private" },
+        { "label": "Visual Analytics", "value": "Dynamic" },
+        { "label": "Distraction Free", "value": "Zero Ads" }
+      ],
+      "myContribution": "Developed the Flask backend API, designed MongoDB document collections, and implemented interactive front-end charts using vanilla JavaScript and Chart.js.",
+      "outcomes": [
+        "Fast local tracking of expenses with granular category filters.",
+        "Dynamic net-worth projections and asset ratio visualization."
+      ],
+      "relatedProjects": ["udhyog-saathi", "insightloop", "hotreload", "krishna-portfolio"]
     },
     {
       "id": "krishna-portfolio",
       "slug": "krishna-portfolio",
-      "title": "Krishna Goyal Portfolio",
-      "subtitle": "Engineering & Creative Showcase Platform",
+      "title": "KrishnaOS",
+      "subtitle": "A macOS Inspired UI/UX Portfolio",
       "shortDescription": "A production-grade TypeScript monorepo portfolio featuring Swiss-editorial typography, custom scroll-linked 3D portrait card transitions, and a single source of truth configuration layer.",
+      "cardDescription": "A macOS inspired UI/UX portfolio and web engineering showcase.",
       "category": "EXPERIMENTS",
       "status": "Live",
       "featured": false,
       "technologies": ["React 18", "TypeScript", "Vite", "Express", "Tailwind CSS", "Turborepo"],
       "liveUrl": "https://personal-portfolio-whoami-1.onrender.com",
       "githubUrl": "https://github.com/Error-Krishna",
+      "accentColor": "#7c2d12",
+      "displayOrder": 6,
+      "published": true,
       "role": "Designer & Developer",
       "date": "2024 - 2026",
       "overview": "Built to express both rigorous full-stack software engineering capabilities and refined visual creative direction, communicating credibility to founders, businesses, and engineering teams.",
@@ -437,9 +538,20 @@
         "Modular service catalog with transparent indicative pricing and package deliverables",
         "Central JSON configuration system for seamless updates without touching codebase"
       ],
-      "myContribution": "Complete end-to-end UX design, typography system, component architecture, scroll physics math, and monorepo orchestration."
+      "stats": [
+        { "label": "Scroll Physics", "value": "3D Fluid" },
+        { "label": "Type Safety", "value": "100%" },
+        { "label": "Monorepo", "value": "Turborepo" }
+      ],
+      "myContribution": "Complete end-to-end UX design, typography system, component architecture, scroll physics math, and monorepo orchestration.",
+      "outcomes": [
+        "Unified design system and responsive editorial layout.",
+        "100% typed site configuration single source of truth."
+      ],
+      "relatedProjects": ["udhyog-saathi", "insightloop", "parallel", "hotreload"]
     }
   ],
+
   "experience": [
     {
       "period": "2024 — PRESENT",

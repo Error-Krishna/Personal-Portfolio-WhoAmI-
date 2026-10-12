@@ -121,25 +121,26 @@ describe('New Sections Suite', () => {
   });
 
   describe('ProjectsSection', () => {
-    it('renders featured projects headline and lead project', () => {
+    it('renders editorial headline and project items', () => {
       render(
         <BrowserRouter>
           <ProjectsSection />
         </BrowserRouter>
       );
-      expect(screen.getByText('FEATURED PROJECTS')).toBeInTheDocument();
-      expect(screen.getByText("THINGS I'VE BUILT.")).toBeInTheDocument();
-      expect(screen.getByText('Udhyog Saathi')).toBeInTheDocument();
+      expect(screen.getByText('PROJECTS / 01')).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /THINGS I'VE BUILT/i })).toBeInTheDocument();
+      expect(screen.getAllByText('Udhyog Saathi').length).toBeGreaterThan(0);
     });
 
-    it('renders supporting projects', () => {
+    it('renders project cards across categories', () => {
       render(
         <BrowserRouter>
           <ProjectsSection />
         </BrowserRouter>
       );
-      expect(screen.getByText('InsightLoop')).toBeInTheDocument();
-      expect(screen.getByText('HotReload')).toBeInTheDocument();
+      expect(screen.getAllByText('InsightLoop').length).toBeGreaterThan(0);
+      expect(screen.getAllByText('HotReload').length).toBeGreaterThan(0);
+      expect(screen.getAllByText('Parallel').length).toBeGreaterThan(0);
     });
   });
 

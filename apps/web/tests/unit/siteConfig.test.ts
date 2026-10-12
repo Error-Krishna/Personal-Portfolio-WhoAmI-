@@ -5,6 +5,10 @@ import {
   isValidUrl,
   getVisibleServices,
   getProjectBySlug,
+  getPublishedProjects,
+  getNextProject,
+  getRelatedProjects,
+  normalizeVideo,
 } from '../../src/lib/config/site-config.js';
 
 describe('Site Configuration & Utilities', () => {
@@ -43,5 +47,35 @@ describe('Site Configuration & Utilities', () => {
     expect(udhyogSaathi).toBeDefined();
     expect(udhyogSaathi?.title).toBe('Udhyog Saathi');
     expect(udhyogSaathi?.category).toBe('SAAS & PRODUCTS');
+  });
+
+  it('manages published project order and navigation helpers', () => {
+    const published = getPublishedProjects();
+    expect(published.length).toBe(6);
+    expect(published[0].slug).toBe('udhyog-saathi');
+    expect(published[1].slug).toBe('insightloop');
+
+    const nextFromFirst = getNextProject('udhyog-saathi');
+    expect(nextFromFirst?.slug).toBe('insightloop');
+
+    const lastSlug = published[published.length - 1].slug;
+    const nextFromLast = getNextProject(lastSlug);
+    expect(nextFromLast).toBeUndefined();
+
+    const related = getRelatedProjects('udhyog-saathi', 4);
+    expect(related.length).toBe(4);
+    expect(related.every((p) => p.slug !== 'udhyog-saathi')).toBe(true);
+  });
+
+  it('normalizes video configuration safely', () => {
+    expect(normalizeVideo(undefined)).toBeNull();
+    expect(normalizeVideo('')).toBeNull();
+    expect(normalizeVideo('https://example.com/video.mp4')).toEqual({
+      url: 'https://example.com/video.mp4',
+    });
+    expect(normalizeVideo({ url: 'https://example.com/demo.mp4', duration: '2:15' })).toEqual({
+      url: 'https://example.com/demo.mp4',
+      duration: '2:15',
+    });
   });
 });

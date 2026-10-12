@@ -71,16 +71,42 @@ export interface SkillItem {
   description?: string;
 }
 
+export interface ProjectVideoConfig {
+  url?: string;
+  poster?: string;
+  caption?: string;
+  duration?: string;
+  type?: 'mp4' | 'webm' | 'youtube' | 'vimeo' | 'loom' | string;
+}
+
+export interface ProjectArchitectureConfig {
+  description?: string;
+  diagramUrl?: string;
+  components?: string[];
+}
+
+export interface ProjectStatItem {
+  label: string;
+  value: string;
+}
+
 export interface ProjectItem {
   id: string;
   slug: string;
   title: string;
   subtitle: string;
   shortDescription: string;
+  cardDescription?: string;
   category: string;
   status: string;
   featured: boolean;
   technologies: string[];
+  thumbnail?: string;
+  heroImage?: string;
+  video?: string | ProjectVideoConfig;
+  accentColor?: string;
+  published?: boolean;
+  displayOrder?: number;
   liveUrl?: string;
   githubUrl?: string;
   backendGithubUrl?: string;
@@ -91,7 +117,12 @@ export interface ProjectItem {
   problem: string;
   solution: string;
   features: string[];
+  architecture?: string | ProjectArchitectureConfig;
   myContribution?: string;
+  contributions?: string;
+  outcomes?: string[];
+  relatedProjects?: string[];
+  stats?: ProjectStatItem[];
 }
 
 export interface ExperienceItem {
@@ -183,7 +214,8 @@ export const formatPrice = (
   if (amount === null || amount === undefined || isNaN(amount) || amount <= 0) {
     return fallbackLabel;
   }
-  const symbol = currency === 'USD' ? '$' : currency === 'EUR' ? '€' : currency === 'INR' ? '₹' : `${currency} `;
+  const symbol =
+    currency === 'USD' ? '$' : currency === 'EUR' ? '€' : currency === 'INR' ? '₹' : `${currency} `;
   return `Starting at ${symbol}${amount.toLocaleString()}`;
 };
 
@@ -199,10 +231,81 @@ export const getAllProjects = (): ProjectItem[] => {
   return siteConfig.projects || [];
 };
 
+export const getPublishedProjects = (): ProjectItem[] => {
+  return (siteConfig.projects || [])
+    .filter((p) => p.published !== false)
+    .sort((a, b) => {
+      const orderA = typeof a.displayOrder === 'number' ? a.displayOrder : 999;
+      const orderB = typeof b.displayOrder === 'number' ? b.displayOrder : 999;
+      return orderA - orderB;
+    });
+};
+
 export const getProjectBySlug = (slug: string): ProjectItem | undefined => {
+  if (!slug) return undefined;
+  const normalized = slug.trim().toLowerCase();
   return (siteConfig.projects || []).find(
-    (p) => p.slug.toLowerCase() === slug.toLowerCase() || p.id.toLowerCase() === slug.toLowerCase()
+    (p) => p.slug?.toLowerCase() === normalized || p.id?.toLowerCase() === normalized
   );
+};
+
+export const getNextProject = (currentSlug: string): ProjectItem | undefined => {
+  const published = getPublishedProjects();
+  if (published.length <= 1) return undefined;
+  const currentIndex = published.findIndex(
+    (p) =>
+      p.slug.toLowerCase() === currentSlug.toLowerCase() ||
+      p.id.toLowerCase() === currentSlug.toLowerCase()
+  );
+  if (currentIndex === -1) return undefined;
+  // If last project, return undefined (or loop if desired, but user requirements say:
+  // "If the current project is the last project, follow the existing navigation convention or omit the unavailable next action.")
+  if (currentIndex < published.length - 1) {
+    return published[currentIndex + 1];
+  }
+  return undefined;
+};
+
+export const getRelatedProjects = (currentSlug: string, count = 4): ProjectItem[] => {
+  const published = getPublishedProjects();
+  const current = getProjectBySlug(currentSlug);
+  const others = published.filter(
+    (p) =>
+      p.slug.toLowerCase() !== currentSlug.toLowerCase() &&
+      p.id.toLowerCase() !== currentSlug.toLowerCase()
+  );
+
+  if (current?.relatedProjects && current.relatedProjects.length > 0) {
+    const curated = current.relatedProjects
+      .map((slug) =>
+        others.find(
+          (o) =>
+            o.slug.toLowerCase() === slug.toLowerCase() || o.id.toLowerCase() === slug.toLowerCase()
+        )
+      )
+      .filter((p): p is ProjectItem => Boolean(p));
+
+    if (curated.length > 0) {
+      // If curated list is shorter than count, fill with remaining other projects
+      const curatedSlugs = new Set(curated.map((c) => c.slug.toLowerCase()));
+      const remaining = others.filter((o) => !curatedSlugs.has(o.slug.toLowerCase()));
+      return [...curated, ...remaining].slice(0, count);
+    }
+  }
+
+  return others.slice(0, count);
+};
+
+export const normalizeVideo = (video?: ProjectItem['video']): ProjectVideoConfig | null => {
+  if (!video) return null;
+  if (typeof video === 'string') {
+    if (!video.trim()) return null;
+    return { url: video.trim() };
+  }
+  if (video.url && video.url.trim()) {
+    return video;
+  }
+  return null;
 };
 
 export const getSafeAsset = (assetPath?: string | null, fallback: string = ''): string => {

@@ -21,7 +21,8 @@
 }
 
 @keyframes floatSlow {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px) rotate(0deg);
   }
   50% {
@@ -30,7 +31,8 @@
 }
 
 @keyframes floatReverse {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px) rotate(0deg);
   }
   50% {
@@ -39,7 +41,8 @@
 }
 
 @keyframes pulseGlow {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.6;
     transform: scale(1);
   }
@@ -50,7 +53,8 @@
 }
 
 @keyframes blinkCaret {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -101,4 +105,61 @@
 
 .dark ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.15);
+}
+
+/* 3D Flip Card System */
+.flip-card-wrapper {
+  perspective: 1200px;
+  -webkit-perspective: 1200px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Hover flip on pointer devices, focus-within for keyboard, or manual toggle */
+@media (hover: hover) and (pointer: fine) {
+  .flip-card-wrapper:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+.flip-card-wrapper:focus-within .flip-card-inner,
+.flip-card-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  border-radius: 1rem; /* rounded-2xl */
+}
+
+.flip-card-front {
+  transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg);
+  z-index: 2;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-card-inner {
+    transition: transform 0.1s ease !important;
+  }
 }
