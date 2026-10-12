@@ -17,7 +17,11 @@ const SECTION_DIAL = [
   { id: 'contact', label: 'CONTACT', active: false },
 ];
 
-export const HeroSection: React.FC = () => {
+interface HeroSectionProps {
+  hideStaticPortrait?: boolean;
+}
+
+export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = false }) => {
   const [activeDial, setActiveDial] = useState<string>('WORK');
 
   const scrollTo = (id: string) => {
@@ -198,7 +202,12 @@ export const HeroSection: React.FC = () => {
           - Center: (790, 782)
           ========================================================================= */}
       <div className="absolute left-[42.77%] top-[62.79%] -translate-x-1/2 lg:translate-x-0 bottom-[8%] z-20 hidden md:block">
-        <div className="w-[240px] lg:w-[266px] h-[260px] lg:h-[279px] rounded-[16px] overflow-hidden bg-gradient-to-b from-slate-900 via-slate-950 to-black border border-slate-800/90 shadow-2xl relative group">
+        <div
+          id="hero-portrait-slot"
+          className={`w-[240px] lg:w-[266px] h-[260px] lg:h-[279px] rounded-[16px] overflow-hidden bg-gradient-to-b from-slate-900 via-slate-950 to-black border border-slate-800/90 shadow-2xl relative group ${
+            hideStaticPortrait ? 'opacity-0 pointer-events-none' : ''
+          }`}
+        >
           {/* Vignette Lighting */}
           <div className="absolute inset-0 bg-radial-gradient from-transparent via-black/25 to-black/85 z-10 pointer-events-none" />
 
