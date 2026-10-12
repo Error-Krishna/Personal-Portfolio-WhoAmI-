@@ -23,7 +23,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       : [project.category];
 
   return (
-    <div className="flip-card-wrapper group relative w-full h-[220px] sm:h-[230px]">
+    <div className="flip-card-wrapper group relative w-full h-[195px] sm:h-[205px] lg:h-[210px]">
       {/* 3D Flip Inner Container */}
       <div className={`flip-card-inner ${isFlippedManual ? 'is-flipped' : ''}`}>
         {/* ======================================================== */}
@@ -32,10 +32,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
         <Link
           to={`/work/${project.slug}`}
           aria-label={`View ${project.title} case study`}
-          className="flip-card-front bg-white rounded-2xl border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-slate-950/40 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all p-4 sm:p-5 flex gap-4 sm:gap-5 items-stretch text-left overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 select-none"
+          className="flip-card-front bg-white rounded-2xl border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-slate-950/40 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all p-4 sm:p-5 flex gap-4 sm:gap-5 lg:gap-6 items-stretch text-left overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 select-none"
         >
           {/* Left: Thumbnail Window */}
-          <div className="w-[120px] sm:w-[150px] md:w-[160px] shrink-0 rounded-xl overflow-hidden bg-slate-100 border border-slate-200/80 flex items-center justify-center">
+          <div className="w-[125px] sm:w-[155px] md:w-[175px] lg:w-[195px] xl:w-[210px] shrink-0 rounded-xl overflow-hidden bg-slate-100 border border-slate-200/80 flex items-center justify-center">
             {project.thumbnail ? (
               <img
                 src={project.thumbnail}

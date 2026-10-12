@@ -122,12 +122,12 @@ export const ProjectDetailPage: React.FC = () => {
           )}
         </div>
 
-        {/* Immersive Split Hero Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-12 sm:mb-16 min-h-[460px] lg:min-h-[520px]">
-          {/* Left Side: Project Introduction (42% on desktop) */}
-          <div className="lg:col-span-5 flex flex-col justify-center relative z-20 pr-0 lg:pr-2">
+        {/* Immersive Split Hero Section (~70:30 Media Dominance) */}
+        <div className="flex flex-col lg:flex-row items-center mb-12 sm:mb-16 min-h-[460px] lg:min-h-[520px] xl:min-h-[580px] gap-8 lg:gap-0 relative">
+          {/* Left Side: Project Introduction (~30% on desktop) */}
+          <div className="w-full lg:w-[36%] xl:w-[30%] shrink-0 flex flex-col justify-center relative z-20 pr-0 lg:pr-6 xl:pr-8">
             {/* Project Index Label */}
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2 mb-3 sm:mb-4">
               <span className="w-2 h-2 rounded-full bg-red-600" />
               <span className="font-mono text-xs tracking-widest font-bold text-slate-800 uppercase">
                 PROJECT / {formattedNumber}
@@ -135,22 +135,22 @@ export const ProjectDetailPage: React.FC = () => {
             </div>
 
             {/* Giant Title */}
-            <h1 className="font-hero font-black [font-weight:1000] text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-slate-950 uppercase tracking-[-0.035em] leading-[0.92] mb-4">
+            <h1 className="font-hero font-black [font-weight:1000] text-3xl sm:text-4xl lg:text-4xl xl:text-5xl text-slate-950 uppercase tracking-[-0.035em] leading-[0.95] mb-4 break-words">
               {project.title}
               <span className="text-red-600">.</span>
             </h1>
 
             {/* Summary / Subtitle */}
-            <p className="font-sans text-base sm:text-lg text-slate-700 leading-relaxed mb-6 max-w-xl">
+            <p className="font-sans text-sm sm:text-base text-slate-700 leading-relaxed mb-6 max-w-md">
               {project.shortDescription || project.subtitle}
             </p>
 
             {/* Technology & Category Badges */}
-            <div className="flex flex-wrap items-center gap-2 mb-8">
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-6 sm:mb-8">
               {displayBadges.map((badge, idx) => (
                 <span
                   key={idx}
-                  className="font-mono text-[11px] tracking-wider px-3 py-1 rounded-md bg-white text-slate-800 border border-slate-300 font-medium uppercase shadow-xs"
+                  className="font-mono text-[10px] sm:text-[11px] tracking-wider px-2.5 sm:px-3 py-1 rounded-md bg-white text-slate-800 border border-slate-300 font-medium uppercase shadow-xs"
                 >
                   {badge}
                 </span>
@@ -158,13 +158,13 @@ export const ProjectDetailPage: React.FC = () => {
             </div>
 
             {/* Project Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
               {isValidUrl(project.liveUrl) && (
                 <a
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-mono text-xs font-bold uppercase tracking-wider transition-colors shadow-sm"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-mono text-xs font-bold uppercase tracking-wider transition-colors shadow-sm whitespace-nowrap"
                 >
                   <span>View Live Product</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -176,7 +176,7 @@ export const ProjectDetailPage: React.FC = () => {
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-white border border-slate-300 hover:border-slate-950 hover:bg-slate-50 text-slate-950 font-mono text-xs font-bold uppercase tracking-wider transition-colors shadow-xs"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-lg bg-white border border-slate-300 hover:border-slate-950 hover:bg-slate-50 text-slate-950 font-mono text-xs font-bold uppercase tracking-wider transition-colors shadow-xs whitespace-nowrap"
                 >
                   <span>View Source Code</span>
                   <Github className="w-3.5 h-3.5" />
@@ -188,7 +188,7 @@ export const ProjectDetailPage: React.FC = () => {
                   href={project.demoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-3 rounded-lg bg-white border border-slate-300 hover:border-slate-950 hover:bg-slate-50 text-slate-800 font-mono text-xs font-bold uppercase tracking-wider transition-colors shadow-xs"
+                  className="inline-flex items-center gap-2 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-lg bg-white border border-slate-300 hover:border-slate-950 hover:bg-slate-50 text-slate-800 font-mono text-xs font-bold uppercase tracking-wider transition-colors shadow-xs whitespace-nowrap"
                   title="View Walkthrough Demo"
                 >
                   <LinkIcon className="w-3.5 h-3.5" />
@@ -198,8 +198,8 @@ export const ProjectDetailPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Side: Immersive Project Video Hero (58% on desktop) */}
-          <div className="lg:col-span-7 h-full w-full relative z-10 flex items-center">
+          {/* Right Side: Immersive Project Video Hero (~70% on desktop) */}
+          <div className="w-full lg:w-[64%] xl:w-[70%] h-full relative z-10 flex items-center lg:-ml-4 xl:-ml-6">
             <ProjectVideoShowcase project={project} />
           </div>
         </div>

@@ -30,7 +30,7 @@ export const ProjectsSection: React.FC = () => {
   return (
     <section
       id="projects"
-      className="relative w-full bg-[#f8f6f0] text-[#0f1117] selection:bg-black selection:text-white overflow-hidden bg-grain px-6 sm:px-12 lg:px-16 py-20 lg:py-28 border-t border-slate-300/80"
+      className="relative w-full bg-[#f8f6f0] text-[#0f1117] selection:bg-black selection:text-white overflow-hidden bg-grain px-6 sm:px-10 lg:px-12 py-20 lg:py-28 border-t border-slate-300/80"
     >
       {/* Anchor for 'work' navigation target */}
       <div id="work" className="absolute -top-12 left-0 pointer-events-none" />
@@ -82,7 +82,7 @@ export const ProjectsSection: React.FC = () => {
 
         {/* Dynamic Responsive 2-Column Grid */}
         {filteredProjects.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
             {filteredProjects.map((project: ProjectItem, index: number) => (
               <ProjectCard key={project.id || project.slug} project={project} index={index} />
             ))}

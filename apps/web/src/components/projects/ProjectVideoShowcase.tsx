@@ -35,11 +35,11 @@ export const ProjectVideoShowcase: React.FC<ProjectVideoShowcaseProps> = ({ proj
   };
 
   return (
-    <div className="relative w-full h-full min-h-[320px] sm:min-h-[420px] lg:min-h-[520px] rounded-2xl lg:rounded-3xl overflow-hidden select-none bg-slate-900/5">
+    <div className="relative w-full h-full min-h-[320px] sm:min-h-[420px] lg:min-h-[520px] xl:min-h-[580px] rounded-2xl lg:rounded-3xl overflow-hidden select-none bg-slate-900/5">
       {/* ======================================================== */}
       {/* IMMERSIVE MEDIA LAYER (Video or Fallback)                */}
       {/* ======================================================== */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.5)_15%,rgba(0,0,0,1)_35%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.5)_15%,rgba(0,0,0,1)_35%)]">
+      <div className="absolute inset-0 w-full h-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.4)_12%,rgba(0,0,0,1)_28%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.4)_12%,rgba(0,0,0,1)_28%)]">
         {hasActualVideo ? (
           /* Actual Video Player */
           <video
@@ -86,7 +86,7 @@ export const ProjectVideoShowcase: React.FC<ProjectVideoShowcaseProps> = ({ proj
       {/* DIRECTIONAL BLEND MASKS (Fades into cream background)    */}
       {/* ======================================================== */}
       {/* Left-edge soft directional gradient blend */}
-      <div className="hidden lg:block absolute inset-y-0 left-0 w-44 bg-gradient-to-r from-[#f8f6f0] via-[#f8f6f0]/70 to-transparent pointer-events-none z-10" />
+      <div className="hidden lg:block absolute inset-y-0 left-0 w-48 lg:w-56 bg-gradient-to-r from-[#f8f6f0] via-[#f8f6f0]/75 to-transparent pointer-events-none z-10" />
 
       {/* Top & bottom subtle feathering */}
       <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#f8f6f0]/60 to-transparent pointer-events-none z-10" />
