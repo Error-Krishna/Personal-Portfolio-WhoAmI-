@@ -1,0 +1,577 @@
+{
+  "personal": {
+    "name": "Krishna Goyal",
+    "displayName": "KRISHNA GOYAL",
+    "title": "Full-Stack Developer & Product Builder",
+    "headline": "I build things people can use.",
+    "location": "Amaravati, India",
+    "graduationYear": 2027,
+    "email": "iamkrishnagoyal@gmail.com",
+    "availability": "open_to_freelance",
+    "availabilityLabel": "OPEN TO FREELANCE PROJECTS",
+    "shortBio": "Final year Computer Science student at VIT-AP, focused on building real-world products and solving meaningful problems. Full-stack developer and video creator combining engineering with creative execution.",
+    "timezone": "Asia/Kolkata",
+    "responseTime": "Within 24 hours"
+  },
+  "links": {
+    "github": "https://github.com/Error-Krishna",
+    "linkedin": "https://linkedin.com/in/krishna2611",
+    "email": "mailto:iamkrishnagoyal@gmail.com",
+    "phone": "tel:+919064700906",
+    "resume": "/resume/krishna-goyal-resume.pdf",
+    "portfolio": "https://personal-portfolio-whoami-1.onrender.com",
+    "twitter": "",
+    "youtube": "",
+    "instagram": ""
+  },
+  "assets": {
+    "heroPortrait": "/images/image-removebg-preview.png",
+    "aboutPortrait": "/images/about-portrait-red.png",
+    "contactPortrait": "/images/about-portrait-red.png",
+    "resume": "/resume/krishna-goyal-resume.pdf",
+    "ogImage": "/images/about-portrait-red.png"
+  },
+  "pricing": {
+    "currency": "USD",
+    "displayCurrency": "USD",
+    "showPricing": true,
+    "showHourlyRate": false,
+    "hourlyRate": null,
+    "minimumProjectBudget": 500,
+    "customQuoteLabel": "Request a Quote"
+  },
+  "services": [
+    {
+      "id": "web-applications",
+      "title": "Web Applications & Landing Pages",
+      "shortDescription": "High-conversion landing pages and responsive multi-page web applications built with modern React, TypeScript, and clean responsive CSS.",
+      "category": "Frontend & Web",
+      "visible": true,
+      "startingPrice": 500,
+      "currency": "USD",
+      "pricingModel": "starting_at",
+      "deliverables": [
+        "Responsive, mobile-first React / TypeScript interface",
+        "Clean component architecture with Tailwind CSS",
+        "Interactive client-side forms & input validation",
+        "Semantic SEO structure & Open Graph metadata",
+        "Deployment setup and post-launch handoff"
+      ],
+      "exclusions": [
+        "Paid third-party API subscription costs",
+        "Custom enterprise database clustering"
+      ],
+      "estimatedDelivery": "1–2 weeks",
+      "revisionAllowance": 2,
+      "supportPeriod": "14 days post-launch",
+      "featured": false,
+      "ctaLabel": "Discuss Web Project",
+      "ctaDestination": "#contact"
+    },
+    {
+      "id": "full-stack-mvp",
+      "title": "Full-Stack MVP & Product Engineering",
+      "shortDescription": "End-to-end web applications and MVP products with structured backend architecture, robust database modeling, and polished user workflows.",
+      "category": "Full-Stack",
+      "visible": true,
+      "startingPrice": 1200,
+      "currency": "USD",
+      "pricingModel": "starting_at",
+      "deliverables": [
+        "Full frontend and backend implementation (MERN / Django)",
+        "RESTful API design and database modeling (MongoDB / PostgreSQL)",
+        "Authentication, authorization & secure session handling",
+        "Core business workflows, live dashboards & admin views",
+        "Automated testing, containerization (Docker) & deployment"
+      ],
+      "exclusions": [
+        "Third-party paid service API quotas",
+        "Proprietary hardware integrations"
+      ],
+      "estimatedDelivery": "2–4 weeks",
+      "revisionAllowance": 3,
+      "supportPeriod": "30 days post-launch",
+      "featured": true,
+      "ctaLabel": "Build Full-Stack MVP",
+      "ctaDestination": "#contact"
+    },
+    {
+      "id": "backend-api",
+      "title": "Backend & REST API Engineering",
+      "shortDescription": "Reliable, well-documented server architectures and REST APIs built with Express, Node.js, Django REST Framework, or Flask.",
+      "category": "Backend",
+      "visible": true,
+      "startingPrice": 700,
+      "currency": "USD",
+      "pricingModel": "starting_at",
+      "deliverables": [
+        "REST API endpoint architecture with strict schema validation (Zod)",
+        "Relational & NoSQL database schemas (PostgreSQL / MongoDB)",
+        "Standardized error handling envelopes & rate limiting",
+        "Interactive API documentation & Postman collections",
+        "Query optimization and database indexing"
+      ],
+      "exclusions": [
+        "High-frequency custom trading engine logic"
+      ],
+      "estimatedDelivery": "1–3 weeks",
+      "revisionAllowance": 2,
+      "supportPeriod": "14 days post-launch",
+      "featured": false,
+      "ctaLabel": "Discuss API Engineering",
+      "ctaDestination": "#contact"
+    },
+    {
+      "id": "automation-tools",
+      "title": "Automation & Internal Tools",
+      "shortDescription": "Automating repetitive operational workflows, data processing, and custom CLI developer utilities to reduce friction.",
+      "category": "Automation",
+      "visible": true,
+      "startingPrice": 450,
+      "currency": "USD",
+      "pricingModel": "starting_at",
+      "deliverables": [
+        "Workflow analysis and friction point identification",
+        "Custom Python / Go / Node.js automation scripts & CLI tools",
+        "Third-party API integrations and automated data sync",
+        "Error handling, alert notifications & process logging",
+        "Handover documentation and installation scripts"
+      ],
+      "exclusions": [
+        "Legacy mainframe database migrations"
+      ],
+      "estimatedDelivery": "1–2 weeks",
+      "revisionAllowance": 2,
+      "supportPeriod": "14 days post-launch",
+      "featured": false,
+      "ctaLabel": "Automate Workflows",
+      "ctaDestination": "#contact"
+    },
+    {
+      "id": "creative-video",
+      "title": "Creative & Video Editing",
+      "shortDescription": "Engaging short-form video editing, product demonstration walkthroughs, and visual storytelling for technical products and personal brands.",
+      "category": "Creative",
+      "visible": true,
+      "startingPrice": 250,
+      "currency": "USD",
+      "pricingModel": "starting_at",
+      "deliverables": [
+        "Paced video editing with narrative structure & sound design",
+        "Product feature walkthroughs & demonstration cuts",
+        "Motion graphics, kinetic text overlays & color grading",
+        "Platform-specific exports (Vertical 9:16 & Widescreen 16:9)",
+        "Defined revision cycles for pacing and visual feedback"
+      ],
+      "exclusions": [
+        "On-location filming and hardware cameras"
+      ],
+      "estimatedDelivery": "3–5 days",
+      "revisionAllowance": 2,
+      "supportPeriod": "7 days post-delivery",
+      "featured": false,
+      "ctaLabel": "Discuss Video Project",
+      "ctaDestination": "#contact"
+    }
+  ],
+  "skills": [
+    {
+      "name": "React.js",
+      "category": "FRONTEND",
+      "icon": "Atom",
+      "description": "Component architecture, hooks, state management, and SPA ecosystems."
+    },
+    {
+      "name": "TypeScript",
+      "category": "FRONTEND",
+      "icon": "FileCode",
+      "description": "Strongly typed application architecture across frontend, contracts, and backend."
+    },
+    {
+      "name": "JavaScript (ES6+)",
+      "category": "FRONTEND",
+      "icon": "Code",
+      "description": "Modern asynchronous patterns, DOM manipulation, and browser APIs."
+    },
+    {
+      "name": "Tailwind CSS",
+      "category": "FRONTEND",
+      "icon": "Palette",
+      "description": "Utility-first responsive styling, design token systems, and animations."
+    },
+    {
+      "name": "HTML5 & CSS3",
+      "category": "FRONTEND",
+      "icon": "Layout",
+      "description": "Semantic HTML, responsive grid layouts, and web accessibility standards."
+    },
+    {
+      "name": "Node.js",
+      "category": "BACKEND",
+      "icon": "Server",
+      "description": "Event-driven asynchronous server runtimes and microservices."
+    },
+    {
+      "name": "Express.js",
+      "category": "BACKEND",
+      "icon": "Cpu",
+      "description": "Robust middleware pipelines, RESTful routing, and API servers."
+    },
+    {
+      "name": "Python",
+      "category": "BACKEND",
+      "icon": "Terminal",
+      "description": "General backend programming, automation scripting, and data manipulation."
+    },
+    {
+      "name": "Django / DRF",
+      "category": "BACKEND",
+      "icon": "Layers",
+      "description": "Batteries-included web framework, ORM modeling, and REST APIs."
+    },
+    {
+      "name": "Flask",
+      "category": "BACKEND",
+      "icon": "Boxes",
+      "description": "Lightweight modular web services, microservices, and tool backends."
+    },
+    {
+      "name": "REST APIs",
+      "category": "BACKEND",
+      "icon": "Network",
+      "description": "Resource-oriented HTTP architectures, status codes, and input validation."
+    },
+    {
+      "name": "MongoDB",
+      "category": "DATABASES",
+      "icon": "Database",
+      "description": "Document schema design, aggregation pipelines, and indexing."
+    },
+    {
+      "name": "PostgreSQL & SQL",
+      "category": "DATABASES",
+      "icon": "Table",
+      "description": "Relational data modeling, ACID transactions, and optimized SQL queries."
+    },
+    {
+      "name": "Redis",
+      "category": "DATABASES",
+      "icon": "Zap",
+      "description": "In-memory caching, rate limiting, and pub/sub message brokers."
+    },
+    {
+      "name": "Git & GitHub",
+      "category": "TOOLS",
+      "icon": "GitBranch",
+      "description": "Branching strategies, code reviews, semantic commits, and version control."
+    },
+    {
+      "name": "Docker",
+      "category": "TOOLS",
+      "icon": "Container",
+      "description": "Multi-stage container builds, Docker Compose, and environment isolation."
+    },
+    {
+      "name": "Linux & CLI",
+      "category": "TOOLS",
+      "icon": "TerminalSquare",
+      "description": "Shell scripting, process management, remote server management, and tools."
+    },
+    {
+      "name": "Go (Golang)",
+      "category": "TOOLS",
+      "icon": "Binary",
+      "description": "High-performance systems programming, concurrency, and CLI tooling."
+    },
+    {
+      "name": "Postman & Vitest",
+      "category": "TOOLS",
+      "icon": "CheckCircle2",
+      "description": "Automated endpoint testing, integration suites, and API verification."
+    },
+    {
+      "name": "Video Editing",
+      "category": "CREATIVE",
+      "icon": "Film",
+      "description": "Short-form video pacing, narrative editing, and technical walkthroughs."
+    },
+    {
+      "name": "Visual Storytelling",
+      "category": "CREATIVE",
+      "icon": "Video",
+      "description": "Structuring technical content for engaging social media and audience clarity."
+    },
+    {
+      "name": "UI/UX Design Awareness",
+      "category": "CREATIVE",
+      "icon": "Sparkles",
+      "description": "Editorial typography, spacing systems, and purposeful user interactions."
+    }
+  ],
+  "projects": [
+    {
+      "id": "udhyog-saathi",
+      "slug": "udhyog-saathi",
+      "title": "Udhyog Saathi",
+      "subtitle": "SaaS Business Operating System for MSME Manufacturers",
+      "shortDescription": "A specialized SaaS platform engineered for small and mid-sized manufacturing enterprises, centralizing dual-mode invoicing, raw-material inventory, worker operations, and real-time production analytics.",
+      "category": "SAAS & PRODUCTS",
+      "status": "Active Development",
+      "featured": true,
+      "technologies": ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
+      "liveUrl": "https://udhyogsaathi.in/",
+      "githubUrl": "https://github.com/Manish-bhargava/udhyog-saathi-frontend",
+      "backendGithubUrl": "https://github.com/Manish-bhargava/udhyog-saath-backend/",
+      "role": "Co-founder & Full-Stack Developer",
+      "date": "2024 - Present",
+      "overview": "Small and mid-sized manufacturers in India often manage mission-critical operations with fragmented paper slips, physical ledgers, and informal WhatsApp chats. Udhyog Saathi replaces disjointed tracking with a single intuitive operational workspace.",
+      "problem": "Manual double-entry errors in invoicing, sudden stockouts of raw materials without warning, lack of worker attendance and payout accountability, and zero visibility into daily production output.",
+      "solution": "A full-stack web operating system designed specifically around Indian manufacturing workflows—including support for Kacha and Pakka bill formats, real-time inventory threshold alerts, and mobile-friendly workforce dashboards.",
+      "features": [
+        "Executive operational dashboard summarizing active orders, revenue, and material levels",
+        "Dual-mode invoice generation supporting flexible business compliance requirements",
+        "Real-time raw material and finished inventory tracking with automated stock warnings",
+        "Worker management module for tracking shifts, task completions, and wage disbursements",
+        "Production line throughput analytics to uncover bottleneck operations"
+      ],
+      "myContribution": "Architected the frontend UI with React and Tailwind CSS, structured the operational data models in MongoDB, built RESTful endpoints in Express, and designed the intuitive invoice and inventory creation flows."
+    },
+    {
+      "id": "insightloop",
+      "slug": "insightloop",
+      "title": "InsightLoop",
+      "subtitle": "Real-Time Business Management & Analytics Platform",
+      "shortDescription": "A full-stack operational intelligence platform tracking multi-stream sales, worker payouts, and profit-and-loss margins via a synchronized live dashboard and integrated AI assistant.",
+      "category": "FULL-STACK",
+      "status": "Shipped",
+      "featured": true,
+      "technologies": ["React", "Express.js", "MongoDB", "Node.js", "WebSockets"],
+      "liveUrl": "https://insightloop.onrender.com/",
+      "githubUrl": "https://github.com/Error-Krishna/InsightLoop",
+      "role": "Solo Full-Stack Developer",
+      "date": "2024",
+      "overview": "InsightLoop is an operational command center built to turn high-velocity transactional data into clear business decisions, providing operators with immediate clarity into their cash position and team performance.",
+      "problem": "Business owners frequently spend hours each evening compiling disparate receipts and cash transactions to calculate whether they made a profit or loss on any given day.",
+      "solution": "A reactive dashboard that automatically syncs sales entries and worker payments across devices in real time using WebSockets, presenting dynamic profitability calculations and instant trend graphs.",
+      "features": [
+        "Auto-updating operational dashboard with zero page reloads via WebSockets",
+        "Granular sales, expense, and worker payment ledger with filterable date ranges",
+        "Live net profit and loss margin calculation engine",
+        "Integrated conversational AI assistant to answer natural language queries about metrics",
+        "Role-aware access control protecting confidential business financials"
+      ],
+      "myContribution": "Built the entire application from ground up: React frontend interface, Node/Express REST backend, MongoDB schemas, WebSocket bidirectional communication channels, and AI assistance integration."
+    },
+    {
+      "id": "hotreload",
+      "slug": "hotreload",
+      "title": "HotReload",
+      "subtitle": "High-Performance Developer Tooling CLI in Go",
+      "shortDescription": "A lightweight, compiled command-line utility built in Go that monitors source code changes recursively, applies debouncing, and triggers automatic server rebuilds and graceful process restarts.",
+      "category": "TOOLS",
+      "status": "Shipped",
+      "featured": true,
+      "technologies": ["Go", "fsnotify", "CLI", "Process Management"],
+      "liveUrl": "",
+      "githubUrl": "https://github.com/Error-Krishna/hotreload",
+      "demoUrl": "https://www.loom.com/share/773d4d8fdd1840128b92929643a08965",
+      "role": "Creator & Systems Developer",
+      "date": "2024",
+      "overview": "Developed to eliminate the friction of manually terminating, recompiling, and restarting backend services during active development, HotReload provides rapid feedback loops for developers in any language ecosystem.",
+      "problem": "Developers working with compiled languages or custom server scripts lose momentum when constantly switching to terminal windows to kill old processes and run new builds manually.",
+      "solution": "A self-contained Go CLI binary that listens to operating system filesystem events, debounces rapid multi-file writes, and reliably manages the child process lifecycle with graceful signal propagation.",
+      "features": [
+        "Recursive filesystem tree watching powered by the low-level fsnotify library",
+        "Configurable event debouncing window to eliminate multiple restart cycles during IDE saves",
+        "Automatic project stack detection and smart build command inferences",
+        "Graceful process termination handling (SIGTERM / SIGKILL) to prevent zombie port locks",
+        "Zero external runtime dependencies; compiled directly into a single cross-platform executable"
+      ],
+      "myContribution": "Authored the complete Go CLI architecture: created separate modular packages for filesystem watching, process execution, stack detection, and user configuration flags."
+    },
+    {
+      "id": "personal-finance-tracker",
+      "slug": "personal-finance-tracker",
+      "title": "Personal Finance Tracker",
+      "subtitle": "Financial Tracking & Wealth Management Web App",
+      "shortDescription": "A streamlined financial dashboard for logging assets, categorizing recurring liabilities, and visualizing net worth trajectory over time with interactive Chart.js summaries.",
+      "category": "FULL-STACK",
+      "status": "Shipped",
+      "featured": false,
+      "technologies": ["Flask", "MongoDB", "JavaScript", "Chart.js", "HTML/CSS"],
+      "liveUrl": "",
+      "githubUrl": "https://github.com/Error-Krishna",
+      "role": "Solo Developer",
+      "date": "2023 - 2024",
+      "overview": "A private, privacy-conscious finance tracking tool built to consolidate fragmented bank statements, credit obligations, and investments into a single unified visual dashboard.",
+      "problem": "Commercial finance apps are often cluttered with advertisements, upsells, and privacy-invasive banking integrations that break frequently.",
+      "solution": "A lightweight Flask and MongoDB application providing lightning-fast data entry, custom categorization, and dynamic Chart.js visualizations.",
+      "features": [
+        "Comprehensive asset and liability tracking with net worth calculations",
+        "Categorized monthly expenditure breakdowns and budget comparisons",
+        "Interactive graphical trends powered by Chart.js",
+        "Exportable data summaries for personal record keeping"
+      ],
+      "myContribution": "Developed the Flask backend API, designed MongoDB document collections, and implemented interactive front-end charts using vanilla JavaScript and Chart.js."
+    },
+    {
+      "id": "krishna-portfolio",
+      "slug": "krishna-portfolio",
+      "title": "Krishna Goyal Portfolio",
+      "subtitle": "Engineering & Creative Showcase Platform",
+      "shortDescription": "A production-grade TypeScript monorepo portfolio featuring Swiss-editorial typography, custom scroll-linked 3D portrait card transitions, and a single source of truth configuration layer.",
+      "category": "EXPERIMENTS",
+      "status": "Live",
+      "featured": false,
+      "technologies": ["React 18", "TypeScript", "Vite", "Express", "Tailwind CSS", "Turborepo"],
+      "liveUrl": "https://personal-portfolio-whoami-1.onrender.com",
+      "githubUrl": "https://github.com/Error-Krishna",
+      "role": "Designer & Developer",
+      "date": "2024 - 2026",
+      "overview": "Built to express both rigorous full-stack software engineering capabilities and refined visual creative direction, communicating credibility to founders, businesses, and engineering teams.",
+      "problem": "Most developer portfolios use generic off-the-shelf templates with zero personality, poor mobile responsiveness, or excessive gimmicky animations that distract from actual engineering competence.",
+      "solution": "An editorial design combining Archivo Black display typography, Space Mono technical metadata, a smooth scroll-driven card transition, and a configurable service offering.",
+      "features": [
+        "Custom scroll-linked 3D portrait card flip transition between Hero and About",
+        "Interactive Dynamic Island navigation capsule with real-time status ticker",
+        "Modular service catalog with transparent indicative pricing and package deliverables",
+        "Central JSON configuration system for seamless updates without touching codebase"
+      ],
+      "myContribution": "Complete end-to-end UX design, typography system, component architecture, scroll physics math, and monorepo orchestration."
+    }
+  ],
+  "experience": [
+    {
+      "period": "2024 — PRESENT",
+      "organization": "Udhyog Saathi",
+      "role": "Co-Founder & Product Developer",
+      "category": "Product & Engineering",
+      "description": "Building a SaaS business operating system for small and mid-sized manufacturing enterprises. Designing core workflows for billing, inventory management, and operational dashboards.",
+      "link": "https://udhyogsaathi.in/"
+    },
+    {
+      "period": "2024 — PRESENT",
+      "organization": "Independent Full-Stack Engineering",
+      "role": "Full-Stack Developer",
+      "category": "Software Development",
+      "description": "Architecting production web applications and developer tools, including InsightLoop (real-time business management) and HotReload (Go CLI file watcher).",
+      "link": "https://github.com/Error-Krishna"
+    },
+    {
+      "period": "2023 — 2027",
+      "organization": "Vellore Institute of Technology (VIT-AP)",
+      "role": "B.Tech in Computer Science & Engineering",
+      "category": "Education",
+      "description": "Undergraduate studies in Computer Science. Core coursework: Data Structures, Computer Networks, Operating Systems, DBMS, OOP, and NoSQL Databases.",
+      "link": "https://vitap.ac.in"
+    },
+    {
+      "period": "2023 — PRESENT",
+      "organization": "Creative & Video Production",
+      "role": "Video Creator & Visual Storyteller",
+      "category": "Creative",
+      "description": "Editing short-form storytelling videos, product walkthroughs, and technical demos using Adobe Premiere Pro and motion graphics tools.",
+      "link": ""
+    },
+    {
+      "period": "2021 — 2023",
+      "organization": "Satyanarayan Academy",
+      "role": "Higher Secondary (PCM & Computer Science)",
+      "category": "Education",
+      "description": "Completed Class 12 with 86.2% aggregate in West Bengal, India with a focus on Physics, Chemistry, Mathematics, and Computer Science.",
+      "link": ""
+    }
+  ],
+  "creativeWorks": [
+    {
+      "id": "saas-walkthrough",
+      "title": "SaaS Product Walkthrough & Demo",
+      "category": "Product Demonstration",
+      "description": "Dynamic video breakdown explaining complex manufacturing workflow automation and dashboard features with paced editing and clear visual callouts.",
+      "tools": ["Premiere Pro", "After Effects", "Loom"],
+      "status": "Available on request"
+    },
+    {
+      "id": "tech-storytelling",
+      "title": "Short-Form Technical Storytelling",
+      "category": "Short-Form Content",
+      "description": "High-retention vertical edits designed for developers and founders, translating software concepts and architectural decisions into engaging visual narratives.",
+      "tools": ["Premiere Pro", "Motion Design"],
+      "status": "Published"
+    },
+    {
+      "id": "brand-creative",
+      "title": "Motion Graphics & Kinetic Typography",
+      "category": "Motion Graphics",
+      "description": "Clean, understated kinetic typography and graphical highlights created to elevate developer tools and product announcements.",
+      "tools": ["After Effects", "Sound Design"],
+      "status": "Active"
+    }
+  ],
+  "trustPrinciples": [
+    {
+      "number": "01",
+      "title": "Transparent & Defined Scope",
+      "description": "Every project begins with clear deliverables, mutually agreed timelines, and explicit boundaries so there are never hidden surprises."
+    },
+    {
+      "number": "02",
+      "title": "Production-Grade, Typed Code",
+      "description": "Clean TypeScript, modular component architecture, and structured error handling ensure your software can scale, be audited, and be maintained with ease."
+    },
+    {
+      "number": "03",
+      "title": "Thoughtful UX & Fluid Performance",
+      "description": "Fast loading times, mobile-first responsive layouts, accessible markup, and smooth micro-interactions that make applications a pleasure to use."
+    },
+    {
+      "number": "04",
+      "title": "Direct & Proactive Communication",
+      "description": "Regular milestone check-ins, asynchronous video updates, and clear issue escalation keep your team aligned from kickoff to launch."
+    },
+    {
+      "number": "05",
+      "title": "Reliable Handoff & Documentation",
+      "description": "Comprehensive READMEs, environment configuration guides, and deployment support ensure you or your team can take over seamlessly."
+    }
+  ],
+  "contact": {
+    "heading": "HAVE AN IDEA?\nLET'S BUILD IT.",
+    "subheading": "Open to freelance projects, collaborations, and interesting product ideas. Let's discuss your scope.",
+    "email": "iamkrishnagoyal@gmail.com",
+    "projectTypes": [
+      "Web Applications & Landing Pages",
+      "Full-Stack MVP & Product Engineering",
+      "Backend & REST API Engineering",
+      "Automation & Internal Tools",
+      "Creative & Video Editing",
+      "Other / Consultation"
+    ],
+    "budgetOptions": [
+      "Starting (< $500)",
+      "$500 – $1,200",
+      "$1,200 – $3,000",
+      "$3,000+",
+      "Scope-based / Request a Quote"
+    ],
+    "timelineOptions": [
+      "Fast (< 2 weeks)",
+      "Standard (2–4 weeks)",
+      "Flexible (1–2 months)",
+      "Exploring ideas"
+    ],
+    "successMessage": "Thank you for reaching out! I've received your project inquiry and will get back to you within 24 hours."
+  },
+  "sectionVisibility": {
+    "hero": true,
+    "about": true,
+    "skills": true,
+    "projects": true,
+    "services": true,
+    "experience": true,
+    "creative": true,
+    "trust": true,
+    "contact": true,
+    "footer": true
+  }
+}
