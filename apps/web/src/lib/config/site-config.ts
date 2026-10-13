@@ -171,11 +171,25 @@ export interface ContactConfig {
   successMessage: string;
 }
 
+export interface TestimonialItem {
+  id: string;
+  published?: boolean;
+  clientName: string;
+  clientRole: string;
+  companyName: string;
+  productName?: string;
+  testimonial: string;
+  profileImage?: string;
+  companyLogo?: string;
+  highlightPhrase?: string;
+}
+
 export interface SectionVisibilityConfig {
   hero: boolean;
   about: boolean;
   skills: boolean;
   projects: boolean;
+  testimonials?: boolean;
   services: boolean;
   experience: boolean;
   creative: boolean;
@@ -193,6 +207,7 @@ export interface SiteConfig {
   services: ServiceItem[];
   skills: SkillItem[];
   projects: ProjectItem[];
+  testimonials?: TestimonialItem[];
   experience: ExperienceItem[];
   creativeWorks: CreativeWorkItem[];
   trustPrinciples: TrustPrincipleItem[];
@@ -202,6 +217,10 @@ export interface SiteConfig {
 
 // Safely typed singleton site configuration
 export const siteConfig: SiteConfig = rawConfig as unknown as SiteConfig;
+
+export const getPublishedTestimonials = (): TestimonialItem[] => {
+  return (siteConfig.testimonials || []).filter((t) => t.published !== false);
+};
 
 // Helper utilities for resilient UI rendering
 export const isValidUrl = (url?: string | null): boolean => {

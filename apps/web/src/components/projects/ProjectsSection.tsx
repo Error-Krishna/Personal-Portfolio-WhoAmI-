@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { ArrowRight } from 'lucide-react';
 import { getPublishedProjects, type ProjectItem } from '../../lib/config/site-config.js';
 import { ProjectCard } from './ProjectCard.js';
 
@@ -9,6 +10,18 @@ export const ProjectsSection: React.FC = () => {
   const publishedProjects = useMemo(() => {
     return getPublishedProjects();
   }, []);
+
+  // First 3 featured projects for priority showcase
+  const featuredTopProjects = useMemo(() => {
+    const featured = publishedProjects.filter((p) => p.featured);
+    return featured.slice(0, 3);
+  }, [publishedProjects]);
+
+  // Remaining published projects for secondary collection
+  const remainingProjects = useMemo(() => {
+    const featuredIds = new Set(featuredTopProjects.map((p) => p.id));
+    return publishedProjects.filter((p) => !featuredIds.has(p.id));
+  }, [publishedProjects, featuredTopProjects]);
 
   // Compute available categories dynamically
   const categories = useMemo(() => {
@@ -26,6 +39,14 @@ export const ProjectsSection: React.FC = () => {
       (p) => p.category?.toUpperCase() === activeCategory.toUpperCase()
     );
   }, [activeCategory, publishedProjects]);
+
+  const scrollToContact = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const el = document.getElementById('contact');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <section
@@ -80,18 +101,126 @@ export const ProjectsSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Dynamic Responsive 2-Column Grid */}
-        {filteredProjects.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
-            {filteredProjects.map((project: ProjectItem, index: number) => (
-              <ProjectCard key={project.id || project.slug} project={project} index={index} />
-            ))}
+        {/* SECTION CONTENT */}
+        {activeCategory === 'ALL' ? (
+          <div>
+            {/* 1. TOP TIER: FEATURED HIGHLIGHTS (Top 3 Projects) */}
+            <div className="mb-6">
+              <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-300/60">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-red-600" />
+                  <span className="font-mono text-xs font-bold uppercase tracking-wider text-slate-900">
+                    FEATURED WORK
+                  </span>
+                </div>
+                <span className="font-mono text-[11px] text-slate-500 uppercase tracking-wider">
+                  03 SELECTED CASE STUDIES
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+                {featuredTopProjects.map((project: ProjectItem, index: number) => (
+                  <ProjectCard
+                    key={project.id || project.slug}
+                    project={project}
+                    index={index}
+                    featuredHighlight={true}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* 2. COMPACT POST-WORK CONVERSION CTA */}
+            <div className="my-8 sm:my-10 p-5 sm:p-6 rounded-2xl bg-white border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-2.5 h-2.5 rounded-full bg-red-600 shrink-0 animate-pulse" />
+                <div>
+                  <h4 className="font-sans font-bold text-base sm:text-lg text-slate-950 tracking-tight">
+                    Have a project like this?
+                  </h4>
+                  <p className="font-sans text-xs sm:text-sm text-slate-600 mt-0.5">
+                    Whether you need an MVP, full-stack application, or custom backend, let's talk.
+                  </p>
+                </div>
+              </div>
+
+              <a
+                href="#contact"
+                onClick={scrollToContact}
+                className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-white bg-slate-950 hover:bg-slate-800 px-5 py-3 rounded-xl transition-all shadow-md active:scale-[0.98] shrink-0 cursor-pointer group"
+              >
+                <span>LET’S DISCUSS IT</span>
+                <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform" />
+              </a>
+            </div>
+
+            {/* 3. SECONDARY TIER: REMAINING PUBLISHED PROJECTS */}
+            {remainingProjects.length > 0 && (
+              <div className="mt-8">
+                <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-300/60">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-slate-400" />
+                    <span className="font-mono text-xs font-bold uppercase tracking-wider text-slate-800">
+                      ADDITIONAL SYSTEMS & UTILITIES
+                    </span>
+                  </div>
+                  <span className="font-mono text-[11px] text-slate-500 uppercase tracking-wider">
+                    {remainingProjects.length} MORE PROJECTS
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+                  {remainingProjects.map((project: ProjectItem, index: number) => (
+                    <ProjectCard
+                      key={project.id || project.slug}
+                      project={project}
+                      index={featuredTopProjects.length + index}
+                      featuredHighlight={false}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         ) : (
-          <div className="py-16 text-center bg-white rounded-2xl border border-slate-200/80">
-            <p className="font-mono text-sm text-slate-500 uppercase tracking-wider">
-              No projects found in this category.
-            </p>
+          /* Filtered Category View */
+          <div>
+            {filteredProjects.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
+                {filteredProjects.map((project: ProjectItem, index: number) => (
+                  <ProjectCard
+                    key={project.id || project.slug}
+                    project={project}
+                    index={index}
+                    featuredHighlight={project.featured}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="py-16 text-center bg-white rounded-2xl border border-slate-200/80">
+                <p className="font-mono text-sm text-slate-500 uppercase tracking-wider">
+                  No projects found in this category.
+                </p>
+              </div>
+            )}
+
+            {/* Post-Work CTA also accessible when filtered */}
+            <div className="mt-8 p-5 sm:p-6 rounded-2xl bg-white border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-2.5 h-2.5 rounded-full bg-red-600 shrink-0 animate-pulse" />
+                <h4 className="font-sans font-bold text-base text-slate-950 tracking-tight">
+                  Have a project like this?
+                </h4>
+              </div>
+              <a
+                href="#contact"
+                onClick={scrollToContact}
+                className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-white bg-slate-950 hover:bg-slate-800 px-5 py-2.5 rounded-xl transition-all shadow-md active:scale-[0.98] shrink-0 cursor-pointer group"
+              >
+                <span>LET’S DISCUSS IT</span>
+                <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform" />
+              </a>
+            </div>
           </div>
         )}
       </div>

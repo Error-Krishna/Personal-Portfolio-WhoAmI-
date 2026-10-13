@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { ChromeStar } from '../ui/ChromeStar.js';
+import { siteConfig } from '../../lib/config/site-config.js';
 
 const OTHER_SIDES = [
   { label: 'SOFTWARE ENGINEER', isPrimary: true },
@@ -10,10 +11,10 @@ const OTHER_SIDES = [
 ];
 
 const SECTION_DIAL = [
-  { id: 'work', label: 'WORK', active: true },
+  { id: 'projects', label: 'WORK', active: true },
+  { id: 'services', label: 'SERVICES', active: false },
+  { id: 'how-it-works', label: 'PROCESS', active: false },
   { id: 'skills', label: 'SKILLS', active: false },
-  { id: 'projects', label: 'PROJECTS', active: false },
-  { id: 'experience', label: 'EXPERIENCE', active: false },
   { id: 'contact', label: 'CONTACT', active: false },
 ];
 
@@ -141,8 +142,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
       </div>
 
       {/* Tablet & Mobile Fallback Headline */}
-      <div className="lg:hidden absolute inset-x-0 top-[18%] px-6 z-10 text-center select-none pointer-events-none">
-        <h1 className="font-hero text-[15vw] sm:text-[12vw] text-slate-950 uppercase tracking-[-0.035em] leading-[0.88]">
+      <div className="lg:hidden absolute inset-x-0 top-[15%] px-6 z-10 text-center select-none pointer-events-none">
+        <h1 className="font-hero text-[14vw] sm:text-[11vw] text-slate-950 uppercase tracking-[-0.035em] leading-[0.88]">
           <span className="block">I’M A</span>
           <span className="block">SOFTWARE</span>
           <span className="block">
@@ -150,8 +151,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
             <span className="inline-block w-[5px] h-[0.72em] bg-slate-950 ml-1.5 align-baseline animate-caret" />
           </span>
         </h1>
+        {/* Availability Badge */}
+        {siteConfig.personal.availabilityLabel && (
+          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 mt-3 rounded-full bg-emerald-50 border border-emerald-200/80 font-mono text-[10px] tracking-wider uppercase font-bold text-emerald-800">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span>{siteConfig.personal.availabilityLabel}</span>
+          </div>
+        )}
+        {/* Mobile positioning text */}
+        <p className="font-sans text-xs sm:text-sm text-slate-700 max-w-sm mx-auto mt-2 leading-relaxed">
+          Product-minded frontend and full-stack engineering for founders, businesses, and teams.
+        </p>
         {/* Mobile fine print */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mt-4 font-mono text-[11px] text-slate-600">
+        <div className="flex flex-wrap items-center justify-center gap-2 mt-3 font-mono text-[11px] text-slate-600">
           <span className="text-purple-600 font-bold">● Software Engineer</span>
           <span>&middot;</span>
           <span>Full-Stack Developer</span>
@@ -172,27 +184,45 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
       </div>
 
       {/* =========================================================================
-          8 & 9. CTA BUTTONS (Vertically arranged with generous gap to image)
+          8 & 9. CTA BUTTONS & POSITIONING
           - Position: x ≈ 121px (7.88%), vertically arranged on the left
           - Distinct horizontal gap of ~290px before Center Portrait at x ≈ 657px (42.77%)
           ========================================================================= */}
-      <div className="absolute left-[7.88%] bottom-[14%] lg:bottom-auto lg:top-[68.5%] z-30 flex flex-col items-start gap-[14px]">
-        {/* Primary CTA Button */}
-        <button
-          onClick={() => scrollTo('hero')}
-          className="w-[220px] sm:w-[248px] h-[52px] sm:h-[55px] rounded-[13px] bg-slate-950 hover:bg-slate-800 text-white font-sans font-bold text-xs tracking-[0.14em] uppercase transition-all shadow-xl hover:shadow-2xl flex items-center justify-between px-6 active:scale-[0.98] group"
-        >
-          <span>EXPLORE MY WORK</span>
-          <ArrowUpRight className="w-4 h-4 text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-        </button>
+      <div className="absolute left-[7.88%] bottom-[12%] lg:bottom-auto lg:top-[61%] z-30 flex flex-col items-start gap-3.5 max-w-[340px] sm:max-w-[380px]">
+        {/* Availability Badge (Desktop) */}
+        {siteConfig.personal.availabilityLabel && (
+          <div className="hidden lg:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/80 font-mono text-[10px] tracking-wider uppercase font-bold text-emerald-800">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span>{siteConfig.personal.availabilityLabel}</span>
+          </div>
+        )}
 
-        {/* Secondary CTA Button */}
-        <a
-          href="mailto:iamkrishnagoyal@gmail.com"
-          className="w-[220px] sm:w-[248px] h-[52px] sm:h-[55px] rounded-[13px] border border-slate-950/25 hover:border-slate-950 bg-transparent hover:bg-slate-950/5 text-slate-950 font-sans font-bold text-xs tracking-[0.14em] uppercase transition-all flex items-center justify-center active:scale-[0.98]"
-        >
-          <span>LET’S CONNECT</span>
-        </a>
+        {/* Client-Focused Positioning Copy (Desktop) */}
+        <p className="hidden lg:block font-sans text-xs sm:text-[13px] text-slate-700 leading-relaxed font-medium">
+          Product-minded frontend and full-stack engineering for founders, businesses, and teams.
+        </p>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row lg:flex-col items-start gap-3 pt-0.5 w-full sm:w-auto">
+          {/* Primary CTA Button */}
+          <button
+            type="button"
+            onClick={() => scrollTo('projects')}
+            className="w-[220px] sm:w-[248px] h-[52px] sm:h-[55px] rounded-[13px] bg-slate-950 hover:bg-slate-800 text-white font-sans font-bold text-xs tracking-[0.14em] uppercase transition-all shadow-xl hover:shadow-2xl flex items-center justify-between px-6 active:scale-[0.98] group cursor-pointer"
+          >
+            <span>VIEW MY WORK</span>
+            <ArrowUpRight className="w-4 h-4 text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </button>
+
+          {/* Secondary CTA Button */}
+          <button
+            type="button"
+            onClick={() => scrollTo('contact')}
+            className="w-[220px] sm:w-[248px] h-[52px] sm:h-[55px] rounded-[13px] border border-slate-950/25 hover:border-slate-950 bg-white/70 hover:bg-white text-slate-950 font-sans font-bold text-xs tracking-[0.14em] uppercase transition-all flex items-center justify-center active:scale-[0.98] cursor-pointer shadow-xs"
+          >
+            <span>LET’S CONNECT</span>
+          </button>
+        </div>
       </div>
 
       {/* =========================================================================

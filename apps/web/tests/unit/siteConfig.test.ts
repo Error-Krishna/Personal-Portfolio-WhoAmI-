@@ -78,4 +78,24 @@ describe('Site Configuration & Utilities', () => {
       duration: '2:15',
     });
   });
+
+  it('manages section visibility configuration with testimonials and core sections enabled', () => {
+    expect(siteConfig.sectionVisibility.trust).toBe(true);
+    expect(siteConfig.sectionVisibility.hero).toBe(true);
+    expect(siteConfig.sectionVisibility.services).toBe(true);
+    expect(siteConfig.sectionVisibility.testimonials).toBe(true);
+  });
+
+  it('provides four published testimonials with expected data contracts', () => {
+    expect(siteConfig.testimonials).toBeDefined();
+    expect(siteConfig.testimonials?.length).toBe(4);
+    siteConfig.testimonials?.forEach((t) => {
+      expect(t.id).toBeDefined();
+      expect(t.published).toBe(true);
+      expect(t.clientName).toBeTruthy();
+      expect(t.clientRole).toBeTruthy();
+      expect(t.companyName).toBeTruthy();
+      expect(t.testimonial).toBeTruthy();
+    });
+  });
 });

@@ -264,7 +264,27 @@ In `"experience"`:
 
 ---
 
-### 8. Section Visibility
+### 8. Testimonials & Client Feedback
+
+In `"testimonials"`:
+
+```json
+{
+  "id": "testimonial-01",
+  "published": true,
+  "clientName": "Client Partner",
+  "clientRole": "Product Lead",
+  "companyName": "Udhyog Saathi",
+  "productName": "Manufacturing OS",
+  "testimonial": "Working with Krishna was seamless from initial discovery to final deployment.",
+  "profileImage": "",
+  "companyLogo": ""
+}
+```
+
+---
+
+### 9. Section Visibility
 
 To show or hide entire sections on the homepage without editing component code:
 
@@ -274,6 +294,7 @@ To show or hide entire sections on the homepage without editing component code:
   "about": true,
   "skills": true,
   "projects": true,
+  "testimonials": true,
   "services": true,
   "experience": true,
   "creative": true,

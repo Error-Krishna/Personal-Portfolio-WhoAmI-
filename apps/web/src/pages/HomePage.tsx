@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { DynamicIsland } from '../components/layout/DynamicIsland.js';
 import { HeroSection } from '../components/hero/HeroSection.js';
 import { AboutSection } from '../components/about/AboutSection.js';
-import { SkillsSection } from '../components/skills/SkillsSection.js';
 import { ProjectsSection } from '../components/projects/ProjectsSection.js';
+import { TestimonialsSection } from '../components/testimonials/TestimonialsSection.js';
 import { ServicesSection } from '../components/services/ServicesSection.js';
+import { HowIWorkSection } from '../components/process/HowIWorkSection.js';
+import { SkillsSection } from '../components/skills/SkillsSection.js';
 import { ExperienceSection } from '../components/experience/ExperienceSection.js';
 import { CreativeSection } from '../components/creative/CreativeSection.js';
-import { TrustSection } from '../components/trust/TrustSection.js';
 import { ContactSection } from '../components/contact/ContactSection.js';
 import { Footer } from '../components/layout/Footer.js';
 import { ScrollPortraitTransition } from '../components/transition/ScrollPortraitTransition.js';
@@ -30,25 +31,28 @@ export const HomePage: React.FC = () => {
       {/* About Section — independent section in standard document flow directly below Hero */}
       {visibility.about && <AboutSection hideStaticPortrait={isTransitionActive} />}
 
-      {/* Skills Section — Tools and technologies */}
-      {visibility.skills && <SkillsSection />}
-
-      {/* Featured Projects Section — Things built */}
+      {/* Featured Projects Section & Collection — Priority work then complete collection */}
       {visibility.projects && <ProjectsSection />}
 
-      {/* Services & Pricing Section — Scopes and transparent pricing */}
+      {/* Testimonials Section — Coordinated 4-card synchronized 3D reveal */}
+      {visibility.testimonials !== false && <TestimonialsSection />}
+
+      {/* Services & Pricing Section — Scopes and transparent pricing cards */}
       {visibility.services && (
         <ServicesSection onSelectService={(service) => setSelectedService(service)} />
       )}
+
+      {/* How We'll Work Together — Unified client collaboration & delivery process */}
+      {(visibility.services || visibility.trust) && <HowIWorkSection />}
+
+      {/* Skills Section — Tools, technologies, ecosystem & Hanoi tower */}
+      {visibility.skills && <SkillsSection />}
 
       {/* Experience Section — Educational background and venture history */}
       {visibility.experience && <ExperienceSection />}
 
       {/* Creative Work Section — Video editing and visual storytelling showcase */}
       {visibility.creative && <CreativeSection />}
-
-      {/* Trust & Collaboration Standards — Engineering commitments */}
-      {visibility.trust && <TrustSection />}
 
       {/* Contact Section — Conversion-focused project inquiry form */}
       {visibility.contact && <ContactSection initialService={selectedService} />}

@@ -21,6 +21,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  React.useEffect(() => {
+    if (initialService) {
+      setFormData((prev) => ({ ...prev, service: initialService }));
+    }
+  }, [initialService]);
+
   const validate = (): boolean => {
     const errs: Record<string, string> = {};
     if (!formData.name.trim() || formData.name.trim().length < 2) {

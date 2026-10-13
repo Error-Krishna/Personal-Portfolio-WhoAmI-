@@ -820,6 +820,52 @@
       "description": "Comprehensive READMEs, environment configuration guides, and deployment support ensure you or your team can take over seamlessly."
     }
   ],
+  "testimonials": [
+    {
+      "id": "testimonial-01",
+      "published": true,
+      "clientName": "Client Partner",
+      "clientRole": "Product Lead",
+      "companyName": "Udhyog Saathi",
+      "productName": "Manufacturing OS",
+      "testimonial": "Working with Krishna was seamless from initial discovery to final deployment. The architecture was clean, typed, and delivered with exceptional attention to user workflows.",
+      "profileImage": "",
+      "companyLogo": ""
+    },
+    {
+      "id": "testimonial-02",
+      "published": true,
+      "clientName": "Technical Lead",
+      "clientRole": "Engineering Lead",
+      "companyName": "InsightLoop",
+      "productName": "Business Intelligence",
+      "testimonial": "Fast turnaround, proactive communication, and high technical standards. The real-time dashboard and WebSocket integrations worked reliably in production.",
+      "profileImage": "",
+      "companyLogo": ""
+    },
+    {
+      "id": "testimonial-03",
+      "published": true,
+      "clientName": "Creative Director",
+      "clientRole": "Design & Content Lead",
+      "companyName": "Studio Parallel",
+      "productName": "Social Platform",
+      "testimonial": "Krishna bridges the gap between engineering rigor and creative sensibilities. Micro-interactions and performance were balanced with precision.",
+      "profileImage": "",
+      "companyLogo": ""
+    },
+    {
+      "id": "testimonial-04",
+      "published": true,
+      "clientName": "Systems Architect",
+      "clientRole": "Developer Tools Lead",
+      "companyName": "HotReload CLI",
+      "productName": "Developer Tooling",
+      "testimonial": "Exceptional problem-solving and systems thinking. The file-watching tool and process lifecycle management demonstrated deep core engineering fundamentals.",
+      "profileImage": "",
+      "companyLogo": ""
+    }
+  ],
   "contact": {
     "heading": "HAVE AN IDEA?\nLET'S BUILD IT.",
     "subheading": "Open to freelance projects, collaborations, and interesting product ideas. Let's discuss your scope.",
@@ -852,6 +898,7 @@
     "about": true,
     "skills": true,
     "projects": true,
+    "testimonials": true,
     "services": true,
     "experience": true,
     "creative": true,

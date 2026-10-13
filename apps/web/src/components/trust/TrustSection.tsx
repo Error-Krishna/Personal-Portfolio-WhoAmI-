@@ -11,7 +11,7 @@ export const TrustSection: React.FC = () => {
         {/* Section Header */}
         <div className="flex items-center gap-4 mb-6">
           <span className="font-mono text-[11px] sm:text-xs tracking-[0.25em] font-bold text-slate-800 uppercase">
-            STANDARDS & PROCESS
+            WORKING STANDARDS
           </span>
           <div className="w-16 sm:w-24 h-[1px] bg-slate-400/80" />
         </div>

@@ -7,9 +7,14 @@ import { ProjectThumbnailFallback } from './ProjectThumbnailFallback.js';
 interface ProjectCardProps {
   project: ProjectItem;
   index: number;
+  featuredHighlight?: boolean;
 }
 
-export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
+export const ProjectCard: React.FC<ProjectCardProps> = ({
+  project,
+  index,
+  featuredHighlight = false,
+}) => {
   const [isFlippedManual, setIsFlippedManual] = useState<boolean>(false);
 
   const formattedIndex = String(index + 1).padStart(2, '0');
@@ -19,11 +24,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   // Selected compact tags from technologies or category
   const displayTags =
     project.technologies && project.technologies.length > 0
-      ? project.technologies.slice(0, 2)
+      ? project.technologies.slice(0, featuredHighlight ? 3 : 2)
       : [project.category];
 
   return (
-    <div className="flip-card-wrapper group relative w-full h-[195px] sm:h-[205px] lg:h-[210px]">
+    <div
+      className={`flip-card-wrapper group relative w-full ${
+        featuredHighlight
+          ? 'h-[215px] sm:h-[225px] lg:h-[230px]'
+          : 'h-[200px] sm:h-[210px] lg:h-[215px]'
+      }`}
+    >
       {/* 3D Flip Inner Container */}
       <div className={`flip-card-inner ${isFlippedManual ? 'is-flipped' : ''}`}>
         {/* ======================================================== */}
@@ -32,10 +43,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
         <Link
           to={`/work/${project.slug}`}
           aria-label={`View ${project.title} case study`}
-          className="flip-card-front bg-white rounded-2xl border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-slate-950/40 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all p-4 sm:p-5 flex gap-4 sm:gap-5 lg:gap-6 items-stretch text-left overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 select-none"
+          className="flip-card-front bg-white rounded-2xl border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-slate-950/40 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all p-3.5 sm:p-4 lg:p-5 flex gap-3 sm:gap-4 lg:gap-5 items-stretch text-left overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 select-none"
         >
           {/* Left: Thumbnail Window */}
-          <div className="w-[125px] sm:w-[155px] md:w-[175px] lg:w-[195px] xl:w-[210px] shrink-0 rounded-xl overflow-hidden bg-slate-100 border border-slate-200/80 flex items-center justify-center">
+          <div className="w-[115px] sm:w-[140px] md:w-[150px] lg:w-[155px] xl:w-[175px] shrink-0 rounded-xl overflow-hidden bg-slate-100 border border-slate-200/80 flex items-center justify-center">
             {project.thumbnail ? (
               <img
                 src={project.thumbnail}
@@ -63,11 +74,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           {/* Right: Info Column */}
           <div className="flex-1 flex flex-col justify-between min-w-0 py-0.5">
             <div>
-              {/* Top row: Title and arrow */}
-              <div className="flex items-start justify-between gap-2 mb-1.5">
-                <h3 className="font-sans font-bold text-lg sm:text-xl text-slate-950 tracking-tight leading-snug truncate">
-                  {project.title}
-                </h3>
+              {/* Top row: Title, optional role, and arrow */}
+              <div className="flex items-start justify-between gap-2 mb-1">
+                <div className="min-w-0 flex-1">
+                  {featuredHighlight && (
+                    <span className="font-mono text-[9px] font-bold text-red-600 tracking-wider uppercase block mb-0.5 truncate">
+                      FEATURED {project.role ? `· ${project.role}` : ''}
+                    </span>
+                  )}
+                  <h3 className="font-sans font-bold text-lg sm:text-xl text-slate-950 tracking-tight leading-snug truncate">
+                    {project.title}
+                  </h3>
+                </div>
                 <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 group-hover:text-slate-950 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 mt-0.5" />
               </div>
 

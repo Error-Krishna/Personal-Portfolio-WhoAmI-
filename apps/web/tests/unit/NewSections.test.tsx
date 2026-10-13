@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import React from 'react';
-import { describe, it, expect, afterEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/vitest';
 import { BrowserRouter } from 'react-router-dom';
@@ -8,13 +8,29 @@ import { SkillsSection } from '../../src/components/skills/SkillsSection.js';
 import { ProjectsSection } from '../../src/components/projects/ProjectsSection.js';
 import { ServicesSection } from '../../src/components/services/ServicesSection.js';
 import { ExperienceSection } from '../../src/components/experience/ExperienceSection.js';
+import { HowIWorkSection } from '../../src/components/process/HowIWorkSection.js';
 import { TrustSection } from '../../src/components/trust/TrustSection.js';
 import { ContactSection } from '../../src/components/contact/ContactSection.js';
 import { Footer } from '../../src/components/layout/Footer.js';
+import { HomePage } from '../../src/pages/HomePage.js';
 
 describe('New Sections Suite', () => {
+  beforeEach(() => {
+    window.matchMedia = vi.fn().mockImplementation((query) => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+    }));
+  });
+
   afterEach(() => {
     cleanup();
+    vi.restoreAllMocks();
   });
 
   describe('SkillsSection', () => {
@@ -176,6 +192,61 @@ describe('New Sections Suite', () => {
     });
   });
 
+  describe('HowIWorkSection', () => {
+    it('renders unified heading, supporting text, 5-step connected flow, and CTA to #contact', () => {
+      render(<HowIWorkSection />);
+      expect(screen.getByText('HOW IT WORKS')).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /HOW WE'LL WORK TOGETHER/i })).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          /A straightforward process to take your idea from the first conversation to a finished product\./i
+        )
+      ).toBeInTheDocument();
+
+      // Verify all 5 steps
+      expect(screen.getByText('01')).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /DISCOVER/i })).toBeInTheDocument();
+      expect(
+        screen.getByText(/We discuss your idea, goals, requirements, and budget\./i)
+      ).toBeInTheDocument();
+
+      expect(screen.getByText('02')).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /PLAN/i })).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          /We define the scope, choose the right approach, and agree on deliverables and timelines\./i
+        )
+      ).toBeInTheDocument();
+
+      expect(screen.getByText('03')).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /BUILD/i })).toBeInTheDocument();
+      expect(
+        screen.getByText(/I develop your solution, share progress, and incorporate your feedback\./i)
+      ).toBeInTheDocument();
+
+      expect(screen.getByText('04')).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /DELIVER/i })).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          /We test the final product, deploy it if required, and complete the handover\./i
+        )
+      ).toBeInTheDocument();
+
+      expect(screen.getByText('05')).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /SUPPORT/i })).toBeInTheDocument();
+      expect(
+        screen.getByText(/We discuss improvements, fixes, and next steps after delivery\./i)
+      ).toBeInTheDocument();
+
+      // CTA link to #contact
+      const ctaLink = screen.getByRole('link', {
+        name: /HAVE A PROJECT IN MIND\? LET'S TALK/i,
+      });
+      expect(ctaLink).toBeInTheDocument();
+      expect(ctaLink).toHaveAttribute('href', '#contact');
+    });
+  });
+
   describe('TrustSection', () => {
     it('renders trust principles', () => {
       render(<TrustSection />);
@@ -210,6 +281,25 @@ describe('New Sections Suite', () => {
       expect(screen.getAllByText(/KRISHNA GOYAL/i).length).toBeGreaterThan(0);
       expect(screen.getByText(/ALL RIGHTS RESERVED/i)).toBeInTheDocument();
       expect(screen.getByText(/OPEN TO FREELANCE PROJECTS/i)).toBeInTheDocument();
+    });
+  });
+
+  describe('HomePage Process Section Integration', () => {
+    it('renders only one combined process section on the homepage without duplicate trust section', () => {
+      const { container } = render(
+        <BrowserRouter>
+          <HomePage />
+        </BrowserRouter>
+      );
+
+      // Verify unified process section exists
+      expect(
+        screen.getByRole('heading', { name: /HOW WE'LL WORK TOGETHER/i })
+      ).toBeInTheDocument();
+      expect(container.querySelectorAll('#how-it-works')).toHaveLength(1);
+
+      // Verify old separate "HOW I WORK WITH CLIENTS" headline is not present on the homepage
+      expect(screen.queryByText('HOW I WORK WITH CLIENTS.')).not.toBeInTheDocument();
     });
   });
 });
