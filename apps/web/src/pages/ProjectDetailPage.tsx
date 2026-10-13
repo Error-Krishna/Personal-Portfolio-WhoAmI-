@@ -10,6 +10,7 @@ import {
   type ProjectItem,
 } from '../lib/config/site-config.js';
 import { DynamicIsland } from '../components/layout/DynamicIsland.js';
+import { CornerNavigationDial } from '../components/navigation/CornerNavigationDial.js';
 import { Footer } from '../components/layout/Footer.js';
 import { ProjectVideoShowcase } from '../components/projects/ProjectVideoShowcase.js';
 import { ProjectCaseStudySections } from '../components/projects/ProjectCaseStudySections.js';
@@ -66,6 +67,7 @@ export const ProjectDetailPage: React.FC = () => {
     return (
       <div className="min-h-screen bg-[#f8f6f0] text-slate-900 flex flex-col justify-between bg-grain">
         <DynamicIsland />
+        <CornerNavigationDial />
         <div className="max-w-2xl mx-auto px-6 py-36 text-center">
           <span className="font-mono text-xs uppercase tracking-widest text-red-600 font-bold block mb-2">
             404 — PROJECT NOT FOUND
@@ -99,6 +101,7 @@ export const ProjectDetailPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#f8f6f0] text-[#0f1117] selection:bg-black selection:text-white bg-grain flex flex-col justify-between">
       <DynamicIsland />
+      <CornerNavigationDial />
 
       <main className="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16 pt-24 sm:pt-28 pb-20 flex-1">
         {/* Top Navigation Bar (Panel 3) */}

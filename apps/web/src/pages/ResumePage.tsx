@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Download, GraduationCap, Briefcase, Award } from 'lucide-react';
 import { DynamicIsland } from '../components/layout/DynamicIsland.js';
+import { CornerNavigationDial } from '../components/navigation/CornerNavigationDial.js';
 import { Footer } from '../components/layout/Footer.js';
 import { siteConfig } from '../lib/config/site-config.js';
 
@@ -13,6 +14,7 @@ export const ResumePage: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#f8f6f0] text-[#0f1117] selection:bg-black selection:text-white bg-grain flex flex-col justify-between">
       <DynamicIsland />
+      <CornerNavigationDial />
 
       <main className="w-full max-w-[1024px] mx-auto px-6 sm:px-12 pt-28 sm:pt-36 pb-20 flex-1">
         {/* Back Link */}

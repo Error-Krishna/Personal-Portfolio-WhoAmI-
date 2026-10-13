@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { DynamicIsland } from '../components/layout/DynamicIsland.js';
+import { CornerNavigationDial } from '../components/navigation/CornerNavigationDial.js';
 import { HeroSection } from '../components/hero/HeroSection.js';
 import { AboutSection } from '../components/about/AboutSection.js';
 import { ProjectsSection } from '../components/projects/ProjectsSection.js';
@@ -17,48 +18,60 @@ import { siteConfig } from '../lib/config/site-config.js';
 export const HomePage: React.FC = () => {
   const [isTransitionActive, setIsTransitionActive] = useState<boolean>(false);
   const [selectedService, setSelectedService] = useState<string>('');
+  const [isNavTransitioning, setIsNavTransitioning] = useState<boolean>(false);
 
   const visibility = siteConfig.sectionVisibility;
 
   return (
     <main className="relative min-h-screen bg-[#f8f6f0] text-slate-900 overflow-x-hidden selection:bg-slate-950 selection:text-white">
-      {/* Dynamic Island Global Navigation Capsule */}
+      {/* Dynamic Island Global Identity Capsule */}
       <DynamicIsland />
 
-      {/* Hero Section — independent section in standard document flow */}
-      {visibility.hero && <HeroSection hideStaticPortrait={isTransitionActive} />}
+      {/* Primary Navigation Interface: Quarter-Circle Corner Dial */}
+      <CornerNavigationDial onTransitionChange={setIsNavTransitioning} />
 
-      {/* About Section — independent section in standard document flow directly below Hero */}
-      {visibility.about && <AboutSection hideStaticPortrait={isTransitionActive} />}
+      {/* Primary Section Content Layer (with focus whoosh transition support) */}
+      <div
+        id="home-content-layer"
+        className={`relative transition-all duration-500 ease-out ${
+          isNavTransitioning ? 'scale-[0.99] opacity-85' : 'scale-100 opacity-100'
+        }`}
+      >
+        {/* Hero Section — independent section in standard document flow */}
+        {visibility.hero && <HeroSection hideStaticPortrait={isTransitionActive} />}
 
-      {/* Featured Projects Section & Collection — Priority work then complete collection */}
-      {visibility.projects && <ProjectsSection />}
+        {/* About Section — independent section in standard document flow directly below Hero */}
+        {visibility.about && <AboutSection hideStaticPortrait={isTransitionActive} />}
 
-      {/* Testimonials Section — Coordinated 4-card synchronized 3D reveal */}
-      {visibility.testimonials !== false && <TestimonialsSection />}
+        {/* Featured Projects Section & Collection — Priority work then complete collection */}
+        {visibility.projects && <ProjectsSection />}
 
-      {/* Services & Pricing Section — Scopes and transparent pricing cards */}
-      {visibility.services && (
-        <ServicesSection onSelectService={(service) => setSelectedService(service)} />
-      )}
+        {/* Testimonials Section — Coordinated 4-card synchronized 3D reveal */}
+        {visibility.testimonials !== false && <TestimonialsSection />}
 
-      {/* How We'll Work Together — Unified client collaboration & delivery process */}
-      {(visibility.services || visibility.trust) && <HowIWorkSection />}
+        {/* Services & Pricing Section — Scopes and transparent pricing cards */}
+        {visibility.services && (
+          <ServicesSection onSelectService={(service) => setSelectedService(service)} />
+        )}
 
-      {/* Skills Section — Tools, technologies, ecosystem & Hanoi tower */}
-      {visibility.skills && <SkillsSection />}
+        {/* How We'll Work Together — Unified client collaboration & delivery process */}
+        {(visibility.services || visibility.trust) && <HowIWorkSection />}
 
-      {/* Experience Section — Educational background and venture history */}
-      {visibility.experience && <ExperienceSection />}
+        {/* Skills Section — Tools, technologies, ecosystem & Hanoi tower */}
+        {visibility.skills && <SkillsSection />}
 
-      {/* Creative Work Section — Video editing and visual storytelling showcase */}
-      {visibility.creative && <CreativeSection />}
+        {/* Experience Section — Educational background and venture history */}
+        {visibility.experience && <ExperienceSection />}
 
-      {/* Contact Section — Conversion-focused project inquiry form */}
-      {visibility.contact && <ContactSection initialService={selectedService} />}
+        {/* Creative Work Section — Video editing and visual storytelling showcase */}
+        {visibility.creative && <CreativeSection />}
 
-      {/* Minimal Footer */}
-      {visibility.footer && <Footer />}
+        {/* Contact Section — Conversion-focused project inquiry form */}
+        {visibility.contact && <ContactSection initialService={selectedService} />}
+
+        {/* Minimal Footer */}
+        {visibility.footer && <Footer />}
+      </div>
 
       {/* Standalone Scroll-Driven 3D Portrait Flip Transition */}
       <ScrollPortraitTransition onReadyChange={setIsTransitionActive} />
