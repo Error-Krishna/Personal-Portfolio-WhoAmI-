@@ -37,6 +37,12 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
   const [isScrubbing, setIsScrubbing] = useState<boolean>(false);
   const [isNavigating, setIsNavigating] = useState<boolean>(false);
   const [isReducedMotion, setIsReducedMotion] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 640;
+    }
+    return false;
+  });
 
   // Synchronization refs for high-frequency wheel events & asynchronous timers
   const actualSectionIdRef = useRef<string>('hero');
@@ -115,6 +121,16 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
         mediaQuery.removeListener(handleMotionChange);
       }
     };
+  }, []);
+
+  // Responsive mobile viewport tracking
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   // Passive section tracking via IntersectionObserver on homepage
@@ -494,11 +510,12 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
   const displayAngle = displayDest.angle;
 
   // Quarter-circle geometry parameters
-  // R = 230px when interactive/expanded, R = 96px when idle (compact footprint)
-  const size = isInteractive ? 230 : 96;
+  // Desktop: R = 230px when interactive/expanded, R = 96px when idle (compact footprint)
+  // Mobile (<640px): R = 196px when interactive, R = 74px when idle (avoids overlapping Dynamic Island)
+  const size = isMobile ? (isInteractive ? 196 : 74) : isInteractive ? 230 : 96;
   const radius = size;
-  const hubRadius = isInteractive ? 40 : 22;
-  const trackRadius = isInteractive ? 180 : 72;
+  const hubRadius = isMobile ? (isInteractive ? 34 : 17) : isInteractive ? 40 : 22;
+  const trackRadius = isMobile ? (isInteractive ? 152 : 54) : isInteractive ? 180 : 72;
   const outerBorderRadius = radius - 2;
 
   // Polar to Cartesian coordinate converter for Top-Right origin (Cx = size, Cy = 0)
@@ -690,11 +707,11 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
                 {/* Expanded Arc Destination Text Labels */}
                 {isInteractive && (
                   <text
-                    x={polarToCartesian(dest.angle, trackRadius - 24).x}
-                    y={polarToCartesian(dest.angle, trackRadius - 24).y + 3.5}
+                    x={polarToCartesian(dest.angle, trackRadius - (isMobile ? 20 : 24)).x}
+                    y={polarToCartesian(dest.angle, trackRadius - (isMobile ? 20 : 24)).y + (isMobile ? 3 : 3.5)}
                     textAnchor="middle"
                     fill={isPreviewed ? '#ffffff' : 'rgba(203, 213, 225, 0.85)'}
-                    fontSize="9.5"
+                    fontSize={isMobile ? '8' : '9.5'}
                     fontFamily="ui-monospace, monospace"
                     fontWeight={isPreviewed ? '700' : '500'}
                     letterSpacing="0.08em"
@@ -722,13 +739,13 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
           {/* Hub Icon / Indicator */}
           <g
             transform={`translate(${size - hubRadius * (isInteractive ? 0.65 : 0.72)}, ${
-              isInteractive ? 5 : 3
+              isInteractive ? (isMobile ? 4 : 5) : (isMobile ? 2 : 3)
             })`}
             className="pointer-events-none"
           >
             <Compass
               className={`${
-                isInteractive ? 'w-4 h-4' : 'w-2.5 h-2.5'
+                isInteractive ? (isMobile ? 'w-3.5 h-3.5' : 'w-4 h-4') : (isMobile ? 'w-2 h-2' : 'w-2.5 h-2.5')
               } text-slate-300 opacity-80`}
             />
           </g>
@@ -740,7 +757,9 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
             type="button"
             onClick={() => setIsOpen(true)}
             aria-label={`Navigation dial: currently at ${displayDest.label}. Click to expand navigation menu.`}
-            className="absolute bottom-1.5 left-1.5 flex items-center gap-1 px-1.5 py-0.5 rounded bg-black/70 border border-white/10 text-white font-mono text-[8.5px] font-bold tracking-wider hover:border-red-500/80 transition-all cursor-pointer shadow-sm"
+            className={`absolute ${
+              isMobile ? 'bottom-1 left-1 px-1 py-0.5 text-[7.5px]' : 'bottom-1.5 left-1.5 px-1.5 py-0.5 text-[8.5px]'
+            } flex items-center gap-1 rounded bg-black/70 border border-white/10 text-white font-mono font-bold tracking-wider hover:border-red-500/80 transition-all cursor-pointer shadow-sm`}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
             <span className="text-slate-200">{displayDest.index}</span>

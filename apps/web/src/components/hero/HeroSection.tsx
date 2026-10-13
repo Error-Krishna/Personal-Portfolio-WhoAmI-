@@ -36,7 +36,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
   return (
     <section
       id="hero"
-      className="relative w-full h-screen min-h-[700px] max-h-[1200px] bg-[#f8f6f0] text-[#0f1117] selection:bg-black selection:text-white overflow-hidden bg-grain select-none"
+      className="relative w-full min-h-[100dvh] lg:h-screen lg:min-h-[700px] max-h-[1200px] bg-[#f8f6f0] text-[#0f1117] selection:bg-black selection:text-white overflow-hidden bg-grain select-none"
     >
       {/* Editorial Handwritten Discovery Annotations for Dynamic Island & Navigation Dial */}
       <HandwrittenAnnotations />
@@ -45,7 +45,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
           - Decorative star: x ≈ 55px (3.58%), y ≈ 40px (3.91%), size: ~38 × 48 px
           - Three-line label: x ≈ 129px (8.4%), y ≈ 37px (3.61%), width: ~70px
           ========================================================================= */}
-      <div className="absolute left-[3.58%] top-[3.91%] z-20 flex items-start gap-4 pointer-events-none">
+      <div className="hidden lg:flex absolute left-[3.58%] top-[3.91%] z-20 items-start gap-4 pointer-events-none">
         {/* Decorative Star */}
         <div className="w-[38px] h-[48px] flex items-center justify-center shrink-0">
           <svg
@@ -83,7 +83,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
           - Position: x ≈ 82px (5.34%), y ≈ 202px (19.73%)
           - Size: ~164 × 187 px, Center: (164, 295)
           ========================================================================= */}
-      <div className="absolute left-[5.34%] top-[19.73%] z-10 animate-float-slow pointer-events-none">
+      <div className="hidden lg:block absolute left-[5.34%] top-[19.73%] z-10 animate-float-slow pointer-events-none">
         <ChromeStar size={164} rotation={-14} />
       </div>
 
@@ -144,36 +144,71 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
         </div>
       </div>
 
-      {/* Tablet & Mobile Fallback Headline */}
-      <div className="lg:hidden absolute inset-x-0 top-[15%] px-6 z-10 text-center select-none pointer-events-none">
-        <h1 className="font-hero text-[14vw] sm:text-[11vw] text-slate-950 uppercase tracking-[-0.035em] leading-[0.88]">
-          <span className="block">I’M A</span>
-          <span className="block">SOFTWARE</span>
-          <span className="block">
-            ENGINEER
-            <span className="inline-block w-[5px] h-[0.72em] bg-slate-950 ml-1.5 align-baseline animate-caret" />
-          </span>
-        </h1>
-        {/* Availability Badge */}
-        {siteConfig.personal.availabilityLabel && (
-          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 mt-3 rounded-full bg-emerald-50 border border-emerald-200/80 font-mono text-[10px] tracking-wider uppercase font-bold text-emerald-800">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            <span>{siteConfig.personal.availabilityLabel}</span>
+      {/* Tablet & Mobile Composed Hero Container */}
+      <div className="lg:hidden relative z-20 flex flex-col justify-between items-center text-center px-5 sm:px-6 pt-20 sm:pt-24 pb-12 w-full min-h-[100dvh]">
+        {/* Main Content Group */}
+        <div className="flex flex-col items-center max-w-md mx-auto my-auto">
+          {/* Main Headline */}
+          <h1 className="font-hero text-[13vw] sm:text-[10vw] text-slate-950 uppercase tracking-[-0.035em] leading-[0.9] select-none">
+            <span className="block">I’M A</span>
+            <span className="block">SOFTWARE</span>
+            <span className="block">
+              ENGINEER
+              <span className="inline-block w-[5px] h-[0.72em] bg-slate-950 ml-1.5 align-baseline animate-caret" />
+            </span>
+          </h1>
+
+          {/* Availability Badge */}
+          {siteConfig.personal.availabilityLabel && (
+            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 mt-3 rounded-full bg-emerald-50 border border-emerald-200/80 font-mono text-[10px] tracking-wider uppercase font-bold text-emerald-800">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>{siteConfig.personal.availabilityLabel}</span>
+            </div>
+          )}
+
+          {/* Mobile positioning text */}
+          <p className="font-sans text-xs sm:text-sm text-slate-700 max-w-xs sm:max-w-sm mx-auto mt-2.5 leading-relaxed">
+            Product-minded frontend and full-stack engineering for founders, businesses, and teams.
+          </p>
+
+          {/* Mobile fine print roles */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mt-3 font-mono text-[10.5px] sm:text-[11px] text-slate-600">
+            <span className="text-purple-600 font-bold">● Software Engineer</span>
+            <span>&middot;</span>
+            <span>Full-Stack Developer</span>
+            <span>&middot;</span>
+            <span>Freelancer</span>
+            <span>&middot;</span>
+            <span>Video Editor</span>
           </div>
-        )}
-        {/* Mobile positioning text */}
-        <p className="font-sans text-xs sm:text-sm text-slate-700 max-w-sm mx-auto mt-2 leading-relaxed">
-          Product-minded frontend and full-stack engineering for founders, businesses, and teams.
-        </p>
-        {/* Mobile fine print */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mt-3 font-mono text-[11px] text-slate-600">
-          <span className="text-purple-600 font-bold">● Software Engineer</span>
-          <span>&middot;</span>
-          <span>Full-Stack Developer</span>
-          <span>&middot;</span>
-          <span>Freelancer</span>
-          <span>&middot;</span>
-          <span>Video Editor</span>
+
+          {/* Mobile Action Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-7 sm:mt-8 w-full max-w-[270px] sm:max-w-none">
+            {/* Primary CTA Button */}
+            <button
+              type="button"
+              onClick={() => scrollTo('projects')}
+              className="w-full sm:w-[220px] h-[50px] sm:h-[54px] rounded-[13px] bg-slate-950 hover:bg-slate-800 text-white font-sans font-bold text-xs tracking-[0.14em] uppercase transition-all shadow-lg flex items-center justify-between px-6 active:scale-[0.98] group cursor-pointer"
+            >
+              <span>VIEW MY WORK</span>
+              <ArrowUpRight className="w-4 h-4 text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </button>
+
+            {/* Secondary CTA Button */}
+            <button
+              type="button"
+              onClick={() => scrollTo('contact')}
+              className="w-full sm:w-[220px] h-[50px] sm:h-[54px] rounded-[13px] border border-slate-950/25 hover:border-slate-950 bg-white/80 hover:bg-white text-slate-950 font-sans font-bold text-xs tracking-[0.14em] uppercase transition-all flex items-center justify-center active:scale-[0.98] cursor-pointer shadow-xs"
+            >
+              <span>LET’S CONNECT</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Minimal Bottom Footer */}
+        <div className="w-full pt-4 font-mono text-[10px] text-slate-600 tracking-wider uppercase flex items-center justify-between px-2 border-t border-slate-200/80">
+          <span>&copy; 2026</span>
+          <span className="truncate max-w-[220px]">BASED IN INDIA · OPEN TO OPPORTUNITIES</span>
         </div>
       </div>
 
@@ -182,36 +217,36 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
           - Position: x ≈ 1287px (83.79%), y ≈ 454px (44.34%)
           - Size: ~171 × 230 px, Center: (1372, 569)
           ========================================================================= */}
-      <div className="absolute right-[4.5%] lg:left-[83.79%] top-[44.34%] z-10 animate-float-reverse pointer-events-none">
+      <div className="hidden lg:block absolute right-[4.5%] lg:left-[83.79%] top-[44.34%] z-10 animate-float-reverse pointer-events-none">
         <ChromeStar size={171} rotation={18} />
       </div>
 
       {/* =========================================================================
-          8 & 9. CTA BUTTONS & POSITIONING
+          8 & 9. CTA BUTTONS & POSITIONING (DESKTOP)
           - Position: x ≈ 121px (7.88%), vertically arranged on the left
           - Distinct horizontal gap of ~290px before Center Portrait at x ≈ 657px (42.77%)
           ========================================================================= */}
-      <div className="absolute left-[7.88%] bottom-[12%] lg:bottom-auto lg:top-[61%] z-30 flex flex-col items-start gap-3.5 max-w-[340px] sm:max-w-[380px]">
+      <div className="hidden lg:flex absolute left-[7.88%] top-[61%] z-30 flex-col items-start gap-3.5 max-w-[340px] sm:max-w-[380px]">
         {/* Availability Badge (Desktop) */}
         {siteConfig.personal.availabilityLabel && (
-          <div className="hidden lg:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/80 font-mono text-[10px] tracking-wider uppercase font-bold text-emerald-800">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/80 font-mono text-[10px] tracking-wider uppercase font-bold text-emerald-800">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             <span>{siteConfig.personal.availabilityLabel}</span>
           </div>
         )}
 
         {/* Client-Focused Positioning Copy (Desktop) */}
-        <p className="hidden lg:block font-sans text-xs sm:text-[13px] text-slate-700 leading-relaxed font-medium">
+        <p className="font-sans text-xs sm:text-[13px] text-slate-700 leading-relaxed font-medium">
           Product-minded frontend and full-stack engineering for founders, businesses, and teams.
         </p>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row lg:flex-col items-start gap-3 pt-0.5 w-full sm:w-auto">
+        <div className="flex flex-col items-start gap-3 pt-0.5 w-full">
           {/* Primary CTA Button */}
           <button
             type="button"
             onClick={() => scrollTo('projects')}
-            className="w-[220px] sm:w-[248px] h-[52px] sm:h-[55px] rounded-[13px] bg-slate-950 hover:bg-slate-800 text-white font-sans font-bold text-xs tracking-[0.14em] uppercase transition-all shadow-xl hover:shadow-2xl flex items-center justify-between px-6 active:scale-[0.98] group cursor-pointer"
+            className="w-[248px] h-[55px] rounded-[13px] bg-slate-950 hover:bg-slate-800 text-white font-sans font-bold text-xs tracking-[0.14em] uppercase transition-all shadow-xl hover:shadow-2xl flex items-center justify-between px-6 active:scale-[0.98] group cursor-pointer"
           >
             <span>VIEW MY WORK</span>
             <ArrowUpRight className="w-4 h-4 text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -221,7 +256,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
           <button
             type="button"
             onClick={() => scrollTo('contact')}
-            className="w-[220px] sm:w-[248px] h-[52px] sm:h-[55px] rounded-[13px] border border-slate-950/25 hover:border-slate-950 bg-white/70 hover:bg-white text-slate-950 font-sans font-bold text-xs tracking-[0.14em] uppercase transition-all flex items-center justify-center active:scale-[0.98] cursor-pointer shadow-xs"
+            className="w-[248px] h-[55px] rounded-[13px] border border-slate-950/25 hover:border-slate-950 bg-white/70 hover:bg-white text-slate-950 font-sans font-bold text-xs tracking-[0.14em] uppercase transition-all flex items-center justify-center active:scale-[0.98] cursor-pointer shadow-xs"
           >
             <span>LET’S CONNECT</span>
           </button>
@@ -310,7 +345,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
           - Right text: x ≈ 1092px (71.09%)
           - Bottom-right star: x ≈ 1448px (94.27%)
           ========================================================================= */}
-      <footer className="absolute inset-x-0 top-[93.55%] z-20 flex items-center justify-between px-[3.58%] pointer-events-none select-none">
+      <footer className="hidden lg:flex absolute inset-x-0 top-[93.55%] z-20 items-center justify-between px-[3.58%] pointer-events-none select-none">
         {/* Left Copyright */}
         <div className="font-mono text-xs text-slate-800 font-semibold tracking-wider whitespace-nowrap">
           &copy; 2026

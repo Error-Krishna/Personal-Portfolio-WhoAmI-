@@ -7,6 +7,7 @@ import {
   Twitter,
   Instagram,
   ExternalLink,
+  X,
 } from 'lucide-react';
 import { siteConfig } from '../../lib/config/site-config.js';
 
@@ -195,7 +196,7 @@ export const DynamicIsland: React.FC = () => {
   return (
     <header
       role="banner"
-      className="fixed top-[17px] left-1/2 -translate-x-1/2 z-50 select-none max-w-[100vw]"
+      className="fixed top-[max(12px,env(safe-area-inset-top))] sm:top-[17px] left-1/2 -translate-x-1/2 z-50 select-none max-w-[100vw]"
     >
       <div
         ref={islandRef}
@@ -215,23 +216,23 @@ export const DynamicIsland: React.FC = () => {
         data-expanded={isExpanded ? 'true' : 'false'}
         className={`relative overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] bg-[#0c0d12]/95 backdrop-blur-2xl border border-white/15 text-white shadow-[0_20px_50px_rgba(0,0,0,0.45)] cursor-pointer ${
           isExpanded
-            ? 'w-[calc(100vw-32px)] max-w-[580px] min-h-[86px] rounded-[32px] sm:rounded-[43px] px-4 sm:px-6 py-3.5'
-            : 'w-auto min-w-[270px] sm:min-w-[290px] max-w-[calc(100vw-32px)] h-[46px] rounded-full px-3.5 py-1.5'
+            ? 'w-[calc(100vw-24px)] sm:w-[calc(100vw-32px)] max-w-[580px] min-h-[86px] max-h-[85vh] sm:max-h-[90vh] overflow-y-auto rounded-[28px] sm:rounded-[43px] px-3.5 sm:px-6 py-3 sm:py-3.5'
+            : 'w-auto min-w-[210px] xs:min-w-[240px] sm:min-w-[290px] max-w-[calc(100vw-88px)] sm:max-w-[calc(100vw-32px)] h-[42px] sm:h-[46px] rounded-full px-2.5 sm:px-3.5 py-1 sm:py-1.5'
         }`}
       >
         {/* COLLAPSED STATE: Identity + Calm Rotating Social Handle Ticker */}
         {!isExpanded ? (
-          <div className="w-full h-full flex items-center justify-between gap-3 whitespace-nowrap">
+          <div className="w-full h-full flex items-center justify-between gap-2 sm:gap-3 whitespace-nowrap">
             {/* Left: Avatar + Name */}
-            <div className="flex items-center gap-2 shrink-0">
-              <div className="relative w-6 h-6 rounded-full overflow-hidden bg-white/10 border border-white/20 shrink-0">
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+              <div className="relative w-5 h-5 sm:w-6 sm:h-6 rounded-full overflow-hidden bg-white/10 border border-white/20 shrink-0">
                 <img
                   src={siteConfig.assets?.heroPortrait || '/images/image-removebg-preview.png'}
                   alt="Krishna"
                   className="w-full h-full object-cover object-top grayscale"
                 />
               </div>
-              <span className="text-[11px] font-bold font-sans tracking-wider uppercase text-slate-100">
+              <span className="text-[10px] sm:text-[11px] font-bold font-sans tracking-wider uppercase text-slate-100 max-w-[80px] xs:max-w-none truncate">
                 {displayName}
               </span>
             </div>
@@ -239,7 +240,7 @@ export const DynamicIsland: React.FC = () => {
             <span className="w-1 h-1 rounded-full bg-slate-600 shrink-0" />
 
             {/* Right: Rotating Social Profile Ticker (stable dimensions to prevent layout shifts) */}
-            <div className="w-[125px] sm:w-[140px] shrink-0 flex items-center justify-end overflow-hidden">
+            <div className="w-[95px] xs:w-[110px] sm:w-[140px] shrink-0 flex items-center justify-end overflow-hidden">
               {activeSocial && (
                 <a
                   href={activeSocial.url}
@@ -247,7 +248,7 @@ export const DynamicIsland: React.FC = () => {
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
                   data-testid="collapsed-social-ticker"
-                  className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 transition-all duration-300 text-[10px] font-sans font-medium group shrink-0 ${
+                  className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 transition-all duration-300 text-[9px] sm:text-[10px] font-sans font-medium group shrink-0 ${
                     isTransitioning
                       ? 'opacity-0 translate-x-2'
                       : 'opacity-100 translate-x-0'
@@ -257,10 +258,10 @@ export const DynamicIsland: React.FC = () => {
                 >
                   {ActiveSocialIcon && (
                     <ActiveSocialIcon
-                      className={`w-3 h-3 ${activeSocial.accent} shrink-0`}
+                      className={`w-2.5 h-2.5 sm:w-3 sm:h-3 ${activeSocial.accent} shrink-0`}
                     />
                   )}
-                  <span className="text-slate-300 group-hover:text-white max-w-[85px] sm:max-w-[95px] truncate">
+                  <span className="text-slate-300 group-hover:text-white max-w-[65px] xs:max-w-[78px] sm:max-w-[95px] truncate">
                     {activeSocial.handle}
                   </span>
                   <ExternalLink className="w-2.5 h-2.5 text-slate-500 group-hover:text-slate-300 opacity-60 shrink-0" />
@@ -276,33 +277,49 @@ export const DynamicIsland: React.FC = () => {
           >
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
               {/* Left: Portrait + Name + Role + Availability */}
-              <div className="flex items-center gap-3 min-w-0 shrink-0">
-                <div className="relative w-[44px] h-[44px] sm:w-[48px] sm:h-[48px] rounded-full overflow-hidden bg-white/10 border border-white/20 shadow-inner shrink-0">
-                  <img
-                    src={siteConfig.assets?.heroPortrait || '/images/image-removebg-preview.png'}
-                    alt="Krishna Goyal"
-                    className="w-full h-full object-cover object-top grayscale"
-                  />
-                  <span
-                    title="Available for freelance & product engineering"
-                    className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#0c0d12] animate-pulse"
-                  />
+              <div className="flex items-center justify-between sm:justify-start gap-3 min-w-0 shrink-0">
+                <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                  <div className="relative w-[40px] h-[40px] sm:w-[48px] sm:h-[48px] rounded-full overflow-hidden bg-white/10 border border-white/20 shadow-inner shrink-0">
+                    <img
+                      src={siteConfig.assets?.heroPortrait || '/images/image-removebg-preview.png'}
+                      alt="Krishna Goyal"
+                      className="w-full h-full object-cover object-top grayscale"
+                    />
+                    <span
+                      title="Available for freelance & product engineering"
+                      className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#0c0d12] animate-pulse"
+                    />
+                  </div>
+
+                  <div className="flex flex-col text-left justify-center min-w-0">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[12px] sm:text-[13px] font-bold font-sans tracking-wider uppercase text-white leading-tight truncate">
+                        {displayName}
+                      </span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+                    </div>
+                    <span className="text-[10px] sm:text-[11px] text-slate-400 font-sans leading-tight mt-0.5 truncate">
+                      {roleTitle}
+                    </span>
+                    <span className="text-[9px] font-mono text-emerald-400/90 tracking-wider uppercase mt-0.5 truncate">
+                      AVAILABLE FOR PROJECTS
+                    </span>
+                  </div>
                 </div>
 
-                <div className="flex flex-col text-left justify-center min-w-0">
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-[12px] sm:text-[13px] font-bold font-sans tracking-wider uppercase text-white leading-tight truncate">
-                      {displayName}
-                    </span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
-                  </div>
-                  <span className="text-[10px] sm:text-[11px] text-slate-400 font-sans leading-tight mt-0.5 truncate">
-                    {roleTitle}
-                  </span>
-                  <span className="text-[9px] font-mono text-emerald-400/90 tracking-wider uppercase mt-0.5 truncate">
-                    AVAILABLE FOR PROJECTS
-                  </span>
-                </div>
+                {/* Mobile-only close button */}
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsMobileExpanded(false);
+                    setIsHovered(false);
+                  }}
+                  className="sm:hidden p-1.5 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition-colors"
+                  aria-label="Close social panel"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
               </div>
 
               {/* Right: All Configured Social Profiles */}
@@ -331,8 +348,15 @@ export const DynamicIsland: React.FC = () => {
               </div>
             </div>
 
-            {/* Subtle bottom indicator */}
-            <div className="w-12 h-1 bg-white/20 rounded-full mx-auto mt-2" />
+            {/* Subtle bottom indicator with tap-to-close */}
+            <div
+              onClick={() => {
+                setIsMobileExpanded(false);
+                setIsHovered(false);
+              }}
+              title="Tap to close"
+              className="w-12 h-1 bg-white/20 hover:bg-white/40 rounded-full mx-auto mt-2 cursor-pointer transition-colors"
+            />
           </div>
         )}
       </div>

@@ -23,13 +23,13 @@ describe('HandwrittenAnnotations Component', () => {
     expect(container).toHaveClass('pointer-events-none');
   });
 
-  it('renders the Dynamic Island desktop annotation with "Say hello ↗" and curved SVG arrow', () => {
+  it('renders the Dynamic Island desktop annotation with "Touch me" and curved SVG arrow', () => {
     render(<HandwrittenAnnotations />);
 
     const islandDesktop = screen.getByTestId('annotation-dynamic-island-desktop');
     expect(islandDesktop).toBeInTheDocument();
     expect(islandDesktop).toHaveClass('pointer-events-none');
-    expect(islandDesktop).toHaveTextContent(/Say hello ↗/i);
+    expect(islandDesktop).toHaveTextContent(/Touch me/i);
 
     const svg = islandDesktop.querySelector('svg');
     expect(svg).toBeInTheDocument();
@@ -40,13 +40,13 @@ describe('HandwrittenAnnotations Component', () => {
     expect(arrowPath).toHaveAttribute('d', 'M 2 16 C 14 18, 28 13, 39 5');
   });
 
-  it('renders the Dynamic Island mobile annotation variant with "Say hello ↗"', () => {
+  it('renders the Dynamic Island mobile annotation variant with "Touch me"', () => {
     render(<HandwrittenAnnotations />);
 
     const islandMobile = screen.getByTestId('annotation-dynamic-island-mobile');
     expect(islandMobile).toBeInTheDocument();
     expect(islandMobile).toHaveClass('sm:hidden');
-    expect(islandMobile).toHaveTextContent(/Say hello ↗/i);
+    expect(islandMobile).toHaveTextContent(/Touch me/i);
 
     const svg = islandMobile.querySelector('svg');
     expect(svg).toBeInTheDocument();
@@ -72,7 +72,7 @@ describe('HandwrittenAnnotations Component', () => {
   it('applies handwritten typography and entrance animation classes', () => {
     render(<HandwrittenAnnotations />);
 
-    const labels = screen.getAllByText(/Say hello ↗/i);
+    const labels = screen.getAllByText(/Touch me/i);
     labels.forEach((label) => {
       expect(label).toHaveClass('font-handwriting');
       expect(label).toHaveClass('animate-annotation-label');

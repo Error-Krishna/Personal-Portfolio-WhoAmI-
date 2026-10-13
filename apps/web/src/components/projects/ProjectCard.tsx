@@ -46,7 +46,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           className="flip-card-front bg-white rounded-2xl border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-slate-950/40 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all p-3.5 sm:p-4 lg:p-5 flex gap-3 sm:gap-4 lg:gap-5 items-stretch text-left overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 select-none"
         >
           {/* Left: Thumbnail Window */}
-          <div className="w-[115px] sm:w-[140px] md:w-[150px] lg:w-[155px] xl:w-[175px] shrink-0 rounded-xl overflow-hidden bg-slate-100 border border-slate-200/80 flex items-center justify-center">
+          <div className="w-[100px] xs:w-[120px] sm:w-[140px] md:w-[150px] lg:w-[155px] xl:w-[175px] shrink-0 rounded-xl overflow-hidden bg-slate-100 border border-slate-200/80 flex items-center justify-center">
             {project.thumbnail ? (
               <img
                 src={project.thumbnail}

@@ -64,10 +64,10 @@ export const HandwrittenAnnotations: React.FC = () => {
           ========================================================================= */}
       <div
         data-testid="annotation-dynamic-island-mobile"
-        className="flex sm:hidden items-center gap-1 absolute top-[68px] left-5 -rotate-1 pointer-events-none select-none"
+        className="flex sm:hidden items-center gap-1 absolute top-[58px] left-4 xs:left-6 -rotate-1 pointer-events-none select-none"
       >
         <span className="font-handwriting text-[16px] text-slate-700/90 font-medium tracking-wide whitespace-nowrap animate-annotation-label">
-          Say hello ↗
+          Touch me
         </span>
 
         {/* Compact curved arrow */}
