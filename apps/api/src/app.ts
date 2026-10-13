@@ -15,10 +15,26 @@ export function createApp(): Express {
   // Security headers
   app.use(helmet());
 
-  // CORS configuration
+  // CORS configuration (supports comma-separated origins and Vercel preview domains)
+  const configuredOrigins = env.CORS_ORIGIN.split(',').map((o) => o.trim());
+
   app.use(
     cors({
-      origin: env.CORS_ORIGIN,
+      origin: (origin, callback) => {
+        // Allow requests with no origin (e.g. mobile apps, curl, server-to-server, or same-origin)
+        if (!origin) return callback(null, true);
+
+        const isAllowed =
+          configuredOrigins.includes(origin) ||
+          configuredOrigins.includes('*') ||
+          /^https:\/\/[a-zA-Z0-9_-]+\.vercel\.app$/.test(origin);
+
+        if (isAllowed) {
+          callback(null, true);
+        } else {
+          callback(new Error(`Origin ${origin} not allowed by CORS`));
+        }
+      },
       credentials: true,
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization', 'X-Request-Id'],
