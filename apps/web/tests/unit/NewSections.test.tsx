@@ -148,15 +148,22 @@ describe('New Sections Suite', () => {
     it('renders services headline and packages with indicative pricing', () => {
       render(<ServicesSection />);
       expect(screen.getByText('SERVICES & PRICING')).toBeInTheDocument();
-      expect(screen.getByText("LET'S BUILD SOMETHING USEFUL.")).toBeInTheDocument();
-      expect(screen.getByText('Full-Stack MVP & Product Engineering')).toBeInTheDocument();
-      expect(screen.getByText(/Starting at \$1,200/i)).toBeInTheDocument();
-      expect(screen.getByText(/Starting at \$500/i)).toBeInTheDocument();
+      expect(
+        screen.getByRole('heading', { name: /LET'S BUILD SOMETHING USEFUL/i })
+      ).toBeInTheDocument();
+      expect(screen.getAllByText('Full-Stack MVP & Product Engineering').length).toBeGreaterThan(0);
+      expect(screen.getAllByText(/\$1,200/i).length).toBeGreaterThan(0);
+      expect(screen.getAllByText(/\$500/i).length).toBeGreaterThan(0);
+      expect(screen.getAllByText(/Let's discuss/i).length).toBeGreaterThan(0);
     });
 
-    it('renders deliverables with inclusions', () => {
+    it('renders key deliverables and comparison table', () => {
       render(<ServicesSection />);
-      expect(screen.getAllByText("WHAT'S INCLUDED:").length).toBeGreaterThan(0);
+      expect(screen.getAllByText(/KEY DELIVERABLES/i).length).toBeGreaterThan(0);
+      expect(screen.getByRole('heading', { name: /SERVICE COMPARISON/i })).toBeInTheDocument();
+      expect(screen.getByText('VIEW DETAILED PRICING')).toBeInTheDocument();
+      expect(screen.getByText('Frontend development')).toBeInTheDocument();
+      expect(screen.getByText('Backend & APIs')).toBeInTheDocument();
     });
   });
 

@@ -45,6 +45,13 @@ export interface PricingConfig {
   customQuoteLabel: string;
 }
 
+export interface ComparisonCriteriaItem {
+  id: string;
+  label: string;
+  icon: string;
+  type: 'text' | 'feature';
+}
+
 export interface ServiceItem {
   id: string;
   title: string;
@@ -53,8 +60,11 @@ export interface ServiceItem {
   visible: boolean;
   startingPrice: number | null;
   currency: string;
-  pricingModel: 'fixed' | 'starting_at' | 'quote' | string;
+  pricingModel: 'fixed' | 'starting_at' | 'quote' | 'custom' | string;
   deliverables: string[];
+  keyDeliverables?: string[];
+  bestFor?: string;
+  techStack?: string;
   exclusions?: string[];
   estimatedDelivery?: string;
   revisionAllowance?: number | null;
@@ -62,6 +72,7 @@ export interface ServiceItem {
   featured: boolean;
   ctaLabel: string;
   ctaDestination: string;
+  comparison?: Record<string, string>;
 }
 
 export interface SkillItem {
@@ -178,6 +189,7 @@ export interface SiteConfig {
   links: LinksConfig;
   assets: AssetsConfig;
   pricing: PricingConfig;
+  serviceComparisonCriteria?: ComparisonCriteriaItem[];
   services: ServiceItem[];
   skills: SkillItem[];
   projects: ProjectItem[];
@@ -221,6 +233,29 @@ export const formatPrice = (
 
 export const getVisibleServices = (): ServiceItem[] => {
   return (siteConfig.services || []).filter((s) => s.visible !== false);
+};
+
+export const getPrimaryServices = (): ServiceItem[] => {
+  const visible = getVisibleServices();
+  const primaryIds = ['web-applications', 'full-stack-mvp', 'backend-api', 'custom-solutions'];
+  return primaryIds
+    .map((id) => visible.find((s) => s.id === id))
+    .filter((s): s is ServiceItem => Boolean(s));
+};
+
+export const getSpecializedServices = (): ServiceItem[] => {
+  const visible = getVisibleServices();
+  const primaryIds = new Set([
+    'web-applications',
+    'full-stack-mvp',
+    'backend-api',
+    'custom-solutions',
+  ]);
+  return visible.filter((s) => !primaryIds.has(s.id));
+};
+
+export const getComparisonCriteria = (): ComparisonCriteriaItem[] => {
+  return siteConfig.serviceComparisonCriteria || [];
 };
 
 export const getFeaturedProjects = (): ProjectItem[] => {

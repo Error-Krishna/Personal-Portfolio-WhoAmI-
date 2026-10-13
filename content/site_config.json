@@ -40,16 +40,63 @@
     "minimumProjectBudget": 500,
     "customQuoteLabel": "Request a Quote"
   },
+  "serviceComparisonCriteria": [
+    { "id": "bestFor", "label": "Best for", "icon": "User", "type": "text" },
+    { "id": "timeline", "label": "Typical timeline", "icon": "Clock", "type": "text" },
+    { "id": "support", "label": "Post-launch support", "icon": "ShieldCheck", "type": "text" },
+    {
+      "id": "responsiveUi",
+      "label": "Frontend development",
+      "icon": "Monitor",
+      "type": "feature"
+    },
+    {
+      "id": "backendApi",
+      "label": "Backend & APIs",
+      "icon": "Server",
+      "type": "feature"
+    },
+    {
+      "id": "databaseDesign",
+      "label": "Database design",
+      "icon": "Database",
+      "type": "feature"
+    },
+    {
+      "id": "authentication",
+      "label": "Authentication",
+      "icon": "Lock",
+      "type": "feature"
+    },
+    {
+      "id": "integrations",
+      "label": "Third-party integrations",
+      "icon": "Link2",
+      "type": "feature"
+    },
+    {
+      "id": "testingDevops",
+      "label": "Testing & deployment",
+      "icon": "Code2",
+      "type": "feature"
+    }
+  ],
   "services": [
     {
       "id": "web-applications",
       "title": "Web Applications & Landing Pages",
-      "shortDescription": "High-conversion landing pages and responsive multi-page web applications built with modern React, TypeScript, and clean responsive CSS.",
-      "category": "Frontend & Web",
+      "shortDescription": "Responsive websites and polished web interfaces.",
+      "category": "WEB & FRONTEND",
       "visible": true,
       "startingPrice": 500,
       "currency": "USD",
       "pricingModel": "starting_at",
+      "keyDeliverables": [
+        "Responsive modern UI/UX",
+        "Landing pages & web apps",
+        "Forms & API integrations",
+        "Production deployment setup"
+      ],
       "deliverables": [
         "Responsive, mobile-first React / TypeScript interface",
         "Clean component architecture with Tailwind CSS",
@@ -63,20 +110,43 @@
       ],
       "estimatedDelivery": "1–2 weeks",
       "revisionAllowance": 2,
-      "supportPeriod": "14 days post-launch",
+      "supportPeriod": "14 days support",
       "featured": false,
-      "ctaLabel": "Discuss Web Project",
-      "ctaDestination": "#contact"
+      "bestFor": "Businesses, portfolios, landing pages",
+      "techStack": "React, TypeScript, Tailwind CSS",
+      "ctaLabel": "Discuss a Web Project",
+      "ctaDestination": "#contact",
+      "comparison": {
+        "bestFor": "Businesses, portfolios, landing pages",
+        "timeline": "1–2 weeks",
+        "support": "14 days",
+        "responsiveUi": "included",
+        "backendApi": "neutral",
+        "databaseDesign": "neutral",
+        "authentication": "neutral",
+        "integrations": "included",
+        "testingDevops": "included",
+        "uiUxDesign": "included",
+        "maintenance": "excluded",
+        "apiDocs": "neutral",
+        "consulting": "neutral"
+      }
     },
     {
       "id": "full-stack-mvp",
       "title": "Full-Stack MVP & Product Engineering",
-      "shortDescription": "End-to-end web applications and MVP products with structured backend architecture, robust database modeling, and polished user workflows.",
-      "category": "Full-Stack",
+      "shortDescription": "End-to-end web apps and MVPs built from idea to launch.",
+      "category": "FULL-STACK",
       "visible": true,
       "startingPrice": 1200,
       "currency": "USD",
       "pricingModel": "starting_at",
+      "keyDeliverables": [
+        "Full frontend & backend build",
+        "Database & API architecture",
+        "Auth & user workflows",
+        "Cloud deployment & tests"
+      ],
       "deliverables": [
         "Full frontend and backend implementation (MERN / Django)",
         "RESTful API design and database modeling (MongoDB / PostgreSQL)",
@@ -87,20 +157,43 @@
       "exclusions": ["Third-party paid service API quotas", "Proprietary hardware integrations"],
       "estimatedDelivery": "2–4 weeks",
       "revisionAllowance": 3,
-      "supportPeriod": "30 days post-launch",
+      "supportPeriod": "30 days support",
       "featured": true,
-      "ctaLabel": "Build Full-Stack MVP",
-      "ctaDestination": "#contact"
+      "bestFor": "Founders, early-stage products",
+      "techStack": "React, TypeScript, Node.js, PostgreSQL / MongoDB, Docker",
+      "ctaLabel": "Build My MVP",
+      "ctaDestination": "#contact",
+      "comparison": {
+        "bestFor": "Founders, early-stage products",
+        "timeline": "2–4 weeks",
+        "support": "30 days",
+        "responsiveUi": "included",
+        "backendApi": "included",
+        "databaseDesign": "included",
+        "authentication": "included",
+        "integrations": "included",
+        "testingDevops": "included",
+        "uiUxDesign": "included",
+        "maintenance": "included",
+        "apiDocs": "included",
+        "consulting": "neutral"
+      }
     },
     {
       "id": "backend-api",
       "title": "Backend & REST API Engineering",
-      "shortDescription": "Reliable, well-documented server architectures and REST APIs built with Express, Node.js, Django REST Framework, or Flask.",
-      "category": "Backend",
+      "shortDescription": "Scalable server architectures, APIs, and databases.",
+      "category": "BACKEND & API",
       "visible": true,
       "startingPrice": 700,
       "currency": "USD",
       "pricingModel": "starting_at",
+      "keyDeliverables": [
+        "RESTful API architecture",
+        "Database schema design",
+        "Authentication & security",
+        "Documentation & rate limiting"
+      ],
       "deliverables": [
         "REST API endpoint architecture with strict schema validation (Zod)",
         "Relational & NoSQL database schemas (PostgreSQL / MongoDB)",
@@ -111,20 +204,90 @@
       "exclusions": ["High-frequency custom trading engine logic"],
       "estimatedDelivery": "1–3 weeks",
       "revisionAllowance": 2,
-      "supportPeriod": "14 days post-launch",
+      "supportPeriod": "14 days support",
       "featured": false,
+      "bestFor": "Products, integrations, existing systems",
+      "techStack": "Node.js, Express, Django or Flask, PostgreSQL / MongoDB",
       "ctaLabel": "Discuss API Engineering",
-      "ctaDestination": "#contact"
+      "ctaDestination": "#contact",
+      "comparison": {
+        "bestFor": "Products, integrations, existing systems",
+        "timeline": "1–3 weeks",
+        "support": "14 days",
+        "responsiveUi": "excluded",
+        "backendApi": "included",
+        "databaseDesign": "included",
+        "authentication": "included",
+        "integrations": "included",
+        "testingDevops": "included",
+        "uiUxDesign": "neutral",
+        "maintenance": "excluded",
+        "apiDocs": "included",
+        "consulting": "neutral"
+      }
+    },
+    {
+      "id": "custom-solutions",
+      "title": "Custom Solutions & Consulting",
+      "shortDescription": "Tailored engineering for complex technical requirements.",
+      "category": "CUSTOM SOLUTION",
+      "visible": true,
+      "startingPrice": null,
+      "currency": "USD",
+      "pricingModel": "custom",
+      "keyDeliverables": [
+        "Custom software architecture",
+        "Complex feature engineering",
+        "Codebase audits & consulting",
+        "Ongoing technical guidance"
+      ],
+      "deliverables": [
+        "Custom technical solutions and scope-based architecture",
+        "System design, database architecture and technology selection",
+        "Full feature development, third-party integrations and migration",
+        "Technical consulting, codebase audits and mentoring",
+        "Dedicated ongoing support, optimization and maintenance"
+      ],
+      "exclusions": [],
+      "estimatedDelivery": "Flexible timeline",
+      "revisionAllowance": null,
+      "supportPeriod": "Ongoing support",
+      "featured": false,
+      "bestFor": "Unique requirements, technical guidance",
+      "techStack": "Tailored to your needs",
+      "ctaLabel": "Discuss Your Project",
+      "ctaDestination": "#contact",
+      "comparison": {
+        "bestFor": "Unique requirements, technical guidance",
+        "timeline": "Flexible",
+        "support": "Ongoing",
+        "responsiveUi": "included",
+        "backendApi": "included",
+        "databaseDesign": "included",
+        "authentication": "included",
+        "integrations": "included",
+        "testingDevops": "included",
+        "uiUxDesign": "included",
+        "maintenance": "included",
+        "apiDocs": "included",
+        "consulting": "included"
+      }
     },
     {
       "id": "automation-tools",
       "title": "Automation & Internal Tools",
       "shortDescription": "Automating repetitive operational workflows, data processing, and custom CLI developer utilities to reduce friction.",
-      "category": "Automation",
+      "category": "AUTOMATION",
       "visible": true,
       "startingPrice": 450,
       "currency": "USD",
       "pricingModel": "starting_at",
+      "keyDeliverables": [
+        "Custom Python / Node.js automation scripts",
+        "Third-party API & automated data sync",
+        "Error handling, alert notifications & logging",
+        "CLI developer tools & handover docs"
+      ],
       "deliverables": [
         "Workflow analysis and friction point identification",
         "Custom Python / Go / Node.js automation scripts & CLI tools",
@@ -135,8 +298,10 @@
       "exclusions": ["Legacy mainframe database migrations"],
       "estimatedDelivery": "1–2 weeks",
       "revisionAllowance": 2,
-      "supportPeriod": "14 days post-launch",
+      "supportPeriod": "14 days support",
       "featured": false,
+      "bestFor": "Teams needing operational workflow speed",
+      "techStack": "Python, Node.js, Shell, REST APIs",
       "ctaLabel": "Automate Workflows",
       "ctaDestination": "#contact"
     },
@@ -144,11 +309,17 @@
       "id": "creative-video",
       "title": "Creative & Video Editing",
       "shortDescription": "Engaging short-form video editing, product demonstration walkthroughs, and visual storytelling for technical products and personal brands.",
-      "category": "Creative",
+      "category": "CREATIVE",
       "visible": true,
       "startingPrice": 250,
       "currency": "USD",
       "pricingModel": "starting_at",
+      "keyDeliverables": [
+        "Paced video editing with sound design",
+        "Product walkthroughs & feature demos",
+        "Motion graphics & kinetic text overlays",
+        "Platform exports (9:16 vertical & 16:9 widescreen)"
+      ],
       "deliverables": [
         "Paced video editing with narrative structure & sound design",
         "Product feature walkthroughs & demonstration cuts",
@@ -159,8 +330,10 @@
       "exclusions": ["On-location filming and hardware cameras"],
       "estimatedDelivery": "3–5 days",
       "revisionAllowance": 2,
-      "supportPeriod": "7 days post-delivery",
+      "supportPeriod": "7 days support",
       "featured": false,
+      "bestFor": "Creators, startups, product demos",
+      "techStack": "Premiere Pro, After Effects, DaVinci Resolve",
       "ctaLabel": "Discuss Video Project",
       "ctaDestination": "#contact"
     }
