@@ -551,9 +551,10 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
           setIsOpen(false);
           setIsHovered(false);
         }}
-        className={`fixed inset-0 z-30 transition-all duration-400 pointer-events-auto ${
+        style={{ pointerEvents: isInteractive ? 'auto' : 'none' }}
+        className={`fixed inset-0 z-30 transition-all duration-400 ${
           isInteractive
-            ? 'opacity-100 bg-black/20 backdrop-blur-[4px]'
+            ? 'opacity-100 pointer-events-auto bg-black/20 backdrop-blur-[4px]'
             : 'opacity-0 pointer-events-none bg-transparent backdrop-blur-none'
         }`}
         aria-hidden={!isInteractive}

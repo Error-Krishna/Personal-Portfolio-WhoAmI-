@@ -342,4 +342,34 @@ describe('CornerNavigationDial Component', () => {
 
     document.body.removeChild(targetElement);
   });
+
+  it('guarantees dial-focus-backdrop has pointer-events: none in idle mode to prevent intercepting page clicks', () => {
+    render(
+      <MemoryRouter initialEntries={['/']}>
+        <CornerNavigationDial />
+      </MemoryRouter>
+    );
+
+    const backdrop = screen.getByTestId('dial-focus-backdrop');
+    // In idle mode, backdrop MUST NOT have pointer-events-auto
+    expect(backdrop).not.toHaveClass('pointer-events-auto');
+    expect(backdrop).toHaveClass('pointer-events-none');
+    expect(backdrop.style.pointerEvents).toBe('none');
+
+    // On hover, backdrop enters interactive mode
+    const dial = screen.getByTestId('corner-navigation-dial');
+    fireEvent.mouseEnter(dial);
+
+    expect(backdrop).toHaveClass('pointer-events-auto');
+    expect(backdrop).not.toHaveClass('pointer-events-none');
+    expect(backdrop.style.pointerEvents).toBe('auto');
+
+    // Clicking the backdrop dismisses it and restores pointer-events: none
+    fireEvent.click(backdrop);
+
+    expect(backdrop).not.toHaveClass('pointer-events-auto');
+    expect(backdrop).toHaveClass('pointer-events-none');
+    expect(backdrop.style.pointerEvents).toBe('none');
+  });
 });
+
