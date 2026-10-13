@@ -493,11 +493,11 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
   const displayAngle = displayDest.angle;
 
   // Quarter-circle geometry parameters
-  // R = 230px when interactive/expanded, R = 140px when idle
-  const size = isInteractive ? 230 : 140;
+  // R = 230px when interactive/expanded, R = 96px when idle (compact footprint)
+  const size = isInteractive ? 230 : 96;
   const radius = size;
-  const hubRadius = isInteractive ? 40 : 28;
-  const trackRadius = isInteractive ? 180 : 105;
+  const hubRadius = isInteractive ? 40 : 22;
+  const trackRadius = isInteractive ? 180 : 72;
   const outerBorderRadius = radius - 2;
 
   // Polar to Cartesian coordinate converter for Top-Right origin (Cx = size, Cy = 0)
@@ -510,8 +510,8 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
   };
 
   // Needle pointer coordinates pointing to PREVIEWED destination
-  const needleStart = polarToCartesian(displayAngle, hubRadius + 4);
-  const needleEnd = polarToCartesian(displayAngle, trackRadius + 6);
+  const needleStart = polarToCartesian(displayAngle, hubRadius + (isInteractive ? 4 : 2));
+  const needleEnd = polarToCartesian(displayAngle, trackRadius + (isInteractive ? 6 : 3));
   const activeNodePos = polarToCartesian(displayAngle, trackRadius);
 
   return (
@@ -608,8 +608,9 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
           {/* 4. Fine Technical Indexing Ticks along the arc */}
           {Array.from({ length: 25 }).map((_, i) => {
             const tickAngle = 10 + i * 2.9;
-            const p1 = polarToCartesian(tickAngle, trackRadius - (i % 4 === 0 ? 8 : 4));
-            const p2 = polarToCartesian(tickAngle, trackRadius + (i % 4 === 0 ? 8 : 4));
+            const tickLen = isInteractive ? (i % 4 === 0 ? 8 : 4) : (i % 4 === 0 ? 4 : 2);
+            const p1 = polarToCartesian(tickAngle, trackRadius - tickLen);
+            const p2 = polarToCartesian(tickAngle, trackRadius + tickLen);
             return (
               <line
                 key={`tick-${i}`}
@@ -618,7 +619,7 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
                 x2={p2.x}
                 y2={p2.y}
                 stroke={i % 4 === 0 ? 'rgba(255, 255, 255, 0.35)' : 'rgba(255, 255, 255, 0.15)'}
-                strokeWidth={i % 4 === 0 ? '1.2' : '0.8'}
+                strokeWidth={isInteractive ? (i % 4 === 0 ? '1.2' : '0.8') : (i % 4 === 0 ? '0.9' : '0.6')}
               />
             );
           })}
@@ -630,7 +631,7 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
             x2={needleEnd.x}
             y2={needleEnd.y}
             stroke="#ef4444"
-            strokeWidth="2"
+            strokeWidth={isInteractive ? '2' : '1.5'}
             filter="url(#crimsonGlow)"
             className="transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
           />
@@ -639,10 +640,10 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
           <circle
             cx={activeNodePos.x}
             cy={activeNodePos.y}
-            r={isInteractive ? '5' : '3.5'}
+            r={isInteractive ? '5' : '3'}
             fill="#ef4444"
             stroke="#ffffff"
-            strokeWidth="1.5"
+            strokeWidth={isInteractive ? '1.5' : '1'}
             className="transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
           />
 
@@ -718,8 +719,17 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
           />
 
           {/* Hub Icon / Indicator */}
-          <g transform={`translate(${size - (hubRadius * 0.65)}, 5)`} className="pointer-events-none">
-            <Compass className="w-4 h-4 text-slate-300 opacity-80" />
+          <g
+            transform={`translate(${size - hubRadius * (isInteractive ? 0.65 : 0.72)}, ${
+              isInteractive ? 5 : 3
+            })`}
+            className="pointer-events-none"
+          >
+            <Compass
+              className={`${
+                isInteractive ? 'w-4 h-4' : 'w-2.5 h-2.5'
+              } text-slate-300 opacity-80`}
+            />
           </g>
         </svg>
 
@@ -729,7 +739,7 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
             type="button"
             onClick={() => setIsOpen(true)}
             aria-label={`Navigation dial: currently at ${displayDest.label}. Click to expand navigation menu.`}
-            className="absolute bottom-2.5 left-2.5 flex items-center gap-1.5 px-2 py-1 rounded-md bg-black/60 border border-white/10 text-white font-mono text-[9.5px] font-bold tracking-wider hover:border-red-500/80 transition-all cursor-pointer shadow-sm"
+            className="absolute bottom-1.5 left-1.5 flex items-center gap-1 px-1.5 py-0.5 rounded bg-black/70 border border-white/10 text-white font-mono text-[8.5px] font-bold tracking-wider hover:border-red-500/80 transition-all cursor-pointer shadow-sm"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
             <span className="text-slate-200">{displayDest.index}</span>

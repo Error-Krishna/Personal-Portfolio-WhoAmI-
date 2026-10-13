@@ -68,11 +68,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
           - Width: ~90px, Line spacing: ~21px, Right edge ≈ 1480px (96.35%)
           ========================================================================= */}
       <div className="absolute right-[3.65%] top-[3.81%] z-20 pointer-events-none text-right">
-        <div className="font-mono text-[11px] sm:text-xs tracking-[0.22em] text-slate-800 font-bold uppercase leading-[21px] select-none">
+        {/* <div className="font-mono text-[11px] sm:text-xs tracking-[0.22em] text-slate-800 font-bold uppercase leading-[21px] select-none">
           <div>SOFTWARE</div>
           <div>PRODUCTS</div>
           <div>PEOPLE</div>
-        </div>
+        </div> */}
       </div>
 
       {/* =========================================================================
