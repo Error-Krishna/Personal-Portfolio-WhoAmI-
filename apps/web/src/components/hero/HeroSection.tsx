@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { ChromeStar } from '../ui/ChromeStar.js';
+import { HandwrittenAnnotations } from './HandwrittenAnnotations.js';
 import { siteConfig } from '../../lib/config/site-config.js';
 
 const OTHER_SIDES = [
@@ -37,6 +38,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
       id="hero"
       className="relative w-full h-screen min-h-[700px] max-h-[1200px] bg-[#f8f6f0] text-[#0f1117] selection:bg-black selection:text-white overflow-hidden bg-grain select-none"
     >
+      {/* Editorial Handwritten Discovery Annotations for Dynamic Island & Navigation Dial */}
+      <HandwrittenAnnotations />
       {/* =========================================================================
           1. TOP-LEFT DECORATIVE AREA
           - Decorative star: x ≈ 55px (3.58%), y ≈ 40px (3.91%), size: ~38 × 48 px
@@ -243,7 +246,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
 
           {/* Krishna Portrait Headshot */}
           <img
-            src="/images/image-removebg-preview.png"
+            src={siteConfig.assets?.heroPortrait || '/images/image-removebg-preview.png'}
             alt="Krishna Goyal"
             className="w-full h-full object-cover object-top filter grayscale contrast-125 group-hover:scale-105 transition-transform duration-700 ease-out"
           />

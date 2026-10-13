@@ -87,8 +87,9 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
       if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
       if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current);
       if (settleTimeoutRef.current) clearTimeout(settleTimeoutRef.current);
+      onTransitionChange?.(false);
     };
-  }, []);
+  }, [onTransitionChange]);
 
   // Detect reduced-motion preference
   useEffect(() => {

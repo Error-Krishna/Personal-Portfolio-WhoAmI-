@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { siteConfig } from '../../lib/config/site-config.js';
 
 interface Rect {
   left: number;
@@ -235,7 +236,7 @@ export const ScrollPortraitTransition: React.FC<ScrollPortraitTransitionProps> =
 
           {/* Hero headshot */}
           <img
-            src="/images/image-removebg-preview.png"
+            src={siteConfig.assets?.heroPortrait || '/images/image-removebg-preview.png'}
             alt="Krishna Goyal"
             className="w-full h-full object-cover object-top filter grayscale contrast-125"
           />
@@ -264,7 +265,7 @@ export const ScrollPortraitTransition: React.FC<ScrollPortraitTransitionProps> =
         >
           {/* Red-Lit Portrait Photo */}
           <img
-            src="/images/about-portrait-red.png"
+            src={siteConfig.assets?.aboutPortrait || '/images/about-portrait-red.png'}
             alt="Krishna Goyal - About Me"
             className="w-full h-full object-cover object-center filter contrast-110"
           />

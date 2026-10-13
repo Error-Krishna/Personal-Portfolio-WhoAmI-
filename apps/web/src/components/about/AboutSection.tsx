@@ -1,4 +1,5 @@
 import React from 'react';
+import { siteConfig } from '../../lib/config/site-config.js';
 
 const SKILL_TAGS = [
   ['WEB APPS', 'FULL-STACK', 'PRODUCTS'],
@@ -90,7 +91,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ hideStaticPortrait =
                 {/* Red-Lit Portrait Photo */}
                 <img
                   id="about-portrait-image"
-                  src="/images/about-portrait-red.png"
+                  src={siteConfig.assets?.aboutPortrait || '/images/about-portrait-red.png'}
                   alt="Krishna Goyal"
                   className="w-full h-full object-cover object-center filter contrast-110"
                 />

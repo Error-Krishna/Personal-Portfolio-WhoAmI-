@@ -139,16 +139,31 @@ export const DynamicIsland: React.FC = () => {
   useEffect(() => {
     if (isExpanded || socials.length <= 1) return;
 
+    let transitionTimer: NodeJS.Timeout | null = null;
     const interval = setInterval(() => {
       setIsTransitioning(true);
-      setTimeout(() => {
+      transitionTimer = setTimeout(() => {
         setSocialIndex((prev) => (prev + 1) % socials.length);
         setIsTransitioning(false);
       }, 300);
     }, 2800);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      if (transitionTimer) {
+        clearTimeout(transitionTimer);
+      }
+    };
   }, [isExpanded, socials.length]);
+
+  // Clean up hover debounce timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleMouseEnter = () => {
     if (hoverTimeoutRef.current) {
@@ -211,7 +226,7 @@ export const DynamicIsland: React.FC = () => {
             <div className="flex items-center gap-2 shrink-0">
               <div className="relative w-6 h-6 rounded-full overflow-hidden bg-white/10 border border-white/20 shrink-0">
                 <img
-                  src="/images/image-removebg-preview.png"
+                  src={siteConfig.assets?.heroPortrait || '/images/image-removebg-preview.png'}
                   alt="Krishna"
                   className="w-full h-full object-cover object-top grayscale"
                 />
@@ -264,7 +279,7 @@ export const DynamicIsland: React.FC = () => {
               <div className="flex items-center gap-3 min-w-0 shrink-0">
                 <div className="relative w-[44px] h-[44px] sm:w-[48px] sm:h-[48px] rounded-full overflow-hidden bg-white/10 border border-white/20 shadow-inner shrink-0">
                   <img
-                    src="/images/image-removebg-preview.png"
+                    src={siteConfig.assets?.heroPortrait || '/images/image-removebg-preview.png'}
                     alt="Krishna Goyal"
                     className="w-full h-full object-cover object-top grayscale"
                   />

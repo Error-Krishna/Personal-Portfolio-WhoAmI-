@@ -29,6 +29,7 @@ export default {
         hero: ['"Archivo Black"', 'sans-serif'],
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         mono: ['"Space Mono"', 'ui-monospace', 'monospace'],
+        handwriting: ['Caveat', '"Bradley Hand"', '"Segoe Script"', 'cursive', 'sans-serif'],
       },
     },
   },

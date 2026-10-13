@@ -370,7 +370,7 @@ export const SkillsSection: React.FC = () => {
                   <circle cx="300" cy="300" r="46" fill="#f8f6f0" stroke="#dc2626" strokeWidth="2.5" />
                   {/* Actual Photo */}
                   <image
-                    href="/images/about-portrait-red.png"
+                    href={siteConfig.assets?.aboutPortrait || '/images/about-portrait-red.png'}
                     x="256"
                     y="256"
                     width="88"
