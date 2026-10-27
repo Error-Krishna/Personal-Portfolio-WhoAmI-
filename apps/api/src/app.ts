@@ -54,8 +54,14 @@ export function createApp(): Express {
   // Global rate limiter
   app.use(globalRateLimiter);
 
-  // Mount API routes
+  // Mount API routes (supporting primary prefix and fallback rewrite aliases)
   app.use(env.API_PREFIX, apiRoutes);
+  if (env.API_PREFIX !== '/v1') {
+    app.use('/v1', apiRoutes);
+  }
+  if (env.API_PREFIX !== '/api') {
+    app.use('/api', apiRoutes);
+  }
 
   // 404 handler for unknown routes
   app.use(notFoundMiddleware);
