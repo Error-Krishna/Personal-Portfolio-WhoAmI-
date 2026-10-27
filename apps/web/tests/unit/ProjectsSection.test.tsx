@@ -34,7 +34,7 @@ describe('ProjectsSection Component', () => {
     );
 
     const published = getPublishedProjects();
-    expect(published.length).toBe(6);
+    expect(published.length).toBe(9);
 
     // Each project card should be rendered
     published.forEach((p) => {

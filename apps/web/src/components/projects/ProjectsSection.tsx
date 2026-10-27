@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { getPublishedProjects, type ProjectItem } from '../../lib/config/site-config.js';
-import { ProjectCard } from './ProjectCard.js';
+import { ProjectCardWithStatus } from './ProjectCard.js';
 
 export const ProjectsSection: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>('ALL');
@@ -120,7 +120,7 @@ export const ProjectsSection: React.FC = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
                 {featuredTopProjects.map((project: ProjectItem, index: number) => (
-                  <ProjectCard
+                  <ProjectCardWithStatus
                     key={project.id || project.slug}
                     project={project}
                     index={index}
@@ -171,7 +171,7 @@ export const ProjectsSection: React.FC = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
                   {remainingProjects.map((project: ProjectItem, index: number) => (
-                    <ProjectCard
+                    <ProjectCardWithStatus
                       key={project.id || project.slug}
                       project={project}
                       index={featuredTopProjects.length + index}
@@ -188,7 +188,7 @@ export const ProjectsSection: React.FC = () => {
             {filteredProjects.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
                 {filteredProjects.map((project: ProjectItem, index: number) => (
-                  <ProjectCard
+                  <ProjectCardWithStatus
                     key={project.id || project.slug}
                     project={project}
                     index={index}

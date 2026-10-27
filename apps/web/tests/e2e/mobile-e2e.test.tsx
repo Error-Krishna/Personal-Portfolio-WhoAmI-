@@ -6,7 +6,10 @@ import '@testing-library/jest-dom/vitest';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 
 import { DynamicIsland } from '../../src/components/layout/DynamicIsland.js';
-import { CornerNavigationDial, DIAL_DESTINATIONS } from '../../src/components/navigation/CornerNavigationDial.js';
+import {
+  CornerNavigationDial,
+  DIAL_DESTINATIONS,
+} from '../../src/components/navigation/CornerNavigationDial.js';
 import { HandwrittenAnnotations } from '../../src/components/hero/HandwrittenAnnotations.js';
 import { HomePage } from '../../src/pages/HomePage.js';
 import { ProjectDetailPage } from '../../src/pages/ProjectDetailPage.js';
@@ -19,7 +22,11 @@ import { apiClient } from '../../src/lib/api/client.js';
 // Setup common mock environments for mobile E2E
 function setupMobileEnvironment(width = 393, height = 852) {
   Object.defineProperty(window, 'innerWidth', { writable: true, configurable: true, value: width });
-  Object.defineProperty(window, 'innerHeight', { writable: true, configurable: true, value: height });
+  Object.defineProperty(window, 'innerHeight', {
+    writable: true,
+    configurable: true,
+    value: height,
+  });
   window.dispatchEvent(new Event('resize'));
 }
 
@@ -174,7 +181,15 @@ describe('Mobile End-to-End QA Test Suite', () => {
       expect(dial).toBeInTheDocument();
       expect(DIAL_DESTINATIONS).toHaveLength(7);
 
-      const expectedIds = ['hero', 'about', 'projects', 'services', 'how-it-works', 'skills', 'contact'];
+      const expectedIds = [
+        'hero',
+        'about',
+        'projects',
+        'services',
+        'how-it-works',
+        'skills',
+        'contact',
+      ];
       expect(DIAL_DESTINATIONS.map((d) => d.id)).toEqual(expectedIds);
     });
 
@@ -269,9 +284,9 @@ describe('Mobile End-to-End QA Test Suite', () => {
   // 4. ROUTE NAVIGATION MATRIX
   // =========================================================================
   describe('Phase 6: Route Navigation Matrix', () => {
-    it('renders all 6 published project detail pages properly', () => {
+    it('renders all published project detail pages properly', () => {
       const publishedProjects = siteConfig.projects.filter((p) => p.published !== false);
-      expect(publishedProjects.length).toBe(6);
+      expect(publishedProjects.length).toBe(9);
 
       publishedProjects.forEach((project, idx) => {
         const { unmount } = render(
@@ -283,7 +298,9 @@ describe('Mobile End-to-End QA Test Suite', () => {
         );
 
         // Project title must be visible
-        expect(screen.getByRole('heading', { name: new RegExp(project.title, 'i') })).toBeInTheDocument();
+        expect(
+          screen.getByRole('heading', { name: new RegExp(project.title, 'i') })
+        ).toBeInTheDocument();
         // Overview or problem statement
         expect(screen.getByText(project.problem || project.shortDescription)).toBeInTheDocument();
         // Back to Projects link always present
@@ -411,14 +428,18 @@ describe('Mobile End-to-End QA Test Suite', () => {
       render(<ContactSection />);
 
       // Fill in valid form data
-      fireEvent.change(screen.getByPlaceholderText(/Alex Morgan/i), { target: { value: 'Alex Morgan' } });
-      fireEvent.change(screen.getByPlaceholderText(/alex@company.com/i), { target: { value: 'alex@company.com' } });
+      fireEvent.change(screen.getByPlaceholderText(/Alex Morgan/i), {
+        target: { value: 'Alex Morgan' },
+      });
+      fireEvent.change(screen.getByPlaceholderText(/alex@company.com/i), {
+        target: { value: 'alex@company.com' },
+      });
       fireEvent.change(screen.getByPlaceholderText(/Share a brief overview/i), {
         target: { value: 'We need a high-performance web MVP built within 3 weeks.' },
       });
 
       const submitButton = screen.getByRole('button', { name: /SEND PROJECT INQUIRY/i });
-      
+
       await act(async () => {
         fireEvent.click(submitButton);
       });

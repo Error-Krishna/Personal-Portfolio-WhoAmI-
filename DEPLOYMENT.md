@@ -150,6 +150,9 @@ Configure these in the Vercel Dashboard under **Project Settings > Environment V
 | `RATE_LIMIT_WINDOW_MS` | API Runtime | Optional | Secret | Window duration in ms (default: `900000` = 15 minutes). |
 | `RATE_LIMIT_MAX_REQUESTS` | API Runtime | Optional | Secret | Maximum requests per IP window (default: `100`). |
 | `LOG_LEVEL` | API Runtime | Optional | Secret | Set to `info` for production. |
+| `RESEND_API_KEY` | API Runtime | **Required for Email** | Secret | Resend API key (`re_...`) from resend.com for dispatching contact inquiries. |
+| `CONTACT_EMAIL_TO` | API Runtime | Optional | Secret | Destination inbox (default: `iamkrishnagoyal@gmail.com`). |
+| `CONTACT_EMAIL_FROM` | API Runtime | Optional | Secret | Sender address (e.g. `Krishna Goyal Portfolio <onboarding@resend.dev>` or your verified domain). |
 
 > **CRITICAL SECURITY RULE:** Variables prefixed with `VITE_` are compiled directly into the client-side JavaScript bundle sent to every visitor's browser. **NEVER** prefix database credentials, email API keys, or private tokens with `VITE_`.
 

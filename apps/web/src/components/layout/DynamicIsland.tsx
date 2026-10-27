@@ -1,14 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {
-  Github,
-  Linkedin,
-  Mail,
-  Phone,
-  Twitter,
-  Instagram,
-  ExternalLink,
-  X,
-} from 'lucide-react';
+import { Github, Linkedin, Mail, Phone, Twitter, Instagram, ExternalLink, X } from 'lucide-react';
 import { siteConfig } from '../../lib/config/site-config.js';
 
 export interface SocialProfile {
@@ -104,7 +95,10 @@ export const DynamicIsland: React.FC = () => {
   const [isMobileExpanded, setIsMobileExpanded] = useState<boolean>(false);
   const [socialIndex, setSocialIndex] = useState<number>(0);
   const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
-  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Intent detection and hysteresis timers
+  const enterTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const leaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const islandRef = useRef<HTMLDivElement | null>(null);
 
   const socials = getConfiguredSocials();
@@ -115,11 +109,14 @@ export const DynamicIsland: React.FC = () => {
     const handleOutsideInteraction = (e: MouseEvent | TouchEvent) => {
       if (islandRef.current && !islandRef.current.contains(e.target as Node)) {
         setIsMobileExpanded(false);
+        setIsHovered(false);
       }
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
+        if (enterTimeoutRef.current) clearTimeout(enterTimeoutRef.current);
+        if (leaveTimeoutRef.current) clearTimeout(leaveTimeoutRef.current);
         setIsHovered(false);
         setIsMobileExpanded(false);
       }
@@ -157,29 +154,45 @@ export const DynamicIsland: React.FC = () => {
     };
   }, [isExpanded, socials.length]);
 
-  // Clean up hover debounce timeout on unmount
+  // Clean up timers on unmount
   useEffect(() => {
     return () => {
-      if (hoverTimeoutRef.current) {
-        clearTimeout(hoverTimeoutRef.current);
-      }
+      if (enterTimeoutRef.current) clearTimeout(enterTimeoutRef.current);
+      if (leaveTimeoutRef.current) clearTimeout(leaveTimeoutRef.current);
     };
   }, []);
 
+  // Hover intent detection: Require intentional dwell (120ms) before opening
   const handleMouseEnter = () => {
-    if (hoverTimeoutRef.current) {
-      clearTimeout(hoverTimeoutRef.current);
+    if (leaveTimeoutRef.current) {
+      clearTimeout(leaveTimeoutRef.current);
+      leaveTimeoutRef.current = null;
     }
-    setIsHovered(true);
+    if (enterTimeoutRef.current) {
+      clearTimeout(enterTimeoutRef.current);
+    }
+    enterTimeoutRef.current = setTimeout(() => {
+      setIsHovered(true);
+    }, 120);
   };
 
+  // Leave hysteresis: Give 260ms grace period so moving to links doesn't trigger jittery collapse
   const handleMouseLeave = () => {
-    hoverTimeoutRef.current = setTimeout(() => {
+    if (enterTimeoutRef.current) {
+      clearTimeout(enterTimeoutRef.current);
+      enterTimeoutRef.current = null;
+    }
+    if (leaveTimeoutRef.current) {
+      clearTimeout(leaveTimeoutRef.current);
+    }
+    leaveTimeoutRef.current = setTimeout(() => {
       setIsHovered(false);
-    }, 200);
+    }, 260);
   };
 
   const toggleMobileExpanded = () => {
+    if (enterTimeoutRef.current) clearTimeout(enterTimeoutRef.current);
+    if (leaveTimeoutRef.current) clearTimeout(leaveTimeoutRef.current);
     setIsMobileExpanded((prev) => !prev);
   };
 
@@ -196,15 +209,19 @@ export const DynamicIsland: React.FC = () => {
   return (
     <header
       role="banner"
-      className="fixed top-[max(12px,env(safe-area-inset-top))] sm:top-[17px] left-1/2 -translate-x-1/2 z-50 select-none max-w-[100vw]"
+      className="fixed top-[max(12px,env(safe-area-inset-top))] sm:top-[16px] left-1/2 -translate-x-1/2 z-50 select-none max-w-[100vw]"
     >
       <div
         ref={islandRef}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        onFocus={() => setIsHovered(true)}
+        onFocus={() => {
+          if (enterTimeoutRef.current) clearTimeout(enterTimeoutRef.current);
+          setIsHovered(true);
+        }}
         onBlur={(e) => {
           if (!islandRef.current?.contains(e.relatedTarget as Node)) {
+            if (enterTimeoutRef.current) clearTimeout(enterTimeoutRef.current);
             setIsHovered(false);
             setIsMobileExpanded(false);
           }
@@ -214,10 +231,10 @@ export const DynamicIsland: React.FC = () => {
         }}
         data-testid="dynamic-island"
         data-expanded={isExpanded ? 'true' : 'false'}
-        className={`relative overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] bg-[#0c0d12]/95 backdrop-blur-2xl border border-white/15 text-white shadow-[0_20px_50px_rgba(0,0,0,0.45)] cursor-pointer ${
+        className={`relative overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none bg-[#0c0d12]/95 backdrop-blur-2xl border border-white/15 text-white shadow-[0_16px_40px_rgba(0,0,0,0.5)] cursor-pointer ${
           isExpanded
-            ? 'w-[calc(100vw-24px)] sm:w-[calc(100vw-32px)] max-w-[580px] min-h-[86px] max-h-[85vh] sm:max-h-[90vh] overflow-y-auto rounded-[28px] sm:rounded-[43px] px-3.5 sm:px-6 py-3 sm:py-3.5'
-            : 'w-auto min-w-[210px] xs:min-w-[240px] sm:min-w-[290px] max-w-[calc(100vw-88px)] sm:max-w-[calc(100vw-32px)] h-[42px] sm:h-[46px] rounded-full px-2.5 sm:px-3.5 py-1 sm:py-1.5'
+            ? 'w-[calc(100vw-24px)] max-w-[430px] rounded-[22px] sm:rounded-[24px] px-3.5 sm:px-4.5 py-2.5 sm:py-3'
+            : 'w-auto min-w-[210px] xs:min-w-[240px] sm:min-w-[280px] max-w-[calc(100vw-88px)] sm:max-w-[calc(100vw-32px)] h-[40px] sm:h-[44px] rounded-full px-2.5 sm:px-3.5 py-1'
         }`}
       >
         {/* COLLAPSED STATE: Identity + Calm Rotating Social Handle Ticker */}
@@ -225,7 +242,7 @@ export const DynamicIsland: React.FC = () => {
           <div className="w-full h-full flex items-center justify-between gap-2 sm:gap-3 whitespace-nowrap">
             {/* Left: Avatar + Name */}
             <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-              <div className="relative w-5 h-5 sm:w-6 sm:h-6 rounded-full overflow-hidden bg-white/10 border border-white/20 shrink-0">
+              <div className="relative w-5 h-5 sm:w-5.5 sm:h-5.5 rounded-full overflow-hidden bg-white/10 border border-white/20 shrink-0">
                 <img
                   src={siteConfig.assets?.heroPortrait || '/images/image-removebg-preview.png'}
                   alt="Krishna"
@@ -240,7 +257,7 @@ export const DynamicIsland: React.FC = () => {
             <span className="w-1 h-1 rounded-full bg-slate-600 shrink-0" />
 
             {/* Right: Rotating Social Profile Ticker (stable dimensions to prevent layout shifts) */}
-            <div className="w-[95px] xs:w-[110px] sm:w-[140px] shrink-0 flex items-center justify-end overflow-hidden">
+            <div className="w-[95px] xs:w-[110px] sm:w-[135px] shrink-0 flex items-center justify-end overflow-hidden">
               {activeSocial && (
                 <a
                   href={activeSocial.url}
@@ -249,9 +266,7 @@ export const DynamicIsland: React.FC = () => {
                   onClick={(e) => e.stopPropagation()}
                   data-testid="collapsed-social-ticker"
                   className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 transition-all duration-300 text-[9px] sm:text-[10px] font-sans font-medium group shrink-0 ${
-                    isTransitioning
-                      ? 'opacity-0 translate-x-2'
-                      : 'opacity-100 translate-x-0'
+                    isTransitioning ? 'opacity-0 translate-x-2' : 'opacity-100 translate-x-0'
                   }`}
                   title={`Open ${activeSocial.name} profile`}
                   aria-label={`${activeSocial.name}: ${activeSocial.handle}`}
@@ -261,7 +276,7 @@ export const DynamicIsland: React.FC = () => {
                       className={`w-2.5 h-2.5 sm:w-3 sm:h-3 ${activeSocial.accent} shrink-0`}
                     />
                   )}
-                  <span className="text-slate-300 group-hover:text-white max-w-[65px] xs:max-w-[78px] sm:max-w-[95px] truncate">
+                  <span className="text-slate-300 group-hover:text-white max-w-[65px] xs:max-w-[78px] sm:max-w-[90px] truncate">
                     {activeSocial.handle}
                   </span>
                   <ExternalLink className="w-2.5 h-2.5 text-slate-500 group-hover:text-slate-300 opacity-60 shrink-0" />
@@ -270,92 +285,94 @@ export const DynamicIsland: React.FC = () => {
             </div>
           </div>
         ) : (
-          /* EXPANDED STATE: Full Social Identity Panel */
+          /* EXPANDED STATE: Compact, Refined Navigation & Social Capsule */
           <div
             data-testid="expanded-social-panel"
-            className="w-full h-full flex flex-col justify-between animate-fadeIn"
+            className="w-full flex flex-col gap-2.5 animate-fadeIn"
           >
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
-              {/* Left: Portrait + Name + Role + Availability */}
-              <div className="flex items-center justify-between sm:justify-start gap-3 min-w-0 shrink-0">
-                <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
-                  <div className="relative w-[40px] h-[40px] sm:w-[48px] sm:h-[48px] rounded-full overflow-hidden bg-white/10 border border-white/20 shadow-inner shrink-0">
-                    <img
-                      src={siteConfig.assets?.heroPortrait || '/images/image-removebg-preview.png'}
-                      alt="Krishna Goyal"
-                      className="w-full h-full object-cover object-top grayscale"
-                    />
-                    <span
-                      title="Available for freelance & product engineering"
-                      className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#0c0d12] animate-pulse"
-                    />
-                  </div>
+            {/* Top Row: Identity Header + Status Pill + Dismiss Action */}
+            <div className="flex items-center justify-between gap-2 min-w-0">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <div className="relative w-8 h-8 rounded-full overflow-hidden bg-white/10 border border-white/20 shrink-0">
+                  <img
+                    src={siteConfig.assets?.heroPortrait || '/images/image-removebg-preview.png'}
+                    alt="Krishna Goyal"
+                    className="w-full h-full object-cover object-top grayscale"
+                  />
+                  <span
+                    title="Available for freelance & product engineering"
+                    className="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-400 border border-[#0c0d12] animate-pulse"
+                  />
+                </div>
 
-                  <div className="flex flex-col text-left justify-center min-w-0">
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-[12px] sm:text-[13px] font-bold font-sans tracking-wider uppercase text-white leading-tight truncate">
-                        {displayName}
-                      </span>
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
-                    </div>
-                    <span className="text-[10px] sm:text-[11px] text-slate-400 font-sans leading-tight mt-0.5 truncate">
-                      {roleTitle}
+                <div className="flex flex-col text-left justify-center min-w-0">
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <span className="text-[11px] sm:text-[12px] font-bold font-sans tracking-wider uppercase text-white leading-tight truncate">
+                      {displayName}
                     </span>
-                    <span className="text-[9px] font-mono text-emerald-400/90 tracking-wider uppercase mt-0.5 truncate">
+                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[8.5px] font-mono text-emerald-400 uppercase tracking-wider font-semibold">
+                      <span className="w-1 h-1 rounded-full bg-emerald-400" />
                       AVAILABLE FOR PROJECTS
                     </span>
                   </div>
+                  <span className="text-[10px] text-slate-400 font-sans leading-tight mt-0.5 truncate">
+                    {roleTitle}
+                  </span>
                 </div>
-
-                {/* Mobile-only close button */}
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsMobileExpanded(false);
-                    setIsHovered(false);
-                  }}
-                  className="sm:hidden p-1.5 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition-colors"
-                  aria-label="Close social panel"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
               </div>
 
-              {/* Right: All Configured Social Profiles */}
-              <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap justify-start sm:justify-end">
-                {socials.map((profile) => {
-                  const ProfileIcon = profile.icon;
-                  return (
-                    <a
-                      key={profile.id}
-                      href={profile.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      title={`Visit ${profile.name} (${profile.handle})`}
-                      aria-label={`${profile.name}: ${profile.handle}`}
-                      className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 hover:border-white/20 text-xs text-slate-200 hover:text-white transition-all group shrink-0"
-                    >
-                      <ProfileIcon className={`w-3.5 h-3.5 ${profile.accent} shrink-0`} />
-                      <span className="text-[10.5px] font-medium font-sans max-w-[85px] sm:max-w-[100px] truncate">
-                        {profile.handle}
-                      </span>
-                      <ExternalLink className="w-2.5 h-2.5 text-slate-400 opacity-60 group-hover:opacity-100 shrink-0" />
-                    </a>
-                  );
-                })}
-              </div>
+              {/* Close Button */}
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (enterTimeoutRef.current) clearTimeout(enterTimeoutRef.current);
+                  if (leaveTimeoutRef.current) clearTimeout(leaveTimeoutRef.current);
+                  setIsMobileExpanded(false);
+                  setIsHovered(false);
+                }}
+                className="p-1 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition-colors shrink-0"
+                aria-label="Close social panel"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </div>
+
+            {/* Bottom Row: Compact Arranged Profile Links */}
+            <div className="pt-2 border-t border-white/10 flex items-center gap-1.5 flex-wrap">
+              {socials.map((profile) => {
+                const ProfileIcon = profile.icon;
+                return (
+                  <a
+                    key={profile.id}
+                    href={profile.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    title={`Visit ${profile.name} (${profile.handle})`}
+                    aria-label={`${profile.name}: ${profile.handle}`}
+                    className="inline-flex items-center gap-1.5 px-2 py-1 rounded-lg bg-white/5 hover:bg-white/15 border border-white/10 hover:border-white/25 text-[10.5px] text-slate-200 hover:text-white transition-all group shrink-0"
+                  >
+                    <ProfileIcon className={`w-3 h-3 ${profile.accent} shrink-0`} />
+                    <span className="font-medium font-sans max-w-[80px] sm:max-w-[95px] truncate">
+                      {profile.handle}
+                    </span>
+                    <ExternalLink className="w-2.5 h-2.5 text-slate-400 opacity-60 group-hover:opacity-100 shrink-0" />
+                  </a>
+                );
+              })}
             </div>
 
             {/* Subtle bottom indicator with tap-to-close */}
             <div
               onClick={() => {
+                if (enterTimeoutRef.current) clearTimeout(enterTimeoutRef.current);
+                if (leaveTimeoutRef.current) clearTimeout(leaveTimeoutRef.current);
                 setIsMobileExpanded(false);
                 setIsHovered(false);
               }}
               title="Tap to close"
-              className="w-12 h-1 bg-white/20 hover:bg-white/40 rounded-full mx-auto mt-2 cursor-pointer transition-colors"
+              className="w-10 h-1 bg-white/20 hover:bg-white/40 rounded-full mx-auto cursor-pointer transition-colors"
             />
           </div>
         )}

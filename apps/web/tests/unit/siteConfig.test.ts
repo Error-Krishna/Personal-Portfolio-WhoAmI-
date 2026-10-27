@@ -51,7 +51,7 @@ describe('Site Configuration & Utilities', () => {
 
   it('manages published project order and navigation helpers', () => {
     const published = getPublishedProjects();
-    expect(published.length).toBe(6);
+    expect(published.length).toBe(9);
     expect(published[0].slug).toBe('udhyog-saathi');
     expect(published[1].slug).toBe('insightloop');
 

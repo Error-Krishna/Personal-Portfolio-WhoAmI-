@@ -14,6 +14,8 @@ export const ContactInquiryResponseSchema = z.object({
   id: z.string(),
   receivedAt: z.string(),
   message: z.string(),
+  deliveryStatus: z.enum(['delivered', 'accepted', 'queued']).optional(),
+  provider: z.string().optional(),
 });
 
 export type ContactInquiryResponse = z.infer<typeof ContactInquiryResponseSchema>;

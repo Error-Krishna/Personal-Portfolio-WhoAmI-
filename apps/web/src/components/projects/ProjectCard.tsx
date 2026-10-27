@@ -3,17 +3,20 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight, RotateCw } from 'lucide-react';
 import { type ProjectItem } from '../../lib/config/site-config.js';
 import { ProjectThumbnailFallback } from './ProjectThumbnailFallback.js';
+import { withProjectStatus } from './withProjectStatus.js';
 
-interface ProjectCardProps {
+export interface ProjectCardProps {
   project: ProjectItem;
   index: number;
   featuredHighlight?: boolean;
+  statusBadge?: React.ReactNode;
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   index,
   featuredHighlight = false,
+  statusBadge,
 }) => {
   const [isFlippedManual, setIsFlippedManual] = useState<boolean>(false);
 
@@ -74,13 +77,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           {/* Right: Info Column */}
           <div className="flex-1 flex flex-col justify-between min-w-0 py-0.5">
             <div>
-              {/* Top row: Title, optional role, and arrow */}
+              {/* Top row: Title, optional role, status badge, and arrow */}
               <div className="flex items-start justify-between gap-2 mb-1">
                 <div className="min-w-0 flex-1">
-                  {featuredHighlight && (
-                    <span className="font-mono text-[9px] font-bold text-red-600 tracking-wider uppercase block mb-0.5 truncate">
-                      FEATURED {project.role ? `· ${project.role}` : ''}
-                    </span>
+                  {(featuredHighlight || statusBadge) && (
+                    <div className="flex flex-wrap items-center gap-1.5 mb-1">
+                      {featuredHighlight && (
+                        <span className="font-mono text-[9px] font-bold text-red-600 tracking-wider uppercase truncate">
+                          FEATURED {project.role ? `· ${project.role}` : ''}
+                        </span>
+                      )}
+                      {statusBadge}
+                    </div>
                   )}
                   <h3 className="font-sans font-bold text-lg sm:text-xl text-slate-950 tracking-tight leading-snug truncate">
                     {project.title}
@@ -161,3 +169,5 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     </div>
   );
 };
+
+export const ProjectCardWithStatus = withProjectStatus(ProjectCard);

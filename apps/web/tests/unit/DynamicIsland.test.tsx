@@ -74,14 +74,20 @@ describe('DynamicIsland Component', () => {
     expect(screen.getByText(secondHandle)).toBeInTheDocument();
   });
 
-  it('expands to full social identity panel on mouse hover', () => {
+  it('expands to full social identity panel on mouse hover after intentional dwell', () => {
     render(<DynamicIsland />);
 
     const island = screen.getByTestId('dynamic-island');
     expect(island).toHaveAttribute('data-expanded', 'false');
 
-    // Simulate mouse enter
+    // Simulate mouse enter - not expanded immediately due to hover intent detection
     fireEvent.mouseEnter(island);
+    expect(island).toHaveAttribute('data-expanded', 'false');
+
+    // Advance timer past the 120ms intentional dwell threshold
+    act(() => {
+      vi.advanceTimersByTime(150);
+    });
 
     expect(island).toHaveAttribute('data-expanded', 'true');
     expect(screen.getByTestId('expanded-social-panel')).toBeInTheDocument();
@@ -103,14 +109,17 @@ describe('DynamicIsland Component', () => {
     const island = screen.getByTestId('dynamic-island');
 
     fireEvent.mouseEnter(island);
+    act(() => {
+      vi.advanceTimersByTime(150);
+    });
     expect(island).toHaveAttribute('data-expanded', 'true');
 
     fireEvent.mouseLeave(island);
-    // Not collapsed immediately due to 200ms grace period
+    // Not collapsed immediately due to grace period
     expect(island).toHaveAttribute('data-expanded', 'true');
 
     act(() => {
-      vi.advanceTimersByTime(250);
+      vi.advanceTimersByTime(300);
     });
 
     expect(island).toHaveAttribute('data-expanded', 'false');

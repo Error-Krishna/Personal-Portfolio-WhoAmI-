@@ -11,7 +11,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    service: initialService || siteConfig.contact.projectTypes[0] || 'Full-Stack MVP & Product Engineering',
+    service:
+      initialService ||
+      siteConfig.contact.projectTypes[0] ||
+      'Full-Stack MVP & Product Engineering',
     budget: siteConfig.contact.budgetOptions[1] || '$500 – $1,200',
     timeline: siteConfig.contact.timelineOptions[1] || 'Standard (2–4 weeks)',
     message: '',
@@ -45,25 +48,40 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (status === 'loading') return;
     if (!validate()) return;
 
     setStatus('loading');
     setErrorMessage('');
 
     try {
-      await apiClient.post('/contact', {
+      const response = await apiClient.post<{ id: string; message: string }>('/contact', {
         name: formData.name.trim(),
         email: formData.email.trim(),
         service: formData.service,
         budget: formData.budget,
         message: `${formData.message.trim()} (Desired Timeline: ${formData.timeline})`,
       });
-      setStatus('success');
-    } catch {
-      // In case the local API server is not running or network fails, provide a smooth fallback
+
+      if (response && (response.id || response.message)) {
+        setStatus('success');
+      } else {
+        throw new Error('Unexpected response format from contact server.');
+      }
+    } catch (err: unknown) {
+      // In case server is unreachable, rejected by email provider, or network fails, provide a smooth fallback
       setStatus('error');
+      const apiMsg =
+        err &&
+        typeof err === 'object' &&
+        'message' in err &&
+        typeof (err as { message: unknown }).message === 'string'
+          ? (err as { message: string }).message
+          : null;
       setErrorMessage(
-        'Unable to reach backend server. You can email me directly using the button below with your details prefilled!'
+        apiMsg && !apiMsg.includes('Network Error') && !apiMsg.includes('timeout')
+          ? apiMsg
+          : 'Unable to deliver inquiry via server. You can email Krishna directly using the button below with your details prefilled!'
       );
     }
   };

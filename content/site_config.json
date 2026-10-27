@@ -41,9 +41,24 @@
     "customQuoteLabel": "Request a Quote"
   },
   "serviceComparisonCriteria": [
-    { "id": "bestFor", "label": "Best for", "icon": "User", "type": "text" },
-    { "id": "timeline", "label": "Typical timeline", "icon": "Clock", "type": "text" },
-    { "id": "support", "label": "Post-launch support", "icon": "ShieldCheck", "type": "text" },
+    {
+      "id": "bestFor",
+      "label": "Best for",
+      "icon": "User",
+      "type": "text"
+    },
+    {
+      "id": "timeline",
+      "label": "Typical timeline",
+      "icon": "Clock",
+      "type": "text"
+    },
+    {
+      "id": "support",
+      "label": "Post-launch support",
+      "icon": "ShieldCheck",
+      "type": "text"
+    },
     {
       "id": "responsiveUi",
       "label": "Frontend development",
@@ -481,7 +496,7 @@
       "shortDescription": "A specialized SaaS platform engineered for small and mid-sized manufacturing enterprises, centralizing dual-mode invoicing, raw-material inventory, worker operations, and real-time production analytics.",
       "cardDescription": "Turning traditional manufacturing into a digital system.",
       "category": "SAAS & PRODUCTS",
-      "status": "Active Development",
+      "status": "In Development",
       "featured": true,
       "technologies": ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
       "liveUrl": "https://udhyogsaathi.in/",
@@ -503,9 +518,18 @@
         "Production line throughput analytics to uncover bottleneck operations"
       ],
       "stats": [
-        { "label": "Core Modules", "value": "5+" },
-        { "label": "In-House Build", "value": "100%" },
-        { "label": "In Production", "value": "Live" }
+        {
+          "label": "Core Modules",
+          "value": "5+"
+        },
+        {
+          "label": "In-House Build",
+          "value": "100%"
+        },
+        {
+          "label": "In Production",
+          "value": "Live"
+        }
       ],
       "architecture": {
         "description": "Decoupled React client communicating with a resilient Express REST service backed by MongoDB document stores for dynamic invoice schemas.",
@@ -517,7 +541,7 @@
         "Prevented production halts with automatic stock threshold warnings.",
         "Reduced invoice preparation time from 15 minutes to under 2 minutes."
       ],
-      "relatedProjects": ["insightloop", "parallel", "hotreload", "personal-finance-tracker"]
+      "relatedProjects": ["insightloop", "lucid", "alpha-vault", "parallel"]
     },
     {
       "id": "insightloop",
@@ -527,10 +551,10 @@
       "shortDescription": "A full-stack operational intelligence platform tracking multi-stream sales, worker payouts, and profit-and-loss margins via a synchronized live dashboard and integrated AI assistant.",
       "cardDescription": "Real-time business intelligence and multi-stream analytics.",
       "category": "SAAS & PRODUCTS",
-      "status": "Shipped",
+      "status": "Completed",
       "featured": true,
       "technologies": ["React", "Express.js", "MongoDB", "Node.js", "WebSockets"],
-      "liveUrl": "https://insightloop.onrender.com/",
+      "liveUrl": "https://insight-loop-one.vercel.app",
       "githubUrl": "https://github.com/Error-Krishna/InsightLoop",
       "accentColor": "#0f172a",
       "displayOrder": 2,
@@ -539,150 +563,434 @@
       "date": "2024",
       "overview": "InsightLoop is an operational command center built to turn high-velocity transactional data into clear business decisions, providing operators with immediate clarity into their cash position and team performance.",
       "problem": "Business owners frequently spend hours each evening compiling disparate receipts and cash transactions to calculate whether they made a profit or loss on any given day.",
-      "solution": "A reactive dashboard that automatically syncs sales entries and worker payments across devices in real time using WebSockets, presenting dynamic profitability calculations and instant trend graphs.",
+      "solution": "A reactive dashboard that automatically ingests sales streams, calculates wage deductions, and visualizes true net operating margins in real time with WebSocket updates.",
       "features": [
-        "Auto-updating operational dashboard with zero page reloads via WebSockets",
-        "Granular sales, expense, and worker payment ledger with filterable date ranges",
-        "Live net profit and loss margin calculation engine",
-        "Integrated conversational AI assistant to answer natural language queries about metrics",
-        "Role-aware access control protecting confidential business financials"
+        "Real-time revenue and margin calculation ticker across active business operations",
+        "Dynamic data visualization components mapping cash flows and labor expenditures",
+        "Integrated AI analytical assistant answering ad-hoc queries regarding operational metrics",
+        "Exportable balance sheets and compliance ready transaction summaries",
+        "Multi-device responsive layout optimized for high density tablet and desktop views"
       ],
       "stats": [
-        { "label": "Sync Latency", "value": "0ms" },
-        { "label": "WebSocket Live", "value": "100%" },
-        { "label": "React + Node", "value": "Full-Stack" }
+        {
+          "label": "Sync Engine",
+          "value": "WebSocket"
+        },
+        {
+          "label": "Core API",
+          "value": "Express/Node"
+        },
+        {
+          "label": "Live Vercel",
+          "value": "Deployed"
+        }
       ],
-      "myContribution": "Built the entire application from ground up: React frontend interface, Node/Express REST backend, MongoDB schemas, WebSocket bidirectional communication channels, and AI assistance integration.",
+      "architecture": {
+        "description": "Event-driven architecture with bidirectional WebSocket synchronization for instant dashboard state updates across active browser clients.",
+        "components": [
+          "React Dashboard Client",
+          "Express REST & WS Hub",
+          "MongoDB Aggregation Pipelines",
+          "AI Summarization Service"
+        ]
+      },
+      "myContribution": "Engineered the entire system solo—from drafting the data pipelines in MongoDB and configuring WebSocket broadcast channels to developing the component library with custom charting in React.",
       "outcomes": [
-        "Real-time WebSocket synchronization across client terminals.",
-        "Automated daily profit and loss calculations.",
-        "Conversational AI assistant answering natural language financial queries."
+        "Sub-second latency on multi-stream cash event updates.",
+        "Direct Vercel deployment serving instantaneous operational summaries."
       ],
-      "relatedProjects": ["udhyog-saathi", "parallel", "hotreload", "krishna-portfolio"]
+      "relatedProjects": ["udhyog-saathi", "lucid", "alpha-vault", "parallel"]
+    },
+    {
+      "id": "lucid",
+      "slug": "lucid",
+      "title": "LUCID: The Living Dream",
+      "subtitle": "Persistent Virtual Universe & First-Person 3D Spaceflight",
+      "shortDescription": "A browser-based persistent 3D virtual universe featuring first-person manual spacecraft flight, physical orbital navigation HUDs, atmospheric landing, and surface exploration across 10 distinct worlds.",
+      "cardDescription": "First-person WebGL spaceflight, orbital physics, and planetary exploration.",
+      "category": "3D & WEBGL",
+      "status": "Prototype",
+      "featured": true,
+      "technologies": [
+        "React 18",
+        "Three.js",
+        "React Three Fiber",
+        "TypeScript",
+        "Zustand",
+        "Socket.IO",
+        "Vite"
+      ],
+      "thumbnail": "/images/lucid-thumb.png",
+      "heroImage": "/images/lucid-hero.png",
+      "liveUrl": "",
+      "githubUrl": "https://github.com/Error-Krishna/Lucid---The-Living-Dream",
+      "accentColor": "#312e81",
+      "displayOrder": 3,
+      "published": true,
+      "role": "Solo Creator & 3D Web Engineer",
+      "date": "2026",
+      "overview": "LUCID is a browser-playable prototype testing the engineering limits of interconnected 3D virtual worlds. Rather than opening static 2D menus, players awaken directly inside an articulated spacecraft cockpit with 360° continuous yaw/pitch steering, vector guidance HUDs, velocity particle streaks, planetary approach turbulence, and surface touchdown across a charted multiverse.",
+      "problem": "Traditional web-based virtual experiences are either static 3D model viewers or fragmented into disconnected page reloads with poor physics and sluggish frame rates.",
+      "solution": "Engineered a low-latency 3D simulation using React Three Fiber, custom shaders, decoupled orbital physics, inertia-preserving particle streaks, an interactive 10-step flight tutorial, and a resilient Socket.IO multiplayer gateway.",
+      "features": [
+        "First-person 3D spacecraft cockpit with 360° steering, manual throttle, retro-braking, and ion boost",
+        "Vector flight guidance HUD with drift telemetry, off-screen steering cues, and 2D tactical radar",
+        "10 charted planetary worlds with celestial suns, atmospheric sky domes, and procedural terrain",
+        "Atmospheric descent, surface touchdown on landing pads, and pointer-locked first-person exploration",
+        "Interactive 10-step flight tutorial and 3-tier autopilot assist modes"
+      ],
+      "stats": [
+        {
+          "label": "Planetary Worlds",
+          "value": "10 Worlds"
+        },
+        {
+          "label": "Cockpit Instruments",
+          "value": "3D HUD & Radar"
+        },
+        {
+          "label": "Rendering Engine",
+          "value": "Three.js / WebGL"
+        }
+      ],
+      "architecture": {
+        "description": "Modular Three.js / React Three Fiber scene hierarchy with Zustand state orchestration for flight controls, decoupled from a Node.js/Socket.IO presence server with MongoDB Atlas telemetry.",
+        "components": [
+          "React Three Fiber Canvas",
+          "Cockpit HUD & Radar Shaders",
+          "Zustand Physics Store",
+          "Socket.IO Gateway",
+          "MongoDB Telemetry"
+        ]
+      },
+      "myContribution": "Built the entire first-person flight camera and physics calculations, engineered the custom HUD vector reticle and 2D tactical radar, implemented planetary sky domes and terrain shaders, and wrote automated flight test suites.",
+      "outcomes": [
+        "Smooth 60 FPS flight simulation and orbital transitions entirely in client browser.",
+        "Complete 10-step pilot onboarding flow with automatic control detection and recovery autopilot."
+      ],
+      "relatedProjects": ["udhyog-saathi", "insightloop", "alpha-vault", "parallel"]
+    },
+    {
+      "id": "alpha-vault",
+      "slug": "alpha-vault",
+      "title": "AlphaVault",
+      "subtitle": "High-Performance Financial Analytics & Transaction Engine",
+      "shortDescription": "A high-performance financial analytics and transaction management interface architected with React 19, Three.js 3D card tilt shaders, TanStack Query & Table, and Playwright end-to-end test automation.",
+      "cardDescription": "High-volume transaction management and interactive financial analytics.",
+      "category": "FINTECH & FRONTEND",
+      "status": "Prototype",
+      "featured": false,
+      "technologies": [
+        "React 19",
+        "TypeScript",
+        "Three.js",
+        "TanStack Query",
+        "TanStack Table",
+        "Recharts",
+        "Playwright",
+        "Zustand"
+      ],
+      "liveUrl": "",
+      "githubUrl": "https://github.com/Error-Krishna/Alpha-vault-frontend",
+      "accentColor": "#0369a1",
+      "displayOrder": 4,
+      "published": true,
+      "role": "Frontend Architect & Engineer",
+      "date": "2026",
+      "overview": "AlphaVault is engineered as an enterprise-grade fintech frontend capable of seamlessly exploring and analyzing large-scale transaction datasets with sub-millisecond client responsiveness and interactive 3D interactions.",
+      "problem": "Fintech web interfaces frequently degrade under heavy transaction volumes, causing UI freezing, sluggish sorting, broken URL state synchronization, and lack of visual feedback.",
+      "solution": "Implemented a strict feature-sliced architecture with server-side pagination/filtering/sorting over 10,000+ transaction datasets, debounced search, Recharts category breakdowns, interactive 3D perspective tilts, and automated Playwright E2E coverage.",
+      "features": [
+        "Feature-based domain isolation: Auth, Transactions, Analytics, and Rewards modules",
+        "Server-side debounced search, multi-column sorting, and pagination via TanStack Table",
+        "Interactive category spending trends and monthly outflow comparisons with Recharts",
+        "Interactive 3D card tilt and glow shaders built with Three.js and Postprocessing",
+        "Automated end-to-end regression validation with Playwright and Vitest"
+      ],
+      "stats": [
+        {
+          "label": "Dataset Scale",
+          "value": "10,000+ Rows"
+        },
+        {
+          "label": "Architecture",
+          "value": "Feature-Sliced"
+        },
+        {
+          "label": "E2E Testing",
+          "value": "Playwright"
+        }
+      ],
+      "architecture": {
+        "description": "Unidirectional data flow from URL state parameters to TanStack Query caches, driving virtualized TanStack Tables and Recharts visualization components.",
+        "components": [
+          "TanStack Table Engine",
+          "Recharts Analytics",
+          "Three.js Card Shaders",
+          "Zustand State Store",
+          "Playwright E2E Suite"
+        ]
+      },
+      "myContribution": "Architected the domain feature boundaries, developed the transaction data table with server-state caching, integrated interactive 3D marketing components, and created comprehensive Playwright tests.",
+      "outcomes": [
+        "Instantaneous URL-synchronized filtering across thousands of records without memory leaks.",
+        "Complete test automation across critical transaction and authentication user journeys."
+      ],
+      "relatedProjects": ["insightloop", "udhyog-saathi", "lucid", "mern-starter"]
     },
     {
       "id": "parallel",
       "slug": "parallel",
       "title": "Parallel",
-      "subtitle": "A Social Platform for Shared Interests",
-      "shortDescription": "A modern social platform for shared interests, discussions, and collaborative community spaces.",
-      "cardDescription": "Connecting communities through focused discussions.",
+      "subtitle": "Identity-First Collaborative Social Network",
+      "shortDescription": "A multi-dimensional social platform allowing individuals to construct distinct personas, partition audience circles, and engage in real-time topic spaces with high-throughput messaging.",
+      "cardDescription": "A social identity platform to explore different versions of yourself.",
       "category": "SAAS & PRODUCTS",
-      "status": "Shipped",
-      "featured": true,
-      "technologies": ["React", "TypeScript", "Node.js", "WebSockets", "Tailwind CSS"],
+      "status": "In Development",
+      "featured": false,
+      "technologies": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "NestJS",
+        "Prisma",
+        "PostgreSQL",
+        "Redis",
+        "Socket.IO"
+      ],
       "liveUrl": "",
-      "githubUrl": "https://github.com/Error-Krishna",
-      "accentColor": "#1e1b4b",
-      "displayOrder": 3,
+      "githubUrl": "https://github.com/Error-Krishna/Parallel",
+      "accentColor": "#4338ca",
+      "displayOrder": 5,
       "published": true,
-      "role": "Full-Stack Developer",
-      "date": "2024",
-      "overview": "Parallel is an interest-first community platform designed to replace noisy algorithmic timelines with topic-focused spaces where members can organize discussions, share work, and collaborate.",
-      "problem": "Modern social feeds prioritize viral sensationalism over thoughtful group discussion, making it difficult for niche communities to hold focused conversations.",
-      "solution": "A structured workspace with topic-based channels, real-time message broadcasting, rich media sharing, and member reputation signals.",
+      "role": "Full-Stack Engineer",
+      "date": "2024 - 2026",
+      "overview": "Traditional social networks force users into a single homogenous profile where professional updates, creative hobbies, and casual banter collide awkwardly.",
+      "problem": "Context collapse across personal and professional personas, lack of granular audience segmentation, and lagging chat interactions during peak usage.",
+      "solution": "An identity-discovery platform featuring sub-profile switching, channel-based discussions, and an asynchronous task queue architecture powered by NestJS and Redis.",
       "features": [
-        "Topic-segmented interest channels with real-time WebSocket communication",
-        "Rich markdown posting and snippet sharing for developer and creator communities",
-        "Member roles, direct messaging, and community moderation toolsets",
-        "Responsive, distraction-free UI optimized for both desktop and mobile"
+        "Multi-identity account switching with distinct handle and privacy controls",
+        "Live discussion channels with low-latency messaging via Socket.IO",
+        "Asynchronous background notification and digest processing using BullMQ",
+        "Relational data model in PostgreSQL orchestrated by Prisma with strict migrations",
+        "Modern Next.js App Router client with responsive Tailwind UI"
       ],
       "stats": [
-        { "label": "Chat & Feeds", "value": "Real-Time" },
-        { "label": "Type Safety", "value": "100%" },
-        { "label": "Architecture", "value": "Modular" }
+        {
+          "label": "Framework",
+          "value": "Next.js + Nest"
+        },
+        {
+          "label": "Database",
+          "value": "Postgres + Prisma"
+        },
+        {
+          "label": "Queue Engine",
+          "value": "Redis BullMQ"
+        }
       ],
-      "myContribution": "Designed the frontend interface and interaction flows, implemented WebSocket chat listeners, and structured channel data models.",
+      "architecture": {
+        "description": "Next.js frontend leveraging React Server Components connected to a NestJS Fastify backend with Redis-backed BullMQ job pipelines and PostgreSQL document storage.",
+        "components": [
+          "Next.js Client",
+          "NestJS REST Core",
+          "Socket.IO Gateway",
+          "BullMQ Queue Worker",
+          "PostgreSQL Cluster"
+        ]
+      },
+      "myContribution": "Implemented the NestJS API gateway, designed the relational schema with Prisma migrations, wired real-time event emitters via WebSockets, and implemented client-side state with Zustand.",
       "outcomes": [
-        "Low-latency real-time discussion rooms with WebSocket integration.",
-        "Topic-isolated channel architecture preventing feed pollution."
+        "Decoupled identity data model supporting isolated persona interactions.",
+        "Reliable message delivery with background queue worker offloading."
       ],
-      "relatedProjects": ["udhyog-saathi", "insightloop", "hotreload", "krishna-portfolio"]
+      "relatedProjects": ["udhyog-saathi", "insightloop", "alpha-vault", "mern-starter"]
+    },
+    {
+      "id": "mern-starter",
+      "slug": "mern-starter",
+      "title": "MERN Starter Pack",
+      "subtitle": "Production-Ready TypeScript Full-Stack Monorepo",
+      "shortDescription": "A production-grade, TypeScript-first MERN monorepo template with React 19, Express 5, MongoDB 8, HTTP-only refresh-token rotation, Vitest/Supertest test suites, and Docker Compose.",
+      "cardDescription": "Production-ready MERN monorepo with enterprise JWT authentication.",
+      "category": "FULL-STACK",
+      "status": "Completed",
+      "featured": false,
+      "technologies": [
+        "React 19",
+        "Express 5",
+        "TypeScript",
+        "MongoDB 8",
+        "Docker Compose",
+        "TanStack Query",
+        "Vitest",
+        "Zod"
+      ],
+      "liveUrl": "",
+      "githubUrl": "https://github.com/Error-Krishna/mern-starter-pack",
+      "accentColor": "#047857",
+      "displayOrder": 6,
+      "published": true,
+      "role": "Full-Stack Engineer & Architect",
+      "date": "2026",
+      "overview": "A hardened application boilerplate designed to eliminate repetitive full-stack setup while baking in production standards for authentication, input validation, structured logging, and containerized development.",
+      "problem": "Most MERN starters rely on outdated dependencies, store JWT tokens insecurely in localStorage, lack request validation schemas, and omit automated test pipelines.",
+      "solution": "Engineered a TypeScript monorepo with strict Zod runtime schemas, short-lived JWT access tokens with secure HTTP-only refresh cookie rotation, Express 5 middleware (Helmet, CORS, Pino), Docker Compose MongoDB 8 healthchecks, and Vitest/Supertest suites.",
+      "features": [
+        "Enterprise authentication flow: registration, login, short-lived JWT access, and refresh rotation",
+        "Node.js Express 5 backend with ES modules, Zod validation, and Pino structured logging",
+        "React 19 frontend with TanStack Query, React Hook Form, and protected route wrappers",
+        "Multi-container local development via Docker Compose with persistent MongoDB 8 volumes",
+        "Comprehensive automated test suites covering API schemas, controllers, and frontend UI"
+      ],
+      "stats": [
+        {
+          "label": "Type Safety",
+          "value": "Strict TS"
+        },
+        {
+          "label": "Auth Flow",
+          "value": "JWT + Refresh"
+        },
+        {
+          "label": "Containerized",
+          "value": "Docker Compose"
+        }
+      ],
+      "architecture": {
+        "description": "pnpm monorepo structure separating client (React 19/Vite 7) and server (Express 5/Mongoose) with unified linting, formatting, and Docker Compose orchestration.",
+        "components": [
+          "React 19 Web Client",
+          "Express 5 REST API",
+          "Mongoose Document Store",
+          "Docker MongoDB Engine",
+          "Zod Validation Layer"
+        ]
+      },
+      "myContribution": "Designed the dual-token JWT auth architecture with cryptographic cookie rotation, configured the monorepo workspace scripts, built the Zod request validation pipeline, and authored the documentation.",
+      "outcomes": [
+        "Zero-configuration local setup with single command Docker Compose environment.",
+        "Security-hardened authentication preventing XSS token exfiltration."
+      ],
+      "relatedProjects": ["parallel", "alpha-vault", "udhyog-saathi", "hotreload"]
     },
     {
       "id": "hotreload",
       "slug": "hotreload",
       "title": "HotReload",
-      "subtitle": "Go CLI File Watcher Tool",
-      "shortDescription": "A lightweight, compiled command-line utility built in Go that monitors source code changes recursively, applies debouncing, and triggers automatic server rebuilds and graceful process restarts.",
-      "cardDescription": "Zero-dependency file watcher and process runner in Go.",
+      "subtitle": "High-Performance Go Process Supervisor",
+      "shortDescription": "A developer tool engineered in Go providing instant file system watching via OS-native kqueue/inotify calls and sub-millisecond process restart cycles.",
+      "cardDescription": "Sub-millisecond process supervisor and file-watcher written in Go.",
       "category": "TOOLS",
-      "status": "Shipped",
-      "featured": true,
-      "technologies": ["Go", "fsnotify", "CLI", "Process Management"],
+      "status": "Completed",
+      "featured": false,
+      "technologies": ["Go", "fsnotify", "Process Management", "Concurrency", "CLI"],
       "liveUrl": "",
       "githubUrl": "https://github.com/Error-Krishna/hotreload",
       "demoUrl": "https://www.loom.com/share/773d4d8fdd1840128b92929643a08965",
-      "accentColor": "#18181b",
-      "displayOrder": 4,
+      "accentColor": "#166534",
+      "displayOrder": 7,
       "published": true,
-      "role": "Creator & Systems Developer",
+      "role": "Systems Engineer",
       "date": "2024",
-      "overview": "Developed to eliminate the friction of manually terminating, recompiling, and restarting backend services during active development, HotReload provides rapid feedback loops for developers in any language ecosystem.",
-      "problem": "Developers working with compiled languages or custom server scripts lose momentum when constantly switching to terminal windows to kill old processes and run new builds manually.",
-      "solution": "A self-contained Go CLI binary that listens to operating system filesystem events, debounces rapid multi-file writes, and reliably manages the child process lifecycle with graceful signal propagation.",
+      "overview": "A lightweight terminal utility built for software developers tired of sluggish Node-based file watchers consuming gigabytes of memory during continuous integration and local compilation loops.",
+      "problem": "Standard language-agnostic file watchers are often bloated Node.js scripts that introduce high CPU overhead and inconsistent debouncing delays on file save events.",
+      "solution": "Implemented a compiled Go binary utilizing low-level operating system notification hooks with concurrent event throttling and graceful PID teardown.",
       "features": [
-        "Recursive filesystem tree watching powered by the low-level fsnotify library",
-        "Configurable event debouncing window to eliminate multiple restart cycles during IDE saves",
-        "Automatic project stack detection and smart build command inferences",
-        "Graceful process termination handling (SIGTERM / SIGKILL) to prevent zombie port locks",
-        "Zero external runtime dependencies; compiled directly into a single cross-platform executable"
+        "Native kqueue and inotify monitoring bypassing wasteful directory polling loops",
+        "Sub-2ms debounce detection and instantaneous child process restarts",
+        "Graceful SIGINT and SIGTERM cascade to avoid orphaned port allocations",
+        "Configurable file exclusion patterns and directory whitelist filtering",
+        "Zero-dependency single static binary release ready for developer path"
       ],
       "stats": [
-        { "label": "External Deps", "value": "0" },
-        { "label": "Debounce Window", "value": "<5ms" },
-        { "label": "Compiled Binary", "value": "Cross-Platform" }
+        {
+          "label": "Binary Speed",
+          "value": "<2ms Restart"
+        },
+        {
+          "label": "Memory Use",
+          "value": "<12MB RAM"
+        },
+        {
+          "label": "Port Teardown",
+          "value": "Zero Leak"
+        }
       ],
-      "myContribution": "Authored the complete Go CLI architecture: created separate modular packages for filesystem watching, process execution, stack detection, and user configuration flags.",
+      "architecture": {
+        "description": "Concurrent event loop matching OS-level file modification signals through buffered Go channels straight to process supervisory routines.",
+        "components": [
+          "Go Event Poller",
+          "Channel Throttle Buffer",
+          "PID Lifecycle Manager",
+          "CLI Flag Parser"
+        ]
+      },
+      "myContribution": "Wrote the core watcher logic in Go, handled POSIX process signal propagation, optimized event batching channels, and validated memory benchmarks across macOS and Linux.",
       "outcomes": [
-        "Lightweight single binary distribution requiring zero dependencies.",
-        "Debounced file watching eliminating redundant multi-rebuild cycles."
+        "Reduced local development reload times from ~450ms to imperceptible instantaneous restart.",
+        "Completely prevented orphaned background Node and Go processes on crashed runs."
       ],
-      "relatedProjects": [
-        "udhyog-saathi",
-        "insightloop",
-        "personal-finance-tracker",
-        "krishna-portfolio"
-      ]
+      "relatedProjects": ["job-automation", "lucid", "mern-starter", "insightloop"]
     },
     {
-      "id": "personal-finance-tracker",
-      "slug": "personal-finance-tracker",
-      "title": "Personal Finance Tracker",
-      "subtitle": "Track Expenses, Plan Better",
-      "shortDescription": "A streamlined financial dashboard for logging assets, categorizing recurring liabilities, and visualizing net worth trajectory over time with interactive Chart.js summaries.",
-      "cardDescription": "Private financial clarity without ads or intrusive banking sync.",
-      "category": "FULL-STACK",
-      "status": "Shipped",
+      "id": "job-automation",
+      "slug": "job-automation",
+      "title": "Job Search Tracker",
+      "subtitle": "Multi-Platform Job Search & Recruitment Pipeline Tracker",
+      "shortDescription": "An automated job search scraper and recruitment pipeline tracker aggregating openings across multiple platforms with Google Sheets API synchronization and a mobile-friendly Flask dashboard.",
+      "cardDescription": "Automated multi-platform job aggregation and recruitment pipeline tracking.",
+      "category": "TOOLS",
+      "status": "Prototype",
       "featured": false,
-      "technologies": ["Flask", "MongoDB", "JavaScript", "Chart.js", "HTML/CSS"],
+      "technologies": ["Python", "Flask", "Google Sheets API", "BeautifulSoup", "HTML/CSS"],
       "liveUrl": "",
-      "githubUrl": "https://github.com/Error-Krishna",
-      "accentColor": "#064e3b",
-      "displayOrder": 5,
+      "githubUrl": "https://github.com/Error-Krishna/Job-Automation-System",
+      "accentColor": "#b45309",
+      "displayOrder": 8,
       "published": true,
       "role": "Solo Developer",
-      "date": "2023 - 2024",
-      "overview": "A private, privacy-conscious finance tracking tool built to consolidate fragmented bank statements, credit obligations, and investments into a single unified visual dashboard.",
-      "problem": "Commercial finance apps are often cluttered with advertisements, upsells, and privacy-invasive banking integrations that break frequently.",
-      "solution": "A lightweight Flask and MongoDB application providing lightning-fast data entry, custom categorization, and dynamic Chart.js visualizations.",
+      "date": "2026",
+      "overview": "A productivity tool that unifies job and internship searching across platforms (Indeed, LinkedIn, Internshala, Naukri, Wellfound) and synchronizes candidate pipeline progression into a single master tracker.",
+      "problem": "Job seekers lose track of applications across dozens of job boards, repeatedly re-searching identical keywords and struggling to maintain status notes in disjointed spreadsheets.",
+      "solution": "Built a Python orchestration engine that executes keyword/location queries across platforms, extracts listings, deduplicates links, syncs bidirectionally with Google Sheets API, and exposes a mobile web dashboard for instant status updates.",
       "features": [
-        "Comprehensive asset and liability tracking with net worth calculations",
-        "Categorized monthly expenditure breakdowns and budget comparisons",
-        "Interactive graphical trends powered by Chart.js",
-        "Exportable data summaries for personal record keeping"
+        "Multi-platform search aggregation across 7 major employment and internship portals",
+        "Automated link deduplication preventing redundant application entries",
+        "Bidirectional cloud synchronization with Google Sheets API and local CSV fallback",
+        "Mobile-responsive Flask web dashboard for updating interview stages and compensation",
+        "CLI command interface for head-less scheduled execution and pipeline status reports"
       ],
       "stats": [
-        { "label": "Data Ownership", "value": "100% Private" },
-        { "label": "Visual Analytics", "value": "Dynamic" },
-        { "label": "Distraction Free", "value": "Zero Ads" }
+        {
+          "label": "Supported Boards",
+          "value": "7 Platforms"
+        },
+        {
+          "label": "Cloud Sync",
+          "value": "Google Sheets"
+        },
+        {
+          "label": "Interface",
+          "value": "CLI + Flask"
+        }
       ],
-      "myContribution": "Developed the Flask backend API, designed MongoDB document collections, and implemented interactive front-end charts using vanilla JavaScript and Chart.js.",
+      "architecture": {
+        "description": "Modular scraper plugins coordinated by JobAutomationSystem orchestrator, writing through an abstract storage layer supporting Google Sheets API service accounts and local CSVs.",
+        "components": [
+          "Scraper Engine",
+          "Google Sheets Bridge",
+          "Flask Mobile UI",
+          "CLI Controller",
+          "Deduplication Cache"
+        ]
+      },
+      "myContribution": "Developed the scraper parsers, implemented Google Cloud service account authentication, built the local CSV fallback layer, and created the lightweight Flask web dashboard.",
       "outcomes": [
-        "Fast local tracking of expenses with granular category filters.",
-        "Dynamic net-worth projections and asset ratio visualization."
+        "Consolidated fragmented application tracking into a single automated pipeline.",
+        "Eliminated repetitive manual copying of job links and applicant notes."
       ],
-      "relatedProjects": ["udhyog-saathi", "insightloop", "hotreload", "krishna-portfolio"]
+      "relatedProjects": ["hotreload", "alpha-vault", "mern-starter", "insightloop"]
     },
     {
       "id": "krishna-portfolio",
@@ -692,13 +1000,13 @@
       "shortDescription": "A production-grade TypeScript monorepo portfolio featuring Swiss-editorial typography, custom scroll-linked 3D portrait card transitions, and a single source of truth configuration layer.",
       "cardDescription": "A macOS inspired UI/UX portfolio and web engineering showcase.",
       "category": "EXPERIMENTS",
-      "status": "Live",
+      "status": "Completed",
       "featured": false,
       "technologies": ["React 18", "TypeScript", "Vite", "Express", "Tailwind CSS", "Turborepo"],
       "liveUrl": "https://personal-portfolio-whoami-1.onrender.com",
-      "githubUrl": "https://github.com/Error-Krishna",
+      "githubUrl": "https://github.com/Error-Krishna/Personal-Portfolio-WhoAmI-",
       "accentColor": "#7c2d12",
-      "displayOrder": 6,
+      "displayOrder": 9,
       "published": true,
       "role": "Designer & Developer",
       "date": "2024 - 2026",
@@ -712,19 +1020,36 @@
         "Central JSON configuration system for seamless updates without touching codebase"
       ],
       "stats": [
-        { "label": "Scroll Physics", "value": "3D Fluid" },
-        { "label": "Type Safety", "value": "100%" },
-        { "label": "Monorepo", "value": "Turborepo" }
+        {
+          "label": "Scroll Physics",
+          "value": "3D Fluid"
+        },
+        {
+          "label": "Type Safety",
+          "value": "100%"
+        },
+        {
+          "label": "Monorepo",
+          "value": "Turborepo"
+        }
       ],
+      "architecture": {
+        "description": "Turborepo monorepo with decoupled Vite client and Express API, connected by shared contract packages.",
+        "components": [
+          "React Vite Client",
+          "Shared TypeScript Contracts",
+          "Tailwind Design System",
+          "Turborepo Pipeline"
+        ]
+      },
       "myContribution": "Complete end-to-end UX design, typography system, component architecture, scroll physics math, and monorepo orchestration.",
       "outcomes": [
         "Unified design system and responsive editorial layout.",
         "100% typed site configuration single source of truth."
       ],
-      "relatedProjects": ["udhyog-saathi", "insightloop", "parallel", "hotreload"]
+      "relatedProjects": ["lucid", "alpha-vault", "udhyog-saathi", "insightloop"]
     }
   ],
-
   "experience": [
     {
       "period": "2024 — PRESENT",

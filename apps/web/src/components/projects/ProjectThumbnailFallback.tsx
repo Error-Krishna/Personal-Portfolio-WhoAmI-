@@ -16,6 +16,121 @@ export const ProjectThumbnailFallback: React.FC<ProjectThumbnailFallbackProps> =
   className = '',
 }) => {
   switch (id) {
+    case 'lucid':
+      return (
+        <div
+          className={`w-full h-full bg-[#050814] p-2.5 sm:p-3 flex flex-col justify-between font-mono select-none overflow-hidden text-cyan-300 ${className}`}
+        >
+          <div className="flex items-center justify-between pb-1.5 border-b border-cyan-500/20">
+            <div className="flex items-center gap-1.5">
+              <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+              <span className="text-[9px] font-bold tracking-wider text-cyan-200">LUCID HUD</span>
+            </div>
+            <span className="text-[8px] text-cyan-500">360° PITCH</span>
+          </div>
+          <div className="my-auto text-center relative py-1">
+            <div className="text-[8px] text-cyan-400/80 mb-0.5">TARGET: CANDYVERSE</div>
+            <div className="text-[11px] font-bold tracking-wider text-white border border-cyan-500/40 rounded px-2 py-0.5 inline-block bg-cyan-950/40">
+              LOCK · 88 km/s
+            </div>
+            <div className="text-[7px] text-cyan-500/70 mt-0.5">3D WEBGL SIMULATION</div>
+          </div>
+          <div className="text-[8px] text-cyan-400/60 pt-1 border-t border-cyan-500/20 flex items-center justify-between">
+            <span>R3F · THREE.JS</span>
+            <span className="text-cyan-300">SYSTEMS OK</span>
+          </div>
+        </div>
+      );
+
+    case 'alpha-vault':
+      return (
+        <div
+          className={`w-full h-full bg-[#070d18] p-2.5 sm:p-3 flex flex-col justify-between font-sans select-none overflow-hidden text-slate-200 ${className}`}
+        >
+          <div className="flex items-center justify-between pb-1.5 border-b border-sky-500/20">
+            <div className="flex items-center gap-1.5">
+              <div className="w-1.5 h-1.5 rounded-full bg-sky-400" />
+              <span className="font-mono text-[9px] font-bold text-sky-300">ALPHA VAULT</span>
+            </div>
+            <span className="font-mono text-[8px] text-slate-400">10K ROWS</span>
+          </div>
+          <div className="space-y-1 my-auto">
+            <div className="flex items-center justify-between p-1 rounded bg-white/5 border border-white/5 text-[8px] font-mono">
+              <span className="text-slate-300">MERCHANT: STRIPE</span>
+              <span className="text-emerald-400 font-bold">+$2,450.00</span>
+            </div>
+            <div className="flex items-center justify-between p-1 rounded bg-white/5 border border-white/5 text-[8px] font-mono">
+              <span className="text-slate-300">AWS CLOUD INFRA</span>
+              <span className="text-slate-400">-$340.50</span>
+            </div>
+          </div>
+          <div className="text-[8px] font-mono text-slate-400 pt-1 border-t border-sky-500/20 flex items-center justify-between">
+            <span>TANSTACK QUERY</span>
+            <span className="text-sky-400 font-medium">VIRTUALIZED</span>
+          </div>
+        </div>
+      );
+
+    case 'mern-starter':
+      return (
+        <div
+          className={`w-full h-full bg-[#08150f] p-2.5 sm:p-3 flex flex-col justify-between font-mono select-none overflow-hidden text-emerald-400 ${className}`}
+        >
+          <div className="flex items-center justify-between pb-1.5 border-b border-emerald-500/20">
+            <span className="text-[9px] font-bold text-emerald-300">MERN MONOREPO</span>
+            <span className="text-[8px] text-slate-400">DOCKER</span>
+          </div>
+          <div className="grid grid-cols-2 gap-1 my-auto text-[7px] text-center">
+            <div className="p-1 rounded bg-emerald-950/40 border border-emerald-500/30 text-emerald-200">
+              REACT 19
+            </div>
+            <div className="p-1 rounded bg-emerald-950/40 border border-emerald-500/30 text-emerald-200">
+              EXPRESS 5
+            </div>
+            <div className="p-1 rounded bg-emerald-950/40 border border-emerald-500/30 text-emerald-200">
+              MONGO 8
+            </div>
+            <div className="p-1 rounded bg-emerald-950/40 border border-emerald-500/30 text-emerald-200">
+              JWT REFRESH
+            </div>
+          </div>
+          <div className="text-[8px] text-slate-400 pt-1 border-t border-emerald-500/20 flex items-center justify-between">
+            <span>CONTAINERIZED</span>
+            <span className="text-emerald-400">100% TYPED</span>
+          </div>
+        </div>
+      );
+
+    case 'job-automation':
+      return (
+        <div
+          className={`w-full h-full bg-[#181106] p-2.5 sm:p-3 flex flex-col justify-between font-sans select-none overflow-hidden text-amber-200 ${className}`}
+        >
+          <div className="flex items-center justify-between pb-1.5 border-b border-amber-500/20">
+            <span className="font-mono text-[9px] font-bold text-amber-300">JOB TRACKER</span>
+            <span className="font-mono text-[8px] text-amber-500">G-SHEETS API</span>
+          </div>
+          <div className="grid grid-cols-3 gap-1 my-auto text-center">
+            <div className="p-1 rounded bg-white/5 border border-white/10">
+              <div className="text-[6px] font-mono text-slate-400">SCRAPED</div>
+              <div className="text-[10px] font-bold text-white">48</div>
+            </div>
+            <div className="p-1 rounded bg-white/5 border border-white/10">
+              <div className="text-[6px] font-mono text-slate-400">APPLIED</div>
+              <div className="text-[10px] font-bold text-amber-300">16</div>
+            </div>
+            <div className="p-1 rounded bg-white/5 border border-white/10">
+              <div className="text-[6px] font-mono text-slate-400">OFFER/OA</div>
+              <div className="text-[10px] font-bold text-emerald-400">3</div>
+            </div>
+          </div>
+          <div className="text-[8px] font-mono text-slate-400 pt-1 border-t border-amber-500/20 flex items-center justify-between">
+            <span>7 PLATFORMS</span>
+            <span className="text-amber-400">AUTO-DEDUP</span>
+          </div>
+        </div>
+      );
+
     case 'udhyog-saathi':
       return (
         <div
@@ -140,29 +255,6 @@ export const ProjectThumbnailFallback: React.FC<ProjectThumbnailFallbackProps> =
           <div className="text-[8px] text-slate-500 pt-1 border-t border-white/5 flex items-center justify-between">
             <span>PROCESS: RUNNING</span>
             <span className="text-emerald-400">PORT 8080</span>
-          </div>
-        </div>
-      );
-
-    case 'personal-finance-tracker':
-      return (
-        <div
-          className={`w-full h-full bg-[#f8fafc] p-2.5 sm:p-3 flex flex-col justify-between font-sans select-none overflow-hidden ${className}`}
-        >
-          <div className="flex items-center justify-between pb-1.5 border-b border-slate-200">
-            <span className="font-mono text-[9px] font-bold text-slate-800">FINANCE TRACKER</span>
-            <span className="font-mono text-[8px] text-emerald-600 font-semibold">PRIVATE</span>
-          </div>
-          <div className="p-2 rounded bg-white border border-slate-200/80 my-auto shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
-            <div className="text-[8px] font-mono text-slate-400">NET ASSETS</div>
-            <div className="text-xs font-bold text-slate-900">$24,850</div>
-            <div className="w-full bg-slate-100 rounded-full h-1 mt-1.5 overflow-hidden">
-              <div className="bg-emerald-600 h-full w-[70%]" />
-            </div>
-          </div>
-          <div className="text-[8px] font-mono text-slate-500 pt-1 border-t border-slate-100 flex items-center justify-between">
-            <span>EXPENSES</span>
-            <span className="text-slate-900 font-medium">-14.2%</span>
           </div>
         </div>
       );
