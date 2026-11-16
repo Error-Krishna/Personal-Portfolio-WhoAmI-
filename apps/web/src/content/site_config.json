@@ -26,10 +26,10 @@
   },
   "assets": {
     "heroPortrait": "/images/image-removebg-preview.png",
-    "aboutPortrait": "/images/about-portrait-red.png",
-    "contactPortrait": "/images/about-portrait-red.png",
+    "aboutPortrait": "/images/image-removebg-preview.png",
+    "contactPortrait": "/images/image-removebg-preview.png",
     "resume": "/resume/krishna-goyal-resume.pdf",
-    "ogImage": "/images/about-portrait-red.png"
+    "ogImage": "/images/image-removebg-preview.png"
   },
   "pricing": {
     "currency": "USD",
@@ -622,7 +622,7 @@
       ],
       "thumbnail": "/images/lucid-thumb.png",
       "heroImage": "/images/lucid-hero.png",
-      "liveUrl": "",
+      "liveUrl": "https://lucid-the-living-dream-delta.vercel.app",
       "githubUrl": "https://github.com/Error-Krishna/Lucid---The-Living-Dream",
       "accentColor": "#312e81",
       "displayOrder": 3,
@@ -671,6 +671,202 @@
       "relatedProjects": ["udhyog-saathi", "insightloop", "alpha-vault", "parallel"]
     },
     {
+      "id": "market-aura-4u",
+      "slug": "market-aura-4u",
+      "title": "Market Aura 4U",
+      "subtitle": "AI Marketing Automation & Multi-Platform Publishing Studio",
+      "shortDescription": "An enterprise-ready digital marketing automation platform and multi-channel publishing studio unifying brand-grounded AI copywriting, machine learning engagement recommendations, Cloudflare R2 media storage, and automated social distribution.",
+      "cardDescription": "Automated AI copywriting, ML engagement scoring, and direct multi-channel social publishing.",
+      "category": "SAAS & PRODUCTS",
+      "status": "In Development",
+      "featured": false,
+      "technologies": [
+        "React 19",
+        "TypeScript",
+        "Express 5",
+        "Node.js",
+        "MongoDB",
+        "Tailwind CSS v4",
+        "Cloudflare R2",
+        "Python"
+      ],
+      "liveUrl": "https://market-for-you-two.vercel.app",
+      "githubUrl": "https://github.com/Error-Krishna/Market-for-you",
+      "accentColor": "#06b6d4",
+      "displayOrder": 4,
+      "published": true,
+      "role": "Lead Full-Stack Engineer & System Architect",
+      "date": "2024 - Present",
+      "overview": "Modern digital marketing teams face fragmented social media workflows—copywriting across disparate character limits, manual cross-posting, generic AI copy lacking brand voice grounding, and high cloud storage egress fees. Market Aura 4U unifies brand intelligence, AI copy generation, ML-driven engagement prediction, and scheduled multi-platform distribution into one workspace.",
+      "problem": "Marketers spend hours adapting content for Twitter, LinkedIn, Instagram, and blogs individually. Unbounded cloud storage egress fees erode margins, generic LLMs produce off-brand copy, and unreliable schedulers cause duplicate or dropped social posts.",
+      "solution": "Engineered an end-to-end studio with brand-grounded LLM completions via Groq, an offline ML random forest model predicting optimal post formats and timing windows, zero-egress Cloudflare R2 asset storage with MIME validation, and an atomic MongoDB background scheduler preventing duplicate social broadcasts.",
+      "features": [
+        "Brand-grounded multi-platform AI copy generation across Instagram, X, LinkedIn, Facebook, and Email in a single operation",
+        "Offline ML recommendation engine predicting optimal content format, timing window, and engagement rates",
+        "Direct multi-channel publishing with Instagram Graph API v21.0 container flow, Twitter v2, and LinkedIn Community API",
+        "Zero-egress media storage powered by Cloudflare R2 with magic-byte MIME validation and storage quota guardrails",
+        "Atomic distributed post scheduler with MongoDB job leasing, exponential retry backoff, and unknown-outcome protection"
+      ],
+      "stats": [
+        {
+          "label": "Platforms",
+          "value": "6+"
+        },
+        {
+          "label": "Egress Fees",
+          "value": "zsh"
+        },
+        {
+          "label": "Test Suite",
+          "value": "100%"
+        }
+      ],
+      "architecture": {
+        "description": "Vite React 19 SPA communicating with an Express 5 REST API, integrated with Cloudflare R2 for asset storage, MongoDB for tenant persistence, and an auxiliary Python ML microservice for engagement scoring.",
+        "components": [
+          "React 19 Frontend",
+          "Express 5 API Gateway",
+          "MongoDB Atlas",
+          "Cloudflare R2 Storage",
+          "Python ML Scorer"
+        ]
+      },
+      "myContribution": "Architected the full-stack system: implemented React 19 UI with Tailwind CSS v4 and TanStack Query, built Express 5 REST endpoints with AES-256 OAuth token encryption, integrated Cloudflare R2 storage with magic-byte validation, and designed the atomic MongoDB background job leasing scheduler.",
+      "outcomes": [
+        "Reduced cross-channel campaign preparation from 2 hours to under 5 minutes.",
+        "Eliminated cloud storage egress expenses using Cloudflare R2 S3-compatible storage.",
+        "Guaranteed zero duplicate posts during network interruptions via atomic job locking and delivery uncertainty flags."
+      ],
+      "relatedProjects": ["udhyog-saathi", "insightloop", "loadout", "parallel"]
+    },
+    {
+      "id": "loadout",
+      "slug": "loadout",
+      "title": "LOADOUT",
+      "subtitle": "AI-Assisted Web Performance Engineering Workbench",
+      "shortDescription": "A production-grade, local-first performance engineering workbench providing empirical measurement, statistical rigor (Mann-Whitney U), semantic correctness gates, and an offline BM25 RAG AI Copilot.",
+      "cardDescription": "Local-first performance benchmarking, semantic correctness verification, and AI-driven optimization.",
+      "category": "TOOLS",
+      "status": "Completed",
+      "featured": false,
+      "technologies": [
+        "TypeScript",
+        "React 19",
+        "Tailwind CSS",
+        "IndexedDB",
+        "Web Workers",
+        "BM25 RAG",
+        "Vitest"
+      ],
+      "liveUrl": "https://loadout-seven-virid.vercel.app/",
+      "githubUrl": "https://github.com/Error-Krishna/Loadout",
+      "accentColor": "#3b82f6",
+      "displayOrder": 5,
+      "published": true,
+      "role": "Frontend Architect & Systems Engineer",
+      "date": "2024 - Present",
+      "overview": "Web performance optimizations are frequently based on speculative micro-benchmarks that introduce silent semantic regressions or leak user datasets to external cloud APIs. LOADOUT is a local-first engineering workbench that combines multi-trial benchmark execution, non-parametric statistical hypothesis testing, automated data correctness gates, and a zero-data-egress AI Copilot.",
+      "problem": "Developers lack rigorous client-side benchmarking tools to evaluate virtualized lists, off-thread image processing, and high-throughput streams. Typical AI coding tools require sending proprietary raw data to commercial APIs and often recommend optimizations that silently drop or corrupt fields.",
+      "solution": "Built a browser-based performance laboratory featuring injectable monotonic clocks, Mann-Whitney U statistical rank-sum tests, automated 64-bit djb2 hex hash parity verification, and an offline BM25 mathematical RAG retrieval system operating across a zero-leakage Privacy Gateway.",
+      "features": [
+        "Empirical benchmark engine with warmup trials, cooldown pauses, monotonic clocks, and Mann-Whitney U hypothesis testing",
+        "Semantic correctness gate verifying schema, field parity, and 64-bit djb2 hex hashing before recognizing performance gains",
+        "Three specialized workload labs: Dataset (DOM virtualization vs Web Workers), Image (OffscreenCanvas bitmaps), and Stream (backpressure & rAF)",
+        "Zero-data-egress AI Copilot operating across a strict privacy gateway with offline heuristics and opt-in free Groq Llama 3.3",
+        "Promisified native IndexedDB persistence engine with transparent in-memory fallback for headless environments"
+      ],
+      "stats": [
+        {
+          "label": "Passed Tests",
+          "value": "238"
+        },
+        {
+          "label": "Data Egress",
+          "value": "0%"
+        },
+        {
+          "label": "Engine Version",
+          "value": "v2.1"
+        }
+      ],
+      "architecture": {
+        "description": "Local-first client application powered by Web Workers for off-thread processing, an IndexedDB state engine, and an in-memory BM25 retrieval pipeline with strict privacy boundary isolation.",
+        "components": [
+          "AppShell & Workload Labs",
+          "Benchmark Runner Engine",
+          "Semantic Correctness Gate",
+          "IndexedDB Persistence",
+          "Privacy Gateway & BM25 RAG"
+        ]
+      },
+      "myContribution": "Designed the end-to-end architecture: authored the deterministic benchmark engine, statistical analysis suite (Bessel's correction, NIST percentiles, Mann-Whitney U), semantic correctness verification gate, Web Worker streaming laboratories, and the in-memory BM25 RAG Copilot.",
+      "outcomes": [
+        "Achieved 100% test pass rate across 238 unit and integration test suites.",
+        "Guaranteed zero data leakage through an immutable client-side privacy sanitization boundary.",
+        "Eliminated false-positive performance claims by requiring automated correctness gates to pass before benchmarking."
+      ],
+      "relatedProjects": ["alpha-vault", "hotreload", "market-aura-4u", "insightloop"]
+    },
+    {
+      "id": "celebrare-gallery",
+      "slug": "celebrare-gallery",
+      "title": "Frame",
+      "subtitle": "Curated Photography Discovery & Gallery App",
+      "shortDescription": "A production-engineered, responsive photo gallery web application built with React 19, TypeScript, and Tailwind CSS v4, featuring live author filtering, useReducer favourite state, custom fetch hooks with AbortController, and defense-in-depth localStorage persistence.",
+      "cardDescription": "Editorial photo gallery with real-time search, responsive grid, and resilient state.",
+      "category": "FRONTEND & UI",
+      "status": "Completed",
+      "featured": false,
+      "technologies": ["React 19", "TypeScript", "Vite 8", "Tailwind CSS v4", "Picsum API"],
+      "liveUrl": "https://frame-celebrare-photo-gallery.vercel.app/",
+      "githubUrl": "https://github.com/Error-Krishna/Celebrare-Photo-Gallery",
+      "accentColor": "#6366f1",
+      "displayOrder": 6,
+      "published": true,
+      "role": "Frontend Engineer",
+      "date": "2024",
+      "overview": "Built for the Celebrare Frontend Internship Prescreening Assignment, Frame is an editorial photography showcase that prioritizes clean architectural separation of concerns, zero external UI libraries, resilient network cancellation, and automated pre-commit quality gates.",
+      "problem": "Image-heavy gallery applications often suffer from uncontrolled re-renders during search inputs, unhandled race conditions when rapid search queries overlap, broken image loading states, and brittle persistence.",
+      "solution": "Implemented custom useFetchPhotos hook with AbortController cancellation, useMemo author search filtering, an immutable useReducer for favourite items, defensive localStorage synchronization with JSON schema checks, and responsive masonry layouts with pure Tailwind CSS v4.",
+      "features": [
+        "Responsive editorial grid adapting seamlessly across mobile (1 col), tablet (2 cols), and desktop (4 cols)",
+        "Real-time case-insensitive author search with useMemo computation and zero redundant network calls",
+        "Robust favourites management with useReducer and defensive localStorage persistence",
+        "Custom fetch hook with AbortController cancellation to eliminate network race conditions",
+        "Automated DevOps quality gates with Husky pre-commit hooks, lint-staged, and GitHub Actions CI"
+      ],
+      "stats": [
+        {
+          "label": "External UI Libs",
+          "value": "0"
+        },
+        {
+          "label": "React Version",
+          "value": "19"
+        },
+        {
+          "label": "CI Quality",
+          "value": "Passing"
+        }
+      ],
+      "architecture": {
+        "description": "Modular React 19 architecture decoupling state reduction, custom network lifecycle hooks, and pure utility-first presentation.",
+        "components": [
+          "Gallery Grid View",
+          "useFetchPhotos Hook",
+          "Favourites Reducer",
+          "Defensive Storage Engine"
+        ]
+      },
+      "myContribution": "Engineered the complete frontend application: developed custom hooks with AbortController, structured the state management using useReducer and useMemo, designed responsive Tailwind CSS v4 layouts, and configured CI/CD automation.",
+      "outcomes": [
+        "Achieved zero external UI dependencies, keeping client bundle size minimal.",
+        "Prevented memory leaks and network race conditions using AbortController cleanup.",
+        "Established 100% automated CI verification on every push and pull request."
+      ],
+      "relatedProjects": ["lucid", "loadout", "alpha-vault", "parallel"]
+    },
+    {
       "id": "alpha-vault",
       "slug": "alpha-vault",
       "title": "AlphaVault",
@@ -693,7 +889,7 @@
       "liveUrl": "",
       "githubUrl": "https://github.com/Error-Krishna/Alpha-vault-frontend",
       "accentColor": "#0369a1",
-      "displayOrder": 4,
+      "displayOrder": 7,
       "published": true,
       "role": "Frontend Architect & Engineer",
       "date": "2026",
@@ -761,7 +957,7 @@
       "liveUrl": "",
       "githubUrl": "https://github.com/Error-Krishna/Parallel",
       "accentColor": "#4338ca",
-      "displayOrder": 5,
+      "displayOrder": 8,
       "published": true,
       "role": "Full-Stack Engineer",
       "date": "2024 - 2026",
@@ -829,7 +1025,7 @@
       "liveUrl": "",
       "githubUrl": "https://github.com/Error-Krishna/mern-starter-pack",
       "accentColor": "#047857",
-      "displayOrder": 6,
+      "displayOrder": 9,
       "published": true,
       "role": "Full-Stack Engineer & Architect",
       "date": "2026",
@@ -889,7 +1085,7 @@
       "githubUrl": "https://github.com/Error-Krishna/hotreload",
       "demoUrl": "https://www.loom.com/share/773d4d8fdd1840128b92929643a08965",
       "accentColor": "#166534",
-      "displayOrder": 7,
+      "displayOrder": 10,
       "published": true,
       "role": "Systems Engineer",
       "date": "2024",
@@ -947,7 +1143,7 @@
       "liveUrl": "",
       "githubUrl": "https://github.com/Error-Krishna/Job-Automation-System",
       "accentColor": "#b45309",
-      "displayOrder": 8,
+      "displayOrder": 11,
       "published": true,
       "role": "Solo Developer",
       "date": "2026",
@@ -1006,7 +1202,7 @@
       "liveUrl": "https://personal-portfolio-whoami-1.onrender.com",
       "githubUrl": "https://github.com/Error-Krishna/Personal-Portfolio-WhoAmI-",
       "accentColor": "#7c2d12",
-      "displayOrder": 9,
+      "displayOrder": 12,
       "published": true,
       "role": "Designer & Developer",
       "date": "2024 - 2026",

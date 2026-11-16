@@ -168,8 +168,7 @@ export const ScrollPortraitTransition: React.FC<ScrollPortraitTransitionProps> =
   }
 
   // Smooth cubic easing
-  const easeInOutCubic = (t: number) =>
-    t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
   const eased = easeInOutCubic(progress);
 
@@ -252,7 +251,7 @@ export const ScrollPortraitTransition: React.FC<ScrollPortraitTransitionProps> =
         </div>
 
         {/* =====================================================================
-            BACK FACE (180°): Red-Lit About Me Portrait
+            BACK FACE (180°): About Me Portrait
            ===================================================================== */}
         <div
           style={{
@@ -261,14 +260,20 @@ export const ScrollPortraitTransition: React.FC<ScrollPortraitTransitionProps> =
             WebkitBackfaceVisibility: 'hidden',
             borderRadius: `${cardRadius}px`,
           }}
-          className="absolute inset-0 overflow-hidden bg-black border border-slate-900"
+          className="absolute inset-0 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-950 to-black border border-slate-800/90"
         >
-          {/* Red-Lit Portrait Photo */}
+          {/* Vignette lighting */}
+          <div className="absolute inset-0 bg-radial-gradient from-transparent via-black/25 to-black/85 z-10 pointer-events-none" />
+
+          {/* Portrait Photo */}
           <img
-            src={siteConfig.assets?.aboutPortrait || '/images/about-portrait-red.png'}
+            src={siteConfig.assets?.aboutPortrait || '/images/image-removebg-preview.png'}
             alt="Krishna Goyal - About Me"
-            className="w-full h-full object-cover object-center filter contrast-110"
+            className="w-full h-full object-cover object-top filter grayscale contrast-125"
           />
+
+          {/* Bottom vignette gradient */}
+          <div className="absolute bottom-0 inset-x-0 h-12 bg-gradient-to-t from-black/80 to-transparent z-10" />
 
           {/* Light occlusion overlay */}
           <div

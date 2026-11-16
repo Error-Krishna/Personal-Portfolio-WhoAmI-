@@ -158,15 +158,18 @@ describe('withProjectStatus Higher-Order Component & Status Badges', () => {
       (p) => p.slug === 'personal-finance-tracker' || p.id === 'personal-finance-tracker'
     );
     expect(pft).toBeUndefined();
-    expect(published.length).toBe(9);
+    expect(published.length).toBe(12);
   });
 
-  it('9. confirms remaining 9 projects are present and correctly ordered', () => {
+  it('9. confirms all 12 projects are present and correctly ordered', () => {
     const published = getPublishedProjects();
     expect(published.map((p) => p.slug)).toEqual([
       'udhyog-saathi',
       'insightloop',
       'lucid',
+      'market-aura-4u',
+      'loadout',
+      'celebrare-gallery',
       'alpha-vault',
       'parallel',
       'mern-starter',

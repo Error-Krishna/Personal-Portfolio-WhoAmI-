@@ -4,7 +4,7 @@
 **Application:** Krishna Goyal Personal Portfolio & Engineering Showcase  
 **Repository Architecture:** Turborepo pnpm Monorepo  
 **Packages:** `@portfolio/web` (React/Vite), `@portfolio/api` (Express), `@portfolio/contracts` (TypeScript/Zod)  
-**Status:** **READY TO DEPLOY**  
+**Status:** **READY TO DEPLOY**
 
 ---
 
@@ -13,7 +13,9 @@
 This monorepo supports two proven deployment architectures. Both preserve 100% of the existing frontend animations, Dynamic Island, Navigation Dial, case study tabs, responsive styling, and contact form workflows.
 
 ### Primary Recommended Architecture: Option A (Unified Single Vercel Project)
+
 Deploy the frontend static bundle and the serverless Express API handler together inside a single Vercel project.
+
 - **Frontend:** Built by Vite into `apps/web/dist`, served globally via Vercel’s Edge Network CDN.
 - **Backend API:** Adapted via `api/index.ts` to run as an auto-scaling Node.js Serverless Function handling all `/api/v1/*` requests.
 - **Why this fits best:**
@@ -23,7 +25,9 @@ Deploy the frontend static bundle and the serverless Express API handler togethe
   4. **Cost Efficiency:** Operates completely within Vercel's free hobby tier.
 
 ### Supported Alternative Architecture: Option C (Decoupled Vercel + Dedicated Host)
+
 Deploy the frontend on Vercel Edge CDN and host the Express API on a persistent container platform (Render, Railway, Fly.io, or VPS).
+
 - **Frontend:** Hosted on Vercel (`apps/web/dist`).
 - **Backend API:** Runs as a persistent Node.js process (`pnpm --filter @portfolio/api start` executing `node dist/server.js`) on Render or Railway.
 - **Why choose this alternative:**
@@ -123,16 +127,16 @@ pnpm --filter @portfolio/api start
 
 When creating a new project in the [Vercel Dashboard](https://vercel.com/new):
 
-| Setting | Exact Value to Enter | Notes / Rationale |
-| :--- | :--- | :--- |
-| **Framework Preset** | `Vite` | Configures Vercel's caching and asset optimization for Vite |
-| **Root Directory** | `./` (leave default repository root) | Allows Vercel to access monorepo packages (`@portfolio/contracts`) |
-| **Install Command** | `pnpm install` | Uses pnpm to resolve monorepo workspaces and lockfile |
-| **Build Command** | `pnpm turbo run build` | Turborepo builds contracts, API, and web in dependency order |
-| **Output Directory** | `apps/web/dist` | Points to Vite’s generated production bundle directory |
-| **Node.js Version** | `20.x` or `22.x` | Set under Settings > General > Node.js Version |
+| Setting              | Exact Value to Enter                 | Notes / Rationale                                                  |
+| :------------------- | :----------------------------------- | :----------------------------------------------------------------- |
+| **Framework Preset** | `Vite`                               | Configures Vercel's caching and asset optimization for Vite        |
+| **Root Directory**   | `./` (leave default repository root) | Allows Vercel to access monorepo packages (`@portfolio/contracts`) |
+| **Install Command**  | `pnpm install`                       | Uses pnpm to resolve monorepo workspaces and lockfile              |
+| **Build Command**    | `pnpm turbo run build`               | Turborepo builds contracts, API, and web in dependency order       |
+| **Output Directory** | `apps/web/dist`                      | Points to Vite’s generated production bundle directory             |
+| **Node.js Version**  | `20.x` or `22.x`                     | Set under Settings > General > Node.js Version                     |
 
-*Note: Because [`vercel.json`](file:///Users/krishnagoyal/Development/personal%20projects/krishna_portfolio/vercel.json) is present in the repository root, Vercel will automatically prefill these build and output directory settings.*
+_Note: Because [`vercel.json`](file:///Users/krishnagoyal/Development/personal%20projects/krishna_portfolio/vercel.json) is present in the repository root, Vercel will automatically prefill these build and output directory settings._
 
 ---
 
@@ -140,19 +144,19 @@ When creating a new project in the [Vercel Dashboard](https://vercel.com/new):
 
 Configure these in the Vercel Dashboard under **Project Settings > Environment Variables**:
 
-| Variable | Used By | Required? | Public or Secret? | Description & Value |
-| :--- | :--- | :--- | :--- | :--- |
-| `NODE_ENV` | API Runtime | Optional | Secret | Set to `production`. Disables verbose debug stack traces in error envelopes. |
-| `API_PREFIX` | API Runtime | Optional | Secret | Set to `/api/v1` (default in code). |
-| `CORS_ORIGIN` | API Runtime | Recommended | Secret | Production domain(s). Set to `https://krishnagoyal.com,https://your-project.vercel.app`. Automatically permits Vercel preview domains. |
-| `MONGODB_URI` | API Runtime | Optional | Secret | MongoDB Atlas connection string (e.g., `mongodb+srv://user:pass@cluster.mongodb.net/portfolio?retryWrites=true&w=majority`). If omitted, API operates in offline mode without crashing. |
-| `VITE_API_BASE_URL` | Frontend Build | Optional | **Public** | **Option A (Vercel Serverless):** Leave unset or set to `/api/v1`.<br>**Option C (External Host):** Set to your backend URL (e.g. `https://api.yourdomain.com/api/v1`). |
-| `RATE_LIMIT_WINDOW_MS` | API Runtime | Optional | Secret | Window duration in ms (default: `900000` = 15 minutes). |
-| `RATE_LIMIT_MAX_REQUESTS` | API Runtime | Optional | Secret | Maximum requests per IP window (default: `100`). |
-| `LOG_LEVEL` | API Runtime | Optional | Secret | Set to `info` for production. |
-| `RESEND_API_KEY` | API Runtime | **Required for Email** | Secret | Resend API key (`re_...`) from resend.com for dispatching contact inquiries. |
-| `CONTACT_EMAIL_TO` | API Runtime | Optional | Secret | Destination inbox (default: `iamkrishnagoyal@gmail.com`). |
-| `CONTACT_EMAIL_FROM` | API Runtime | Optional | Secret | Sender address (e.g. `Krishna Goyal Portfolio <onboarding@resend.dev>` or your verified domain). |
+| Variable                  | Used By        | Required?              | Public or Secret? | Description & Value                                                                                                                                                                     |
+| :------------------------ | :------------- | :--------------------- | :---------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `NODE_ENV`                | API Runtime    | Optional               | Secret            | Set to `production`. Disables verbose debug stack traces in error envelopes.                                                                                                            |
+| `API_PREFIX`              | API Runtime    | Optional               | Secret            | Set to `/api/v1` (default in code).                                                                                                                                                     |
+| `CORS_ORIGIN`             | API Runtime    | Recommended            | Secret            | Production domain(s). Set to `https://krishnagoyal.com,https://your-project.vercel.app`. Automatically permits Vercel preview domains.                                                  |
+| `MONGODB_URI`             | API Runtime    | Optional               | Secret            | MongoDB Atlas connection string (e.g., `mongodb+srv://user:pass@cluster.mongodb.net/portfolio?retryWrites=true&w=majority`). If omitted, API operates in offline mode without crashing. |
+| `VITE_API_BASE_URL`       | Frontend Build | Optional               | **Public**        | **Option A (Vercel Serverless):** Leave unset or set to `/api/v1`.<br>**Option C (External Host):** Set to your backend URL (e.g. `https://api.yourdomain.com/api/v1`).                 |
+| `RATE_LIMIT_WINDOW_MS`    | API Runtime    | Optional               | Secret            | Window duration in ms (default: `900000` = 15 minutes).                                                                                                                                 |
+| `RATE_LIMIT_MAX_REQUESTS` | API Runtime    | Optional               | Secret            | Maximum requests per IP window (default: `100`).                                                                                                                                        |
+| `LOG_LEVEL`               | API Runtime    | Optional               | Secret            | Set to `info` for production.                                                                                                                                                           |
+| `RESEND_API_KEY`          | API Runtime    | **Required for Email** | Secret            | Resend API key (`re_...`) from resend.com for dispatching contact inquiries.                                                                                                            |
+| `CONTACT_EMAIL_TO`        | API Runtime    | Optional               | Secret            | Destination inbox (default: `iamkrishnagoyal@gmail.com`).                                                                                                                               |
+| `CONTACT_EMAIL_FROM`      | API Runtime    | Optional               | Secret            | Sender address (e.g. `Krishna Goyal Portfolio <onboarding@resend.dev>` or your verified domain).                                                                                        |
 
 > **CRITICAL SECURITY RULE:** Variables prefixed with `VITE_` are compiled directly into the client-side JavaScript bundle sent to every visitor's browser. **NEVER** prefix database credentials, email API keys, or private tokens with `VITE_`.
 
@@ -161,6 +165,7 @@ Configure these in the Vercel Dashboard under **Project Settings > Environment V
 ## G. Backend and API Deployment Instructions
 
 ### For Option A: Vercel Serverless Function (Unified Deployment)
+
 1. Ensure [`api/index.ts`](file:///Users/krishnagoyal/Development/personal%20projects/krishna_portfolio/api/index.ts) is committed in the repository root.
 2. In Vercel Project Settings > Environment Variables, add `NODE_ENV=production` and optionally `MONGODB_URI`.
 3. Deploy to Vercel.
@@ -177,7 +182,9 @@ Configure these in the Vercel Dashboard under **Project Settings > Environment V
    ```
 
 ### For Option C: Deploying API to Render / Railway (Decoupled Mode)
+
 If hosting the backend as a standalone persistent service:
+
 1. Create a **Web Service** on Render or Railway connecting the same GitHub repository.
 2. Settings:
    - **Root Directory:** `.`
@@ -197,6 +204,7 @@ If hosting the backend as a standalone persistent service:
 ## H. Database & External Service Setup
 
 ### MongoDB Atlas Setup (Optional but Recommended for Inquiry Storage)
+
 1. Create a free M0 cluster on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 2. Under **Network Access**, add `0.0.0.0/0` (Allow Access from Anywhere) because Vercel Serverless Functions and cloud hosts utilize dynamic outbound IP addresses.
 3. Under **Database Access**, create a database user with `readWrite` permissions.
@@ -212,14 +220,17 @@ If hosting the backend as a standalone persistent service:
 ## I. SPA Routing and Direct URL Access
 
 ### How Direct Navigation Works on Vercel
+
 Vite builds a Single Page Application with client-side routing managed by React Router v7.
 
 When a visitor navigates directly to:
+
 - `https://yourdomain.com/work/udhyog-saathi`
 - `https://yourdomain.com/project/insightloop`
 - `https://yourdomain.com/resume`
 
 Vercel inspects [`vercel.json`](file:///Users/krishnagoyal/Development/personal%20projects/krishna_portfolio/vercel.json):
+
 ```json
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
@@ -241,7 +252,8 @@ Vercel inspects [`vercel.json`](file:///Users/krishnagoyal/Development/personal%
 ```
 
 ### Routing Precedence Order Verified:
-1. **Static Files Take First Precedence:** Files physically present in `apps/web/dist` (e.g. `/assets/index-CRJ3k8hI.js`, `/images/about-portrait-red.png`, `/resume/krishna-goyal-resume.pdf`) are served immediately with high-speed CDN cache headers.
+
+1. **Static Files Take First Precedence:** Files physically present in `apps/web/dist` (e.g. `/assets/index-CRJ3k8hI.js`, `/images/image-removebg-preview.png`, `/resume/krishna-goyal-resume.pdf`) are served immediately with high-speed CDN cache headers.
 2. **API Requests Route to Serverless Function:** Requests matching `/api/*` are routed to `api/index.ts`.
 3. **All Other Requests Route to `index.html`:** React Router hydrates in the browser and mounts the appropriate view component (`ProjectDetailPage`, `ResumePage`, etc.) without throwing HTTP 404.
 
@@ -257,7 +269,7 @@ pnpm run build
 
 # 2. Verify static assets exist in build output
 ls -la apps/web/dist/resume/krishna-goyal-resume.pdf
-ls -la apps/web/dist/images/about-portrait-red.png
+ls -la apps/web/dist/images/image-removebg-preview.png
 
 # 3. Start preview server
 pnpm --filter @portfolio/web preview --port 4173
@@ -294,7 +306,7 @@ curl -I http://localhost:4173/resume/krishna-goyal-resume.pdf # Expected: HTTP 2
 
 - **Production Deployments:** Any commit pushed or merged into the `main` branch automatically triggers a production deployment to your primary domain (e.g. `krishnagoyal.com` or `krishna-portfolio.vercel.app`).
 - **Preview Deployments:** Any pull request or feature branch push generates a unique preview URL (e.g. `krishna-portfolio-git-feat-xyz.vercel.app`).
-  - *CORS Compatibility:* The API’s CORS middleware automatically recognizes and permits all `*.vercel.app` preview URLs.
+  - _CORS Compatibility:_ The API’s CORS middleware automatically recognizes and permits all `*.vercel.app` preview URLs.
 
 ---
 
@@ -321,23 +333,28 @@ When you are ready to attach a custom domain:
 ## N. Troubleshooting
 
 ### 1. Build Failure: `Cannot find module '@portfolio/contracts'`
+
 - **Cause:** Turborepo build order not followed or contracts package not compiled before web.
 - **Fix:** Ensure Build Command is `pnpm turbo run build` (which honors `dependsOn: ["^build"]` in `turbo.json`), not plain `vite build`.
 
 ### 2. Route Refresh Returns 404
+
 - **Cause:** Vercel rewrite rule missing.
 - **Fix:** Verify `vercel.json` exists at the repository root and contains the `/(.*) -> /index.html` rewrite.
 
 ### 3. Contact Form Submission Fails with Network / CORS Error
+
 - **Cause:** Backend CORS origin does not include the frontend domain.
 - **Fix:** In backend environment variables, verify `CORS_ORIGIN` includes your production URL. If using Option A (same-origin Vercel function), ensure `VITE_API_BASE_URL` is empty or set to `/api/v1` so requests use the same origin.
 - **Fallback Verification:** Even if the network drops or backend is offline, the contact interface displays an alert with a prefilled `SEND VIA EMAIL APP` button.
 
 ### 4. Missing Static Assets (Images / PDF Resume)
+
 - **Cause:** Assets placed in `src/` instead of `public/`, or case-sensitive filename mismatch on Linux builders.
-- **Fix:** Verify files exist in `apps/web/public/` (`/images/about-portrait-red.png`, `/resume/krishna-goyal-resume.pdf`). Vite automatically copies `public/` into `dist/`.
+- **Fix:** Verify files exist in `apps/web/public/` (`/images/image-removebg-preview.png`, `/resume/krishna-goyal-resume.pdf`). Vite automatically copies `public/` into `dist/`.
 
 ### 5. Serverless Function Timeout
+
 - **Cause:** Serverless lambda trying to connect to an unreachable MongoDB host with infinite timeout.
 - **Fix:** The codebase configures `serverSelectionTimeoutMS: 5000` and catches timeouts gracefully so the function responds within standard serverless budget.
 

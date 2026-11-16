@@ -286,7 +286,7 @@ describe('Mobile End-to-End QA Test Suite', () => {
   describe('Phase 6: Route Navigation Matrix', () => {
     it('renders all published project detail pages properly', () => {
       const publishedProjects = siteConfig.projects.filter((p) => p.published !== false);
-      expect(publishedProjects.length).toBe(9);
+      expect(publishedProjects.length).toBe(12);
 
       publishedProjects.forEach((project, idx) => {
         const { unmount } = render(

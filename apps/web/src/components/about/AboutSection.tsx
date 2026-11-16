@@ -86,15 +86,21 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ hideStaticPortrait =
             ) : (
               <div
                 id="about-portrait-slot"
-                className="relative w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[390px] xl:max-w-[400px] aspect-[266/307] rounded-[20px] lg:rounded-[22px] overflow-hidden bg-black shadow-2xl border border-slate-900 group"
+                className="relative w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[390px] xl:max-w-[400px] aspect-[266/307] rounded-[20px] lg:rounded-[22px] overflow-hidden bg-gradient-to-b from-slate-900 via-slate-950 to-black shadow-2xl border border-slate-900 group"
               >
-                {/* Red-Lit Portrait Photo */}
+                {/* Vignette lighting */}
+                <div className="absolute inset-0 bg-radial-gradient from-transparent via-black/25 to-black/85 z-10 pointer-events-none" />
+
+                {/* Portrait Photo */}
                 <img
                   id="about-portrait-image"
-                  src={siteConfig.assets?.aboutPortrait || '/images/about-portrait-red.png'}
+                  src={siteConfig.assets?.aboutPortrait || '/images/image-removebg-preview.png'}
                   alt="Krishna Goyal"
-                  className="w-full h-full object-cover object-center filter contrast-110"
+                  className="w-full h-full object-cover object-top filter grayscale contrast-125"
                 />
+
+                {/* Bottom vignette gradient */}
+                <div className="absolute bottom-0 inset-x-0 h-12 bg-gradient-to-t from-black/80 to-transparent z-10" />
               </div>
             )}
           </div>

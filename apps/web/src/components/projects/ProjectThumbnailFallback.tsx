@@ -16,6 +16,100 @@ export const ProjectThumbnailFallback: React.FC<ProjectThumbnailFallbackProps> =
   className = '',
 }) => {
   switch (id) {
+    case 'market-aura-4u':
+      return (
+        <div
+          className={`w-full h-full bg-[#041218] p-2.5 sm:p-3 flex flex-col justify-between font-mono select-none overflow-hidden text-cyan-300 ${className}`}
+        >
+          <div className="flex items-center justify-between pb-1.5 border-b border-cyan-500/20">
+            <div className="flex items-center gap-1.5">
+              <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+              <span className="text-[9px] font-bold tracking-wider text-cyan-200">
+                MARKET AURA 4U
+              </span>
+            </div>
+            <span className="text-[8px] text-cyan-500">AI STUDIO</span>
+          </div>
+          <div className="grid grid-cols-2 gap-1.5 my-auto">
+            <div className="p-1.5 rounded bg-cyan-950/40 border border-cyan-500/30">
+              <div className="text-[7px] text-cyan-400/70">CHANNELS</div>
+              <div className="text-[9px] font-bold text-white">META · X · LI</div>
+            </div>
+            <div className="p-1.5 rounded bg-cyan-950/40 border border-cyan-500/30">
+              <div className="text-[7px] text-cyan-400/70">STORAGE</div>
+              <div className="text-[9px] font-bold text-cyan-300">CLOUDFLARE R2</div>
+            </div>
+          </div>
+          <div className="text-[8px] text-cyan-400/60 pt-1 border-t border-cyan-500/20 flex items-center justify-between">
+            <span>ML SCORER</span>
+            <span className="text-cyan-300">QUEUE ACTIVE</span>
+          </div>
+        </div>
+      );
+
+    case 'loadout':
+      return (
+        <div
+          className={`w-full h-full bg-[#080d1a] p-2.5 sm:p-3 flex flex-col justify-between font-mono select-none overflow-hidden text-blue-300 ${className}`}
+        >
+          <div className="flex items-center justify-between pb-1.5 border-b border-blue-500/20">
+            <div className="flex items-center gap-1.5">
+              <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+              <span className="text-[9px] font-bold tracking-wider text-blue-200">
+                LOADOUT v2.1
+              </span>
+            </div>
+            <span className="text-[8px] text-blue-400">LOCAL-FIRST</span>
+          </div>
+          <div className="grid grid-cols-2 gap-1.5 my-auto">
+            <div className="p-1.5 rounded bg-blue-950/40 border border-blue-500/30">
+              <div className="text-[7px] text-blue-400/70">STATISTICS</div>
+              <div className="text-[9px] font-bold text-emerald-400">MANN-WHITNEY U</div>
+            </div>
+            <div className="p-1.5 rounded bg-blue-950/40 border border-blue-500/30">
+              <div className="text-[7px] text-blue-400/70">CORRECTNESS</div>
+              <div className="text-[9px] font-bold text-blue-200">100% PARITY</div>
+            </div>
+          </div>
+          <div className="text-[8px] text-blue-400/60 pt-1 border-t border-blue-500/20 flex items-center justify-between">
+            <span>BM25 RAG COPILOT</span>
+            <span className="text-emerald-400">238 TESTS PASS</span>
+          </div>
+        </div>
+      );
+
+    case 'celebrare-gallery':
+      return (
+        <div
+          className={`w-full h-full bg-[#0d0d1a] p-2.5 sm:p-3 flex flex-col justify-between font-mono select-none overflow-hidden text-indigo-300 ${className}`}
+        >
+          <div className="flex items-center justify-between pb-1.5 border-b border-indigo-500/20">
+            <div className="flex items-center gap-1.5">
+              <div className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+              <span className="text-[9px] font-bold tracking-wider text-indigo-200">
+                FRAME GALLERY
+              </span>
+            </div>
+            <span className="text-[8px] text-indigo-400">PICSUM API</span>
+          </div>
+          <div className="grid grid-cols-3 gap-1 my-auto">
+            <div className="h-9 rounded bg-indigo-950/60 border border-indigo-500/30 flex items-center justify-center text-[7px] text-indigo-300">
+              IMG 01
+            </div>
+            <div className="h-9 rounded bg-indigo-950/60 border border-indigo-500/30 flex items-center justify-center text-[7px] text-indigo-300">
+              IMG 02
+            </div>
+            <div className="h-9 rounded bg-indigo-950/60 border border-indigo-500/30 flex items-center justify-center text-[7px] text-pink-400">
+              ♥ SAVED
+            </div>
+          </div>
+          <div className="text-[8px] text-indigo-400/60 pt-1 border-t border-indigo-500/20 flex items-center justify-between">
+            <span>USEREDUCER</span>
+            <span className="text-indigo-300">REACT 19</span>
+          </div>
+        </div>
+      );
+
     case 'lucid':
       return (
         <div

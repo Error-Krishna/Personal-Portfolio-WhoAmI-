@@ -61,10 +61,10 @@ In the `"assets"` section:
 ```json
 "assets": {
   "heroPortrait": "/images/image-removebg-preview.png",
-  "aboutPortrait": "/images/about-portrait-red.png",
-  "contactPortrait": "/images/about-portrait-red.png",
+  "aboutPortrait": "/images/image-removebg-preview.png",
+  "contactPortrait": "/images/image-removebg-preview.png",
   "resume": "/resume/krishna-goyal-resume.pdf",
-  "ogImage": "/images/about-portrait-red.png"
+  "ogImage": "/images/image-removebg-preview.png"
 }
 ```
 

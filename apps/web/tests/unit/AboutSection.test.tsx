@@ -35,12 +35,12 @@ describe('AboutSection Component', () => {
     expect(screen.getByText(/IDEAS → PRODUCTS → IMPACT/i)).toBeInTheDocument();
   });
 
-  it('renders center portrait card slot with red-lit portrait image', () => {
+  it('renders center portrait card slot with portrait image', () => {
     render(<AboutSection />);
 
     const portraitImg = screen.getByAltText('Krishna Goyal');
     expect(portraitImg).toBeInTheDocument();
-    expect(portraitImg).toHaveAttribute('src', '/images/about-portrait-red.png');
+    expect(portraitImg).toHaveAttribute('src', '/images/image-removebg-preview.png');
   });
 
   it('renders short statement and all 6 skill tags', () => {

@@ -149,7 +149,13 @@ export const SkillsSection: React.FC = () => {
     if (towerStack.length === 0) {
       setTowerStack([
         { id: 'dock-init', name: 'Docker', category: 'TOOLS', colorIndex: 3, addedAt: 0 },
-        { id: 'pg-init', name: 'PostgreSQL & SQL', category: 'DATABASES', colorIndex: 2, addedAt: 0 },
+        {
+          id: 'pg-init',
+          name: 'PostgreSQL & SQL',
+          category: 'DATABASES',
+          colorIndex: 2,
+          addedAt: 0,
+        },
         { id: 'node-init', name: 'Node.js', category: 'BACKEND', colorIndex: 1, addedAt: 0 },
         { id: 'react-init', name: 'React.js', category: 'FRONTEND', colorIndex: 0, addedAt: 0 },
       ]);
@@ -190,12 +196,15 @@ export const SkillsSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 mb-12 lg:mb-16 items-end">
           <div className="lg:col-span-7">
             <h2 className="font-hero font-black [font-weight:1000] text-[9vw] sm:text-[7vw] lg:text-[5vw] xl:text-[68px] text-slate-950 uppercase tracking-[-0.035em] leading-[0.92]">
-              BUILD YOUR<br />TECH STACK.
+              BUILD YOUR
+              <br />
+              TECH STACK.
             </h2>
           </div>
           <div className="lg:col-span-5 pb-1">
             <p className="font-sans text-base sm:text-lg text-slate-700 leading-relaxed max-w-xl">
-              Explore my tech ecosystem and see how different technologies come together to build real products.
+              Explore my tech ecosystem and see how different technologies come together to build
+              real products.
             </p>
           </div>
         </div>
@@ -303,14 +312,41 @@ export const SkillsSection: React.FC = () => {
 
                   {/* Red drop shadow filter */}
                   <filter id="crimson-glow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="0" dy="2" stdDeviation="4" floodColor="#dc2626" floodOpacity="0.3" />
+                    <feDropShadow
+                      dx="0"
+                      dy="2"
+                      stdDeviation="4"
+                      floodColor="#dc2626"
+                      floodOpacity="0.3"
+                    />
                   </filter>
                 </defs>
 
                 {/* Concentric Orbital Guide Rings */}
-                <circle cx="300" cy="300" r="130" fill="none" stroke="rgba(0,0,0,0.06)" strokeDasharray="3 4" />
-                <circle cx="300" cy="300" r="200" fill="none" stroke="rgba(0,0,0,0.06)" strokeDasharray="3 4" />
-                <circle cx="300" cy="300" r="265" fill="none" stroke="rgba(0,0,0,0.06)" strokeDasharray="3 4" />
+                <circle
+                  cx="300"
+                  cy="300"
+                  r="130"
+                  fill="none"
+                  stroke="rgba(0,0,0,0.06)"
+                  strokeDasharray="3 4"
+                />
+                <circle
+                  cx="300"
+                  cy="300"
+                  r="200"
+                  fill="none"
+                  stroke="rgba(0,0,0,0.06)"
+                  strokeDasharray="3 4"
+                />
+                <circle
+                  cx="300"
+                  cy="300"
+                  r="265"
+                  fill="none"
+                  stroke="rgba(0,0,0,0.06)"
+                  strokeDasharray="3 4"
+                />
 
                 {/* Inter-technology connections */}
                 {INTER_CONNECTIONS.map(([src, dst], idx) => {
@@ -353,8 +389,8 @@ export const SkillsSection: React.FC = () => {
                         isNodeSelected
                           ? '#dc2626'
                           : isNodeCategoryActive
-                          ? 'rgba(220, 38, 38, 0.4)'
-                          : 'rgba(0,0,0,0.07)'
+                            ? 'rgba(220, 38, 38, 0.4)'
+                            : 'rgba(0,0,0,0.07)'
                       }
                       strokeWidth={isNodeSelected ? 2 : isNodeCategoryActive ? 1.25 : 0.75}
                       className="transition-all duration-300"
@@ -365,12 +401,28 @@ export const SkillsSection: React.FC = () => {
                 {/* Center Portrait Element */}
                 <g className="cursor-pointer" onClick={() => setSelectedTech('React.js')}>
                   {/* Outer delicate ring */}
-                  <circle cx="300" cy="300" r="54" fill="none" stroke="#dc2626" strokeWidth="1" strokeDasharray="2 3" opacity="0.6" />
+                  <circle
+                    cx="300"
+                    cy="300"
+                    r="54"
+                    fill="none"
+                    stroke="#dc2626"
+                    strokeWidth="1"
+                    strokeDasharray="2 3"
+                    opacity="0.6"
+                  />
                   {/* Outer solid border */}
-                  <circle cx="300" cy="300" r="46" fill="#f8f6f0" stroke="#dc2626" strokeWidth="2.5" />
+                  <circle
+                    cx="300"
+                    cy="300"
+                    r="46"
+                    fill="#f8f6f0"
+                    stroke="#dc2626"
+                    strokeWidth="2.5"
+                  />
                   {/* Actual Photo */}
                   <image
-                    href={siteConfig.assets?.aboutPortrait || '/images/about-portrait-red.png'}
+                    href={siteConfig.assets?.aboutPortrait || '/images/image-removebg-preview.png'}
                     x="256"
                     y="256"
                     width="88"
@@ -379,7 +431,14 @@ export const SkillsSection: React.FC = () => {
                     preserveAspectRatio="xMidYMid slice"
                   />
                   {/* Small red live indicator dot */}
-                  <circle cx="334" cy="266" r="4.5" fill="#dc2626" stroke="#ffffff" strokeWidth="1.5" />
+                  <circle
+                    cx="334"
+                    cy="266"
+                    r="4.5"
+                    fill="#dc2626"
+                    stroke="#ffffff"
+                    strokeWidth="1.5"
+                  />
                 </g>
 
                 {/* Technology Nodes */}
@@ -429,7 +488,9 @@ export const SkillsSection: React.FC = () => {
                         cy={node.y}
                         r={radius}
                         fill="#ffffff"
-                        stroke={isHighlighted ? '#dc2626' : isCategoryActive ? '#0f1117' : '#cbd5e1'}
+                        stroke={
+                          isHighlighted ? '#dc2626' : isCategoryActive ? '#0f1117' : '#cbd5e1'
+                        }
                         strokeWidth={isHighlighted ? 2.5 : 1.5}
                         filter="drop-shadow(0px 2px 4px rgba(0,0,0,0.06))"
                         className="transition-all duration-200 group-hover:scale-110"
@@ -454,10 +515,21 @@ export const SkillsSection: React.FC = () => {
                         y={node.y + radius + 13}
                         textAnchor="middle"
                         className={`font-sans text-[10px] font-bold tracking-tight select-none pointer-events-none ${
-                          isHighlighted ? 'fill-red-600' : isCategoryActive ? 'fill-slate-900' : 'fill-slate-500'
+                          isHighlighted
+                            ? 'fill-red-600'
+                            : isCategoryActive
+                              ? 'fill-slate-900'
+                              : 'fill-slate-500'
                         }`}
                       >
-                        {node.name.replace(' (ES6+)', '').replace(' & CSS3', '').replace(' / DRF', '').replace(' & SQL', '').replace(' & GitHub', '').replace(' & CLI', '').replace(' (Golang)', '')}
+                        {node.name
+                          .replace(' (ES6+)', '')
+                          .replace(' & CSS3', '')
+                          .replace(' / DRF', '')
+                          .replace(' & SQL', '')
+                          .replace(' & GitHub', '')
+                          .replace(' & CLI', '')
+                          .replace(' (Golang)', '')}
                       </text>
                     </g>
                   );
@@ -528,7 +600,8 @@ export const SkillsSection: React.FC = () => {
               </span>
             </div>
             <p className="font-sans text-sm text-slate-600">
-              From idea to deployment, I combine the right technologies to build scalable and reliable products.
+              From idea to deployment, I combine the right technologies to build scalable and
+              reliable products.
             </p>
           </div>
 
