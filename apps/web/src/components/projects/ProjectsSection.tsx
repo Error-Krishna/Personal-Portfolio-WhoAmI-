@@ -51,7 +51,7 @@ export const ProjectsSection: React.FC = () => {
   return (
     <section
       id="projects"
-      className="relative w-full bg-[#f8f6f0] text-[#0f1117] selection:bg-black selection:text-white overflow-hidden bg-grain px-6 sm:px-10 lg:px-12 py-20 lg:py-28 border-t border-slate-300/80"
+      className="relative w-full bg-[#f8f6f0] text-[#0f1117] dark:bg-[#0b0d13] dark:text-slate-100 selection:bg-black selection:text-white overflow-hidden bg-grain px-6 sm:px-10 lg:px-12 py-20 lg:py-28 border-t border-slate-300/80 dark:border-slate-800 transition-colors duration-300"
     >
       {/* Anchor for 'work' navigation target */}
       <div id="work" className="absolute -top-12 left-0 pointer-events-none" />
@@ -62,19 +62,19 @@ export const ProjectsSection: React.FC = () => {
           <div className="max-w-3xl">
             {/* Small Label */}
             <div className="flex items-center gap-3 mb-4">
-              <span className="font-mono text-[11px] sm:text-xs tracking-[0.25em] font-bold text-slate-800 uppercase">
+              <span className="font-mono text-[11px] sm:text-xs tracking-[0.25em] font-bold text-slate-800 dark:text-slate-300 uppercase">
                 PROJECTS / 01
               </span>
-              <div className="w-12 sm:w-16 h-[1px] bg-slate-400/80" />
+              <div className="w-12 sm:w-16 h-[1px] bg-slate-400/80 dark:bg-slate-700" />
             </div>
 
             {/* Main Headline */}
-            <h2 className="font-hero font-black [font-weight:1000] text-[9vw] sm:text-[7vw] lg:text-[5vw] xl:text-[68px] text-slate-950 uppercase tracking-[-0.035em] leading-[0.92] mb-4">
+            <h2 className="font-hero font-black [font-weight:1000] text-[9vw] sm:text-[7vw] lg:text-[5vw] xl:text-[68px] text-slate-950 dark:text-white uppercase tracking-[-0.035em] leading-[0.92] mb-4">
               THINGS I'VE BUILT<span className="text-red-600">.</span>
             </h2>
 
             {/* Supporting Text */}
-            <p className="font-sans text-base sm:text-lg text-slate-700 leading-relaxed max-w-2xl">
+            <p className="font-sans text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed max-w-2xl">
               Different problems. Different products. One engineering mindset.
             </p>
           </div>
@@ -90,8 +90,8 @@ export const ProjectsSection: React.FC = () => {
                   onClick={() => setActiveCategory(cat)}
                   className={`font-mono text-xs tracking-wider px-3.5 py-1.5 rounded-full border transition-all duration-200 uppercase font-semibold cursor-pointer ${
                     isActive
-                      ? 'bg-slate-950 text-white border-slate-950 shadow-sm'
-                      : 'bg-white/80 text-slate-700 border-slate-300/90 hover:border-slate-900 hover:text-slate-950'
+                      ? 'bg-slate-950 text-white border-slate-950 shadow-sm dark:bg-white dark:text-slate-950 dark:border-white'
+                      : 'bg-white/80 text-slate-700 border-slate-300/90 hover:border-slate-900 hover:text-slate-950 dark:bg-[#131620] dark:text-slate-300 dark:border-slate-800 dark:hover:border-slate-600 dark:hover:text-white'
                   }`}
                 >
                   {cat}
@@ -106,14 +106,14 @@ export const ProjectsSection: React.FC = () => {
           <div>
             {/* 1. TOP TIER: FEATURED HIGHLIGHTS (Top 3 Projects) */}
             <div className="mb-6">
-              <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-300/60">
+              <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-300/60 dark:border-slate-800">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-red-600" />
-                  <span className="font-mono text-xs font-bold uppercase tracking-wider text-slate-900">
+                  <span className="font-mono text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-100">
                     FEATURED WORK
                   </span>
                 </div>
-                <span className="font-mono text-[11px] text-slate-500 uppercase tracking-wider">
+                <span className="font-mono text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                   03 SELECTED CASE STUDIES
                 </span>
               </div>
@@ -131,14 +131,14 @@ export const ProjectsSection: React.FC = () => {
             </div>
 
             {/* 2. COMPACT POST-WORK CONVERSION CTA */}
-            <div className="my-8 sm:my-10 p-5 sm:p-6 rounded-2xl bg-white border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="my-8 sm:my-10 p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#131620] border border-slate-200/90 dark:border-slate-800 shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className="w-2.5 h-2.5 rounded-full bg-red-600 shrink-0 animate-pulse" />
                 <div>
-                  <h4 className="font-sans font-bold text-base sm:text-lg text-slate-950 tracking-tight">
+                  <h4 className="font-sans font-bold text-base sm:text-lg text-slate-950 dark:text-white tracking-tight">
                     Have a project like this?
                   </h4>
-                  <p className="font-sans text-xs sm:text-sm text-slate-600 mt-0.5">
+                  <p className="font-sans text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-0.5">
                     Whether you need an MVP, full-stack application, or custom backend, let's talk.
                   </p>
                 </div>
@@ -147,24 +147,24 @@ export const ProjectsSection: React.FC = () => {
               <a
                 href="#contact"
                 onClick={scrollToContact}
-                className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-white bg-slate-950 hover:bg-slate-800 px-5 py-3 rounded-xl transition-all shadow-md active:scale-[0.98] shrink-0 cursor-pointer group"
+                className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-white dark:text-slate-950 bg-slate-950 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-200 px-5 py-3 rounded-xl transition-all shadow-md active:scale-[0.98] shrink-0 cursor-pointer group"
               >
                 <span>LET’S DISCUSS IT</span>
-                <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform" />
+                <ArrowRight className="w-4 h-4 text-white dark:text-slate-950 group-hover:translate-x-0.5 transition-transform" />
               </a>
             </div>
 
             {/* 3. SECONDARY TIER: REMAINING PUBLISHED PROJECTS */}
             {remainingProjects.length > 0 && (
               <div className="mt-8">
-                <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-300/60">
+                <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-300/60 dark:border-slate-800">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-slate-400" />
-                    <span className="font-mono text-xs font-bold uppercase tracking-wider text-slate-800">
+                    <span className="font-mono text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
                       ADDITIONAL SYSTEMS & UTILITIES
                     </span>
                   </div>
-                  <span className="font-mono text-[11px] text-slate-500 uppercase tracking-wider">
+                  <span className="font-mono text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     {remainingProjects.length} MORE PROJECTS
                   </span>
                 </div>
@@ -197,28 +197,28 @@ export const ProjectsSection: React.FC = () => {
                 ))}
               </div>
             ) : (
-              <div className="py-16 text-center bg-white rounded-2xl border border-slate-200/80">
-                <p className="font-mono text-sm text-slate-500 uppercase tracking-wider">
+              <div className="py-16 text-center bg-white dark:bg-[#131620] rounded-2xl border border-slate-200/80 dark:border-slate-800">
+                <p className="font-mono text-sm text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                   No projects found in this category.
                 </p>
               </div>
             )}
 
             {/* Post-Work CTA also accessible when filtered */}
-            <div className="mt-8 p-5 sm:p-6 rounded-2xl bg-white border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="mt-8 p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#131620] border border-slate-200/90 dark:border-slate-800 shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className="w-2.5 h-2.5 rounded-full bg-red-600 shrink-0 animate-pulse" />
-                <h4 className="font-sans font-bold text-base text-slate-950 tracking-tight">
+                <h4 className="font-sans font-bold text-base text-slate-950 dark:text-white tracking-tight">
                   Have a project like this?
                 </h4>
               </div>
               <a
                 href="#contact"
                 onClick={scrollToContact}
-                className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-white bg-slate-950 hover:bg-slate-800 px-5 py-2.5 rounded-xl transition-all shadow-md active:scale-[0.98] shrink-0 cursor-pointer group"
+                className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-white dark:text-slate-950 bg-slate-950 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-200 px-5 py-2.5 rounded-xl transition-all shadow-md active:scale-[0.98] shrink-0 cursor-pointer group"
               >
                 <span>LET’S DISCUSS IT</span>
-                <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform" />
+                <ArrowRight className="w-4 h-4 text-white dark:text-slate-950 group-hover:translate-x-0.5 transition-transform" />
               </a>
             </div>
           </div>

@@ -25,7 +25,7 @@ export const HandwrittenAnnotations: React.FC = () => {
         data-testid="annotation-dynamic-island-desktop"
         className="hidden sm:flex items-center gap-1.5 absolute top-[85px] right-[calc(51%+154px)] -rotate-1 pointer-events-none select-none"
       >
-        <span className="font-handwriting text-[20px] lg:text-[30px] text-slate-700/90 font-medium tracking-wide whitespace-nowrap animate-annotation-label">
+        <span className="font-handwriting text-[20px] lg:text-[30px] text-slate-700/90 dark:text-slate-300/90 font-medium tracking-wide whitespace-nowrap animate-annotation-label">
           Touch me
         </span>
 
@@ -35,7 +35,7 @@ export const HandwrittenAnnotations: React.FC = () => {
           height="22"
           viewBox="0 0 44 22"
           fill="none"
-          className="overflow-visible shrink-0 text-slate-600/80 -ml-0.5 mt-0.5"
+          className="overflow-visible shrink-0 text-slate-600/80 dark:text-slate-400/80 -ml-0.5 mt-0.5"
           aria-hidden="true"
         >
           <path
@@ -66,7 +66,7 @@ export const HandwrittenAnnotations: React.FC = () => {
         data-testid="annotation-dynamic-island-mobile"
         className="flex sm:hidden items-center gap-1 absolute top-[58px] left-4 xs:left-6 -rotate-1 pointer-events-none select-none"
       >
-        <span className="font-handwriting text-[16px] text-slate-700/90 font-medium tracking-wide whitespace-nowrap animate-annotation-label">
+        <span className="font-handwriting text-[16px] text-slate-700/90 dark:text-slate-300/90 font-medium tracking-wide whitespace-nowrap animate-annotation-label">
           Touch me
         </span>
 
@@ -76,7 +76,7 @@ export const HandwrittenAnnotations: React.FC = () => {
           height="20"
           viewBox="0 0 32 20"
           fill="none"
-          className="overflow-visible shrink-0 text-slate-600/80 ml-0.5 -mt-1"
+          className="overflow-visible shrink-0 text-slate-600/80 dark:text-slate-400/80 ml-0.5 -mt-1"
           aria-hidden="true"
         >
           <path
@@ -108,7 +108,7 @@ export const HandwrittenAnnotations: React.FC = () => {
         data-testid="annotation-nav-dial"
         className="hidden md:flex items-center gap-1.5 absolute top-[40px] right-[112px] lg:right-[118px] rotate-1 pointer-events-none select-none"
       >
-        <span className="font-handwriting text-[20px] lg:text-[22px] text-slate-700/90 font-medium tracking-wide whitespace-nowrap animate-annotation-label">
+        <span className="font-handwriting text-[20px] lg:text-[22px] text-slate-700/90 dark:text-slate-300/90 font-medium tracking-wide whitespace-nowrap animate-annotation-label">
           Take a look around
         </span>
 
@@ -118,7 +118,7 @@ export const HandwrittenAnnotations: React.FC = () => {
           height="24"
           viewBox="0 0 46 24"
           fill="none"
-          className="overflow-visible shrink-0 text-slate-600/80 ml-1 -mt-0.5"
+          className="overflow-visible shrink-0 text-slate-600/80 dark:text-slate-400/80 ml-1 -mt-0.5"
           aria-hidden="true"
         >
           <path

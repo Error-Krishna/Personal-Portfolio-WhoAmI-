@@ -36,7 +36,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
   return (
     <section
       id="hero"
-      className="relative w-full min-h-[100dvh] lg:h-screen lg:min-h-[700px] max-h-[1200px] bg-[#f8f6f0] text-[#0f1117] selection:bg-black selection:text-white overflow-hidden bg-grain select-none"
+      className="relative w-full min-h-[100dvh] lg:h-screen lg:min-h-[700px] max-h-[1200px] bg-[#f8f6f0] text-[#0f1117] dark:bg-[#0b0d13] dark:text-slate-100 selection:bg-black selection:text-white overflow-hidden bg-grain select-none transition-colors duration-300"
     >
       {/* Editorial Handwritten Discovery Annotations for Dynamic Island & Navigation Dial */}
       <HandwrittenAnnotations />
@@ -51,14 +51,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
           <svg
             viewBox="0 0 24 24"
             fill="currentColor"
-            className="w-8 h-8 text-slate-950"
+            className="w-8 h-8 text-slate-950 dark:text-slate-100"
           >
             <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
           </svg>
         </div>
 
         {/* Three-line label: BUILD / LEARN / CREATE */}
-        <div className="font-mono text-[11px] sm:text-xs tracking-[0.22em] text-slate-800 font-bold uppercase leading-[21px] select-none">
+        <div className="font-mono text-[11px] sm:text-xs tracking-[0.22em] text-slate-800 dark:text-slate-300 font-bold uppercase leading-[21px] select-none">
           <div>BUILD</div>
           <div>LEARN</div>
           <div>CREATE</div>
@@ -95,7 +95,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
           ========================================================================= */}
       <div className="hidden lg:flex items-start absolute left-[60%] top-[14%] z-20 h-[108px]">
         {/* Thin vertical divider line */}
-        <div className="w-[1px] h-[108px] bg-slate-400/80 mr-6 shrink-0" />
+        <div className="w-[1px] h-[108px] bg-slate-400/80 dark:bg-slate-700 mr-6 shrink-0" />
 
         {/* 4 vertically stacked lines */}
         <div className="flex flex-col justify-between h-[108px] font-mono text-xs tracking-wider">
@@ -103,7 +103,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
             <div
               key={side.label}
               className={`flex items-center gap-2.5 ${
-                side.isPrimary ? 'text-slate-950 font-bold' : 'text-slate-400 font-medium'
+                side.isPrimary ? 'text-slate-950 dark:text-white font-bold' : 'text-slate-400 dark:text-slate-500 font-medium'
               }`}
             >
               {side.isPrimary ? (
@@ -129,18 +129,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
 
         {/* ROW 2: "SOFTWARE" */}
         <div className="absolute left-[16%] top-[28.5%] z-10">
-          <span className="font-hero font-black [font-weight:1000] text-[9.8vw] xl:text-[150px] text-slate-950 uppercase tracking-[-0.035em] leading-[0.88] block">
+          <span className="font-hero font-black [font-weight:1000] text-[9.8vw] xl:text-[150px] text-slate-950 dark:text-white uppercase tracking-[-0.035em] leading-[0.88] block">
             SOFTWARE
           </span>
         </div>
 
         {/* ROW 3: "ENGINEER|" */}
         <div className="absolute left-[20%] top-[43%] z-10 flex items-baseline">
-          <span className="font-hero font-black [font-weight:1000] text-[9.3vw] xl:text-[142px] text-slate-950 uppercase tracking-[-0.035em] leading-[0.88] block">
+          <span className="font-hero font-black [font-weight:1000] text-[9.3vw] xl:text-[142px] text-slate-950 dark:text-white uppercase tracking-[-0.035em] leading-[0.88] block">
             ENGINEER
           </span>
           {/* Terminal caret indicator */}
-          <span className="inline-block w-[6px] xl:w-[8px] h-[0.72em] bg-slate-950 ml-3 align-baseline animate-caret" />
+          <span className="inline-block w-[6px] xl:w-[8px] h-[0.72em] bg-slate-950 dark:bg-slate-100 ml-3 align-baseline animate-caret" />
         </div>
       </div>
 
@@ -149,31 +149,31 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
         {/* Main Content Group */}
         <div className="flex flex-col items-center max-w-md mx-auto my-auto">
           {/* Main Headline */}
-          <h1 className="font-hero text-[13vw] sm:text-[10vw] text-slate-950 uppercase tracking-[-0.035em] leading-[0.9] select-none">
+          <h1 className="font-hero text-[13vw] sm:text-[10vw] text-slate-950 dark:text-white uppercase tracking-[-0.035em] leading-[0.9] select-none">
             <span className="block">I’M A</span>
             <span className="block">SOFTWARE</span>
             <span className="block">
               ENGINEER
-              <span className="inline-block w-[5px] h-[0.72em] bg-slate-950 ml-1.5 align-baseline animate-caret" />
+              <span className="inline-block w-[5px] h-[0.72em] bg-slate-950 dark:bg-slate-100 ml-1.5 align-baseline animate-caret" />
             </span>
           </h1>
 
           {/* Availability Badge */}
           {siteConfig.personal.availabilityLabel && (
-            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 mt-3 rounded-full bg-emerald-50 border border-emerald-200/80 font-mono text-[10px] tracking-wider uppercase font-bold text-emerald-800">
+            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 mt-3 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800/60 font-mono text-[10px] tracking-wider uppercase font-bold text-emerald-800 dark:text-emerald-300">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               <span>{siteConfig.personal.availabilityLabel}</span>
             </div>
           )}
 
           {/* Mobile positioning text */}
-          <p className="font-sans text-xs sm:text-sm text-slate-700 max-w-xs sm:max-w-sm mx-auto mt-2.5 leading-relaxed">
+          <p className="font-sans text-xs sm:text-sm text-slate-700 dark:text-slate-300 max-w-xs sm:max-w-sm mx-auto mt-2.5 leading-relaxed">
             Product-minded frontend and full-stack engineering for founders, businesses, and teams.
           </p>
 
           {/* Mobile fine print roles */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mt-3 font-mono text-[10.5px] sm:text-[11px] text-slate-600">
-            <span className="text-purple-600 font-bold">● Software Engineer</span>
+          <div className="flex flex-wrap items-center justify-center gap-2 mt-3 font-mono text-[10.5px] sm:text-[11px] text-slate-600 dark:text-slate-400">
+            <span className="text-purple-600 dark:text-purple-400 font-bold">● Software Engineer</span>
             <span>&middot;</span>
             <span>Full-Stack Developer</span>
             <span>&middot;</span>
@@ -188,17 +188,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
             <button
               type="button"
               onClick={() => scrollTo('projects')}
-              className="w-full sm:w-[220px] h-[50px] sm:h-[54px] rounded-[13px] bg-slate-950 hover:bg-slate-800 text-white font-sans font-bold text-xs tracking-[0.14em] uppercase transition-all shadow-lg flex items-center justify-between px-6 active:scale-[0.98] group cursor-pointer"
+              className="w-full sm:w-[220px] h-[50px] sm:h-[54px] rounded-[13px] bg-slate-950 hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200 text-white font-sans font-bold text-xs tracking-[0.14em] uppercase transition-all shadow-lg flex items-center justify-between px-6 active:scale-[0.98] group cursor-pointer"
             >
               <span>VIEW MY WORK</span>
-              <ArrowUpRight className="w-4 h-4 text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              <ArrowUpRight className="w-4 h-4 text-white dark:text-slate-950 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </button>
 
             {/* Secondary CTA Button */}
             <button
               type="button"
               onClick={() => scrollTo('contact')}
-              className="w-full sm:w-[220px] h-[50px] sm:h-[54px] rounded-[13px] border border-slate-950/25 hover:border-slate-950 bg-white/80 hover:bg-white text-slate-950 font-sans font-bold text-xs tracking-[0.14em] uppercase transition-all flex items-center justify-center active:scale-[0.98] cursor-pointer shadow-xs"
+              className="w-full sm:w-[220px] h-[50px] sm:h-[54px] rounded-[13px] border border-slate-950/25 hover:border-slate-950 dark:border-white/20 dark:hover:border-white/40 bg-white/80 hover:bg-white dark:bg-white/10 dark:hover:bg-white/20 text-slate-950 dark:text-white font-sans font-bold text-xs tracking-[0.14em] uppercase transition-all flex items-center justify-center active:scale-[0.98] cursor-pointer shadow-xs"
             >
               <span>LET’S CONNECT</span>
             </button>
@@ -206,7 +206,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
         </div>
 
         {/* Mobile Minimal Bottom Footer */}
-        <div className="w-full pt-4 font-mono text-[10px] text-slate-600 tracking-wider uppercase flex items-center justify-between px-2 border-t border-slate-200/80">
+        <div className="w-full pt-4 font-mono text-[10px] text-slate-600 dark:text-slate-400 tracking-wider uppercase flex items-center justify-between px-2 border-t border-slate-200/80 dark:border-slate-800">
           <span>&copy; 2026</span>
           <span className="truncate max-w-[220px]">BASED IN INDIA · OPEN TO OPPORTUNITIES</span>
         </div>
@@ -229,14 +229,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
       <div className="hidden lg:flex absolute left-[7.88%] top-[61%] z-30 flex-col items-start gap-3.5 max-w-[340px] sm:max-w-[380px]">
         {/* Availability Badge (Desktop) */}
         {siteConfig.personal.availabilityLabel && (
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/80 font-mono text-[10px] tracking-wider uppercase font-bold text-emerald-800">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800/60 font-mono text-[10px] tracking-wider uppercase font-bold text-emerald-800 dark:text-emerald-300">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             <span>{siteConfig.personal.availabilityLabel}</span>
           </div>
         )}
 
         {/* Client-Focused Positioning Copy (Desktop) */}
-        <p className="font-sans text-xs sm:text-[13px] text-slate-700 leading-relaxed font-medium">
+        <p className="font-sans text-xs sm:text-[13px] text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
           Product-minded frontend and full-stack engineering for founders, businesses, and teams.
         </p>
 
@@ -246,17 +246,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
           <button
             type="button"
             onClick={() => scrollTo('projects')}
-            className="w-[248px] h-[55px] rounded-[13px] bg-slate-950 hover:bg-slate-800 text-white font-sans font-bold text-xs tracking-[0.14em] uppercase transition-all shadow-xl hover:shadow-2xl flex items-center justify-between px-6 active:scale-[0.98] group cursor-pointer"
+            className="w-[248px] h-[55px] rounded-[13px] bg-slate-950 hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200 text-white font-sans font-bold text-xs tracking-[0.14em] uppercase transition-all shadow-xl hover:shadow-2xl flex items-center justify-between px-6 active:scale-[0.98] group cursor-pointer"
           >
             <span>VIEW MY WORK</span>
-            <ArrowUpRight className="w-4 h-4 text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            <ArrowUpRight className="w-4 h-4 text-white dark:text-slate-950 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </button>
 
           {/* Secondary CTA Button */}
           <button
             type="button"
             onClick={() => scrollTo('contact')}
-            className="w-[248px] h-[55px] rounded-[13px] border border-slate-950/25 hover:border-slate-950 bg-white/70 hover:bg-white text-slate-950 font-sans font-bold text-xs tracking-[0.14em] uppercase transition-all flex items-center justify-center active:scale-[0.98] cursor-pointer shadow-xs"
+            className="w-[248px] h-[55px] rounded-[13px] border border-slate-950/25 hover:border-slate-950 dark:border-white/20 dark:hover:border-white/40 bg-white/70 hover:bg-white dark:bg-white/10 dark:hover:bg-white/20 text-slate-950 dark:text-white font-sans font-bold text-xs tracking-[0.14em] uppercase transition-all flex items-center justify-center active:scale-[0.98] cursor-pointer shadow-xs"
           >
             <span>LET’S CONNECT</span>
           </button>
@@ -300,15 +300,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
         {/* Vertical Timeline Indicator Line with 5 dots */}
         <div className="relative w-3 flex flex-col items-center justify-between h-[131px] py-1">
           {/* Vertical connecting line */}
-          <div className="absolute top-2 bottom-2 w-[1px] bg-slate-300 left-1/2 -translate-x-1/2 z-0" />
+          <div className="absolute top-2 bottom-2 w-[1px] bg-slate-300 dark:bg-slate-700 left-1/2 -translate-x-1/2 z-0" />
 
           {SECTION_DIAL.map((item) => {
             const isActive = activeDial === item.label;
             return (
               <div
                 key={item.label}
-                className={`relative z-10 w-2.5 h-2.5 rounded-full border border-slate-900 transition-all ${
-                  isActive ? 'bg-slate-950 scale-125' : 'bg-[#f8f6f0]'
+                className={`relative z-10 w-2.5 h-2.5 rounded-full border border-slate-900 dark:border-slate-400 transition-all ${
+                  isActive ? 'bg-slate-950 dark:bg-white scale-125' : 'bg-[#f8f6f0] dark:bg-[#0b0d13]'
                 }`}
               />
             );
@@ -327,7 +327,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
                   scrollTo(item.id);
                 }}
                 className={`text-left transition-colors ${
-                  isActive ? 'text-slate-950 font-bold' : 'text-slate-500 hover:text-slate-800'
+                  isActive ? 'text-slate-950 dark:text-white font-bold' : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
                 }`}
               >
                 {item.label}
@@ -347,15 +347,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
           ========================================================================= */}
       <footer className="hidden lg:flex absolute inset-x-0 top-[93.55%] z-20 items-center justify-between px-[3.58%] pointer-events-none select-none">
         {/* Left Copyright */}
-        <div className="font-mono text-xs text-slate-800 font-semibold tracking-wider whitespace-nowrap">
+        <div className="font-mono text-xs text-slate-800 dark:text-slate-400 font-semibold tracking-wider whitespace-nowrap">
           &copy; 2026
         </div>
 
         {/* Horizontal Divider Line */}
-        <div className="hidden sm:block flex-1 mx-8 h-[1px] bg-slate-300 max-w-[58.27%]" />
+        <div className="hidden sm:block flex-1 mx-8 h-[1px] bg-slate-300 dark:bg-slate-700 max-w-[58.27%]" />
 
         {/* Right Footer Text */}
-        <div className="font-mono text-[11px] text-slate-800 tracking-[0.22em] uppercase font-semibold whitespace-nowrap">
+        <div className="font-mono text-[11px] text-slate-800 dark:text-slate-400 tracking-[0.22em] uppercase font-semibold whitespace-nowrap">
           BASED IN INDIA &middot; OPEN TO OPPORTUNITIES
         </div>
 
@@ -364,7 +364,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
           <svg
             viewBox="0 0 24 24"
             fill="currentColor"
-            className="w-5 h-5 text-slate-950"
+            className="w-5 h-5 text-slate-950 dark:text-slate-100"
           >
             <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
           </svg>

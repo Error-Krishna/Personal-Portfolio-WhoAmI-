@@ -59,7 +59,7 @@ export const ServicePricingCard: React.FC<ServicePricingCardProps> = ({
       className={`relative rounded-3xl transition-all duration-300 flex flex-col justify-between p-5 sm:p-6 select-none ${
         isFeatured
           ? 'bg-[#0d1117] text-white shadow-2xl border-2 border-red-600/90 xl:-translate-y-2'
-          : 'bg-white text-slate-950 border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-slate-950/40 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]'
+          : 'bg-white dark:bg-[#131620] text-slate-950 dark:text-white border border-slate-200/90 dark:border-slate-800 shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.25)] hover:border-slate-950/40 dark:hover:border-slate-600 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]'
       }`}
     >
       {/* Featured Floating Badge */}
@@ -76,7 +76,7 @@ export const ServicePricingCard: React.FC<ServicePricingCardProps> = ({
           <div className="flex items-center gap-2">
             <span
               className={`font-mono text-xs font-bold ${
-                isFeatured ? 'text-white' : 'text-slate-900'
+                isFeatured ? 'text-white' : 'text-slate-900 dark:text-slate-100'
               }`}
             >
               {formattedIndex}
@@ -85,14 +85,14 @@ export const ServicePricingCard: React.FC<ServicePricingCardProps> = ({
               className={`font-mono text-[10px] tracking-wider uppercase font-semibold px-2 py-0.5 rounded-full ${
                 isFeatured
                   ? 'bg-white/10 text-slate-300 border border-white/15'
-                  : 'bg-slate-100 text-slate-700 border border-slate-200'
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700'
               }`}
             >
               {service.category}
             </span>
           </div>
           <ArrowUpRight
-            className={`w-3.5 h-3.5 shrink-0 ${isFeatured ? 'text-slate-400' : 'text-slate-500'}`}
+            className={`w-3.5 h-3.5 shrink-0 ${isFeatured ? 'text-slate-400' : 'text-slate-500 dark:text-slate-400'}`}
           />
         </div>
 
@@ -101,7 +101,7 @@ export const ServicePricingCard: React.FC<ServicePricingCardProps> = ({
           className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 ${
             isFeatured
               ? 'bg-white/10 text-red-500 border border-white/10'
-              : 'bg-red-50 text-red-600 border border-red-100'
+              : 'bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 border border-red-100 dark:border-red-900/40'
           }`}
         >
           {renderServiceIcon()}
@@ -110,7 +110,7 @@ export const ServicePricingCard: React.FC<ServicePricingCardProps> = ({
         {/* Title */}
         <h3
           className={`font-sans font-bold text-lg sm:text-xl tracking-tight leading-snug mb-1.5 ${
-            isFeatured ? 'text-white' : 'text-slate-950'
+            isFeatured ? 'text-white' : 'text-slate-950 dark:text-white'
           }`}
         >
           {service.title}
@@ -119,7 +119,7 @@ export const ServicePricingCard: React.FC<ServicePricingCardProps> = ({
         {/* Short Description */}
         <p
           className={`font-sans text-xs sm:text-[13px] leading-relaxed mb-4 ${
-            isFeatured ? 'text-slate-300' : 'text-slate-600'
+            isFeatured ? 'text-slate-300' : 'text-slate-600 dark:text-slate-300'
           }`}
         >
           {service.shortDescription}
@@ -129,7 +129,7 @@ export const ServicePricingCard: React.FC<ServicePricingCardProps> = ({
         <div className="mb-4">
           <span
             className={`font-mono text-[10px] tracking-wider uppercase font-bold block mb-2 ${
-              isFeatured ? 'text-slate-400' : 'text-slate-900'
+              isFeatured ? 'text-slate-400' : 'text-slate-900 dark:text-slate-300'
             }`}
           >
             KEY DELIVERABLES
@@ -143,10 +143,10 @@ export const ServicePricingCard: React.FC<ServicePricingCardProps> = ({
                     <Check className="w-2 h-2 text-white stroke-[3]" />
                   </div>
                 ) : (
-                  <Check className="w-3 h-3 text-slate-900 shrink-0 mt-0.5" />
+                  <Check className="w-3 h-3 text-slate-900 dark:text-slate-100 shrink-0 mt-0.5" />
                 )}
                 <span
-                  className={`leading-snug ${isFeatured ? 'text-slate-200' : 'text-slate-700'}`}
+                  className={`leading-snug ${isFeatured ? 'text-slate-200' : 'text-slate-700 dark:text-slate-300'}`}
                 >
                   {pointer}
                 </span>
@@ -161,12 +161,12 @@ export const ServicePricingCard: React.FC<ServicePricingCardProps> = ({
         {/* Pricing Block */}
         <div
           className={`rounded-2xl p-3.5 sm:p-4 mb-3 border ${
-            isFeatured ? 'bg-white/[0.05] border-white/10' : 'bg-slate-50 border-slate-200/80'
+            isFeatured ? 'bg-white/[0.05] border-white/10' : 'bg-slate-50 dark:bg-slate-800/60 border-slate-200/80 dark:border-slate-700'
           }`}
         >
           <div
             className={`font-mono text-[10px] uppercase tracking-wider mb-0.5 font-semibold ${
-              isFeatured ? 'text-slate-400' : 'text-slate-500'
+              isFeatured ? 'text-slate-400' : 'text-slate-500 dark:text-slate-400'
             }`}
           >
             {service.startingPrice ? 'Starting at' : 'Custom scope'}
@@ -174,7 +174,7 @@ export const ServicePricingCard: React.FC<ServicePricingCardProps> = ({
 
           <div
             className={`font-sans font-black text-2xl sm:text-[26px] tracking-tight mb-2 ${
-              isFeatured ? 'text-white' : 'text-slate-950'
+              isFeatured ? 'text-white' : 'text-slate-950 dark:text-white'
             }`}
           >
             {service.startingPrice ? `$${service.startingPrice.toLocaleString()}` : "Let's discuss"}
@@ -183,7 +183,7 @@ export const ServicePricingCard: React.FC<ServicePricingCardProps> = ({
           {/* Timeline and Support Row */}
           <div
             className={`flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-mono pt-2 border-t ${
-              isFeatured ? 'border-white/10 text-slate-400' : 'border-slate-200 text-slate-600'
+              isFeatured ? 'border-white/10 text-slate-400' : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400'
             }`}
           >
             {service.estimatedDelivery && (
@@ -205,16 +205,16 @@ export const ServicePricingCard: React.FC<ServicePricingCardProps> = ({
         {service.bestFor && (
           <div
             className={`flex items-start gap-2 mb-3.5 text-xs font-mono ${
-              isFeatured ? 'text-slate-300' : 'text-slate-600'
+              isFeatured ? 'text-slate-300' : 'text-slate-600 dark:text-slate-300'
             }`}
           >
             <User
               className={`w-3.5 h-3.5 shrink-0 mt-0.5 ${
-                isFeatured ? 'text-slate-400' : 'text-slate-500'
+                isFeatured ? 'text-slate-400' : 'text-slate-500 dark:text-slate-400'
               }`}
             />
             <div className="leading-tight">
-              <span className="text-[9px] uppercase tracking-wider block font-bold text-slate-400 mb-0.5">
+              <span className="text-[9px] uppercase tracking-wider block font-bold text-slate-400 dark:text-slate-500 mb-0.5">
                 BEST FOR
               </span>
               <span className="leading-snug line-clamp-1">{service.bestFor}</span>
@@ -229,7 +229,7 @@ export const ServicePricingCard: React.FC<ServicePricingCardProps> = ({
           className={`w-full py-2.5 px-3.5 rounded-xl font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer ${
             isFeatured
               ? 'bg-red-600 hover:bg-red-700 text-white shadow-lg shadow-red-600/30'
-              : 'bg-slate-950 hover:bg-slate-800 text-white'
+              : 'bg-slate-950 hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200 text-white'
           }`}
         >
           <span>{service.ctaLabel}</span>

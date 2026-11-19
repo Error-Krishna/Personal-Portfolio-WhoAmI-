@@ -99,50 +99,50 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
   return (
     <section
       id="contact"
-      className="relative w-full bg-[#f8f6f0] text-[#0f1117] selection:bg-black selection:text-white overflow-hidden bg-grain px-6 sm:px-12 lg:px-16 py-20 lg:py-28 border-t border-slate-300/80"
+      className="relative w-full bg-[#f8f6f0] text-[#0f1117] dark:bg-[#0b0d13] dark:text-slate-100 selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black overflow-hidden bg-grain px-6 sm:px-12 lg:px-16 py-20 lg:py-28 border-t border-slate-300/80 dark:border-slate-800 transition-colors duration-300"
     >
       <div className="w-full max-w-[1536px] mx-auto">
         {/* Section Header */}
         <div className="flex items-center gap-4 mb-6">
-          <span className="font-mono text-[11px] sm:text-xs tracking-[0.25em] font-bold text-slate-800 uppercase">
+          <span className="font-mono text-[11px] sm:text-xs tracking-[0.25em] font-bold text-slate-800 dark:text-slate-300 uppercase">
             CONTACT
           </span>
-          <div className="w-16 sm:w-24 h-[1px] bg-slate-400/80" />
+          <div className="w-16 sm:w-24 h-[1px] bg-slate-400/80 dark:bg-slate-700" />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
           {/* Left Column: Direct info & social destinations */}
           <div className="lg:col-span-5 flex flex-col justify-between">
             <div>
-              <h2 className="font-hero font-black [font-weight:1000] text-[9vw] sm:text-[7vw] lg:text-[4.5vw] xl:text-[62px] text-slate-950 uppercase tracking-[-0.035em] leading-[0.92] mb-6">
+              <h2 className="font-hero font-black [font-weight:1000] text-[9vw] sm:text-[7vw] lg:text-[4.5vw] xl:text-[62px] text-slate-950 dark:text-white uppercase tracking-[-0.035em] leading-[0.92] mb-6">
                 HAVE AN IDEA?
                 <br />
                 <span className="text-red-600">LET'S BUILD IT.</span>
               </h2>
 
-              <p className="font-sans text-base sm:text-lg text-slate-700 leading-relaxed mb-8">
+              <p className="font-sans text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed mb-8">
                 {siteConfig.contact.subheading}
               </p>
 
               <div className="space-y-4 mb-8">
-                <div className="p-4 rounded-xl bg-white border border-slate-300/80">
-                  <div className="font-mono text-[10px] text-slate-400 uppercase tracking-wider mb-1">
+                <div className="p-4 rounded-xl bg-white dark:bg-[#131620] border border-slate-300/80 dark:border-slate-800 transition-colors">
+                  <div className="font-mono text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">
                     DIRECT EMAIL
                   </div>
                   <a
                     href={`mailto:${siteConfig.personal.email}`}
-                    className="font-sans font-bold text-base sm:text-lg text-slate-950 hover:text-red-600 transition-colors flex items-center gap-2"
+                    className="font-sans font-bold text-base sm:text-lg text-slate-950 dark:text-slate-100 hover:text-red-600 dark:hover:text-red-500 transition-colors flex items-center gap-2"
                   >
-                    <Mail className="w-4 h-4 text-slate-900" />
+                    <Mail className="w-4 h-4 text-slate-900 dark:text-slate-100" />
                     {siteConfig.personal.email}
                   </a>
                 </div>
 
-                <div className="p-4 rounded-xl bg-white border border-slate-300/80">
-                  <div className="font-mono text-[10px] text-slate-400 uppercase tracking-wider mb-1">
+                <div className="p-4 rounded-xl bg-white dark:bg-[#131620] border border-slate-300/80 dark:border-slate-800 transition-colors">
+                  <div className="font-mono text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">
                     TYPICAL RESPONSE TIME
                   </div>
-                  <div className="font-mono text-sm font-semibold text-slate-800">
+                  <div className="font-mono text-sm font-semibold text-slate-800 dark:text-slate-200">
                     {siteConfig.personal.responseTime} · {siteConfig.personal.location}
                   </div>
                 </div>
@@ -150,8 +150,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
             </div>
 
             {/* Social channels */}
-            <div className="pt-6 border-t border-slate-300/80">
-              <span className="font-mono text-xs uppercase tracking-wider text-slate-500 font-semibold block mb-3">
+            <div className="pt-6 border-t border-slate-300/80 dark:border-slate-800 transition-colors">
+              <span className="font-mono text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold block mb-3">
                 CONNECT ACROSS PLATFORMS
               </span>
               <div className="flex flex-wrap items-center gap-3">
@@ -160,7 +160,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
                     href={siteConfig.links.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-slate-300 text-slate-900 font-mono text-xs font-semibold hover:border-slate-950 transition-colors"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-[#131620] border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-200 font-mono text-xs font-semibold hover:border-slate-950 dark:hover:border-slate-600 transition-colors"
                   >
                     <Github className="w-4 h-4" />
                     GITHUB
@@ -172,7 +172,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
                     href={siteConfig.links.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-slate-300 text-slate-900 font-mono text-xs font-semibold hover:border-slate-950 transition-colors"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-[#131620] border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-200 font-mono text-xs font-semibold hover:border-slate-950 dark:hover:border-slate-600 transition-colors"
                   >
                     <Linkedin className="w-4 h-4" />
                     LINKEDIN
@@ -184,16 +184,16 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
 
           {/* Right Column: Interactive Inquiry Form */}
           <div className="lg:col-span-7">
-            <div className="bg-white rounded-2xl p-6 sm:p-10 border border-slate-300/90 shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
+            <div className="bg-white dark:bg-[#131620] rounded-2xl p-6 sm:p-10 border border-slate-300/90 dark:border-slate-800 shadow-[0_4px_24px_rgba(0,0,0,0.04)] transition-colors">
               {status === 'success' ? (
                 <div className="py-12 text-center flex flex-col items-center">
-                  <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-6">
+                  <div className="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-6">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h3 className="font-sans font-black text-2xl sm:text-3xl text-slate-950 mb-3 tracking-tight">
+                  <h3 className="font-sans font-black text-2xl sm:text-3xl text-slate-950 dark:text-white mb-3 tracking-tight">
                     Inquiry Received!
                   </h3>
-                  <p className="font-sans text-slate-600 max-w-md mx-auto mb-8 leading-relaxed">
+                  <p className="font-sans text-slate-600 dark:text-slate-400 max-w-md mx-auto mb-8 leading-relaxed">
                     {siteConfig.contact.successMessage}
                   </p>
                   <button
@@ -209,7 +209,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
                         message: '',
                       });
                     }}
-                    className="px-6 py-2.5 rounded-lg bg-slate-950 text-white font-mono text-xs font-bold uppercase tracking-wider hover:bg-slate-800 transition-colors"
+                    className="px-6 py-2.5 rounded-lg bg-slate-950 dark:bg-white text-white dark:text-slate-950 font-mono text-xs font-bold uppercase tracking-wider hover:bg-slate-800 dark:hover:bg-slate-200 transition-colors"
                   >
                     SEND ANOTHER MESSAGE
                   </button>
@@ -217,14 +217,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
               ) : (
                 <form onSubmit={handleSubmit} noValidate className="space-y-6">
                   {status === 'error' && (
-                    <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs sm:text-sm flex flex-col gap-3">
+                    <div className="p-4 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 text-amber-900 dark:text-amber-200 text-xs sm:text-sm flex flex-col gap-3">
                       <div className="flex items-start gap-2">
                         <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
                         <span>{errorMessage}</span>
                       </div>
                       <a
                         href={mailtoUrl}
-                        className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-slate-950 text-white font-mono text-xs font-bold uppercase tracking-wider hover:bg-slate-800 transition-colors"
+                        className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-slate-950 dark:bg-white text-white dark:text-slate-950 font-mono text-xs font-bold uppercase tracking-wider hover:bg-slate-800 dark:hover:bg-slate-200 transition-colors"
                       >
                         <Mail className="w-4 h-4" />
                         SEND VIA EMAIL APP
@@ -237,7 +237,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
                     <div>
                       <label
                         htmlFor="name"
-                        className="block font-mono text-[11px] font-bold uppercase tracking-wider text-slate-800 mb-1.5"
+                        className="block font-mono text-[11px] font-bold uppercase tracking-wider text-slate-800 dark:text-slate-300 mb-1.5"
                       >
                         YOUR NAME *
                       </label>
@@ -248,10 +248,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="e.g. Alex Morgan"
-                        className={`w-full px-4 py-3 rounded-lg border font-sans text-sm text-slate-950 bg-slate-50/50 focus:bg-white focus:outline-none transition-colors ${
+                        className={`w-full px-4 py-3 rounded-lg border font-sans text-sm text-slate-950 dark:text-white bg-slate-50/50 dark:bg-slate-900/60 focus:bg-white dark:focus:bg-slate-900 focus:outline-none transition-colors ${
                           errors.name
                             ? 'border-red-500 focus:border-red-600'
-                            : 'border-slate-300 focus:border-slate-950'
+                            : 'border-slate-300 dark:border-slate-700 focus:border-slate-950 dark:focus:border-slate-400'
                         }`}
                       />
                       {errors.name && (
@@ -265,7 +265,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
                     <div>
                       <label
                         htmlFor="email"
-                        className="block font-mono text-[11px] font-bold uppercase tracking-wider text-slate-800 mb-1.5"
+                        className="block font-mono text-[11px] font-bold uppercase tracking-wider text-slate-800 dark:text-slate-300 mb-1.5"
                       >
                         YOUR EMAIL *
                       </label>
@@ -276,10 +276,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="e.g. alex@company.com"
-                        className={`w-full px-4 py-3 rounded-lg border font-sans text-sm text-slate-950 bg-slate-50/50 focus:bg-white focus:outline-none transition-colors ${
+                        className={`w-full px-4 py-3 rounded-lg border font-sans text-sm text-slate-950 dark:text-white bg-slate-50/50 dark:bg-slate-900/60 focus:bg-white dark:focus:bg-slate-900 focus:outline-none transition-colors ${
                           errors.email
                             ? 'border-red-500 focus:border-red-600'
-                            : 'border-slate-300 focus:border-slate-950'
+                            : 'border-slate-300 dark:border-slate-700 focus:border-slate-950 dark:focus:border-slate-400'
                         }`}
                       />
                       {errors.email && (
@@ -295,7 +295,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
                     <div>
                       <label
                         htmlFor="service"
-                        className="block font-mono text-[11px] font-bold uppercase tracking-wider text-slate-800 mb-1.5"
+                        className="block font-mono text-[11px] font-bold uppercase tracking-wider text-slate-800 dark:text-slate-300 mb-1.5"
                       >
                         SERVICE / SCOPE *
                       </label>
@@ -303,10 +303,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
                         id="service"
                         value={formData.service}
                         onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                        className="w-full px-4 py-3 rounded-lg border border-slate-300 font-sans text-sm text-slate-950 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-slate-950 transition-colors"
+                        className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-700 font-sans text-sm text-slate-950 dark:text-white bg-slate-50/50 dark:bg-slate-900/60 focus:bg-white dark:focus:bg-slate-900 focus:outline-none focus:border-slate-950 dark:focus:border-slate-400 transition-colors"
                       >
                         {siteConfig.contact.projectTypes.map((type) => (
-                          <option key={type} value={type}>
+                          <option key={type} value={type} className="dark:bg-slate-900 dark:text-white">
                             {type}
                           </option>
                         ))}
@@ -317,7 +317,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
                     <div>
                       <label
                         htmlFor="budget"
-                        className="block font-mono text-[11px] font-bold uppercase tracking-wider text-slate-800 mb-1.5"
+                        className="block font-mono text-[11px] font-bold uppercase tracking-wider text-slate-800 dark:text-slate-300 mb-1.5"
                       >
                         APPROXIMATE BUDGET
                       </label>
@@ -325,10 +325,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
                         id="budget"
                         value={formData.budget}
                         onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                        className="w-full px-4 py-3 rounded-lg border border-slate-300 font-sans text-sm text-slate-950 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-slate-950 transition-colors"
+                        className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-700 font-sans text-sm text-slate-950 dark:text-white bg-slate-50/50 dark:bg-slate-900/60 focus:bg-white dark:focus:bg-slate-900 focus:outline-none focus:border-slate-950 dark:focus:border-slate-400 transition-colors"
                       >
                         {siteConfig.contact.budgetOptions.map((budget) => (
-                          <option key={budget} value={budget}>
+                          <option key={budget} value={budget} className="dark:bg-slate-900 dark:text-white">
                             {budget}
                           </option>
                         ))}
@@ -340,7 +340,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
                   <div>
                     <label
                       htmlFor="message"
-                      className="block font-mono text-[11px] font-bold uppercase tracking-wider text-slate-800 mb-1.5"
+                      className="block font-mono text-[11px] font-bold uppercase tracking-wider text-slate-800 dark:text-slate-300 mb-1.5"
                     >
                       PROJECT DESCRIPTION *
                     </label>
@@ -351,10 +351,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Share a brief overview of your product, goals, or the specific problem you want to solve..."
-                      className={`w-full px-4 py-3 rounded-lg border font-sans text-sm text-slate-950 bg-slate-50/50 focus:bg-white focus:outline-none transition-colors resize-y ${
+                      className={`w-full px-4 py-3 rounded-lg border font-sans text-sm text-slate-950 dark:text-white bg-slate-50/50 dark:bg-slate-900/60 focus:bg-white dark:focus:bg-slate-900 focus:outline-none transition-colors resize-y ${
                         errors.message
                           ? 'border-red-500 focus:border-red-600'
-                          : 'border-slate-300 focus:border-slate-950'
+                          : 'border-slate-300 dark:border-slate-700 focus:border-slate-950 dark:focus:border-slate-400'
                       }`}
                     />
                     {errors.message && (
@@ -369,7 +369,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
                     <button
                       type="submit"
                       disabled={status === 'loading'}
-                      className="w-full py-3.5 px-6 rounded-xl bg-slate-950 hover:bg-slate-800 text-white font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors disabled:opacity-50 cursor-pointer shadow-md"
+                      className="w-full py-3.5 px-6 rounded-xl bg-slate-950 dark:bg-white hover:bg-slate-800 dark:hover:bg-slate-200 text-white dark:text-slate-950 font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors disabled:opacity-50 cursor-pointer shadow-md"
                     >
                       {status === 'loading' ? (
                         <>

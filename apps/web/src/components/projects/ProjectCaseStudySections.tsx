@@ -92,7 +92,7 @@ export const ProjectCaseStudySections: React.FC<ProjectCaseStudySectionsProps> =
       <div
         role="tablist"
         aria-label="Project Case Study Sections"
-        className="flex items-center gap-6 sm:gap-10 border-b border-slate-300/80 pb-3 mb-10 overflow-x-auto no-scrollbar select-none"
+        className="flex items-center gap-6 sm:gap-10 border-b border-slate-300/80 dark:border-slate-800 pb-3 mb-10 overflow-x-auto no-scrollbar select-none transition-colors"
       >
         {availableTabs.map((tab, idx) => {
           const isActive = activeTab === tab.id;
@@ -109,11 +109,11 @@ export const ProjectCaseStudySections: React.FC<ProjectCaseStudySectionsProps> =
               onKeyDown={(e) => handleKeyDown(e, idx)}
               className={`relative flex items-center gap-2 font-mono text-xs uppercase tracking-wider py-1.5 transition-colors duration-200 whitespace-nowrap cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 rounded-sm ${
                 isActive
-                  ? 'text-red-600 font-bold'
-                  : 'text-slate-500 hover:text-slate-950 font-medium'
+                  ? 'text-red-600 dark:text-red-500 font-bold'
+                  : 'text-slate-500 hover:text-slate-950 dark:text-slate-400 dark:hover:text-white font-medium'
               }`}
             >
-              <span className={isActive ? 'text-red-600 font-bold' : 'text-slate-400'}>
+              <span className={isActive ? 'text-red-600 dark:text-red-500 font-bold' : 'text-slate-400 dark:text-slate-500'}>
                 {tab.number}
               </span>
               <span>{tab.label}</span>
@@ -146,7 +146,7 @@ export const ProjectCaseStudySections: React.FC<ProjectCaseStudySectionsProps> =
                 <span className="font-mono text-xs uppercase tracking-widest text-red-600 font-bold block mb-2">
                   01 · OVERVIEW
                 </span>
-                <h2 className="font-hero font-black text-2xl sm:text-3xl lg:text-4xl text-slate-950 uppercase tracking-tight max-w-3xl leading-[1.05]">
+                <h2 className="font-hero font-black text-2xl sm:text-3xl lg:text-4xl text-slate-950 dark:text-white uppercase tracking-tight max-w-3xl leading-[1.05]">
                   {project.subtitle
                     ? `${project.subtitle.toUpperCase()}.`
                     : `${project.title.toUpperCase()}.`}
@@ -156,24 +156,24 @@ export const ProjectCaseStudySections: React.FC<ProjectCaseStudySectionsProps> =
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
                 {/* Narrative & Challenges */}
                 <div className="lg:col-span-8 space-y-6">
-                  <p className="font-sans text-base sm:text-lg text-slate-700 leading-relaxed">
+                  <p className="font-sans text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
                     {project.overview}
                   </p>
 
                   {(project.problem || project.solution) && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                       {project.problem && (
-                        <div className="p-5 rounded-xl bg-white border border-slate-200 shadow-sm">
+                        <div className="p-5 rounded-xl bg-white dark:bg-[#131620] border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
                           <span className="font-mono text-[10px] uppercase tracking-wider font-bold text-red-600 block mb-1.5">
                             THE CHALLENGE
                           </span>
-                          <p className="font-sans text-sm text-slate-700 leading-relaxed">
+                          <p className="font-sans text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
                             {project.problem}
                           </p>
                         </div>
                       )}
                       {project.solution && (
-                        <div className="p-5 rounded-xl bg-slate-950 text-white border border-slate-800 shadow-sm">
+                        <div className="p-5 rounded-xl bg-slate-950 dark:bg-[#1a1f2e] text-white border border-slate-800 shadow-sm transition-colors">
                           <span className="font-mono text-[10px] uppercase tracking-wider font-bold text-emerald-400 block mb-1.5">
                             THE SOLUTION
                           </span>
@@ -192,12 +192,12 @@ export const ProjectCaseStudySections: React.FC<ProjectCaseStudySectionsProps> =
                     {project.stats.map((stat, idx) => (
                       <div
                         key={idx}
-                        className="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm"
+                        className="p-5 rounded-2xl bg-white dark:bg-[#131620] border border-slate-200/90 dark:border-slate-800 shadow-sm transition-colors"
                       >
-                        <div className="font-hero font-black text-2xl sm:text-3xl text-slate-950 tracking-tight mb-1">
+                        <div className="font-hero font-black text-2xl sm:text-3xl text-slate-950 dark:text-white tracking-tight mb-1">
                           {stat.value}
                         </div>
-                        <div className="font-mono text-xs uppercase tracking-wider text-slate-500 font-semibold">
+                        <div className="font-mono text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">
                           {stat.label}
                         </div>
                       </div>
@@ -215,7 +215,7 @@ export const ProjectCaseStudySections: React.FC<ProjectCaseStudySectionsProps> =
                 <span className="font-mono text-xs uppercase tracking-widest text-red-600 font-bold block mb-2">
                   02 · FEATURES
                 </span>
-                <h2 className="font-hero font-black text-2xl sm:text-3xl text-slate-950 uppercase tracking-tight">
+                <h2 className="font-hero font-black text-2xl sm:text-3xl text-slate-950 dark:text-white uppercase tracking-tight">
                   CORE CAPABILITIES & WORKFLOWS<span className="text-red-600">.</span>
                 </h2>
               </div>
@@ -224,10 +224,10 @@ export const ProjectCaseStudySections: React.FC<ProjectCaseStudySectionsProps> =
                 {project.features.map((feature, idx) => (
                   <div
                     key={idx}
-                    className="flex items-start gap-3.5 p-5 rounded-xl bg-white border border-slate-200/90 shadow-sm"
+                    className="flex items-start gap-3.5 p-5 rounded-xl bg-white dark:bg-[#131620] border border-slate-200/90 dark:border-slate-800 shadow-sm transition-colors"
                   >
                     <CheckCircle2 className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
-                    <p className="font-sans text-sm sm:text-base text-slate-800 leading-relaxed">
+                    <p className="font-sans text-sm sm:text-base text-slate-800 dark:text-slate-200 leading-relaxed">
                       {feature}
                     </p>
                   </div>
@@ -243,20 +243,20 @@ export const ProjectCaseStudySections: React.FC<ProjectCaseStudySectionsProps> =
                 <span className="font-mono text-xs uppercase tracking-widest text-red-600 font-bold block mb-2">
                   03 · ARCHITECTURE
                 </span>
-                <h2 className="font-hero font-black text-2xl sm:text-3xl text-slate-950 uppercase tracking-tight">
+                <h2 className="font-hero font-black text-2xl sm:text-3xl text-slate-950 dark:text-white uppercase tracking-tight">
                   TECHNICAL SYSTEM ARCHITECTURE<span className="text-red-600">.</span>
                 </h2>
               </div>
 
-              <div className="p-6 sm:p-8 rounded-2xl bg-white border border-slate-200/90 shadow-sm space-y-6">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#131620] border border-slate-200/90 dark:border-slate-800 shadow-sm space-y-6 transition-colors">
                 {architectureConfig.description && (
-                  <p className="font-sans text-base sm:text-lg text-slate-700 leading-relaxed">
+                  <p className="font-sans text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
                     {architectureConfig.description}
                   </p>
                 )}
 
                 {architectureConfig.diagramUrl && (
-                  <div className="rounded-xl overflow-hidden border border-slate-200 bg-slate-50 p-4">
+                  <div className="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 p-4">
                     <img
                       src={architectureConfig.diagramUrl}
                       alt="System Architecture Diagram"
@@ -267,16 +267,16 @@ export const ProjectCaseStudySections: React.FC<ProjectCaseStudySectionsProps> =
 
                 {architectureConfig.components && architectureConfig.components.length > 0 && (
                   <div>
-                    <span className="font-mono text-xs uppercase tracking-wider text-slate-400 font-bold block mb-3">
+                    <span className="font-mono text-xs uppercase tracking-wider text-slate-400 dark:text-slate-500 font-bold block mb-3">
                       SYSTEM COMPONENTS
                     </span>
                     <div className="flex flex-wrap gap-2">
                       {architectureConfig.components.map((comp, idx) => (
                         <span
                           key={idx}
-                          className="inline-flex items-center gap-1.5 font-mono text-xs tracking-wider px-3 py-1.5 rounded-lg bg-slate-100 text-slate-800 border border-slate-200 uppercase font-medium"
+                          className="inline-flex items-center gap-1.5 font-mono text-xs tracking-wider px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 uppercase font-medium"
                         >
-                          <Cpu className="w-3.5 h-3.5 text-slate-500" />
+                          <Cpu className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
                           {comp}
                         </span>
                       ))}
@@ -294,23 +294,23 @@ export const ProjectCaseStudySections: React.FC<ProjectCaseStudySectionsProps> =
                 <span className="font-mono text-xs uppercase tracking-widest text-red-600 font-bold block mb-2">
                   04 · MY ROLE
                 </span>
-                <h2 className="font-hero font-black text-2xl sm:text-3xl text-slate-950 uppercase tracking-tight">
+                <h2 className="font-hero font-black text-2xl sm:text-3xl text-slate-950 dark:text-white uppercase tracking-tight">
                   ENGINEERING CONTRIBUTIONS<span className="text-red-600">.</span>
                 </h2>
               </div>
 
-              <div className="p-6 sm:p-8 rounded-2xl bg-white border border-slate-200/90 shadow-sm space-y-4">
-                <div className="flex flex-wrap items-center gap-4 pb-4 border-b border-slate-100 text-xs font-mono text-slate-600">
-                  <span className="inline-flex items-center gap-1.5 font-bold text-slate-950 uppercase">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#131620] border border-slate-200/90 dark:border-slate-800 shadow-sm space-y-4 transition-colors">
+                <div className="flex flex-wrap items-center gap-4 pb-4 border-b border-slate-100 dark:border-slate-800 text-xs font-mono text-slate-600 dark:text-slate-400">
+                  <span className="inline-flex items-center gap-1.5 font-bold text-slate-950 dark:text-white uppercase">
                     <User className="w-3.5 h-3.5 text-red-600" />
                     {project.role}
                   </span>
-                  <span className="text-slate-300">|</span>
+                  <span className="text-slate-300 dark:text-slate-700">|</span>
                   <span>TIMELINE: {project.date}</span>
                 </div>
 
                 {contributionText && (
-                  <p className="font-sans text-base sm:text-lg text-slate-700 leading-relaxed">
+                  <p className="font-sans text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
                     {contributionText}
                   </p>
                 )}
@@ -325,7 +325,7 @@ export const ProjectCaseStudySections: React.FC<ProjectCaseStudySectionsProps> =
                 <span className="font-mono text-xs uppercase tracking-widest text-red-600 font-bold block mb-2">
                   05 · OUTCOMES
                 </span>
-                <h2 className="font-hero font-black text-2xl sm:text-3xl text-slate-950 uppercase tracking-tight">
+                <h2 className="font-hero font-black text-2xl sm:text-3xl text-slate-950 dark:text-white uppercase tracking-tight">
                   VERIFIED OUTCOMES & IMPACT<span className="text-red-600">.</span>
                 </h2>
               </div>
@@ -334,10 +334,10 @@ export const ProjectCaseStudySections: React.FC<ProjectCaseStudySectionsProps> =
                 {project.outcomes.map((outcome, idx) => (
                   <div
                     key={idx}
-                    className="flex items-start gap-3.5 p-5 rounded-xl bg-white border border-slate-200/90 shadow-sm"
+                    className="flex items-start gap-3.5 p-5 rounded-xl bg-white dark:bg-[#131620] border border-slate-200/90 dark:border-slate-800 shadow-sm transition-colors"
                   >
                     <Award className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-                    <p className="font-sans text-sm sm:text-base text-slate-800 leading-relaxed">
+                    <p className="font-sans text-sm sm:text-base text-slate-800 dark:text-slate-200 leading-relaxed">
                       {outcome}
                     </p>
                   </div>

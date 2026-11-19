@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Github, Linkedin, Mail, Phone, Twitter, Instagram, ExternalLink, X } from 'lucide-react';
+import { Github, Linkedin, Mail, Phone, Twitter, Instagram, ExternalLink, X, Sun, Moon } from 'lucide-react';
 import { siteConfig } from '../../lib/config/site-config.js';
+import { useTheme } from '../../context/ThemeContext.js';
 
 export interface SocialProfile {
   id: string;
@@ -91,6 +92,7 @@ export const getConfiguredSocials = (): SocialProfile[] => {
 };
 
 export const DynamicIsland: React.FC = () => {
+  const { theme, toggleTheme } = useTheme();
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [isMobileExpanded, setIsMobileExpanded] = useState<boolean>(false);
   const [socialIndex, setSocialIndex] = useState<number>(0);
@@ -256,32 +258,53 @@ export const DynamicIsland: React.FC = () => {
 
             <span className="w-1 h-1 rounded-full bg-slate-600 shrink-0" />
 
-            {/* Right: Rotating Social Profile Ticker (stable dimensions to prevent layout shifts) */}
-            <div className="w-[95px] xs:w-[110px] sm:w-[135px] shrink-0 flex items-center justify-end overflow-hidden">
-              {activeSocial && (
-                <a
-                  href={activeSocial.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  data-testid="collapsed-social-ticker"
-                  className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 transition-all duration-300 text-[9px] sm:text-[10px] font-sans font-medium group shrink-0 ${
-                    isTransitioning ? 'opacity-0 translate-x-2' : 'opacity-100 translate-x-0'
-                  }`}
-                  title={`Open ${activeSocial.name} profile`}
-                  aria-label={`${activeSocial.name}: ${activeSocial.handle}`}
-                >
-                  {ActiveSocialIcon && (
-                    <ActiveSocialIcon
-                      className={`w-2.5 h-2.5 sm:w-3 sm:h-3 ${activeSocial.accent} shrink-0`}
-                    />
-                  )}
-                  <span className="text-slate-300 group-hover:text-white max-w-[65px] xs:max-w-[78px] sm:max-w-[90px] truncate">
-                    {activeSocial.handle}
-                  </span>
-                  <ExternalLink className="w-2.5 h-2.5 text-slate-500 group-hover:text-slate-300 opacity-60 shrink-0" />
-                </a>
-              )}
+            {/* Right: Rotating Social Profile Ticker + Theme Toggle Button */}
+            <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+              <div className="w-[80px] xs:w-[95px] sm:w-[125px] shrink-0 flex items-center justify-end overflow-hidden">
+                {activeSocial && (
+                  <a
+                    href={activeSocial.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    data-testid="collapsed-social-ticker"
+                    className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 transition-all duration-300 text-[9px] sm:text-[10px] font-sans font-medium group shrink-0 ${
+                      isTransitioning ? 'opacity-0 translate-x-2' : 'opacity-100 translate-x-0'
+                    }`}
+                    title={`Open ${activeSocial.name} profile`}
+                    aria-label={`${activeSocial.name}: ${activeSocial.handle}`}
+                  >
+                    {ActiveSocialIcon && (
+                      <ActiveSocialIcon
+                        className={`w-2.5 h-2.5 sm:w-3 sm:h-3 ${activeSocial.accent} shrink-0`}
+                      />
+                    )}
+                    <span className="text-slate-300 group-hover:text-white max-w-[55px] xs:max-w-[68px] sm:max-w-[85px] truncate">
+                      {activeSocial.handle}
+                    </span>
+                    <ExternalLink className="w-2.5 h-2.5 text-slate-500 group-hover:text-slate-300 opacity-60 shrink-0" />
+                  </a>
+                )}
+              </div>
+
+              {/* Minimalist Theme Toggle Button */}
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleTheme();
+                }}
+                aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                data-testid="theme-toggle"
+                title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                className="p-1 sm:p-1.5 rounded-full bg-white/5 hover:bg-white/15 text-slate-300 hover:text-white transition-all duration-300 shrink-0 cursor-pointer flex items-center justify-center focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40"
+              >
+                {theme === 'dark' ? (
+                  <Sun className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400 transition-transform duration-300 hover:rotate-45" />
+                ) : (
+                  <Moon className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-300 transition-transform duration-300 hover:-rotate-12" />
+                )}
+              </button>
             </div>
           </div>
         ) : (
@@ -321,21 +344,41 @@ export const DynamicIsland: React.FC = () => {
                 </div>
               </div>
 
-              {/* Close Button */}
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  if (enterTimeoutRef.current) clearTimeout(enterTimeoutRef.current);
-                  if (leaveTimeoutRef.current) clearTimeout(leaveTimeoutRef.current);
-                  setIsMobileExpanded(false);
-                  setIsHovered(false);
-                }}
-                className="p-1 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition-colors shrink-0"
-                aria-label="Close social panel"
-              >
-                <X className="w-3.5 h-3.5" />
-              </button>
+              {/* Actions: Theme Toggle + Close Button */}
+              <div className="flex items-center gap-1.5 shrink-0">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleTheme();
+                  }}
+                  aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                  data-testid="theme-toggle-expanded"
+                  title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                  className="p-1 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition-colors shrink-0 cursor-pointer flex items-center justify-center"
+                >
+                  {theme === 'dark' ? (
+                    <Sun className="w-3.5 h-3.5 text-amber-400 transition-transform duration-300 hover:rotate-45" />
+                  ) : (
+                    <Moon className="w-3.5 h-3.5 text-slate-300 transition-transform duration-300 hover:-rotate-12" />
+                  )}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (enterTimeoutRef.current) clearTimeout(enterTimeoutRef.current);
+                    if (leaveTimeoutRef.current) clearTimeout(leaveTimeoutRef.current);
+                    setIsMobileExpanded(false);
+                    setIsHovered(false);
+                  }}
+                  className="p-1 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition-colors shrink-0"
+                  aria-label="Close social panel"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              </div>
             </div>
 
             {/* Bottom Row: Compact Arranged Profile Links */}

@@ -180,29 +180,29 @@ export const SkillsSection: React.FC = () => {
   return (
     <section
       id="skills"
-      className="relative w-full bg-[#f8f6f0] text-[#0f1117] selection:bg-black selection:text-white overflow-hidden bg-grain px-6 sm:px-12 lg:px-16 py-20 lg:py-28 border-t border-slate-300/80"
+      className="relative w-full bg-[#f8f6f0] text-[#0f1117] dark:bg-[#0b0d13] dark:text-slate-100 selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black overflow-hidden bg-grain px-6 sm:px-12 lg:px-16 py-20 lg:py-28 border-t border-slate-300/80 dark:border-slate-800 transition-colors duration-300"
     >
       <div className="w-full max-w-[1536px] mx-auto">
         {/* =========================================================================
             1. SECTION HEADER
            ========================================================================= */}
         <div className="flex items-center gap-4 mb-4 sm:mb-6">
-          <span className="font-mono text-[11px] sm:text-xs tracking-[0.25em] font-bold text-slate-800 uppercase">
+          <span className="font-mono text-[11px] sm:text-xs tracking-[0.25em] font-bold text-slate-800 dark:text-slate-300 uppercase">
             SKILLS / 02
           </span>
-          <div className="w-16 sm:w-24 h-[1px] bg-slate-400/80" />
+          <div className="w-16 sm:w-24 h-[1px] bg-slate-400/80 dark:bg-slate-700" />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 mb-12 lg:mb-16 items-end">
           <div className="lg:col-span-7">
-            <h2 className="font-hero font-black [font-weight:1000] text-[9vw] sm:text-[7vw] lg:text-[5vw] xl:text-[68px] text-slate-950 uppercase tracking-[-0.035em] leading-[0.92]">
+            <h2 className="font-hero font-black [font-weight:1000] text-[9vw] sm:text-[7vw] lg:text-[5vw] xl:text-[68px] text-slate-950 dark:text-white uppercase tracking-[-0.035em] leading-[0.92]">
               BUILD YOUR
               <br />
               TECH STACK.
             </h2>
           </div>
           <div className="lg:col-span-5 pb-1">
-            <p className="font-sans text-base sm:text-lg text-slate-700 leading-relaxed max-w-xl">
+            <p className="font-sans text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed max-w-xl">
               Explore my tech ecosystem and see how different technologies come together to build
               real products.
             </p>
@@ -217,7 +217,7 @@ export const SkillsSection: React.FC = () => {
               LEFT PANEL: Vertical Technology Categories
              ----------------------------------------------------------------------- */}
           <div className="lg:col-span-3 space-y-3">
-            <div className="font-mono text-xs uppercase tracking-widest text-slate-400 font-bold px-1 mb-2">
+            <div className="font-mono text-xs uppercase tracking-widest text-slate-400 dark:text-slate-500 font-bold px-1 mb-2">
               CATEGORIES
             </div>
 
@@ -239,14 +239,14 @@ export const SkillsSection: React.FC = () => {
                     }}
                     className={`group w-full p-4 rounded-xl text-left border transition-all duration-200 flex items-center justify-between cursor-pointer ${
                       isActive
-                        ? 'bg-slate-950 text-white border-slate-950 shadow-md translate-x-1'
-                        : 'bg-white/80 hover:bg-white text-slate-800 border-slate-300/80 hover:border-slate-900'
+                        ? 'bg-slate-950 text-white border-slate-950 shadow-md translate-x-1 dark:bg-red-600 dark:border-red-600'
+                        : 'bg-white/80 hover:bg-white text-slate-800 border-slate-300/80 hover:border-slate-900 dark:bg-[#131620]/80 dark:hover:bg-[#131620] dark:text-slate-200 dark:border-slate-800 dark:hover:border-slate-600'
                     }`}
                   >
                     <div className="flex items-center gap-3">
                       <span
                         className={`font-mono text-xs font-bold ${
-                          isActive ? 'text-red-500' : 'text-slate-400 group-hover:text-slate-900'
+                          isActive ? 'text-red-500 dark:text-white' : 'text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white'
                         }`}
                       >
                         {cat.num}
@@ -256,7 +256,7 @@ export const SkillsSection: React.FC = () => {
                         className={`w-7 h-7 rounded-lg flex items-center justify-center ${
                           isActive
                             ? 'bg-white/10 text-white'
-                            : 'bg-slate-100 text-slate-700 group-hover:bg-slate-950 group-hover:text-white'
+                            : 'bg-slate-100 text-slate-700 group-hover:bg-slate-950 group-hover:text-white dark:bg-slate-800 dark:text-slate-300 dark:group-hover:bg-slate-700'
                         } transition-colors`}
                       >
                         <IconComponent className="w-3.5 h-3.5" />
@@ -270,7 +270,7 @@ export const SkillsSection: React.FC = () => {
                     <div className="flex items-center gap-2">
                       <span
                         className={`font-mono text-[10px] px-2 py-0.5 rounded font-bold ${
-                          isActive ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'
+                          isActive ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300'
                         }`}
                       >
                         {count}
@@ -278,8 +278,8 @@ export const SkillsSection: React.FC = () => {
                       <ChevronRight
                         className={`w-4 h-4 transition-transform ${
                           isActive
-                            ? 'text-red-500 translate-x-0.5'
-                            : 'text-slate-400 group-hover:text-slate-900'
+                            ? 'text-red-500 dark:text-white translate-x-0.5'
+                            : 'text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white'
                         }`}
                       />
                     </div>
@@ -292,12 +292,12 @@ export const SkillsSection: React.FC = () => {
           {/* -----------------------------------------------------------------------
               CENTER: Branching Technology Ecosystem (Responsive SVG Map)
              ----------------------------------------------------------------------- */}
-          <div className="lg:col-span-6 bg-white/70 rounded-2xl border border-slate-300/80 p-4 sm:p-6 shadow-sm flex flex-col items-center justify-center relative overflow-hidden">
+          <div className="lg:col-span-6 bg-white/70 dark:bg-[#131620]/80 rounded-2xl border border-slate-300/80 dark:border-slate-800 p-4 sm:p-6 shadow-sm flex flex-col items-center justify-center relative overflow-hidden transition-colors">
             {/* Ambient Background Glow */}
             <div className="absolute w-72 h-72 rounded-full bg-red-600/5 blur-3xl pointer-events-none" />
 
             {/* Instruction pill */}
-            <div className="font-mono text-[11px] tracking-wider uppercase text-slate-500 bg-white/90 border border-slate-200 px-3 py-1 rounded-full mb-3 shadow-xs flex items-center gap-1.5 z-10">
+            <div className="font-mono text-[11px] tracking-wider uppercase text-slate-500 dark:text-slate-300 bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-700 px-3 py-1 rounded-full mb-3 shadow-xs flex items-center gap-1.5 z-10">
               <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse" />
               INTERACTIVE ECOSYSTEM · CLICK NODE TO EXPLORE
             </div>
@@ -328,7 +328,7 @@ export const SkillsSection: React.FC = () => {
                   cy="300"
                   r="130"
                   fill="none"
-                  stroke="rgba(0,0,0,0.06)"
+                  stroke="rgba(128,128,128,0.15)"
                   strokeDasharray="3 4"
                 />
                 <circle
@@ -336,7 +336,7 @@ export const SkillsSection: React.FC = () => {
                   cy="300"
                   r="200"
                   fill="none"
-                  stroke="rgba(0,0,0,0.06)"
+                  stroke="rgba(128,128,128,0.15)"
                   strokeDasharray="3 4"
                 />
                 <circle
@@ -344,7 +344,7 @@ export const SkillsSection: React.FC = () => {
                   cy="300"
                   r="265"
                   fill="none"
-                  stroke="rgba(0,0,0,0.06)"
+                  stroke="rgba(128,128,128,0.15)"
                   strokeDasharray="3 4"
                 />
 
@@ -365,7 +365,7 @@ export const SkillsSection: React.FC = () => {
                       y1={node1.y}
                       x2={node2.x}
                       y2={node2.y}
-                      stroke={isConnectedActive ? '#dc2626' : 'rgba(0,0,0,0.06)'}
+                      stroke={isConnectedActive ? '#dc2626' : 'rgba(128,128,128,0.18)'}
                       strokeWidth={isConnectedActive ? 1.75 : 1}
                       strokeDasharray={isConnectedActive ? 'none' : '2 3'}
                       className="transition-all duration-300"
@@ -390,7 +390,7 @@ export const SkillsSection: React.FC = () => {
                           ? '#dc2626'
                           : isNodeCategoryActive
                             ? 'rgba(220, 38, 38, 0.4)'
-                            : 'rgba(0,0,0,0.07)'
+                            : 'rgba(128,128,128,0.18)'
                       }
                       strokeWidth={isNodeSelected ? 2 : isNodeCategoryActive ? 1.25 : 0.75}
                       className="transition-all duration-300"
@@ -419,6 +419,7 @@ export const SkillsSection: React.FC = () => {
                     fill="#f8f6f0"
                     stroke="#dc2626"
                     strokeWidth="2.5"
+                    className="dark:fill-[#0b0d13]"
                   />
                   {/* Actual Photo */}
                   <image
@@ -482,7 +483,7 @@ export const SkillsSection: React.FC = () => {
                         />
                       )}
 
-                      {/* Node White Circle Base */}
+                      {/* Node Circle Base */}
                       <circle
                         cx={node.x}
                         cy={node.y}
@@ -493,7 +494,7 @@ export const SkillsSection: React.FC = () => {
                         }
                         strokeWidth={isHighlighted ? 2.5 : 1.5}
                         filter="drop-shadow(0px 2px 4px rgba(0,0,0,0.06))"
-                        className="transition-all duration-200 group-hover:scale-110"
+                        className="transition-all duration-200 group-hover:scale-110 dark:fill-[#1e2330] dark:stroke-slate-600"
                       />
 
                       {/* Logo Icon via ForeignObject */}
@@ -518,8 +519,8 @@ export const SkillsSection: React.FC = () => {
                           isHighlighted
                             ? 'fill-red-600'
                             : isCategoryActive
-                              ? 'fill-slate-900'
-                              : 'fill-slate-500'
+                              ? 'fill-slate-900 dark:fill-slate-200'
+                              : 'fill-slate-500 dark:fill-slate-400'
                         }`}
                       >
                         {node.name
@@ -543,14 +544,14 @@ export const SkillsSection: React.FC = () => {
              ----------------------------------------------------------------------- */}
           <div className="lg:col-span-3 space-y-4">
             {/* Selected Tech Card */}
-            <div className="bg-white rounded-xl p-5 border border-slate-300/80 shadow-xs">
+            <div className="bg-white dark:bg-[#131620] rounded-xl p-5 border border-slate-300/80 dark:border-slate-800 shadow-xs transition-colors">
               <div className="flex items-start justify-between gap-3">
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center border border-slate-200 shrink-0">
+                  <div className="w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center border border-slate-200 dark:border-slate-700 shrink-0">
                     <TechLogo name={selectedTech} size={22} />
                   </div>
                   <div className="min-w-0">
-                    <h3 className="font-sans font-black text-lg text-slate-950 tracking-tight leading-tight truncate">
+                    <h3 className="font-sans font-black text-lg text-slate-950 dark:text-white tracking-tight leading-tight truncate">
                       {selectedTech}
                     </h3>
                     <span className="font-mono text-[10px] uppercase font-bold tracking-wider text-red-600 block mt-0.5">
@@ -564,7 +565,7 @@ export const SkillsSection: React.FC = () => {
                   type="button"
                   onClick={() => handleAssignToStack(selectedTech, activeCategory)}
                   title="Assign to Tech Stack"
-                  className="px-2.5 py-1.5 rounded-md bg-slate-950 hover:bg-red-600 text-white font-mono text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 transition-colors cursor-pointer shrink-0"
+                  className="px-2.5 py-1.5 rounded-md bg-slate-950 hover:bg-red-600 text-white dark:bg-white dark:text-slate-950 dark:hover:bg-red-600 dark:hover:text-white font-mono text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 transition-colors cursor-pointer shrink-0"
                 >
                   <Plus className="w-3 h-3" />
                   ADD TO STACK
@@ -572,7 +573,7 @@ export const SkillsSection: React.FC = () => {
               </div>
 
               {activeSkillObj?.description && (
-                <p className="font-sans text-xs text-slate-600 leading-relaxed mt-3">
+                <p className="font-sans text-xs text-slate-600 dark:text-slate-400 leading-relaxed mt-3">
                   {activeSkillObj.description}
                 </p>
               )}
@@ -591,15 +592,15 @@ export const SkillsSection: React.FC = () => {
         {/* =========================================================================
             3. BOTTOM CTA STRIP
            ========================================================================= */}
-        <div className="pt-8 border-t border-slate-300/80 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="pt-8 border-t border-slate-300/80 dark:border-slate-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 transition-colors">
           <div>
             <div className="flex items-center gap-2 mb-1">
               <Sparkles className="w-4 h-4 text-red-600" />
-              <span className="font-mono text-xs font-bold uppercase tracking-wider text-slate-900">
+              <span className="font-mono text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
                 BUILD SOMETHING TOGETHER.
               </span>
             </div>
-            <p className="font-sans text-sm text-slate-600">
+            <p className="font-sans text-sm text-slate-600 dark:text-slate-400">
               From idea to deployment, I combine the right technologies to build scalable and
               reliable products.
             </p>

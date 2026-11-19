@@ -65,22 +65,22 @@ export const ProjectDetailPage: React.FC = () => {
   // 404 Not Found State
   if (!project) {
     return (
-      <div className="min-h-screen bg-[#f8f6f0] text-slate-900 flex flex-col justify-between bg-grain">
+      <div className="min-h-screen bg-[#f8f6f0] dark:bg-[#0b0d13] text-slate-900 dark:text-[#f1f3f9] flex flex-col justify-between bg-grain transition-colors duration-300">
         <DynamicIsland />
         <CornerNavigationDial />
         <div className="max-w-2xl mx-auto px-6 py-36 text-center">
           <span className="font-mono text-xs uppercase tracking-widest text-red-600 font-bold block mb-2">
             404 — PROJECT NOT FOUND
           </span>
-          <h1 className="font-hero font-black text-4xl sm:text-5xl text-slate-950 uppercase tracking-tight mb-4">
+          <h1 className="font-hero font-black text-4xl sm:text-5xl text-slate-950 dark:text-white uppercase tracking-tight mb-4">
             PROJECT NOT FOUND<span className="text-red-600">.</span>
           </h1>
-          <p className="font-sans text-slate-600 mb-8 max-w-md mx-auto">
+          <p className="font-sans text-slate-600 dark:text-slate-400 mb-8 max-w-md mx-auto">
             The project case study you requested could not be found or has moved.
           </p>
           <Link
             to="/#projects"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-950 text-white font-mono text-xs font-bold uppercase tracking-wider hover:bg-slate-800 transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-950 dark:bg-white text-white dark:text-slate-950 font-mono text-xs font-bold uppercase tracking-wider hover:bg-slate-800 dark:hover:bg-slate-200 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             RETURN TO PROJECTS
@@ -99,16 +99,16 @@ export const ProjectDetailPage: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[#f8f6f0] text-[#0f1117] selection:bg-black selection:text-white bg-grain flex flex-col justify-between">
+    <div className="min-h-screen bg-[#f8f6f0] text-[#0f1117] dark:bg-[#0b0d13] dark:text-[#f1f3f9] selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black bg-grain flex flex-col justify-between transition-colors duration-300">
       <DynamicIsland />
       <CornerNavigationDial />
 
       <main className="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16 pt-24 sm:pt-28 pb-20 flex-1">
         {/* Top Navigation Bar (Panel 3) */}
-        <div className="flex items-center justify-between gap-4 py-4 mb-8 sm:mb-12 border-b border-slate-300/60">
+        <div className="flex items-center justify-between gap-4 py-4 mb-8 sm:mb-12 border-b border-slate-300/60 dark:border-slate-800 transition-colors">
           <Link
             to="/#projects"
-            className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-slate-800 hover:text-red-600 transition-colors"
+            className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-500 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Projects</span>
@@ -117,7 +117,7 @@ export const ProjectDetailPage: React.FC = () => {
           {nextProject && (
             <Link
               to={`/work/${nextProject.slug}`}
-              className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-slate-800 hover:text-red-600 transition-colors"
+              className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-500 transition-colors"
             >
               <span>Next Project</span>
               <ArrowRight className="w-4 h-4" />
@@ -132,19 +132,19 @@ export const ProjectDetailPage: React.FC = () => {
             {/* Project Index Label */}
             <div className="flex items-center gap-2 mb-3 sm:mb-4">
               <span className="w-2 h-2 rounded-full bg-red-600" />
-              <span className="font-mono text-xs tracking-widest font-bold text-slate-800 uppercase">
+              <span className="font-mono text-xs tracking-widest font-bold text-slate-800 dark:text-slate-300 uppercase">
                 PROJECT / {formattedNumber}
               </span>
             </div>
 
             {/* Giant Title */}
-            <h1 className="font-hero font-black [font-weight:1000] text-3xl sm:text-4xl lg:text-4xl xl:text-5xl text-slate-950 uppercase tracking-[-0.035em] leading-[0.95] mb-4 break-words">
+            <h1 className="font-hero font-black [font-weight:1000] text-3xl sm:text-4xl lg:text-4xl xl:text-5xl text-slate-950 dark:text-white uppercase tracking-[-0.035em] leading-[0.95] mb-4 break-words">
               {project.title}
               <span className="text-red-600">.</span>
             </h1>
 
             {/* Summary / Subtitle */}
-            <p className="font-sans text-sm sm:text-base text-slate-700 leading-relaxed mb-6 max-w-md">
+            <p className="font-sans text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed mb-6 max-w-md">
               {project.shortDescription || project.subtitle}
             </p>
 
@@ -153,7 +153,7 @@ export const ProjectDetailPage: React.FC = () => {
               {displayBadges.map((badge, idx) => (
                 <span
                   key={idx}
-                  className="font-mono text-[10px] sm:text-[11px] tracking-wider px-2.5 sm:px-3 py-1 rounded-md bg-white text-slate-800 border border-slate-300 font-medium uppercase shadow-xs"
+                  className="font-mono text-[10px] sm:text-[11px] tracking-wider px-2.5 sm:px-3 py-1 rounded-md bg-white dark:bg-[#131620] text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-800 font-medium uppercase shadow-xs transition-colors"
                 >
                   {badge}
                 </span>
@@ -179,7 +179,7 @@ export const ProjectDetailPage: React.FC = () => {
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-lg bg-white border border-slate-300 hover:border-slate-950 hover:bg-slate-50 text-slate-950 font-mono text-xs font-bold uppercase tracking-wider transition-colors shadow-xs whitespace-nowrap"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-lg bg-white dark:bg-[#131620] border border-slate-300 dark:border-slate-800 hover:border-slate-950 dark:hover:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-950 dark:text-slate-100 font-mono text-xs font-bold uppercase tracking-wider transition-colors shadow-xs whitespace-nowrap"
                 >
                   <span>View Source Code</span>
                   <Github className="w-3.5 h-3.5" />
@@ -191,7 +191,7 @@ export const ProjectDetailPage: React.FC = () => {
                   href={project.demoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-lg bg-white border border-slate-300 hover:border-slate-950 hover:bg-slate-50 text-slate-800 font-mono text-xs font-bold uppercase tracking-wider transition-colors shadow-xs whitespace-nowrap"
+                  className="inline-flex items-center gap-2 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-lg bg-white dark:bg-[#131620] border border-slate-300 dark:border-slate-800 hover:border-slate-950 dark:hover:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-mono text-xs font-bold uppercase tracking-wider transition-colors shadow-xs whitespace-nowrap"
                   title="View Walkthrough Demo"
                 >
                   <LinkIcon className="w-3.5 h-3.5" />

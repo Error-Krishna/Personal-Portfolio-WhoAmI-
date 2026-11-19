@@ -150,34 +150,34 @@ export const ServiceComparisonTable: React.FC<ServiceComparisonTableProps> = ({
   return (
     <section
       id="service-comparison"
-      className="relative w-full bg-[#f8f6f0] text-[#0f1117] selection:bg-black selection:text-white overflow-hidden bg-grain px-6 sm:px-10 lg:px-12 pt-2 lg:pt-4 pb-16 lg:pb-24"
+      className="relative w-full bg-[#f8f6f0] text-[#0f1117] dark:bg-[#0b0d13] dark:text-slate-100 selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black overflow-hidden bg-grain px-6 sm:px-10 lg:px-12 pt-2 lg:pt-4 pb-16 lg:pb-24 transition-colors duration-300"
     >
       <div className="w-full max-w-[1536px] mx-auto">
         {/* ======================================================== */}
         {/* SECTION HEADER                                           */}
         {/* ======================================================== */}
         <div className="flex items-center gap-4 mb-4">
-          <span className="font-mono text-[11px] sm:text-xs tracking-[0.25em] font-bold text-slate-800 uppercase">
+          <span className="font-mono text-[11px] sm:text-xs tracking-[0.25em] font-bold text-slate-800 dark:text-slate-300 uppercase">
             COMPARISON
           </span>
-          <div className="w-16 sm:w-24 h-[1px] bg-slate-400/80" />
+          <div className="w-16 sm:w-24 h-[1px] bg-slate-400/80 dark:bg-slate-700" />
         </div>
 
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-6 lg:mb-8">
           <div>
-            <h2 className="font-hero font-black [font-weight:1000] text-3xl sm:text-5xl lg:text-6xl text-slate-950 uppercase tracking-tight leading-[0.95]">
+            <h2 className="font-hero font-black [font-weight:1000] text-3xl sm:text-5xl lg:text-6xl text-slate-950 dark:text-white uppercase tracking-tight leading-[0.95]">
               SERVICE COMPARISON<span className="text-red-600">.</span>
             </h2>
           </div>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 lg:gap-6 self-start lg:self-end">
-            <p className="font-sans text-sm sm:text-base text-slate-600 max-w-md leading-relaxed">
+            <p className="font-sans text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-md leading-relaxed">
               Compare key details at a glance to find the right service for your needs.
             </p>
             <button
               type="button"
               onClick={scrollToPricing}
-              className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-slate-950 hover:text-red-600 px-4 py-2.5 rounded-full border border-slate-300 bg-white hover:border-slate-950 transition-colors shadow-xs cursor-pointer shrink-0"
+              className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-slate-950 dark:text-slate-200 hover:text-red-600 dark:hover:text-red-500 px-4 py-2.5 rounded-full border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 hover:border-slate-950 dark:hover:border-slate-500 transition-colors shadow-xs cursor-pointer shrink-0"
             >
               <span>VIEW DETAILED PRICING</span>
               <ArrowRight className="w-3.5 h-3.5" />

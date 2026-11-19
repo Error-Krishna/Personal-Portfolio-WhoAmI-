@@ -23,7 +23,7 @@ export const HomePage: React.FC = () => {
   const visibility = siteConfig.sectionVisibility;
 
   return (
-    <main className="relative min-h-screen bg-[#f8f6f0] text-slate-900 overflow-x-hidden selection:bg-slate-950 selection:text-white">
+    <main className="relative min-h-screen bg-[#f8f6f0] text-slate-900 dark:bg-[#0b0d13] dark:text-slate-100 overflow-x-hidden selection:bg-slate-950 selection:text-white transition-colors duration-300">
       {/* Dynamic Island Global Identity Capsule */}
       <DynamicIsland />
 

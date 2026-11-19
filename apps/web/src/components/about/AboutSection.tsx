@@ -21,24 +21,24 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ hideStaticPortrait =
   return (
     <section
       id="about"
-      className="relative w-full min-h-screen bg-[#f8f6f0] text-[#0f1117] selection:bg-black selection:text-white overflow-hidden bg-grain select-none px-6 sm:px-12 lg:px-16 py-14 lg:py-20 flex flex-col justify-between"
+      className="relative w-full min-h-screen bg-[#f8f6f0] text-[#0f1117] dark:bg-[#0b0d13] dark:text-slate-100 selection:bg-black selection:text-white overflow-hidden bg-grain select-none px-6 sm:px-12 lg:px-16 py-14 lg:py-20 flex flex-col justify-between transition-colors duration-300"
     >
       <div className="w-full max-w-[1536px] mx-auto flex-1 flex flex-col justify-between">
         {/* =========================================================================
             1. SECTION LABEL: "ABOUT ME" + HORIZONTAL DIVIDER
            ========================================================================= */}
         <div className="flex items-center gap-4 mb-4 sm:mb-6">
-          <span className="font-mono text-[11px] sm:text-xs tracking-[0.25em] font-bold text-slate-800 uppercase">
+          <span className="font-mono text-[11px] sm:text-xs tracking-[0.25em] font-bold text-slate-800 dark:text-slate-300 uppercase">
             ABOUT ME
           </span>
-          <div className="w-16 sm:w-24 h-[1px] bg-slate-400/80" />
+          <div className="w-16 sm:w-24 h-[1px] bg-slate-400/80 dark:bg-slate-700" />
         </div>
 
         {/* =========================================================================
             2. MAIN HEADLINE (Two tightly stacked lines, Archivo Black)
            ========================================================================= */}
         <div className="mb-10 sm:mb-14 lg:mb-16">
-          <h2 className="font-hero font-black [font-weight:1000] text-[11vw] sm:text-[9vw] lg:text-[7.2vw] xl:text-[98px] 2xl:text-[104px] text-slate-950 uppercase tracking-[-0.035em] leading-[0.88] select-none">
+          <h2 className="font-hero font-black [font-weight:1000] text-[11vw] sm:text-[9vw] lg:text-[7.2vw] xl:text-[98px] 2xl:text-[104px] text-slate-950 dark:text-white uppercase tracking-[-0.035em] leading-[0.88] select-none">
             <span className="block">I BUILD THINGS</span>
             <span className="block">PEOPLE CAN USE.</span>
           </h2>
@@ -53,22 +53,22 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ hideStaticPortrait =
              ----------------------------------------------------------------------- */}
           <div className="lg:col-span-4 flex flex-col justify-between h-full pt-1 lg:pt-3">
             {/* Bio paragraph with highlighted bold phrases */}
-            <p className="font-sans text-[17px] sm:text-[19px] lg:text-[20px] xl:text-[22px] text-slate-900 leading-[1.38] font-normal">
-              I'm <strong className="font-bold text-slate-950">Krishna Goyal</strong>, a final year
+            <p className="font-sans text-[17px] sm:text-[19px] lg:text-[20px] xl:text-[22px] text-slate-900 dark:text-slate-200 leading-[1.38] font-normal">
+              I'm <strong className="font-bold text-slate-950 dark:text-white">Krishna Goyal</strong>, a final year
               Computer Science student at{' '}
-              <strong className="font-bold text-slate-950">VIT-AP</strong>, focused on building
+              <strong className="font-bold text-slate-950 dark:text-white">VIT-AP</strong>, focused on building
               real-world products and solving meaningful problems. I work as a{' '}
-              <strong className="font-bold text-slate-950">full-stack developer</strong> and also
+              <strong className="font-bold text-slate-950 dark:text-white">full-stack developer</strong> and also
               create content through{' '}
-              <strong className="font-bold text-slate-950">video editing</strong>, combining tech
+              <strong className="font-bold text-slate-950 dark:text-white">video editing</strong>, combining tech
               and creativity to bring ideas to life.
             </p>
 
             {/* Divider line */}
-            <div className="w-[88px] h-[1px] bg-slate-400 my-6 sm:my-8" />
+            <div className="w-[88px] h-[1px] bg-slate-400 dark:bg-slate-700 my-6 sm:my-8" />
 
             {/* Metadata lines */}
-            <div className="space-y-3 font-mono text-xs sm:text-[13px] tracking-[0.2em] text-slate-800 uppercase font-semibold">
+            <div className="space-y-3 font-mono text-xs sm:text-[13px] tracking-[0.2em] text-slate-800 dark:text-slate-300 uppercase font-semibold">
               <div>STUDENT · DEVELOPER · CREATOR</div>
               <div>IDEAS → PRODUCTS → IMPACT</div>
             </div>
@@ -111,7 +111,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ hideStaticPortrait =
           <div className="lg:col-span-4 flex flex-col justify-between h-full pt-1 lg:pt-3">
             {/* Short Statement */}
             <div className="mb-6 lg:mb-8">
-              <h3 className="font-sans text-[20px] sm:text-[24px] lg:text-[26px] xl:text-[29px] text-slate-950 leading-[1.25] font-normal">
+              <h3 className="font-sans text-[20px] sm:text-[24px] lg:text-[26px] xl:text-[29px] text-slate-950 dark:text-white leading-[1.25] font-normal">
                 From ideas on a screen
                 <br />
                 to products in the real world.
@@ -125,7 +125,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ hideStaticPortrait =
                   {row.map((tag) => (
                     <span
                       key={tag}
-                      className="px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-[8px] sm:rounded-[9px] border border-slate-900 bg-transparent font-mono text-[10.5px] sm:text-[11.5px] font-bold tracking-[0.14em] uppercase text-slate-950 whitespace-nowrap hover:bg-slate-950 hover:text-white transition-colors cursor-default"
+                      className="px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-[8px] sm:rounded-[9px] border border-slate-900 dark:border-slate-600 bg-transparent font-mono text-[10.5px] sm:text-[11.5px] font-bold tracking-[0.14em] uppercase text-slate-950 dark:text-slate-200 whitespace-nowrap hover:bg-slate-950 hover:text-white dark:hover:bg-white dark:hover:text-slate-950 transition-colors cursor-default"
                     >
                       {tag}
                     </span>
@@ -137,7 +137,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ hideStaticPortrait =
             {/* Vertical Process Indicator: 4 circular nodes */}
             <div className="relative pl-7 py-1">
               {/* Connecting vertical line */}
-              <div className="absolute top-2 bottom-2 left-[5.5px] w-[1px] bg-slate-300" />
+              <div className="absolute top-2 bottom-2 left-[5.5px] w-[1px] bg-slate-300 dark:bg-slate-700" />
 
               <div className="space-y-5">
                 {PROCESS_STEPS.map((step) => (
@@ -145,11 +145,11 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ hideStaticPortrait =
                     {/* Node Dot */}
                     <div
                       className={`absolute -left-7 w-3 h-3 rounded-full transition-transform ${
-                        step.isFilled ? 'bg-slate-950' : 'border border-slate-900 bg-[#f8f6f0]'
+                        step.isFilled ? 'bg-slate-950 dark:bg-white' : 'border border-slate-900 dark:border-slate-500 bg-[#f8f6f0] dark:bg-[#0b0d13]'
                       }`}
                     />
                     {/* Label */}
-                    <span className="font-mono text-xs sm:text-[13px] font-semibold tracking-[0.2em] text-slate-900 uppercase">
+                    <span className="font-mono text-xs sm:text-[13px] font-semibold tracking-[0.2em] text-slate-900 dark:text-slate-200 uppercase">
                       {step.label}
                     </span>
                   </div>
@@ -162,14 +162,14 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ hideStaticPortrait =
         {/* =========================================================================
             4. MINIMAL FOOTER
            ========================================================================= */}
-        <footer className="w-full pt-12 lg:pt-16 mt-12 flex items-center justify-between text-slate-800 select-none">
+        <footer className="w-full pt-12 lg:pt-16 mt-12 flex items-center justify-between text-slate-800 dark:text-slate-400 select-none">
           {/* Copyright */}
           <div className="font-mono text-xs font-semibold tracking-wider whitespace-nowrap">
             &copy; 2026
           </div>
 
           {/* Divider line */}
-          <div className="hidden sm:block flex-1 mx-8 h-[1px] bg-slate-300" />
+          <div className="hidden sm:block flex-1 mx-8 h-[1px] bg-slate-300 dark:bg-slate-700" />
 
           {/* Location info */}
           <div className="font-mono text-[11px] tracking-[0.22em] uppercase font-semibold whitespace-nowrap">

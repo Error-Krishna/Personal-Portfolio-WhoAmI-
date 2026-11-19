@@ -156,7 +156,7 @@ export const TechStackTower: React.FC<TechStackTowerProps> = ({
   const isFull = stack.length >= maxCapacity;
 
   return (
-    <div className="bg-white rounded-xl p-5 border border-slate-300/80 shadow-xs flex flex-col justify-between relative overflow-hidden select-none">
+    <div className="bg-white dark:bg-[#131620] rounded-xl p-5 border border-slate-300/80 dark:border-slate-800 shadow-xs flex flex-col justify-between relative overflow-hidden select-none transition-colors">
       {/* Dynamic Keyframes for Hanoi Falling Cylinder & Shattering Pieces */}
       <style>{`
         @keyframes cylinderHanoiDrop {
@@ -208,25 +208,25 @@ export const TechStackTower: React.FC<TechStackTowerProps> = ({
       `}</style>
 
       {/* Header bar */}
-      <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+      <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
         <div>
           <span className="font-mono text-[10px] uppercase tracking-widest text-red-600 font-bold block mb-0.5">
             TOWER OF HANOI STACK
           </span>
-          <h4 className="font-sans font-black text-sm text-slate-950 uppercase tracking-tight">
+          <h4 className="font-sans font-black text-sm text-slate-950 dark:text-white uppercase tracking-tight">
             CUSTOM STACK TOWER
           </h4>
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="font-mono text-[10px] px-2 py-0.5 rounded-md font-bold bg-slate-100 text-slate-700">
+          <span className="font-mono text-[10px] px-2 py-0.5 rounded-md font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
             {stack.length}/{maxCapacity} BLOCKS
           </span>
           <button
             type="button"
             onClick={onReset}
             title="Break stack into pieces"
-            className="font-mono text-[10px] font-bold text-slate-600 hover:text-red-600 uppercase flex items-center gap-1 px-2 py-1 rounded hover:bg-red-50 transition-colors cursor-pointer border border-transparent hover:border-red-200"
+            className="font-mono text-[10px] font-bold text-slate-600 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-400 uppercase flex items-center gap-1 px-2 py-1 rounded hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors cursor-pointer border border-transparent hover:border-red-200 dark:hover:border-red-900/40"
           >
             <RotateCcw className="w-3 h-3" />
             RESET TOWER
@@ -235,13 +235,13 @@ export const TechStackTower: React.FC<TechStackTowerProps> = ({
       </div>
 
       {/* Stage: Hanoi Pole & Stacking Cylinders Canvas */}
-      <div className="relative w-full h-[270px] bg-gradient-to-b from-slate-50 via-white to-slate-100/70 rounded-lg border border-slate-200/80 overflow-hidden my-3 flex items-end justify-center">
+      <div className="relative w-full h-[270px] bg-gradient-to-b from-slate-50 via-white to-slate-100/70 dark:from-slate-900/70 dark:via-slate-900/90 dark:to-slate-950 rounded-lg border border-slate-200/80 dark:border-slate-800 overflow-hidden my-3 flex items-end justify-center">
         {/* Background Level Guidelines */}
         <div className="absolute inset-0 pointer-events-none flex flex-col justify-between py-6 px-4 opacity-30">
           {[6, 5, 4, 3, 2, 1].map((lvl) => (
-            <div key={lvl} className="w-full border-b border-dashed border-slate-400/60 flex justify-between items-end">
-              <span className="font-mono text-[8px] text-slate-400 select-none">LVL {lvl}</span>
-              <span className="font-mono text-[8px] text-slate-400 select-none">{lvl * 15}%</span>
+            <div key={lvl} className="w-full border-b border-dashed border-slate-400/60 dark:border-slate-600 flex justify-between items-end">
+              <span className="font-mono text-[8px] text-slate-400 dark:text-slate-500 select-none">LVL {lvl}</span>
+              <span className="font-mono text-[8px] text-slate-400 dark:text-slate-500 select-none">{lvl * 15}%</span>
             </div>
           ))}
         </div>
@@ -250,7 +250,7 @@ export const TechStackTower: React.FC<TechStackTowerProps> = ({
             1. THE CENTRAL HANOI POLE
            =================================================================== */}
         <div
-          className="absolute z-10 w-3 rounded-t-full bg-gradient-to-r from-slate-400 via-slate-100 to-slate-400 border border-slate-400/60 shadow-sm"
+          className="absolute z-10 w-3 rounded-t-full bg-gradient-to-r from-slate-400 via-slate-100 to-slate-400 dark:from-slate-600 dark:via-slate-300 dark:to-slate-600 border border-slate-400/60 dark:border-slate-600 shadow-sm"
           style={{
             left: '50%',
             bottom: '18px',
@@ -259,7 +259,7 @@ export const TechStackTower: React.FC<TechStackTowerProps> = ({
           }}
         >
           {/* Metallic Tip Cap */}
-          <div className="absolute -top-1.5 -left-[2px] w-4 h-4 rounded-full bg-gradient-to-b from-white via-slate-200 to-slate-400 border border-slate-400 shadow-xs" />
+          <div className="absolute -top-1.5 -left-[2px] w-4 h-4 rounded-full bg-gradient-to-b from-white via-slate-200 to-slate-400 dark:from-slate-200 dark:via-slate-400 dark:to-slate-600 border border-slate-400 dark:border-slate-500 shadow-xs" />
         </div>
 
         {/* ===================================================================
@@ -355,7 +355,7 @@ export const TechStackTower: React.FC<TechStackTowerProps> = ({
         {/* Empty state hint */}
         {!isShattering && stack.length === 0 && (
           <div className="absolute top-10 left-0 right-0 text-center px-4 pointer-events-none">
-            <span className="font-mono text-[10px] uppercase font-bold text-slate-400 bg-white/90 border border-slate-200 px-2.5 py-1 rounded-full shadow-xs">
+            <span className="font-mono text-[10px] uppercase font-bold text-slate-400 dark:text-slate-300 bg-white/90 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 px-2.5 py-1 rounded-full shadow-xs">
               POLE IS EMPTY
             </span>
           </div>
@@ -364,7 +364,7 @@ export const TechStackTower: React.FC<TechStackTowerProps> = ({
 
       {/* Footer Instructions / Status */}
       <div className="pt-1 text-center">
-        <p className="font-sans text-[11px] text-slate-500 leading-normal">
+        <p className="font-sans text-[11px] text-slate-500 dark:text-slate-400 leading-normal">
           {stack.length === 0
             ? 'Select any technology on the map & click "+ ADD TO STACK" to drop a block.'
             : isFull
@@ -376,7 +376,7 @@ export const TechStackTower: React.FC<TechStackTowerProps> = ({
           <button
             type="button"
             onClick={onDiscuss}
-            className="w-full mt-2.5 py-2 px-3 rounded-lg bg-slate-950 hover:bg-red-600 text-white font-mono text-[10px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+            className="w-full mt-2.5 py-2 px-3 rounded-lg bg-slate-950 hover:bg-red-600 text-white dark:bg-white dark:text-slate-950 dark:hover:bg-red-600 dark:hover:text-white font-mono text-[10px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
           >
             DISCUSS THIS STACK
             <ArrowRight className="w-3 h-3" />

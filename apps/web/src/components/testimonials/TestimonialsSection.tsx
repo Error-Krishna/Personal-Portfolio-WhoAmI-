@@ -102,26 +102,26 @@ export const TestimonialsSection: React.FC = () => {
       id="testimonials"
       ref={sectionRef}
       aria-label="Client Testimonials"
-      className="relative w-full bg-[#f8f6f0] text-[#0f1117] selection:bg-black selection:text-white overflow-hidden bg-grain px-6 sm:px-10 lg:px-12 py-20 lg:py-28 border-t border-slate-300/80"
+      className="relative w-full bg-[#f8f6f0] text-[#0f1117] dark:bg-[#0b0d13] dark:text-slate-100 selection:bg-black selection:text-white overflow-hidden bg-grain px-6 sm:px-10 lg:px-12 py-20 lg:py-28 border-t border-slate-300/80 dark:border-slate-800 transition-colors duration-300"
     >
       <div className="w-full max-w-[1536px] mx-auto">
         {/* Editorial Label */}
         <div className="flex items-center gap-4 mb-4">
-          <span className="font-mono text-[11px] sm:text-xs tracking-[0.25em] font-bold text-slate-800 uppercase">
+          <span className="font-mono text-[11px] sm:text-xs tracking-[0.25em] font-bold text-slate-800 dark:text-slate-300 uppercase">
             CLIENT FEEDBACK / 01—04
           </span>
-          <div className="w-16 sm:w-24 h-[1px] bg-slate-400/80" />
+          <div className="w-16 sm:w-24 h-[1px] bg-slate-400/80 dark:bg-slate-700" />
         </div>
 
         {/* Headline & Overview */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 mb-14 lg:mb-20 items-end">
           <div className="lg:col-span-7">
-            <h2 className="font-hero font-black [font-weight:1000] text-[9vw] sm:text-[7vw] lg:text-[5vw] xl:text-[68px] text-slate-950 uppercase tracking-[-0.035em] leading-[0.92]">
+            <h2 className="font-hero font-black [font-weight:1000] text-[9vw] sm:text-[7vw] lg:text-[5vw] xl:text-[68px] text-slate-950 dark:text-white uppercase tracking-[-0.035em] leading-[0.92]">
               WHAT PEOPLE SAY<span className="text-red-600">.</span>
             </h2>
           </div>
           <div className="lg:col-span-5 pb-1">
-            <p className="font-sans text-base sm:text-lg text-slate-700 leading-relaxed max-w-xl">
+            <p className="font-sans text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed max-w-xl">
               Good work is built on good collaboration.
             </p>
           </div>

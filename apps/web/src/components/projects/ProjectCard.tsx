@@ -46,10 +46,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         <Link
           to={`/work/${project.slug}`}
           aria-label={`View ${project.title} case study`}
-          className="flip-card-front bg-white rounded-2xl border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-slate-950/40 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all p-3.5 sm:p-4 lg:p-5 flex gap-3 sm:gap-4 lg:gap-5 items-stretch text-left overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 select-none"
+          className="flip-card-front bg-white dark:bg-[#131620] rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.25)] hover:border-slate-950/40 dark:hover:border-slate-600 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all p-3.5 sm:p-4 lg:p-5 flex gap-3 sm:gap-4 lg:gap-5 items-stretch text-left overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 select-none"
         >
           {/* Left: Thumbnail Window */}
-          <div className="w-[100px] xs:w-[120px] sm:w-[140px] md:w-[150px] lg:w-[155px] xl:w-[175px] shrink-0 rounded-xl overflow-hidden bg-slate-100 border border-slate-200/80 flex items-center justify-center">
+          <div className="w-[100px] xs:w-[120px] sm:w-[140px] md:w-[150px] lg:w-[155px] xl:w-[175px] shrink-0 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 flex items-center justify-center">
             {project.thumbnail ? (
               <img
                 src={project.thumbnail}
@@ -90,15 +90,15 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                       {statusBadge}
                     </div>
                   )}
-                  <h3 className="font-sans font-bold text-lg sm:text-xl text-slate-950 tracking-tight leading-snug truncate">
+                  <h3 className="font-sans font-bold text-lg sm:text-xl text-slate-950 dark:text-white tracking-tight leading-snug truncate">
                     {project.title}
                   </h3>
                 </div>
-                <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 group-hover:text-slate-950 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 mt-0.5" />
+                <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 dark:text-slate-500 group-hover:text-slate-950 dark:group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 mt-0.5" />
               </div>
 
               {/* Description */}
-              <p className="font-sans text-xs sm:text-sm text-slate-600 line-clamp-2 leading-relaxed">
+              <p className="font-sans text-xs sm:text-sm text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
                 {project.shortDescription || project.subtitle}
               </p>
             </div>
@@ -108,7 +108,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               {displayTags.map((tag) => (
                 <span
                   key={tag}
-                  className="font-mono text-[10px] tracking-wider px-2.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200 uppercase font-medium"
+                  className="font-mono text-[10px] tracking-wider px-2.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 uppercase font-medium"
                 >
                   {tag}
                 </span>
@@ -161,7 +161,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         aria-label={
           isFlippedManual ? `Flip to front of ${project.title}` : `Flip to back of ${project.title}`
         }
-        className="sm:hidden absolute bottom-2 right-2 z-10 p-1.5 rounded-full bg-slate-900/10 hover:bg-slate-900/20 text-slate-700 transition-colors backdrop-blur-sm"
+        className="sm:hidden absolute bottom-2 right-2 z-10 p-1.5 rounded-full bg-slate-900/10 dark:bg-white/10 hover:bg-slate-900/20 dark:hover:bg-white/20 text-slate-700 dark:text-slate-300 transition-colors backdrop-blur-sm"
         title="Flip Card Preview"
       >
         <RotateCw className="w-3 h-3" />

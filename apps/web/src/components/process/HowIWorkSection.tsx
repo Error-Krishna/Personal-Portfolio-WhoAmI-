@@ -48,26 +48,26 @@ export const HowIWorkSection: React.FC = () => {
   return (
     <section
       id="how-it-works"
-      className="relative w-full bg-[#f8f6f0] text-[#0f1117] selection:bg-black selection:text-white overflow-hidden bg-grain px-6 sm:px-10 lg:px-12 py-20 lg:py-28 border-t border-slate-300/80"
+      className="relative w-full bg-[#f8f6f0] text-[#0f1117] dark:bg-[#0b0d13] dark:text-slate-100 selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black overflow-hidden bg-grain px-6 sm:px-10 lg:px-12 py-20 lg:py-28 border-t border-slate-300/80 dark:border-slate-800 transition-colors duration-300"
     >
       <div className="w-full max-w-[1536px] mx-auto">
         {/* Section Header / Kicker */}
         <div className="flex items-center gap-4 mb-4">
-          <span className="font-mono text-[11px] sm:text-xs tracking-[0.25em] font-bold text-slate-800 uppercase">
+          <span className="font-mono text-[11px] sm:text-xs tracking-[0.25em] font-bold text-slate-800 dark:text-slate-300 uppercase">
             HOW IT WORKS
           </span>
-          <div className="w-16 sm:w-24 h-[1px] bg-slate-400/80" />
+          <div className="w-16 sm:w-24 h-[1px] bg-slate-400/80 dark:bg-slate-700" />
         </div>
 
         {/* Headline & Overview */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 mb-14 lg:mb-20 items-end">
           <div className="lg:col-span-7">
-            <h2 className="font-hero font-black [font-weight:1000] text-[9vw] sm:text-[7vw] lg:text-[5vw] xl:text-[68px] text-slate-950 uppercase tracking-[-0.035em] leading-[0.92]">
+            <h2 className="font-hero font-black [font-weight:1000] text-[9vw] sm:text-[7vw] lg:text-[5vw] xl:text-[68px] text-slate-950 dark:text-white uppercase tracking-[-0.035em] leading-[0.92]">
               HOW WE&apos;LL WORK TOGETHER<span className="text-red-600">.</span>
             </h2>
           </div>
           <div className="lg:col-span-5 pb-1">
-            <p className="font-sans text-base sm:text-lg text-slate-700 leading-relaxed max-w-xl">
+            <p className="font-sans text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed max-w-xl">
               A straightforward process to take your idea from the first conversation to a finished product.
             </p>
           </div>
@@ -77,7 +77,7 @@ export const HowIWorkSection: React.FC = () => {
         <div className="relative">
           {/* Mobile Continuous Vertical Track Line */}
           <div
-            className="lg:hidden absolute left-[13px] top-4 bottom-4 w-[1px] bg-slate-300"
+            className="lg:hidden absolute left-[13px] top-4 bottom-4 w-[1px] bg-slate-300 dark:bg-slate-800"
             aria-hidden="true"
           />
 
@@ -90,21 +90,21 @@ export const HowIWorkSection: React.FC = () => {
                 {/* Desktop Horizontal Connector Line (steps 01-04) */}
                 {index < PROCESS_STEPS.length - 1 && (
                   <div
-                    className="hidden lg:block absolute top-[14px] left-[28px] right-[-20px] h-[1px] bg-slate-300 pointer-events-none"
+                    className="hidden lg:block absolute top-[14px] left-[28px] right-[-20px] h-[1px] bg-slate-300 dark:bg-slate-800 pointer-events-none"
                     aria-hidden="true"
                   />
                 )}
 
                 {/* Timeline Marker Node */}
                 <div
-                  className="absolute left-0 top-3 lg:static lg:mb-4 w-7 h-7 rounded-full bg-[#f8f6f0] border-2 border-slate-300 group-hover:border-red-600 transition-colors flex items-center justify-center z-10 shrink-0"
+                  className="absolute left-0 top-3 lg:static lg:mb-4 w-7 h-7 rounded-full bg-[#f8f6f0] dark:bg-[#0b0d13] border-2 border-slate-300 dark:border-slate-700 group-hover:border-red-600 transition-colors flex items-center justify-center z-10 shrink-0"
                   aria-hidden="true"
                 >
-                  <span className="w-2 h-2 rounded-full bg-slate-400 group-hover:bg-red-600 transition-colors" />
+                  <span className="w-2 h-2 rounded-full bg-slate-400 dark:bg-slate-600 group-hover:bg-red-600 transition-colors" />
                 </div>
 
                 {/* Compact Step Card */}
-                <div className="bg-white rounded-xl p-5 sm:p-6 border border-slate-200/90 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:border-slate-900/40 hover:shadow-[0_4px_16px_rgba(0,0,0,0.05)] transition-all flex flex-col justify-between h-full">
+                <div className="bg-white dark:bg-[#131620] rounded-xl p-5 sm:p-6 border border-slate-200/90 dark:border-slate-800 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:border-slate-900/40 dark:hover:border-slate-600 hover:shadow-[0_4px_16px_rgba(0,0,0,0.05)] transition-all flex flex-col justify-between h-full">
                   <div>
                     {/* Step Number & Title */}
                     <div className="flex items-baseline gap-2.5 mb-2.5">
@@ -114,13 +114,13 @@ export const HowIWorkSection: React.FC = () => {
                       <span className="font-mono text-sm text-slate-400 font-normal" aria-hidden="true">
                         —
                       </span>
-                      <h3 className="font-sans font-bold text-base sm:text-lg text-slate-950 tracking-tight uppercase">
+                      <h3 className="font-sans font-bold text-base sm:text-lg text-slate-950 dark:text-white tracking-tight uppercase">
                         {step.title}
                       </h3>
                     </div>
 
                     {/* 1–2 Line Description */}
-                    <p className="font-sans text-xs sm:text-[13px] text-slate-600 leading-relaxed">
+                    <p className="font-sans text-xs sm:text-[13px] text-slate-600 dark:text-slate-400 leading-relaxed">
                       {step.description}
                     </p>
                   </div>
@@ -135,10 +135,10 @@ export const HowIWorkSection: React.FC = () => {
           <a
             href="#contact"
             onClick={scrollToContact}
-            className="inline-flex items-center gap-3 px-6 py-3.5 bg-slate-950 text-white font-mono text-xs sm:text-sm font-bold tracking-wider uppercase rounded-full hover:bg-red-600 transition-all shadow-sm active:scale-[0.98] group cursor-pointer"
+            className="inline-flex items-center gap-3 px-6 py-3.5 bg-slate-950 text-white dark:bg-white dark:text-slate-950 font-mono text-xs sm:text-sm font-bold tracking-wider uppercase rounded-full hover:bg-red-600 dark:hover:bg-red-600 dark:hover:text-white transition-all shadow-sm active:scale-[0.98] group cursor-pointer"
           >
             <span>HAVE A PROJECT IN MIND? LET&apos;S TALK</span>
-            <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-4 h-4 text-white dark:text-slate-950 group-hover:text-white group-hover:translate-x-1 transition-transform" />
           </a>
         </div>
       </div>

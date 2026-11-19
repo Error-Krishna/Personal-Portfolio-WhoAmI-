@@ -12,21 +12,21 @@ export const OtherProjectsNav: React.FC<OtherProjectsNavProps> = ({ projects }) 
   if (!projects || projects.length === 0) return null;
 
   return (
-    <div className="w-full pt-16 sm:pt-20 border-t border-slate-300/80">
+    <div className="w-full pt-16 sm:pt-20 border-t border-slate-300/80 dark:border-slate-800 transition-colors">
       {/* Top Header Row */}
       <div className="flex items-center justify-between gap-4 mb-6">
         <div>
-          <span className="font-mono text-xs tracking-widest text-slate-800 font-bold uppercase block">
+          <span className="font-mono text-xs tracking-widest text-slate-800 dark:text-slate-300 font-bold uppercase block">
             OTHER PROJECTS
           </span>
-          <p className="font-sans text-xs text-slate-500 mt-0.5">
+          <p className="font-sans text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             Explore other things I've built.
           </p>
         </div>
 
         <Link
           to="/#projects"
-          className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider font-bold text-slate-800 hover:text-red-600 transition-colors"
+          className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider font-bold text-slate-800 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-500 transition-colors"
         >
           <span>Explore All Projects</span>
           <ArrowUpRight className="w-4 h-4" />
@@ -39,10 +39,10 @@ export const OtherProjectsNav: React.FC<OtherProjectsNavProps> = ({ projects }) 
           <Link
             key={item.slug}
             to={`/work/${item.slug}`}
-            className="group p-3 sm:p-3.5 rounded-xl bg-white border border-slate-200/90 hover:border-slate-950/60 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] transition-all flex items-center gap-3.5 select-none"
+            className="group p-3 sm:p-3.5 rounded-xl bg-white dark:bg-[#131620] border border-slate-200/90 dark:border-slate-800 hover:border-slate-950/60 dark:hover:border-slate-600 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] transition-all flex items-center gap-3.5 select-none"
           >
             {/* Small Thumbnail */}
-            <div className="w-14 h-12 shrink-0 rounded-lg overflow-hidden bg-slate-100 border border-slate-200/80 flex items-center justify-center">
+            <div className="w-14 h-12 shrink-0 rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 flex items-center justify-center">
               {item.thumbnail ? (
                 <img
                   src={item.thumbnail}
@@ -68,10 +68,10 @@ export const OtherProjectsNav: React.FC<OtherProjectsNavProps> = ({ projects }) 
 
             {/* Title and Arrow */}
             <div className="flex-1 min-w-0 flex items-center justify-between gap-1.5">
-              <span className="font-sans font-bold text-sm text-slate-900 group-hover:text-red-600 transition-colors truncate">
+              <span className="font-sans font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors truncate">
                 {item.title}
               </span>
-              <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-slate-950 group-hover:translate-x-1 transition-all shrink-0" />
+              <ArrowRight className="w-4 h-4 text-slate-400 dark:text-slate-500 group-hover:text-slate-950 dark:group-hover:text-white group-hover:translate-x-1 transition-all shrink-0" />
             </div>
           </Link>
         ))}
