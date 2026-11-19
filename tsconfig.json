@@ -6,6 +6,9 @@
     "moduleResolution": "NodeNext",
     "noEmit": true
   },
-  "include": ["api/**/*"],
-  "exclude": ["apps/**/*", "packages/**/*", "node_modules", "dist"]
+  "include": [
+    "api/**/*",
+    "apps/api/src/common/types/**/*"
+  ],
+  "exclude": ["node_modules", "dist"]
 }

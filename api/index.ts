@@ -1,5 +1,5 @@
-import { createApp } from '../apps/api/dist/app.js';
-import { connectDatabase } from '../apps/api/dist/config/database.js';
+import { createApp } from '../apps/api/src/app.js';
+import { connectDatabase } from '../apps/api/src/config/database.js';
 
 // Trigger database connection asynchronously on cold start if MONGODB_URI is provided
 if (process.env.MONGODB_URI) {
