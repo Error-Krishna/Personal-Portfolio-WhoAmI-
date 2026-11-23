@@ -68,7 +68,8 @@ export const HowIWorkSection: React.FC = () => {
           </div>
           <div className="lg:col-span-5 pb-1">
             <p className="font-sans text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed max-w-xl">
-              A straightforward process to take your idea from the first conversation to a finished product.
+              A straightforward process to take your idea from the first conversation to a finished
+              product.
             </p>
           </div>
         </div>
@@ -111,7 +112,10 @@ export const HowIWorkSection: React.FC = () => {
                       <span className="font-mono font-black text-xl sm:text-2xl text-red-600 tracking-tight">
                         {step.number}
                       </span>
-                      <span className="font-mono text-sm text-slate-400 font-normal" aria-hidden="true">
+                      <span
+                        className="font-mono text-sm text-slate-400 font-normal"
+                        aria-hidden="true"
+                      >
                         —
                       </span>
                       <h3 className="font-sans font-bold text-base sm:text-lg text-slate-950 dark:text-white tracking-tight uppercase">

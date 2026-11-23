@@ -41,19 +41,19 @@ The repository is structured as a high-performance monorepo using **pnpm workspa
 
 All commands should be executed from the monorepo root using `pnpm`:
 
-| Action | Command | Description |
-| :--- | :--- | :--- |
-| **Install Dependencies** | `pnpm install` | Installs all monorepo dependencies |
-| **Start Development** | `pnpm run dev` | Runs web (port 5173) and api (port 5001) in parallel |
-| **Run Web Dev Only** | `pnpm --filter @portfolio/web dev` | Runs Vite dev server at `http://localhost:5173` |
-| **Run API Dev Only** | `pnpm --filter @portfolio/api dev` | Runs API server at `http://localhost:5001` |
-| **Typecheck** | `pnpm run typecheck` | Executes `tsc --noEmit` across all workspace packages |
-| **Run Web Tests** | `pnpm --filter @portfolio/web test` | Runs all 12 frontend test suites (81 unit/e2e tests) |
-| **Run API Tests** | `pnpm --filter @portfolio/api test` | Runs all backend test suites (4 tests) |
-| **Production Build** | `pnpm run build` | Compiles contracts, builds API, and generates production web bundle |
-| **Synchronize Config** | `pnpm run sync-config` | Validates JSON and mirrors master config to web app |
-| **Clean Artifacts** | `pnpm run clean` | Cleans all `dist`, `build`, and `.turbo` cache directories |
-| **Environment Check** | `pnpm run check-env` | Verifies Node.js version and `.env` presence |
+| Action                   | Command                             | Description                                                         |
+| :----------------------- | :---------------------------------- | :------------------------------------------------------------------ |
+| **Install Dependencies** | `pnpm install`                      | Installs all monorepo dependencies                                  |
+| **Start Development**    | `pnpm run dev`                      | Runs web (port 5173) and api (port 5001) in parallel                |
+| **Run Web Dev Only**     | `pnpm --filter @portfolio/web dev`  | Runs Vite dev server at `http://localhost:5173`                     |
+| **Run API Dev Only**     | `pnpm --filter @portfolio/api dev`  | Runs API server at `http://localhost:5001`                          |
+| **Typecheck**            | `pnpm run typecheck`                | Executes `tsc --noEmit` across all workspace packages               |
+| **Run Web Tests**        | `pnpm --filter @portfolio/web test` | Runs all 12 frontend test suites (81 unit/e2e tests)                |
+| **Run API Tests**        | `pnpm --filter @portfolio/api test` | Runs all backend test suites (4 tests)                              |
+| **Production Build**     | `pnpm run build`                    | Compiles contracts, builds API, and generates production web bundle |
+| **Synchronize Config**   | `pnpm run sync-config`              | Validates JSON and mirrors master config to web app                 |
+| **Clean Artifacts**      | `pnpm run clean`                    | Cleans all `dist`, `build`, and `.turbo` cache directories          |
+| **Environment Check**    | `pnpm run check-env`                | Verifies Node.js version and `.env` presence                        |
 
 ---
 
@@ -61,17 +61,17 @@ All commands should be executed from the monorepo root using `pnpm`:
 
 Environment variables are defined in `.env` at the monorepo root. A template is provided in `.env.example`:
 
-| Variable | Location | Default / Example | Purpose |
-| :--- | :--- | :--- | :--- |
-| `PORT` | Root `.env` | `5001` | Port for Express API server |
-| `NODE_ENV` | Root `.env` | `development` / `production` | Application runtime environment |
-| `API_PREFIX` | Root `.env` | `/api/v1` | URL prefix for REST routes |
-| `CORS_ORIGIN` | Root `.env` | `http://localhost:5173` | Allowed origin for frontend API requests |
-| `MONGODB_URI` | Root `.env` | `mongodb://localhost:27017/krishna_portfolio` | Database connection string |
-| `RATE_LIMIT_WINDOW_MS` | Root `.env` | `900000` (15 min) | Rate limiter window in milliseconds |
-| `RATE_LIMIT_MAX_REQUESTS` | Root `.env` | `100` | Max requests per rate limit window |
-| `LOG_LEVEL` | Root `.env` | `debug` / `info` | Logging verbosity |
-| `VITE_API_BASE_URL` | Root `.env` | `http://localhost:5001/api/v1` | Frontend API client base URL |
+| Variable                  | Location    | Default / Example                             | Purpose                                  |
+| :------------------------ | :---------- | :-------------------------------------------- | :--------------------------------------- |
+| `PORT`                    | Root `.env` | `5001`                                        | Port for Express API server              |
+| `NODE_ENV`                | Root `.env` | `development` / `production`                  | Application runtime environment          |
+| `API_PREFIX`              | Root `.env` | `/api/v1`                                     | URL prefix for REST routes               |
+| `CORS_ORIGIN`             | Root `.env` | `http://localhost:5173`                       | Allowed origin for frontend API requests |
+| `MONGODB_URI`             | Root `.env` | `mongodb://localhost:27017/krishna_portfolio` | Database connection string               |
+| `RATE_LIMIT_WINDOW_MS`    | Root `.env` | `900000` (15 min)                             | Rate limiter window in milliseconds      |
+| `RATE_LIMIT_MAX_REQUESTS` | Root `.env` | `100`                                         | Max requests per rate limit window       |
+| `LOG_LEVEL`               | Root `.env` | `debug` / `info`                              | Logging verbosity                        |
+| `VITE_API_BASE_URL`       | Root `.env` | `http://localhost:5001/api/v1`                | Frontend API client base URL             |
 
 ---
 
@@ -201,6 +201,7 @@ pnpm run sync-config
 ```
 
 Or manually:
+
 ```bash
 cp content/site_config.json apps/web/src/content/site_config.json
 ```

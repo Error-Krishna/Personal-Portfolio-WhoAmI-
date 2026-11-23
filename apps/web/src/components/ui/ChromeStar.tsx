@@ -34,7 +34,14 @@ export const ChromeStar: React.FC<ChromeStarProps> = ({
       >
         <defs>
           {/* Main Chrome Body Metallic Gradient */}
-          <linearGradient id={gradOuter} x1="30" y1="20" x2="170" y2="180" gradientUnits="userSpaceOnUse">
+          <linearGradient
+            id={gradOuter}
+            x1="30"
+            y1="20"
+            x2="170"
+            y2="180"
+            gradientUnits="userSpaceOnUse"
+          >
             <stop offset="0%" stopColor="#ffffff" />
             <stop offset="18%" stopColor="#d5d8e2" />
             <stop offset="35%" stopColor="#8c90a3" />
@@ -46,7 +53,14 @@ export const ChromeStar: React.FC<ChromeStarProps> = ({
           </linearGradient>
 
           {/* Diagonal Specular Sheen (Lavender/Chrome Glint) */}
-          <linearGradient id={gradSheen} x1="0" y1="100" x2="200" y2="100" gradientUnits="userSpaceOnUse">
+          <linearGradient
+            id={gradSheen}
+            x1="0"
+            y1="100"
+            x2="200"
+            y2="100"
+            gradientUnits="userSpaceOnUse"
+          >
             <stop offset="0%" stopColor="#ffffff" stopOpacity="0.8" />
             <stop offset="30%" stopColor="#b4b9d2" stopOpacity="0.4" />
             <stop offset="50%" stopColor="#9a8ef6" stopOpacity="0.6" />
@@ -63,7 +77,14 @@ export const ChromeStar: React.FC<ChromeStarProps> = ({
           </radialGradient>
 
           {/* Puffy 3D bevel shading */}
-          <linearGradient id={gradShade} x1="100" y1="0" x2="100" y2="200" gradientUnits="userSpaceOnUse">
+          <linearGradient
+            id={gradShade}
+            x1="100"
+            y1="0"
+            x2="100"
+            y2="200"
+            gradientUnits="userSpaceOnUse"
+          >
             <stop offset="0%" stopColor="#ffffff" stopOpacity="0.7" />
             <stop offset="50%" stopColor="#1e2029" stopOpacity="0.2" />
             <stop offset="100%" stopColor="#07080b" stopOpacity="0.85" />
@@ -117,11 +138,7 @@ export const ChromeStar: React.FC<ChromeStarProps> = ({
           opacity="0.9"
         />
         {/* Top-Left Crisp Ridge */}
-        <path
-          d="M 100,100 L 10,100 C 65,100 100,65 100,10 Z"
-          fill="#ffffff"
-          opacity="0.4"
-        />
+        <path d="M 100,100 L 10,100 C 65,100 100,65 100,10 Z" fill="#ffffff" opacity="0.4" />
 
         {/* Specular White Rim / Light Reflex on Edge */}
         <path
@@ -141,7 +158,14 @@ export const ChromeStar: React.FC<ChromeStarProps> = ({
         />
 
         {/* Central Glint Flare */}
-        <circle cx="100" cy="100" r="5" fill="#ffffff" opacity="0.9" filter={`url(#blur-${starId})`} />
+        <circle
+          cx="100"
+          cy="100"
+          r="5"
+          fill="#ffffff"
+          opacity="0.9"
+          filter={`url(#blur-${starId})`}
+        />
         <circle cx="100" cy="100" r="2.5" fill="#ffffff" />
       </svg>
     </div>

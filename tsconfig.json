@@ -6,10 +6,6 @@
     "moduleResolution": "NodeNext",
     "noEmit": true
   },
-  "include": [
-    "api/**/*",
-    "worker/**/*",
-    "apps/api/src/common/types/**/*"
-  ],
+  "include": ["api/**/*", "worker/**/*", "apps/api/src/common/types/**/*"],
   "exclude": ["node_modules", "dist"]
 }

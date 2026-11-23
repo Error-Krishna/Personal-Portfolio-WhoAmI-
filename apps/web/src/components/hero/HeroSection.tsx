@@ -103,7 +103,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
             <div
               key={side.label}
               className={`flex items-center gap-2.5 ${
-                side.isPrimary ? 'text-slate-950 dark:text-white font-bold' : 'text-slate-400 dark:text-slate-500 font-medium'
+                side.isPrimary
+                  ? 'text-slate-950 dark:text-white font-bold'
+                  : 'text-slate-400 dark:text-slate-500 font-medium'
               }`}
             >
               {side.isPrimary ? (
@@ -126,7 +128,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
           ========================================================================= */}
       {/* Desktop Coordinate Placed Headline */}
       <div className="hidden lg:block select-none pointer-events-none">
-
         {/* ROW 2: "SOFTWARE" */}
         <div className="absolute left-[16%] top-[28.5%] z-10">
           <span className="font-hero font-black [font-weight:1000] text-[9.8vw] xl:text-[150px] text-slate-950 dark:text-white uppercase tracking-[-0.035em] leading-[0.88] block">
@@ -173,7 +174,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
 
           {/* Mobile fine print roles */}
           <div className="flex flex-wrap items-center justify-center gap-2 mt-3 font-mono text-[10.5px] sm:text-[11px] text-slate-600 dark:text-slate-400">
-            <span className="text-purple-600 dark:text-purple-400 font-bold">● Software Engineer</span>
+            <span className="text-purple-600 dark:text-purple-400 font-bold">
+              ● Software Engineer
+            </span>
             <span>&middot;</span>
             <span>Full-Stack Developer</span>
             <span>&middot;</span>
@@ -308,7 +311,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
               <div
                 key={item.label}
                 className={`relative z-10 w-2.5 h-2.5 rounded-full border border-slate-900 dark:border-slate-400 transition-all ${
-                  isActive ? 'bg-slate-950 dark:bg-white scale-125' : 'bg-[#f8f6f0] dark:bg-[#0b0d13]'
+                  isActive
+                    ? 'bg-slate-950 dark:bg-white scale-125'
+                    : 'bg-[#f8f6f0] dark:bg-[#0b0d13]'
                 }`}
               />
             );
@@ -327,7 +332,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ hideStaticPortrait = f
                   scrollTo(item.id);
                 }}
                 className={`text-left transition-colors ${
-                  isActive ? 'text-slate-950 dark:text-white font-bold' : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+                  isActive
+                    ? 'text-slate-950 dark:text-white font-bold'
+                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
                 }`}
               >
                 {item.label}

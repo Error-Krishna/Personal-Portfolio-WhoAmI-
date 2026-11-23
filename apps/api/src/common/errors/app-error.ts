@@ -75,7 +75,13 @@ export class RateLimitError extends AppError {
 
 export class InternalServerError extends AppError {
   constructor(message: string = 'An unexpected internal server error occurred') {
-    super(message, HttpStatus.INTERNAL_SERVER_ERROR, ErrorCode.INTERNAL_SERVER_ERROR, undefined, false);
+    super(
+      message,
+      HttpStatus.INTERNAL_SERVER_ERROR,
+      ErrorCode.INTERNAL_SERVER_ERROR,
+      undefined,
+      false
+    );
   }
 }
 

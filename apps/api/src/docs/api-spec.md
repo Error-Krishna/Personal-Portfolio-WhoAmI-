@@ -1,9 +1,11 @@
 # API Specification
 
 ## Base URL
+
 `/api/v1`
 
 ## Standard Success Envelope
+
 ```json
 {
   "success": true,
@@ -13,7 +15,9 @@
 ```
 
 ## Standard Error Envelope
+
 All error responses consistently return:
+
 ```json
 {
   "success": false,
@@ -37,5 +41,6 @@ All error responses consistently return:
 ## Endpoints
 
 ### 1. Health Check
+
 - **Route:** `GET /health`
 - **Description:** Verifies service availability, database connectivity, and uptime.

@@ -10,7 +10,9 @@ async function bootstrap() {
   await connectDatabase();
 
   const server = app.listen(env.PORT, () => {
-    logger.info(`🚀 API Server running on http://localhost:${env.PORT}${env.API_PREFIX} [${env.NODE_ENV}]`);
+    logger.info(
+      `🚀 API Server running on http://localhost:${env.PORT}${env.API_PREFIX} [${env.NODE_ENV}]`
+    );
   });
 
   // Graceful shutdown handling

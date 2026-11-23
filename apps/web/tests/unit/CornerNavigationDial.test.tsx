@@ -372,4 +372,3 @@ describe('CornerNavigationDial Component', () => {
     expect(backdrop.style.pointerEvents).toBe('none');
   });
 });
-

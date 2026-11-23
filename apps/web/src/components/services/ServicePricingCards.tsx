@@ -65,7 +65,9 @@ export const ServicePricingCards: React.FC<ServicePricingCardsProps> = ({ onSele
                   <span className="font-sans text-xs font-bold text-slate-950 dark:text-white block">
                     Focused Scope
                   </span>
-                  <span className="font-sans text-[11px] text-slate-600 dark:text-slate-400">No ambiguity</span>
+                  <span className="font-sans text-[11px] text-slate-600 dark:text-slate-400">
+                    No ambiguity
+                  </span>
                 </div>
               </div>
 
@@ -77,7 +79,9 @@ export const ServicePricingCards: React.FC<ServicePricingCardsProps> = ({ onSele
                   <span className="font-sans text-xs font-bold text-slate-950 dark:text-white block">
                     Transparent Pricing
                   </span>
-                  <span className="font-sans text-[11px] text-slate-600 dark:text-slate-400">Know what to expect</span>
+                  <span className="font-sans text-[11px] text-slate-600 dark:text-slate-400">
+                    Know what to expect
+                  </span>
                 </div>
               </div>
 
@@ -89,7 +93,9 @@ export const ServicePricingCards: React.FC<ServicePricingCardsProps> = ({ onSele
                   <span className="font-sans text-xs font-bold text-slate-950 dark:text-white block">
                     Post-Launch Support
                   </span>
-                  <span className="font-sans text-[11px] text-slate-600 dark:text-slate-400">Ongoing assistance</span>
+                  <span className="font-sans text-[11px] text-slate-600 dark:text-slate-400">
+                    Ongoing assistance
+                  </span>
                 </div>
               </div>
             </div>

@@ -16,4 +16,3 @@ if (typeof window !== 'undefined') {
     } as unknown as typeof IntersectionObserver;
   }
 }
-

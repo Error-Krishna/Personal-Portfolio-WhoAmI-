@@ -31,7 +31,8 @@ export const CreativeSection: React.FC = () => {
           <div className="lg:col-span-5 pb-1">
             <p className="font-sans text-base sm:text-lg text-slate-300 leading-relaxed max-w-xl">
               Software engineering meets visual storytelling. Editing product demonstrations,
-              technical breakdowns, and high-retention short-form video that resonates with audiences.
+              technical breakdowns, and high-retention short-form video that resonates with
+              audiences.
             </p>
           </div>
         </div>

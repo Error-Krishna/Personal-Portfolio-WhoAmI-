@@ -306,7 +306,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
                         className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-700 font-sans text-sm text-slate-950 dark:text-white bg-slate-50/50 dark:bg-slate-900/60 focus:bg-white dark:focus:bg-slate-900 focus:outline-none focus:border-slate-950 dark:focus:border-slate-400 transition-colors"
                       >
                         {siteConfig.contact.projectTypes.map((type) => (
-                          <option key={type} value={type} className="dark:bg-slate-900 dark:text-white">
+                          <option
+                            key={type}
+                            value={type}
+                            className="dark:bg-slate-900 dark:text-white"
+                          >
                             {type}
                           </option>
                         ))}
@@ -328,7 +332,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService =
                         className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-700 font-sans text-sm text-slate-950 dark:text-white bg-slate-50/50 dark:bg-slate-900/60 focus:bg-white dark:focus:bg-slate-900 focus:outline-none focus:border-slate-950 dark:focus:border-slate-400 transition-colors"
                       >
                         {siteConfig.contact.budgetOptions.map((budget) => (
-                          <option key={budget} value={budget} className="dark:bg-slate-900 dark:text-white">
+                          <option
+                            key={budget}
+                            value={budget}
+                            className="dark:bg-slate-900 dark:text-white"
+                          >
                             {budget}
                           </option>
                         ))}

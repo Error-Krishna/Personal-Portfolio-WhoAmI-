@@ -35,7 +35,9 @@ export class ApiClientError extends Error {
     );
   }
 
-  static networkError(message: string = 'Network connection failed. Please check your internet.'): ApiClientError {
+  static networkError(
+    message: string = 'Network connection failed. Please check your internet.'
+  ): ApiClientError {
     return new ApiClientError(message, 'NETWORK_ERROR', 0);
   }
 

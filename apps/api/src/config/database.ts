@@ -33,7 +33,10 @@ export async function connectDatabase(): Promise<boolean> {
     return true;
   } catch (error) {
     isConnected = false;
-    logger.warn('MongoDB initial connection failed. Continuing in non-persisted/offline mode:', error);
+    logger.warn(
+      'MongoDB initial connection failed. Continuing in non-persisted/offline mode:',
+      error
+    );
     return false;
   }
 }

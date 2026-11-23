@@ -113,7 +113,13 @@ export const ProjectCaseStudySections: React.FC<ProjectCaseStudySectionsProps> =
                   : 'text-slate-500 hover:text-slate-950 dark:text-slate-400 dark:hover:text-white font-medium'
               }`}
             >
-              <span className={isActive ? 'text-red-600 dark:text-red-500 font-bold' : 'text-slate-400 dark:text-slate-500'}>
+              <span
+                className={
+                  isActive
+                    ? 'text-red-600 dark:text-red-500 font-bold'
+                    : 'text-slate-400 dark:text-slate-500'
+                }
+              >
                 {tab.number}
               </span>
               <span>{tab.label}</span>

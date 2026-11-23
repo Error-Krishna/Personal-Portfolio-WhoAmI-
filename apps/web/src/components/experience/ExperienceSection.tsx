@@ -33,8 +33,8 @@ export const ExperienceSection: React.FC = () => {
           </div>
           <div className="lg:col-span-5 pb-1">
             <p className="font-sans text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed max-w-xl">
-              From foundational computer science studies to co-founding manufacturing software
-              and shipping open-source developer tooling.
+              From foundational computer science studies to co-founding manufacturing software and
+              shipping open-source developer tooling.
             </p>
           </div>
         </div>

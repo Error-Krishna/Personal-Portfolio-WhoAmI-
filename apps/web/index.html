@@ -2,12 +2,69 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Krishna Goyal | Portfolio</title>
-    <meta name="description" content="Portfolio of Krishna Goyal - Full Stack Developer, Engineer & Creator" />
+    <title>Krishna Goyal | Full-Stack Developer & Product Builder</title>
+    <meta
+      name="description"
+      content="Portfolio of Krishna Goyal — Full-Stack Developer, Computer Science Engineer & Product Builder specializing in high-performance web applications, scalable APIs, and intuitive user experiences."
+    />
+    <link rel="canonical" href="https://errorkrishna.com/" />
+
+    <!-- Open Graph Metadata -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://errorkrishna.com/" />
+    <meta property="og:title" content="Krishna Goyal | Full-Stack Developer & Product Builder" />
+    <meta
+      property="og:description"
+      content="Full-Stack Developer & Product Builder building real-world software, SaaS systems, and digital experiences."
+    />
+    <meta property="og:image" content="https://errorkrishna.com/images/image-removebg-preview.png" />
+    <meta property="og:site_name" content="Krishna Goyal Portfolio" />
+
+    <!-- Twitter / X Card Metadata -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://errorkrishna.com/" />
+    <meta name="twitter:title" content="Krishna Goyal | Full-Stack Developer & Product Builder" />
+    <meta
+      name="twitter:description"
+      content="Full-Stack Developer & Product Builder building real-world software, SaaS systems, and digital experiences."
+    />
+    <meta name="twitter:image" content="https://errorkrishna.com/images/image-removebg-preview.png" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://errorkrishna.com/#person",
+            "name": "Krishna Goyal",
+            "jobTitle": "Full-Stack Developer & Product Builder",
+            "url": "https://errorkrishna.com",
+            "email": "iamkrishnagoyal@gmail.com",
+            "sameAs": [
+              "https://github.com/Error-Krishna",
+              "https://linkedin.com/in/krishna2611"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://errorkrishna.com/#website",
+            "url": "https://errorkrishna.com",
+            "name": "Krishna Goyal Portfolio",
+            "author": {
+              "@id": "https://errorkrishna.com/#person"
+            }
+          }
+        ]
+      }
+    </script>
+
+    <!-- Theme Initialization Script -->
     <script>
-      (function() {
+      (function () {
         try {
           var saved = localStorage.getItem('theme');
           if (saved === 'dark') {
@@ -25,7 +82,9 @@
       rel="stylesheet"
     />
   </head>
-  <body class="bg-[#f7f5f0] text-[#11141a] dark:bg-[#0b0d13] dark:text-[#f1f3f9] antialiased selection:bg-amber-500 selection:text-black transition-colors duration-300">
+  <body
+    class="bg-[#f7f5f0] text-[#11141a] dark:bg-[#0b0d13] dark:text-[#f1f3f9] antialiased selection:bg-amber-500 selection:text-black transition-colors duration-300"
+  >
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

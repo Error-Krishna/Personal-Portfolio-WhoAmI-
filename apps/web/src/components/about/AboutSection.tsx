@@ -54,14 +54,17 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ hideStaticPortrait =
           <div className="lg:col-span-4 flex flex-col justify-between h-full pt-1 lg:pt-3">
             {/* Bio paragraph with highlighted bold phrases */}
             <p className="font-sans text-[17px] sm:text-[19px] lg:text-[20px] xl:text-[22px] text-slate-900 dark:text-slate-200 leading-[1.38] font-normal">
-              I'm <strong className="font-bold text-slate-950 dark:text-white">Krishna Goyal</strong>, a final year
-              Computer Science student at{' '}
-              <strong className="font-bold text-slate-950 dark:text-white">VIT-AP</strong>, focused on building
-              real-world products and solving meaningful problems. I work as a{' '}
-              <strong className="font-bold text-slate-950 dark:text-white">full-stack developer</strong> and also
-              create content through{' '}
-              <strong className="font-bold text-slate-950 dark:text-white">video editing</strong>, combining tech
-              and creativity to bring ideas to life.
+              I'm{' '}
+              <strong className="font-bold text-slate-950 dark:text-white">Krishna Goyal</strong>, a
+              final year Computer Science student at{' '}
+              <strong className="font-bold text-slate-950 dark:text-white">VIT-AP</strong>, focused
+              on building real-world products and solving meaningful problems. I work as a{' '}
+              <strong className="font-bold text-slate-950 dark:text-white">
+                full-stack developer
+              </strong>{' '}
+              and also create content through{' '}
+              <strong className="font-bold text-slate-950 dark:text-white">video editing</strong>,
+              combining tech and creativity to bring ideas to life.
             </p>
 
             {/* Divider line */}
@@ -145,7 +148,9 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ hideStaticPortrait =
                     {/* Node Dot */}
                     <div
                       className={`absolute -left-7 w-3 h-3 rounded-full transition-transform ${
-                        step.isFilled ? 'bg-slate-950 dark:bg-white' : 'border border-slate-900 dark:border-slate-500 bg-[#f8f6f0] dark:bg-[#0b0d13]'
+                        step.isFilled
+                          ? 'bg-slate-950 dark:bg-white'
+                          : 'border border-slate-900 dark:border-slate-500 bg-[#f8f6f0] dark:bg-[#0b0d13]'
                       }`}
                     />
                     {/* Label */}

@@ -221,7 +221,9 @@ describe('New Sections Suite', () => {
       expect(screen.getByText('03')).toBeInTheDocument();
       expect(screen.getByRole('heading', { name: /BUILD/i })).toBeInTheDocument();
       expect(
-        screen.getByText(/I develop your solution, share progress, and incorporate your feedback\./i)
+        screen.getByText(
+          /I develop your solution, share progress, and incorporate your feedback\./i
+        )
       ).toBeInTheDocument();
 
       expect(screen.getByText('04')).toBeInTheDocument();
@@ -293,9 +295,7 @@ describe('New Sections Suite', () => {
       );
 
       // Verify unified process section exists
-      expect(
-        screen.getByRole('heading', { name: /HOW WE'LL WORK TOGETHER/i })
-      ).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /HOW WE'LL WORK TOGETHER/i })).toBeInTheDocument();
       expect(container.querySelectorAll('#how-it-works')).toHaveLength(1);
 
       // Verify old separate "HOW I WORK WITH CLIENTS" headline is not present on the homepage

@@ -1,17 +1,3 @@
 # Deployment Guide
 
-## Production Build
-```bash
-# Build contracts, api, and web applications
-pnpm build
-```
-
-## Docker Deployment
-```bash
-# Start all containers using docker compose
-cd infra
-docker compose up --build -d
-```
-- Web: `http://localhost:3000`
-- API: `http://localhost:5000/api/v1`
-- MongoDB: `localhost:27017`
+Please refer to the comprehensive [DEPLOYMENT.md](file:///Users/krishnagoyal/Development/personal%20projects/krishna_portfolio/DEPLOYMENT.md) at the repository root for detailed runbooks on Cloudflare Workers with Static Assets (Active Production), Vercel serverless deployment, and Docker containerization.

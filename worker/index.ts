@@ -29,6 +29,9 @@ function corsHeaders(origin: string | null): Record<string, string> {
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Request-Id',
     'Access-Control-Max-Age': '86400',
+    'X-Content-Type-Options': 'nosniff',
+    'X-Frame-Options': 'SAMEORIGIN',
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
   };
 }
 
@@ -257,9 +260,7 @@ export default {
               success: false,
               error: {
                 code: 'EMAIL_SEND_FAILED',
-                message:
-                  resData.message ||
-                  'Failed to dispatch email via Resend provider.',
+                message: resData.message || 'Failed to dispatch email via Resend provider.',
               },
             }),
             {
@@ -297,8 +298,7 @@ export default {
             success: false,
             error: {
               code: 'DISPATCH_ERROR',
-              message:
-                err instanceof Error ? err.message : 'Network error during email dispatch.',
+              message: err instanceof Error ? err.message : 'Network error during email dispatch.',
             },
           }),
           {

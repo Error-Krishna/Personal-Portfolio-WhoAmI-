@@ -25,8 +25,8 @@ export const TrustSection: React.FC = () => {
           </div>
           <div className="lg:col-span-5 pb-1">
             <p className="font-sans text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed max-w-xl">
-              Engineering credibility built on transparent scopes, typed architecture, reliable delivery,
-              and thoughtful communication. Here is what you can depend on.
+              Engineering credibility built on transparent scopes, typed architecture, reliable
+              delivery, and thoughtful communication. Here is what you can depend on.
             </p>
           </div>
         </div>

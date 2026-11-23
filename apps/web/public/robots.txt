@@ -1,0 +1,9 @@
+# robots.txt for https://errorkrishna.com
+User-agent: *
+Allow: /
+
+# Host
+Host: https://errorkrishna.com
+
+# Sitemaps
+Sitemap: https://errorkrishna.com/sitemap.xml

@@ -161,7 +161,8 @@ export const Footer: React.FC = () => {
             © {currentYear} {siteConfig.personal.name}. ALL RIGHTS RESERVED.
           </div>
           <div>
-            BASED IN {siteConfig.personal.location.toUpperCase()} · TIMEZONE {siteConfig.personal.timezone}
+            BASED IN {siteConfig.personal.location.toUpperCase()} · TIMEZONE{' '}
+            {siteConfig.personal.timezone}
           </div>
         </div>
       </div>

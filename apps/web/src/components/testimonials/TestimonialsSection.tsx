@@ -1,8 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import {
-  getPublishedTestimonials,
-  type TestimonialItem,
-} from '../../lib/config/site-config.js';
+import { getPublishedTestimonials, type TestimonialItem } from '../../lib/config/site-config.js';
 
 const getInitials = (name: string): string => {
   if (!name) return 'CL';
@@ -148,11 +145,7 @@ export const TestimonialsSection: React.FC = () => {
                     isReducedMotion
                       ? 'transition-none'
                       : 'transition-transform duration-[1400ms] ease-[cubic-bezier(0.25,1,0.5,1)]'
-                  } ${
-                    isFlipped
-                      ? '[transform:rotateY(180deg)]'
-                      : '[transform:rotateY(0deg)]'
-                  }`}
+                  } ${isFlipped ? '[transform:rotateY(180deg)]' : '[transform:rotateY(0deg)]'}`}
                   data-flipped={isFlipped ? 'true' : 'false'}
                 >
                   {/* BACK FACE (Dark Theme) — Initial state showing company / product logo */}

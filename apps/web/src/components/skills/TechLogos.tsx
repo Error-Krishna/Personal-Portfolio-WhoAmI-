@@ -167,7 +167,11 @@ export const TechLogo: React.FC<TechLogoProps> = ({ name, size = 20, className =
           stroke="#336791"
           strokeWidth="2"
         />
-        <path d="M4 12C4 14.5 7 16.5 12 16.5C17 16.5 20 14.5 20 12" stroke="#336791" strokeWidth="2" />
+        <path
+          d="M4 12C4 14.5 7 16.5 12 16.5C17 16.5 20 14.5 20 12"
+          stroke="#336791"
+          strokeWidth="2"
+        />
         <path d="M4 7.5C4 10 7 12 12 12C17 12 20 10 20 7.5" stroke="#336791" strokeWidth="2" />
       </svg>
     );
@@ -221,15 +225,8 @@ export const TechLogo: React.FC<TechLogoProps> = ({ name, size = 20, className =
         fill="none"
         className={`text-[#dc382d] ${className}`}
       >
-        <path
-          d="M12 2L3 6.5V11L12 15.5L21 11V6.5L12 2Z"
-          fill="#dc382d"
-        />
-        <path
-          d="M3 13.5L12 18L21 13.5M3 17.5L12 22L21 17.5"
-          stroke="#dc382d"
-          strokeWidth="2"
-        />
+        <path d="M12 2L3 6.5V11L12 15.5L21 11V6.5L12 2Z" fill="#dc382d" />
+        <path d="M3 13.5L12 18L21 13.5M3 17.5L12 22L21 17.5" stroke="#dc382d" strokeWidth="2" />
       </svg>
     );
   }
@@ -252,15 +249,22 @@ export const TechLogo: React.FC<TechLogoProps> = ({ name, size = 20, className =
   }
 
   // Fallbacks to Lucide icons
-  if (norm.includes('express')) return <Cpu className={`text-slate-800 ${className}`} size={size} />;
-  if (norm.includes('django')) return <Layers className={`text-[#092e20] ${className}`} size={size} />;
-  if (norm.includes('flask')) return <Boxes className={`text-slate-800 ${className}`} size={size} />;
+  if (norm.includes('express'))
+    return <Cpu className={`text-slate-800 ${className}`} size={size} />;
+  if (norm.includes('django'))
+    return <Layers className={`text-[#092e20] ${className}`} size={size} />;
+  if (norm.includes('flask'))
+    return <Boxes className={`text-slate-800 ${className}`} size={size} />;
   if (norm.includes('api')) return <Network className={`text-red-600 ${className}`} size={size} />;
-  if (norm.includes('linux')) return <TerminalSquare className={`text-amber-600 ${className}`} size={size} />;
-  if (norm.includes('html') || norm.includes('css')) return <Layout className={`text-orange-600 ${className}`} size={size} />;
+  if (norm.includes('linux'))
+    return <TerminalSquare className={`text-amber-600 ${className}`} size={size} />;
+  if (norm.includes('html') || norm.includes('css'))
+    return <Layout className={`text-orange-600 ${className}`} size={size} />;
   if (norm.includes('video')) return <Film className={`text-red-500 ${className}`} size={size} />;
-  if (norm.includes('story')) return <Video className={`text-purple-600 ${className}`} size={size} />;
-  if (norm.includes('design') || norm.includes('ux')) return <Sparkles className={`text-pink-600 ${className}`} size={size} />;
+  if (norm.includes('story'))
+    return <Video className={`text-purple-600 ${className}`} size={size} />;
+  if (norm.includes('design') || norm.includes('ux'))
+    return <Sparkles className={`text-pink-600 ${className}`} size={size} />;
 
   return <Code className={`text-slate-700 ${className}`} size={size} />;
 };

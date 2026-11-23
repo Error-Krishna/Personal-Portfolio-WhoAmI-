@@ -136,7 +136,11 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
   // Passive section tracking via IntersectionObserver on homepage
   // Updates actualSectionId and previewedSectionId ONLY when user scrolls page normally
   useEffect(() => {
-    if (!isHomePage || typeof window === 'undefined' || typeof IntersectionObserver === 'undefined') {
+    if (
+      !isHomePage ||
+      typeof window === 'undefined' ||
+      typeof IntersectionObserver === 'undefined'
+    ) {
       return;
     }
 
@@ -627,7 +631,7 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
           {/* 4. Fine Technical Indexing Ticks along the arc */}
           {Array.from({ length: 25 }).map((_, i) => {
             const tickAngle = 10 + i * 2.9;
-            const tickLen = isInteractive ? (i % 4 === 0 ? 8 : 4) : (i % 4 === 0 ? 4 : 2);
+            const tickLen = isInteractive ? (i % 4 === 0 ? 8 : 4) : i % 4 === 0 ? 4 : 2;
             const p1 = polarToCartesian(tickAngle, trackRadius - tickLen);
             const p2 = polarToCartesian(tickAngle, trackRadius + tickLen);
             return (
@@ -638,7 +642,9 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
                 x2={p2.x}
                 y2={p2.y}
                 stroke={i % 4 === 0 ? 'rgba(255, 255, 255, 0.35)' : 'rgba(255, 255, 255, 0.15)'}
-                strokeWidth={isInteractive ? (i % 4 === 0 ? '1.2' : '0.8') : (i % 4 === 0 ? '0.9' : '0.6')}
+                strokeWidth={
+                  isInteractive ? (i % 4 === 0 ? '1.2' : '0.8') : i % 4 === 0 ? '0.9' : '0.6'
+                }
               />
             );
           })}
@@ -699,7 +705,13 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
                   cx={pos.x}
                   cy={pos.y}
                   r={isPreviewed ? '4' : '2.5'}
-                  fill={isPreviewed ? '#ef4444' : isActual ? 'rgba(255, 255, 255, 0.8)' : 'rgba(255, 255, 255, 0.45)'}
+                  fill={
+                    isPreviewed
+                      ? '#ef4444'
+                      : isActual
+                        ? 'rgba(255, 255, 255, 0.8)'
+                        : 'rgba(255, 255, 255, 0.45)'
+                  }
                   stroke={isPreviewed ? '#ffffff' : 'rgba(255, 255, 255, 0.2)'}
                   strokeWidth="1"
                   className="transition-all duration-300 group-hover:scale-125"
@@ -709,7 +721,10 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
                 {isInteractive && (
                   <text
                     x={polarToCartesian(dest.angle, trackRadius - (isMobile ? 20 : 24)).x}
-                    y={polarToCartesian(dest.angle, trackRadius - (isMobile ? 20 : 24)).y + (isMobile ? 3 : 3.5)}
+                    y={
+                      polarToCartesian(dest.angle, trackRadius - (isMobile ? 20 : 24)).y +
+                      (isMobile ? 3 : 3.5)
+                    }
                     textAnchor="middle"
                     fill={isPreviewed ? '#ffffff' : 'rgba(203, 213, 225, 0.85)'}
                     fontSize={isMobile ? '8' : '9.5'}
@@ -740,13 +755,19 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
           {/* Hub Icon / Indicator */}
           <g
             transform={`translate(${size - hubRadius * (isInteractive ? 0.65 : 0.72)}, ${
-              isInteractive ? (isMobile ? 4 : 5) : (isMobile ? 2 : 3)
+              isInteractive ? (isMobile ? 4 : 5) : isMobile ? 2 : 3
             })`}
             className="pointer-events-none"
           >
             <Compass
               className={`${
-                isInteractive ? (isMobile ? 'w-3.5 h-3.5' : 'w-4 h-4') : (isMobile ? 'w-2 h-2' : 'w-2.5 h-2.5')
+                isInteractive
+                  ? isMobile
+                    ? 'w-3.5 h-3.5'
+                    : 'w-4 h-4'
+                  : isMobile
+                    ? 'w-2 h-2'
+                    : 'w-2.5 h-2.5'
               } text-slate-300 opacity-80`}
             />
           </g>
@@ -759,7 +780,9 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
             onClick={() => setIsOpen(true)}
             aria-label={`Navigation dial: currently at ${displayDest.label}. Click to expand navigation menu.`}
             className={`absolute ${
-              isMobile ? 'bottom-1 left-1 px-1 py-0.5 text-[7.5px]' : 'bottom-1.5 left-1.5 px-1.5 py-0.5 text-[8.5px]'
+              isMobile
+                ? 'bottom-1 left-1 px-1 py-0.5 text-[7.5px]'
+                : 'bottom-1.5 left-1.5 px-1.5 py-0.5 text-[8.5px]'
             } flex items-center gap-1 rounded bg-black/70 border border-white/10 text-white font-mono font-bold tracking-wider hover:border-red-500/80 transition-all cursor-pointer shadow-sm`}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
@@ -783,9 +806,7 @@ export const CornerNavigationDial: React.FC<CornerNavigationDialProps> = ({
               </button>
             ) : (
               <div className="flex items-center gap-2 font-mono text-[9px] text-slate-400 uppercase tracking-widest bg-black/50 px-2 py-0.5 rounded border border-white/10">
-                <span className="text-red-400 font-bold">
-                  {isScrubbing ? 'SCRUB' : 'NAV DIAL'}
-                </span>
+                <span className="text-red-400 font-bold">{isScrubbing ? 'SCRUB' : 'NAV DIAL'}</span>
                 <span>/</span>
                 <span className="text-white font-bold">{displayDest.label}</span>
               </div>

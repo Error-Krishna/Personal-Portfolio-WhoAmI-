@@ -161,7 +161,9 @@ export const ServicePricingCard: React.FC<ServicePricingCardProps> = ({
         {/* Pricing Block */}
         <div
           className={`rounded-2xl p-3.5 sm:p-4 mb-3 border ${
-            isFeatured ? 'bg-white/[0.05] border-white/10' : 'bg-slate-50 dark:bg-slate-800/60 border-slate-200/80 dark:border-slate-700'
+            isFeatured
+              ? 'bg-white/[0.05] border-white/10'
+              : 'bg-slate-50 dark:bg-slate-800/60 border-slate-200/80 dark:border-slate-700'
           }`}
         >
           <div
@@ -183,7 +185,9 @@ export const ServicePricingCard: React.FC<ServicePricingCardProps> = ({
           {/* Timeline and Support Row */}
           <div
             className={`flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-mono pt-2 border-t ${
-              isFeatured ? 'border-white/10 text-slate-400' : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400'
+              isFeatured
+                ? 'border-white/10 text-slate-400'
+                : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400'
             }`}
           >
             {service.estimatedDelivery && (

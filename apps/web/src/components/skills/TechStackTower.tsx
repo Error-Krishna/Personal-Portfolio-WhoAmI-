@@ -239,9 +239,16 @@ export const TechStackTower: React.FC<TechStackTowerProps> = ({
         {/* Background Level Guidelines */}
         <div className="absolute inset-0 pointer-events-none flex flex-col justify-between py-6 px-4 opacity-30">
           {[6, 5, 4, 3, 2, 1].map((lvl) => (
-            <div key={lvl} className="w-full border-b border-dashed border-slate-400/60 dark:border-slate-600 flex justify-between items-end">
-              <span className="font-mono text-[8px] text-slate-400 dark:text-slate-500 select-none">LVL {lvl}</span>
-              <span className="font-mono text-[8px] text-slate-400 dark:text-slate-500 select-none">{lvl * 15}%</span>
+            <div
+              key={lvl}
+              className="w-full border-b border-dashed border-slate-400/60 dark:border-slate-600 flex justify-between items-end"
+            >
+              <span className="font-mono text-[8px] text-slate-400 dark:text-slate-500 select-none">
+                LVL {lvl}
+              </span>
+              <span className="font-mono text-[8px] text-slate-400 dark:text-slate-500 select-none">
+                {lvl * 15}%
+              </span>
             </div>
           ))}
         </div>
@@ -368,8 +375,8 @@ export const TechStackTower: React.FC<TechStackTowerProps> = ({
           {stack.length === 0
             ? 'Select any technology on the map & click "+ ADD TO STACK" to drop a block.'
             : isFull
-            ? 'Tower reached max capacity! Click RESET TOWER to break it into pieces.'
-            : `${maxCapacity - stack.length} more blocks can be stacked onto this tower.`}
+              ? 'Tower reached max capacity! Click RESET TOWER to break it into pieces.'
+              : `${maxCapacity - stack.length} more blocks can be stacked onto this tower.`}
         </p>
 
         {stack.length > 0 && onDiscuss && (

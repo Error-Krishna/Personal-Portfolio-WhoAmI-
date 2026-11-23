@@ -1,5 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Github, Linkedin, Mail, Phone, Twitter, Instagram, ExternalLink, X, Sun, Moon } from 'lucide-react';
+import {
+  Github,
+  Linkedin,
+  Mail,
+  Phone,
+  Twitter,
+  Instagram,
+  ExternalLink,
+  X,
+  Sun,
+  Moon,
+} from 'lucide-react';
 import { siteConfig } from '../../lib/config/site-config.js';
 import { useTheme } from '../../context/ThemeContext.js';
 

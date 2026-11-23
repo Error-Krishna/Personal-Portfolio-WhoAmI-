@@ -28,7 +28,8 @@ describe('Comprehensive Click Interaction Audit', () => {
       disconnect = vi.fn();
       takeRecords = vi.fn().mockReturnValue([]);
     }
-    window.IntersectionObserver = MockIntersectionObserver as unknown as typeof IntersectionObserver;
+    window.IntersectionObserver =
+      MockIntersectionObserver as unknown as typeof IntersectionObserver;
 
     // Mock matchMedia
     Object.defineProperty(window, 'matchMedia', {
@@ -162,7 +163,10 @@ describe('Comprehensive Click Interaction Audit', () => {
       <MemoryRouter initialEntries={['/']}>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/work/:slug" element={<div data-testid="detail-page-target">Detail Page</div>} />
+          <Route
+            path="/work/:slug"
+            element={<div data-testid="detail-page-target">Detail Page</div>}
+          />
         </Routes>
       </MemoryRouter>
     );
@@ -218,7 +222,9 @@ describe('Comprehensive Click Interaction Audit', () => {
     fireEvent.change(emailInput, { target: { value: 'jane@example.com' } });
     expect(emailInput.value).toBe('jane@example.com');
 
-    fireEvent.change(messageInput, { target: { value: 'We need a high quality web application built quickly.' } });
+    fireEvent.change(messageInput, {
+      target: { value: 'We need a high quality web application built quickly.' },
+    });
     expect(messageInput.value).toBe('We need a high quality web application built quickly.');
 
     // Submit button can be clicked

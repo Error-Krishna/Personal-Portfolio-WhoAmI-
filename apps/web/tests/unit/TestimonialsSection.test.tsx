@@ -62,12 +62,8 @@ describe('TestimonialsSection Component', () => {
     render(<TestimonialsSection />);
 
     expect(screen.getByText('CLIENT FEEDBACK / 01—04')).toBeInTheDocument();
-    expect(
-      screen.getByRole('heading', { name: /WHAT PEOPLE SAY/i })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText('Good work is built on good collaboration.')
-    ).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /WHAT PEOPLE SAY/i })).toBeInTheDocument();
+    expect(screen.getByText('Good work is built on good collaboration.')).toBeInTheDocument();
   });
 
   it('renders exactly four testimonial cards in dark theme', () => {
@@ -227,10 +223,12 @@ describe('TestimonialsSection Component', () => {
 
     // Verify DOM order: Projects -> Testimonials -> Services
     if (projectsEl && testimonialsEl && servicesEl) {
-      const isAfterProjects =
-        Boolean(projectsEl.compareDocumentPosition(testimonialsEl) & Node.DOCUMENT_POSITION_FOLLOWING);
-      const isBeforeServices =
-        Boolean(testimonialsEl.compareDocumentPosition(servicesEl) & Node.DOCUMENT_POSITION_FOLLOWING);
+      const isAfterProjects = Boolean(
+        projectsEl.compareDocumentPosition(testimonialsEl) & Node.DOCUMENT_POSITION_FOLLOWING
+      );
+      const isBeforeServices = Boolean(
+        testimonialsEl.compareDocumentPosition(servicesEl) & Node.DOCUMENT_POSITION_FOLLOWING
+      );
 
       expect(isAfterProjects).toBe(true);
       expect(isBeforeServices).toBe(true);

@@ -76,7 +76,9 @@ export const ResumePage: React.FC = () => {
             <div className="space-y-4">
               <div className="bg-white dark:bg-[#131620] p-6 rounded-xl border border-slate-300/80 dark:border-slate-800 transition-colors">
                 <div className="flex flex-wrap items-baseline justify-between gap-2 mb-1">
-                  <h3 className="font-sans font-black text-lg text-slate-950 dark:text-white">VIT-AP University</h3>
+                  <h3 className="font-sans font-black text-lg text-slate-950 dark:text-white">
+                    VIT-AP University
+                  </h3>
                   <span className="font-mono text-xs text-red-600 font-bold">2023 — 2027</span>
                 </div>
                 <p className="font-sans text-sm text-slate-700 dark:text-slate-300 mb-2">
@@ -177,7 +179,9 @@ export const ResumePage: React.FC = () => {
             <div className="space-y-4">
               <div className="bg-white dark:bg-[#131620] p-6 rounded-xl border border-slate-300/80 dark:border-slate-800 transition-colors">
                 <div className="flex flex-wrap items-baseline justify-between gap-2 mb-1">
-                  <h3 className="font-sans font-black text-lg text-slate-950 dark:text-white">InsightLoop</h3>
+                  <h3 className="font-sans font-black text-lg text-slate-950 dark:text-white">
+                    InsightLoop
+                  </h3>
                   <span className="font-mono text-xs text-red-600 font-bold">
                     React.js · TypeScript · Node.js · Express.js · MongoDB · Redis
                   </span>
@@ -196,7 +200,9 @@ export const ResumePage: React.FC = () => {
 
               <div className="bg-white dark:bg-[#131620] p-6 rounded-xl border border-slate-300/80 dark:border-slate-800 transition-colors">
                 <div className="flex flex-wrap items-baseline justify-between gap-2 mb-1">
-                  <h3 className="font-sans font-black text-lg text-slate-950 dark:text-white">Market Aura 4U</h3>
+                  <h3 className="font-sans font-black text-lg text-slate-950 dark:text-white">
+                    Market Aura 4U
+                  </h3>
                   <span className="font-mono text-xs text-red-600 font-bold">
                     React.js · TypeScript · Node.js · Express.js · MongoDB
                   </span>
@@ -214,7 +220,9 @@ export const ResumePage: React.FC = () => {
 
               <div className="bg-white dark:bg-[#131620] p-6 rounded-xl border border-slate-300/80 dark:border-slate-800 transition-colors">
                 <div className="flex flex-wrap items-baseline justify-between gap-2 mb-1">
-                  <h3 className="font-sans font-black text-lg text-slate-950 dark:text-white">Loadout</h3>
+                  <h3 className="font-sans font-black text-lg text-slate-950 dark:text-white">
+                    Loadout
+                  </h3>
                   <span className="font-mono text-xs text-red-600 font-bold">
                     React.js · TypeScript · Node.js · Express.js · Web Workers
                   </span>
