@@ -120,8 +120,12 @@ export default {
         );
       }
 
-      // Check if Resend API key is configured
-      if (!env.RESEND_API_KEY) {
+      // Check if Resend API key is configured (check both env and process.env)
+      const apiKey =
+        env.RESEND_API_KEY ||
+        (typeof process !== 'undefined' ? process.env?.RESEND_API_KEY : undefined);
+
+      if (!apiKey) {
         return new Response(
           JSON.stringify({
             success: false,
@@ -141,9 +145,14 @@ export default {
         );
       }
 
-      const toEmail = env.CONTACT_EMAIL_TO || 'iamkrishnagoyal@gmail.com';
+      const toEmail =
+        env.CONTACT_EMAIL_TO ||
+        (typeof process !== 'undefined' ? process.env?.CONTACT_EMAIL_TO : undefined) ||
+        'iamkrishnagoyal@gmail.com';
       const fromEmail =
-        env.CONTACT_EMAIL_FROM || 'Krishna Goyal Portfolio <onboarding@resend.dev>';
+        env.CONTACT_EMAIL_FROM ||
+        (typeof process !== 'undefined' ? process.env?.CONTACT_EMAIL_FROM : undefined) ||
+        'Krishna Goyal Portfolio <onboarding@resend.dev>';
       const subject = `[Portfolio Inquiry] ${service} - from ${name}`;
 
       const textContent = [
@@ -226,7 +235,7 @@ export default {
         const resendRes = await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: {
-            Authorization: `Bearer ${env.RESEND_API_KEY}`,
+            Authorization: `Bearer ${apiKey}`,
             'Content-Type': 'application/json',
             'User-Agent': 'Krishna-Goyal-Portfolio-Worker/1.0',
           },
