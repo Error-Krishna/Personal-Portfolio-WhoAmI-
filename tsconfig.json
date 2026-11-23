@@ -8,6 +8,7 @@
   },
   "include": [
     "api/**/*",
+    "worker/**/*",
     "apps/api/src/common/types/**/*"
   ],
   "exclude": ["node_modules", "dist"]
